@@ -4,6 +4,14 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Toolbar, AppBar, Typography, Button, TextField } from '@material-ui/core';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Slide } from '@material-ui/core'
+
+function slideIn(props, timeout=1000) {
+    // slide-in transition for login box
+    return <Slide direction="left" timeout={timeout} {...props} />;
+    // the transition defaults to 1000 miliseconds, or 1 second.
+    // TODO : configurable transition duration
+}
 
 class FrontPage extends Component {
     constructor(props) {
@@ -20,8 +28,11 @@ class FrontPage extends Component {
             passkeyRef : React.createRef(),
             validPasskey : true
         };
+
         this.handleUserIDChange = this.handleUserIDChange.bind(this);
         this.handleKeyChange = this.handleKeyChange.bind(this);
+        this.performVerification = this.performVerification.bind(this);
+        this.login = this.login.bind(this);
     }
 
     validateID = (text : String) => {
@@ -53,6 +64,25 @@ class FrontPage extends Component {
             validPasskey : this.validateKey(event.target.value)
             // and so does the authentication key
         })
+    }
+
+    performVerification = (event) => {
+        if (this.state.validId === false) 
+            // Invalid ID encounter :: stop verification IMMEDIATELY
+            return;
+        this.setState({
+            loggedin : this.login(this.state.id, this.state.passkeyRef.current.value)
+        })
+        this.setState({
+            "login-dialog-open" : !this.state.loggedin
+            // if logged in, then close the dialog
+        })
+    }
+
+    login = (username, password) => {
+        // returns true if-and-only-if login succeeded.
+        return true;
+        // TODO : implement logging in ability
     }
 
     render() {
@@ -92,11 +122,15 @@ class FrontPage extends Component {
                         "login-dialog-open" : false
                         // if triggered to close, set the props to close
                     })
-                }}
-                >
+                }} TransitionComponent={slideIn} fullScreen>
+                {/* TODO : allow customization for login box size */}
+
                     <DialogTitle>Log in</DialogTitle>
+
                     <DialogContent>
-                        <DialogContentText>
+                        <DialogContentText style={{
+                            marginBottom: '5px'
+                        }}>
                             Logging in allows solution submissions.
                             {/* should be possible to set languages */}
                         </DialogContentText>
@@ -111,8 +145,22 @@ class FrontPage extends Component {
 
                         <TextField label="Authentication key" ref={this.state.passkeyRef}
                         type="password" onChange={this.handleKeyChange}
-                        error={!this.state.validPasskey} fullWidth={true}>
+                        error={!this.state.validPasskey} fullWidth={true}
+                        style={{
+                            // marginBottom: '10px'
+                        }}>
                         </TextField>
+
+                        <DialogActions>
+                            <Button onClick={() => this.setState({
+                                    "login-dialog-open" : false
+                                })}>
+                                    Cancel
+                            </Button>
+                            <Button onClick={this.performVerification}>
+                                Login
+                            </Button>
+                        </DialogActions>
                     </DialogContent>
                 </Dialog>
             </div>
