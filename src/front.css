@@ -11,3 +11,7 @@ html {
     background-color: #D50000;
     color: white;
 }
+
+#contest-name {
+    font-size: 30px;
+}
