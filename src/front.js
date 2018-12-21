@@ -152,16 +152,9 @@ class FrontPage extends Component {
             <div>
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton color="inherit" aria-label="Menu"
-                        style={{
-                            marginLeft : -12,
-                            marginRight: 12
-                        }}><MenuIcon /></IconButton>
-
                         <Typography variant="h5" color="inherit" style={{
                             flexGrow: 1
                         }}>{this.state.contestName}</Typography>
-
                         {this.loginButton()}
                     </Toolbar>
                 </AppBar>
