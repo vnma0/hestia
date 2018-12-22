@@ -6,12 +6,15 @@ import ContestSignature from './contestSignature/contestSignature.js';
 import CountdownClock from './clock/clock.js';
 import LoginButton from './login/loginButton.js';
 import LoginDialog from './login/loginDialog.js';
+import UserSettingButton from './userSetting/userSettingButton.js';
+import UserSettingMenu from './userSetting/userSettingMenu.js';
 
 /**
  * @name GlobalStatusBar
  * @description Global sticky status bar at the top of the screen
  * @param {String} contestTimeLeft time left for current contest
  * @param {String} contestDuration duration of current contest
+ * @param {String} currentUser currently logged in user
  * @param {boolean} loggedIn true if user has logged in, otherwise false
  * @author minhducsun2002
  */
@@ -20,8 +23,13 @@ class GlobalStatusBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loginDialogOpen : false
+            loginDialogOpen : false,
+            userMenuOpen : false,
+            userMenuAnchorElement : undefined
         }
+        
+        this.closeLoginDialog = this.closeLoginDialog.bind(this);
+        this.openUserMenu = this.openUserMenu.bind(this);
     }
 
     renderClock() {
@@ -31,6 +39,27 @@ class GlobalStatusBar extends Component {
                 timeLeft={this.props.contestTimeLeft} 
                 duration={this.props.contestDuration} />)
         else return (<></>)
+    }
+
+    renderLoginDialog() {
+        return (
+            <LoginDialog
+                open={this.state.loginDialogOpen}
+                closeer={this.closeLoginDialog} onClose={this.closeLoginDialog} />
+        )
+    }
+
+    closeLoginDialog() {
+        this.setState({
+            loginDialogOpen : false
+        })
+    }
+
+    openUserMenu(event) {
+        this.setState({
+            userMenuAnchorElement : event.currentTarget,
+            userMenuOpen : true
+        })
     }
 
     render() {
@@ -51,17 +80,18 @@ class GlobalStatusBar extends Component {
                             <LoginButton text="Log in here" onClick={() => this.setState({
                                 loginDialogOpen : true
                             })} /> : 
-                            <></>
-                            }
+                            <UserSettingButton 
+                                user={this.props.currentUser} onClick={this.openUserMenu}/>}
                     </Toolbar>
                 </AppBar>
-                <LoginDialog
-                    open={this.state.loginDialogOpen}
-                    closeer={() => this.setState({
-                        loginDialogOpen : false
-                    })} onClose={() => this.setState({
-                        loginDialogOpen : false
-                    })} />
+
+                {this.renderLoginDialog()}
+
+                <UserSettingMenu anchorEl={this.state.userMenuAnchorElement}
+                user={this.props.currentUser} open={this.state.userMenuOpen}
+                onClose={() => this.setState({
+                    userMenuOpen : false
+                })}/>
             </>
         )
     }
