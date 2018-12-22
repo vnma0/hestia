@@ -29,9 +29,8 @@ class LoginDialog extends Component {
             validId : true,
 
             validPasskey : true,
-            passkeyRef : React.createRef()
-            // We will not save the password inside this.state : it's dangerous.
-            // Instead, we save a ref and then read the value directly when logging in.
+            passkeyRef : React.createRef(),
+            passkey: ''
         }
 
 
@@ -50,8 +49,10 @@ class LoginDialog extends Component {
         if (this.state.validId === false)
             // if invalidID, stop immediately
             return false;
+        alert(`You attempted to log in with username
+            '${this.state.id}' and password '${this.state.passkey}'`)
         /**
-         * @todo Implement log in function
+         * @todo Implement log in function & integrate with cookies
          */
     }
 
@@ -64,6 +65,7 @@ class LoginDialog extends Component {
 
     handleKeyChange = (event) => {
         this.setState({
+            passkey : event.target.value,
             validPasskey : validateKey(event.target.value)
         })
     }
@@ -103,6 +105,7 @@ class LoginDialog extends Component {
                         <Grid item>
                             <TextField label="Authentication key" ref={this.state.passkeyRef}
                                 type="password" onChange={this.handleKeyChange}
+                                value={this.state.passkey}
                                 error={!this.state.validPasskey} fullWidth={true}>
                             </TextField>
                         </Grid>
