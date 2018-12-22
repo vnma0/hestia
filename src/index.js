@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import GlobalStatusBar from './appBar/appBar.js'
 
 ReactDOM.render(<GlobalStatusBar contestName="Kỳ thi 1"
-                contestTimeLeft="00:00:01"
-                contestDuration="23:59:59" loggedIn={false}/>, document.getElementById('root'));
+                contestTimeLeft="00:00:00"
+                contestDuration="23:59:59" loggedIn={true}/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

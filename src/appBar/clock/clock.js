@@ -17,7 +17,13 @@ import AccessTime from '@material-ui/icons/AccessTime'
 class CountdownClock extends Component {
     render() {
         return (
-            <Button style={{color: 'white'}} disabled>
+            <Button style={(this.props.timeLeft !== "00:00:00" ? {
+                color : 'black', backgroundColor : 'yellow'
+                // if contest is running, yellow background
+            } : {
+                color : 'white', backgroundColor : 'black'
+                // else we just make it black
+            })} disabled>
                 <AccessTime style={{marginRight : '10px'}}/>
                 {this.props.timeLeft} / {this.props.duration}
             </Button>
