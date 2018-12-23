@@ -10,9 +10,6 @@ import Lock from '@material-ui/icons/Lock';
 /**
  * @name LoginDialog the login dialog
  * @param {boolean} open : the visibility of the dialog
- * @param {function} closeer : the function called when the Cancel button is clicked.
- *                             Should be something that can modify the open state.
- *                             Will be passed directly to the dialog.
  * @param {function} onClose : the function called when the dialog closes.
  * @param {String} slideDirection : direction that the dialog slides in.
  * @example <LoginDialog open={this.state.open} closeer={() => {this.state.open = false}} 
@@ -114,7 +111,7 @@ class LoginDialog extends Component {
                 </DialogContent>
                 
                 <DialogActions>
-                    <Button onClick={this.props.closeer}>
+                    <Button onClick={this.props.onClose}>
                         Cancel
                     </Button>
                     <Button onClick={this.login}>
