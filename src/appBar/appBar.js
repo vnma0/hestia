@@ -8,6 +8,7 @@ import LoginButton from './login/loginButton.js';
 import LoginDialog from './login/loginDialog.js';
 import UserSettingButton from './userSetting/userSettingButton.js';
 import UserSettingMenu from './userSetting/userSettingMenu.js';
+import UserSettingDialog from './userSetting/userSettingDialog.js';
 
 /**
  * @name GlobalStatusBar
@@ -16,6 +17,7 @@ import UserSettingMenu from './userSetting/userSettingMenu.js';
  * @param {String} contestDuration duration of current contest
  * @param {String} currentUser currently logged in user
  * @param {boolean} loggedIn true if user has logged in, otherwise false
+ * @param {function} menuOpen function to open the menu/sidenav/et.. (called upon menu button click)
  * @author minhducsun2002
  */
 
@@ -25,11 +27,15 @@ class GlobalStatusBar extends Component {
         this.state = {
             loginDialogOpen : false,
             userMenuOpen : false,
+            userSettingDialogOpen : false,
             userMenuAnchorElement : undefined
         }
         
         this.closeLoginDialog = this.closeLoginDialog.bind(this);
         this.openUserMenu = this.openUserMenu.bind(this);
+        this.closeUserMenu = this.closeUserMenu.bind(this);
+        this.closeUserSettingDialog = this.closeUserSettingDialog.bind(this);
+        this.openUserSettingDialog = this.openUserSettingDialog.bind(this);
     }
 
     renderClock() {
@@ -45,8 +51,28 @@ class GlobalStatusBar extends Component {
         return (
             <LoginDialog
                 open={this.state.loginDialogOpen}
-                closeer={this.closeLoginDialog} onClose={this.closeLoginDialog} />
+                onClose={this.closeLoginDialog} slideDirection="down"/>
         )
+    }
+
+    renderUserSettingDialog() {
+        return (
+            <UserSettingDialog user={this.props.currentUser}
+                open={this.state.userSettingDialogOpen} onClose={this.closeUserSettingDialog} />
+        )
+    }
+
+    closeUserSettingDialog() {
+        this.setState({
+            userSettingDialogOpen : false
+        })
+    }
+
+    openUserSettingDialog() {
+        this.setState({
+            userSettingDialogOpen : true
+        });
+        this.closeUserMenu();
     }
 
     closeLoginDialog() {
@@ -62,14 +88,20 @@ class GlobalStatusBar extends Component {
         })
     }
 
+    closeUserMenu() {
+        this.setState({
+            userMenuOpen : false
+        })
+    }
+
     render() {
         return (
             <>
                 <AppBar position="static">
                     <Toolbar>
                         <IconButton onClick={this.props.menuOpen} style={{
-                            marginLeft : -12,
-                            marginRight : 12
+                            marginLeft : -12, marginRight : 12,
+                            color : 'white'
                         }}><Menu /></IconButton>
                         {/* this button opens the sidenav or invoke whatever passed as menuOpen */}
 
@@ -87,11 +119,11 @@ class GlobalStatusBar extends Component {
 
                 {this.renderLoginDialog()}
 
+                {this.renderUserSettingDialog()}
+
                 <UserSettingMenu anchorEl={this.state.userMenuAnchorElement}
                 user={this.props.currentUser} open={this.state.userMenuOpen}
-                onClose={() => this.setState({
-                    userMenuOpen : false
-                })}/>
+                onClose={this.closeUserMenu} showProfileAction={this.openUserSettingDialog}/>
             </>
         )
     }
