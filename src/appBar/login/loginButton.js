@@ -12,7 +12,6 @@ class LoginButton extends Component {
     render() {
         return (
             <Button color="inherit" {...this.props}>
-            {/* inherit all props */}
                 {this.props.text}
             </Button>
         )
