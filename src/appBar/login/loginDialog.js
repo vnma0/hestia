@@ -27,7 +27,9 @@ class LoginDialog extends Component {
 
             validPasskey : true,
             passkeyRef : React.createRef(),
-            passkey: ''
+            passkey: '',
+
+            loginInvokerRef: React.createRef()
         }
 
 
@@ -35,12 +37,25 @@ class LoginDialog extends Component {
         this.handleUserIDChange = this.handleUserIDChange.bind(this);
         this.handleKeyChange = this.handleKeyChange.bind(this);
         this.slideIn = this.slideIn.bind(this);
+        this.resolveEnterKey = this.resolveEnterKey.bind(this);
     }
 
     slideIn(props) {
         return <Slide direction={this.props.slideDirection || 'up'} {...props} />;
         // by default the dialog slides upwards
     }   
+
+    resolveEnterKey = (event) => {
+        if (event.keyCode === 13)
+            // if Return (or "Enter" key was pressed)
+            // simulate onClick
+            this.state.loginInvokerRef.current.props.onClick()
+            /**
+             * @author minhducsun2002
+             * @desc thank Material UI for making my life tougher by forcing me to touch PROPS 
+             */
+            
+    }    
 
     login = (event) => {
         if (this.state.validId === false)
@@ -86,9 +101,9 @@ class LoginDialog extends Component {
                         </Grid>
                         <Grid item>
                             <TextField autoFocus={true} label="ID" value={this.state.id}
-                            onChange={this.handleUserIDChange} 
-                            error={!this.state.validId} fullWidth={true}>
-                            {/* if invalid ID, must be addressed */}
+                            onChange={this.handleUserIDChange} fullWidth={true}
+                            error={!this.state.validId} /* if invalid ID, must be addressed */
+                            onKeyDown={this.resolveEnterKey}>
                             </TextField>
                         </Grid>
                     </Grid>
@@ -102,8 +117,8 @@ class LoginDialog extends Component {
                         <Grid item>
                             <TextField label="Authentication key" ref={this.state.passkeyRef}
                                 type="password" onChange={this.handleKeyChange}
-                                value={this.state.passkey}
-                                error={!this.state.validPasskey} fullWidth={true}>
+                                value={this.state.passkey} fullWidth={true}
+                                error={!this.state.validPasskey} onKeyDown={this.resolveEnterKey}>
                             </TextField>
                         </Grid>
                     </Grid>
@@ -114,7 +129,7 @@ class LoginDialog extends Component {
                     <Button onClick={this.props.onClose}>
                         Cancel
                     </Button>
-                    <Button onClick={this.login}>
+                    <Button onClick={this.login} ref={this.state.loginInvokerRef}>
                         Log in
                     </Button>
                 </DialogActions>
