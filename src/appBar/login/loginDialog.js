@@ -12,7 +12,7 @@ import Lock from '@material-ui/icons/Lock';
  * @param {boolean} open : the visibility of the dialog
  * @param {function} onClose : the function called when the dialog closes.
  * @param {String} slideDirection : direction that the dialog slides in.
- * @example <LoginDialog open={this.state.open} closeer={() => {this.state.open = false}} 
+ * @example <LoginDialog open={this.state.open} onClose={() => {this.state.open = false}} 
  *           slideDirection={'up'} />
  * 
  * @author minhducsun2002

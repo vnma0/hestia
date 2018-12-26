@@ -9,9 +9,8 @@ import { Slide, Button, TextField } from '@material-ui/core'
  * @param {function} onClose : the function called when the dialog closes.
  * @param {String} slideDirection : direction that the dialog slides in.
  * @param {String} user : user name to display
- * @example <LoginDialog open={this.state.open} closeer={() => {this.state.open = false}} 
+ * @example <PasswordChangeDialog open={this.state.open} onClose={() => {this.state.open = false}} 
  *           slideDirection={'up'} />
- * 
  * @author minhducsun2002
  */
 
