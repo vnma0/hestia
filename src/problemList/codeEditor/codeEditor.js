@@ -12,7 +12,8 @@ class CodeEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            code: '// type your code...'
+            code: '',
+            lang: null
         }
     }
     editorDidMount(editor, monaco) {
@@ -31,7 +32,7 @@ class CodeEditor extends React.Component {
             <MonacoEditor
                 width="50%"
                 height="600px"
-                language="C++"
+                language="cpp"
                 theme="vs-dark"
                 value={code}
                 options={options}
