@@ -111,7 +111,7 @@ class GlobalStatusBar extends Component {
                         {!this.props.loggedIn ?
                             <LoginButton onClick={() => this.setState({
                                 loginDialogOpen : true
-                            })}>Log in here</LoginButton> 
+                            })}>{"Log in here"}</LoginButton> 
                             <UserSettingButton 
                                 user={this.props.currentUser} onClick={this.openUserMenu}/>}
                     </Toolbar>
