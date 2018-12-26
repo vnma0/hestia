@@ -7,11 +7,10 @@ class LangSelection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            str: 'C++',
+            lang: 'C++',
             anchorEl: null
         };
-        this.handleChose = this.handleChose.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+        this.handleChoice = this.handleChoice.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -19,24 +18,18 @@ class LangSelection extends React.Component {
         this.setState({ anchorEl: event.currentTarget });
     };
 
-    handleClose(){
-        this.setState({ anchorEl: null });
-    };
-
-    handleChose() {
+    handleChoice(newLang) {
         this.setState({
-            str: this.props.lang[1],
+            lang: newLang,
             anchorEl: null
         });
     };
 
     render() {
-        const { anchorEl, str } = this.state;
-        const { lang } = this.props;
         return (
             <div>
                 <Button
-                    aria-owns={anchorEl ? 'simple-menu' : undefined}
+                    aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
                     aria-haspopup="true"
                     onClick={this.handleClick}
                 >
@@ -44,18 +37,18 @@ class LangSelection extends React.Component {
         </Button>
                 <Menu
                     id="simple-menu"
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
+                    anchorEl={this.state.anchorEl}
+                    open={Boolean(this.state.anchorEl)}
                     onClose={this.handleClose}
                 >
-                    {lang.map((x, i) => <MenuItem onClick={this.handleChose}>{x}</MenuItem>)}
+                    <MenuItem onClick={this.handleChoice(cpp)}>C++</MenuItem>
+                    <MenuItem onClick={this.handleChoice(java)}>Java</MenuItem>
+                    <MenuItem onClick={this.handleChoice(python)}>Python</MenuItem>
                 </Menu>
                 <h1>{str}</h1>
             </div>
         );
     }
 }
-
-LangSelection.defaultProps = { lang: ['C++', 'JavaScript'] };
 
 export default LangSelection;
