@@ -13,11 +13,20 @@ class CodeEditor extends React.Component {
         super(props);
         this.state = {
             code: '',
-            lang: null
+            lang: null,
+            
+            editorComponent: undefined
         }
+        this.editorDidMount = this.editorDidMount.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
+
     editorDidMount(editor, monaco) {
         console.log('editorDidMount', editor);
+        this.setState({
+            editorComponent : editor
+        })
+        editor.layout();
         editor.focus();
     }
     onChange(newValue, e) {
@@ -30,8 +39,8 @@ class CodeEditor extends React.Component {
         };
         return (
             <MonacoEditor
-                width="50%"
-                height="600px"
+                width="500"
+                height="600"
                 language="cpp"
                 theme="vs-dark"
                 value={code}

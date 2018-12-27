@@ -6,7 +6,6 @@ class ProblemList extends React.Component {
     render() {
         return(
             <>
-                <GlobalStatusBar />
                 <ProblemTabEditor/>
             </>
         )

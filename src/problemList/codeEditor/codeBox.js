@@ -1,16 +1,17 @@
 import React from 'react';
 import LangSelection from './langSelection';
 import CodeEditor from './codeEditor';
+// <CodeEditor/>
 
 class CodeBox extends React.Component {
     render(){
         return(
-            <>
-            <LangSelection/>
-            
-            </>
+            <div style={{
+                flexGrow: 1
+            }}>
+                <CodeEditor />
+            </div>
         )
     }
 }
-//<CodeEditor/>
 export default CodeBox;
