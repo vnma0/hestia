@@ -45,7 +45,7 @@ class LangSelection extends React.Component {
                     <MenuItem onClick={this.handleChoice(java)}>Java</MenuItem>
                     <MenuItem onClick={this.handleChoice(python)}>Python</MenuItem>
                 </Menu>
-                <h1>{str}</h1>
+                <h1>{this.state.lang}</h1>
             </div>
         );
     }
