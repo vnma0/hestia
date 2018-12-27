@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GlobalStatusBar from './appBar.js';
+import GlobalStatusBar from './globalStatusBar.js';
 
 it('GlobalStatusBar rendered - no crash', () => {
   const div = document.createElement('div');

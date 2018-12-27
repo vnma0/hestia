@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css'
 import 'typeface-roboto';
 import * as serviceWorker from './serviceWorker';
-import GlobalStatusBar from './appBar/appBar.js'
+import GlobalStatusBar from './globalStatusBar/globalStatusBar.js'
 
 ReactDOM.render(<GlobalStatusBar contestName="Kỳ thi 1" currentUser="Test User"
                 contestTimeLeft="00:00:00"
