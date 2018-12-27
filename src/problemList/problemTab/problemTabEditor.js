@@ -23,7 +23,7 @@ class ProblemTabEditor extends React.Component {
             <div className={classes.root}>
                 <Grid container spacing={24}>
                     <ProblemTab />
-                    <CodeEditor />s
+                    <CodeEditor />
                 </Grid>
             </div>
         )
