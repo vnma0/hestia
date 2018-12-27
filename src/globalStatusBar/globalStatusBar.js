@@ -51,7 +51,7 @@ class GlobalStatusBar extends Component {
         return (
             <LoginDialog
                 open={this.state.loginDialogOpen}
-                onClose={this.closeLoginDialog} slideDirection="down"/>
+                onClose={this.closeLoginDialog}/>
         )
     }
 

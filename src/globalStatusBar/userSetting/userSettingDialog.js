@@ -3,13 +3,15 @@ import React, {Component} from 'react';
 import { DialogTitle, DialogContent, Dialog, DialogActions, AppBar, Tabs, Tab } from '@material-ui/core';
 import { Button, Slide } from '@material-ui/core';
 import PasswordChangeDialog from './passwordChange/passwordChangeDialog.js';
+import {fade} from '../lib/libTransition.js';
 
 /**
  * @name UserSettingDialog
  * @description Dialog to change user settings.
  *              ALL PROPS WILL BE PASSED DOWN TO <Dialog />
  * @param {String} user Username
- * @param {String} slideDirection : direction that the dialog slides in.
+ * @param {function} TransitionComponent : TransitionComponent that the dialog uses.
+ *                                         Overrides slideDirection.
  * @returns {<Dialog />} A '@material-ui/core/Dialog' component
  * @author minhducsun2002
  */
@@ -21,14 +23,8 @@ class UserSettingDialog extends Component {
             currentTab : 0,
             pwdChangeDialogOpen : false
         }
-        this.slideIn = this.slideIn.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-
-    slideIn(props) {
-        return <Slide direction={this.props.slideDirection || 'up'} {...props} />;
-        // by default the dialog slides upwards
-    }   
 
     handleChange(event, value) {
         this.setState({
@@ -38,7 +34,9 @@ class UserSettingDialog extends Component {
 
     render() {
         return (<>
-            <Dialog {...this.props} TransitionComponent={this.slideIn}>
+            <Dialog {...this.props}
+                TransitionComponent={this.props.TransitionComponent
+                ? this.props.TransitionComponent : fade}>
                 <DialogTitle>
                     User settings {this.props.user ? `for ${this.props.user}` : ''}
                 </DialogTitle>

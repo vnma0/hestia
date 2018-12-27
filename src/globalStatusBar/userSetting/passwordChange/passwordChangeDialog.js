@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 
 import { DialogTitle, DialogContent, Dialog, DialogActions } from '@material-ui/core';
 import { Slide, Button, TextField } from '@material-ui/core'
+import {fade} from '../../lib/libTransition.js';
 
 /**
  * @name PasswordChangeForm
- * @param {boolean} open : the visibility of the dialog
- * @param {function} onClose : the function called when the dialog closes.
- * @param {String} slideDirection : direction that the dialog slides in.
+ * @description The password changing dialog.
+ *              ALL PROPS WILL BE PASSED DOWN TO <Dialog />
+ * @param {function} TransitionComponent : TransitionComponent that the dialog uses.
+ *                                         Overrides slideDirection.
  * @param {String} user : user name to display
  * @example <PasswordChangeDialog open={this.state.open} onClose={() => {this.state.open = false}} 
  *           slideDirection={'up'} />
@@ -23,8 +25,6 @@ class PasswordChangeDialog extends Component {
             verifyKey: '',
             pwdChangeInvokerRef : React.createRef()
         }
-
-        this.slideIn = this.slideIn.bind(this);
         this.changePassword = this.changePassword.bind(this);
 
         this.handleChangeKeyVerifier = this.handleChangeKeyVerifier.bind(this);
@@ -70,14 +70,11 @@ class PasswordChangeDialog extends Component {
                 ` and verified with '${this.state.verifyKey}'`)
     }
 
-    slideIn(props) {
-        return <Slide direction={this.props.slideDirection || 'up'} {...props} />;
-        // by default the dialog slides upwards
-    }
-
     render() {
         return (
-            <Dialog open={this.props.open} TransitionComponent={this.slideIn}>
+            <Dialog {...this.props}
+            TransitionComponent={this.props.TransitionComponent
+                ? this.props.TransitionComponent : fade}>
                 <DialogTitle>
                     Changing password for {this.props.user}
                 </DialogTitle>
