@@ -82,20 +82,6 @@ class Submission extends React.Component {
 */
 
 class SubmissionTable extends React.Component {
-	constructor(props) {
-		super(props);
-		this.printArray = this.printArray.bind(this);
-	}
-	printArray(arr) {
-		return this.props.submissionList.map(submission => {
-			return (
-				<Submission contestant={submission.contestant} problem={submission.problem}
-				language={submission.language} verdict={submission.verdict}
-				executionTime={submission.executionTime} memload={submission.memory}
-				timestamp={submission.submissionTimestamp}/>
-			);
-		});
-	}
 	render() {
 		return (
 			<Paper>
@@ -110,7 +96,14 @@ class SubmissionTable extends React.Component {
 						<TableCell>Timestamp</TableCell>
 					</TableHead>
 					<TableBody>
-						<this.printArray />
+						{this.props.submissionList.map(submission => {
+							return (
+								<Submission contestant={submission.contestant} problem={submission.problem}
+								language={submission.language} verdict={submission.verdict}
+								executionTime={submission.executionTime} memload={submission.memory}
+								timestamp={submission.submissionTimestamp}/>
+							);
+						})}
 					</TableBody>
 				</Table>
 			</Paper>
