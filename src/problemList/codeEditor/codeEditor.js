@@ -13,7 +13,7 @@ class CodeEditor extends React.Component {
         super(props);
         this.state = {
             code: '',
-            lang: null,
+            //lang: null,
             
             editorComponent: undefined
         }
@@ -41,7 +41,7 @@ class CodeEditor extends React.Component {
             <MonacoEditor
                 width="500"
                 height="600"
-                language="cpp"
+                language=/*{this.state.lang}*/"cpp"
                 theme="vs-dark"
                 value={code}
                 options={options}
