@@ -1,0 +1,25 @@
+/* .a_table style: used for the whole table */
+.a_table {
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+}
+
+/* .Accepted mainly used for the word Accepted in Verdict */
+.Accepted {
+  color: #33cc33;
+  font-style: bold;
+}
+
+/* .NotAccepted mainly used for NOT Accepted in Verdict (Now not use) */
+.NotAccepted {
+  /* background-color: #ffb3b3; */
+}
+
+/* .titleSummissions for the word All Submissions */
+.titleSummissions {
+  color: MediumSeaGreen;
+  margin: 100px 20px 25px 0px;
+  text-align: center;
+  font-style: italic;
+}
