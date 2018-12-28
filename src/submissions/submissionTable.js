@@ -1,13 +1,13 @@
 import React from "react";
 import { Table, TableBody, TableCell, TableRow, TableHead, Paper } from "@material-ui/core";
 
-import ContestantSignature from './contestantSignature.js';
-import ProblemSignature from './problemSignature.js';
-import LanguageSignature from './languageSignature.js';
-import VerdictSignature from './verdictSignature.js';
-import ExecTimeSignature from './execTimeSignature.js';
-import TimestampSignature from './timestampSignature.js';
-import MemorySignature from './memorySignature.js';
+import ContestantSignature from './signature/contestantSignature.js';
+import ProblemSignature from './signature/problemSignature.js';
+import LanguageSignature from './signature/languageSignature.js';
+import VerdictSignature from './signature/verdictSignature.js';
+import ExecTimeSignature from './signature/execTimeSignature.js';
+import TimestampSignature from './signature/timestampSignature.js';
+import MemorySignature from './signature/memorySignature.js';
 
 /**
  * @name SubmissionTable
