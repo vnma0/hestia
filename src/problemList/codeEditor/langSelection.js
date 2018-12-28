@@ -7,24 +7,23 @@ class LangSelection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: 'C++',
+            lang: "cpp",
             anchorEl: null
         };
         this.handleChoice = this.handleChoice.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        //this.handleClose = this.handleClose.bind(this);
     }
 
-    handleClick(event){
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleChoice(newLang) {
-        if(newLang!=null) {
-            this.setState({
-                lang: "cpp"
-            });
-        }
+    handleClick(event) {
         this.setState({
+            anchorEl: event.currentTarget
+        });
+    };
+    
+    handleChoice(newLang) {
+        this.setState({
+            lang: newLang?newLang:this.state.lang,
             anchorEl: null
         });
     };
