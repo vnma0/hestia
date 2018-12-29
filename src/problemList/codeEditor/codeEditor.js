@@ -31,10 +31,9 @@ class CodeEditor extends React.Component {
         console.log('onChange', newValue, e)
     }
     render() {
-        const code = this.state.code
+        const { code } = this.state.code
         const options = {
             selectOnLineNumbers: true,
-        
         }
         return (
             <>
@@ -47,7 +46,8 @@ class CodeEditor extends React.Component {
                     options={options}
                     onChange={this.onChange}
                     editorDidMount={this.editorDidMount}
-                />Editor Language: {this.state.lang}
+                />
+                Editor Language: {this.state.lang}
             </>
         )
     }
