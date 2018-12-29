@@ -26,7 +26,10 @@ import MemorySignature from './signature/memorySignature.js';
 class Submission extends React.Component {
 	render() {
 		return (
-			<TableRow>
+			<TableRow style={{
+				backgroundColor: (this.props.verdict==="AC"
+				|| this.props.verdict==="Accepted" ? '#A5D6A7' : '')
+			}}>
 				<TableCell>
 					<ContestantSignature contestantName={this.props.contestant}/>
 				</TableCell>
@@ -37,9 +40,7 @@ class Submission extends React.Component {
 					<LanguageSignature languageName={this.props.language} />
 				</TableCell>
 				<TableCell>
-					<VerdictSignature verdict={this.props.verdict}
-					success={this.props.verdict==="AC" || this.props.verdict==="Accepted"}
-					failed={this.props.verdict==="WA" || this.props.verdict==="Wrong answer"}/>
+					<VerdictSignature verdict={this.props.verdict}/>
 				</TableCell>
 				<TableCell>
 					<ExecTimeSignature time={this.props.executionTime} />
