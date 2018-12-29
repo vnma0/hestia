@@ -17,7 +17,7 @@ import UserSettingDialog from './userSetting/userSettingDialog.js';
  * @param {String} contestDuration duration of current contest
  * @param {String} currentUser currently logged in user
  * @param {boolean} loggedIn true if user has logged in, otherwise false
- * @param {function} menuOpen function to open the menu/sidenav/et.. (called upon menu button click)
+ * @param {function} menuOpen function to open the menu/sidenav/etc.. (called upon menu button click)
  * @author minhducsun2002
  */
 
