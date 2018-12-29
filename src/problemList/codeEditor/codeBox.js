@@ -24,6 +24,7 @@ class CodeBox extends React.Component {
                 }}
             >
                 <LangSelection callbackFromParent={this.langCallback} />
+                Parent Lang: {this.state.currentLang}
                 <CodeEditor lang={this.state.currentLang}/>
             </div>
         )

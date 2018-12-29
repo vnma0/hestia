@@ -8,6 +8,7 @@
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
     "monaco-editor": "^0.15.6",
+    "monaco-editor-webpack-plugin": "^1.7.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-monaco-editor": "^0.22.0",

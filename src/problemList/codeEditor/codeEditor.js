@@ -1,6 +1,5 @@
 import React from 'react'
 import MonacoEditor from 'react-monaco-editor'
-import 'typeface-roboto'
 
 /**
  * Monaco Api: https://microsoft.github.io/monaco-editor/api/index.html
@@ -40,7 +39,7 @@ class CodeEditor extends React.Component {
             <>
                 <MonacoEditor
                     height="300"
-                    language="cpp" //{this.state.lang}
+                    language={this.state.lang}
                     theme="vs-dark"
                     value={code}
                     options={options}

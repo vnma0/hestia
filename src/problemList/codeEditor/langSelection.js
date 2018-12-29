@@ -2,7 +2,6 @@ import React from 'react'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-import 'typeface-roboto'
 
 class LangSelection extends React.Component {
     constructor(props) {
@@ -22,11 +21,11 @@ class LangSelection extends React.Component {
     }
 
     handleChoice(newLang) {
+        this.props.callbackFromParent(newLang ? newLang : this.state.currentLang)
         this.setState({
             currentLang: newLang ? newLang : this.state.currentLang,
             anchorEl: null,
         })
-        this.props.callbackFromParent(this.state.currentLang)
     }
 
     render() {
