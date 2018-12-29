@@ -6,16 +6,22 @@ import { Button } from '@material-ui/core'
  */
 
 class downloadButton extends React.Component {
+    constructor(props){
+        super(props);
+        this.handleClick=this.handleClick.bind(this);
+    }
+    //handeClick
     handleClick() {
         alert("Button pressed");
     }
-
+    //render
     render() {
         return (
             <Button
                     size="large"
                     variant="contained"
-                    onClick={() => this.handleClick}
+                    fullWidth="true" //enable fullwidth
+                    onClick={this.handleClick}
                 >
                     {this.props.children}
             </Button>

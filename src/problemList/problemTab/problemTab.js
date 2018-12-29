@@ -39,10 +39,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
 });
-//Render
 class ProblemTab extends React.Component {
   state = {
-    value: 0,
+    value: 0, //Current tab
   };
   //Handle change
   handleChange = (event, value) => {
