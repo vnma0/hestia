@@ -51,8 +51,7 @@ class LangSelection extends React.Component {
                             {x}
                         </MenuItem>
                     ))}
-                </Menu>
-                <h2>{currentLang}</h2>
+                </Menu>Current Language: {currentLang}
             </div>
         )
     }

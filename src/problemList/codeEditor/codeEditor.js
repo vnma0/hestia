@@ -34,20 +34,20 @@ class CodeEditor extends React.Component {
         const code = this.state.code
         const options = {
             selectOnLineNumbers: true,
+        
         }
         return (
             <>
                 <MonacoEditor
                     // width="500"
                     height="300"
-                    language={this.state.lang}
+                    language="cpp" //{this.state.lang}
                     theme="vs-dark"
                     value={code}
                     options={options}
                     onChange={this.onChange}
                     editorDidMount={this.editorDidMount}
-                />
-                <h1>{this.state.lang}</h1>
+                />Editor Language: {this.state.lang}
             </>
         )
     }
