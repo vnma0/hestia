@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css'
 import 'typeface-roboto';
 import * as serviceWorker from './serviceWorker';
-import GlobalStatusBar from './appBar/appBar.js';
+import GlobalStatusBar from './globalStatusBar/globalStatusBar.js';
 import ProblemTabEditor from './problemList/problemTabEditor';
 import CodeBox from './problemList/codeEditor/codeBox.js'
 

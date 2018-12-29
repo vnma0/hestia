@@ -1,5 +1,6 @@
 import React from 'react'
 import MonacoEditor from 'react-monaco-editor'
+import 'typeface-roboto'
 
 /**
  * Monaco Api: https://microsoft.github.io/monaco-editor/api/index.html
