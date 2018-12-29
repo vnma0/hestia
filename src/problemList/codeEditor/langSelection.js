@@ -42,11 +42,11 @@ class LangSelection extends React.Component {
                     id="simple-menu"
                     anchorEl={this.state.anchorEl}
                     open={Boolean(this.state.anchorEl)}
-                    onClose={this.handleChoice(null)}
+                    onClose={() => this.handleChoice(null)}
                 >
-                    <MenuItem onClick={this.handleChoice("cpp")}>C++</MenuItem>
-                    <MenuItem onClick={this.handleChoice("java")}>Java</MenuItem>
-                    <MenuItem onClick={this.handleChoice("python")}>Python</MenuItem>
+                    <MenuItem onClick={() => this.handleChoice("cpp")}>C++</MenuItem>
+                    <MenuItem onClick={() => this.handleChoice("java")}>Java</MenuItem>
+                    <MenuItem onClick={() => this.handleChoice("python")}>Python</MenuItem>
                 </Menu>
                 <h1>{this.state.lang}</h1>
             </div>
