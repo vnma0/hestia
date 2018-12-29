@@ -51,7 +51,7 @@ class GlobalStatusBar extends Component {
         return (
             <LoginDialog
                 open={this.state.loginDialogOpen}
-                onClose={this.closeLoginDialog} slideDirection="down"/>
+                onClose={this.closeLoginDialog}/>
         )
     }
 
@@ -109,9 +109,9 @@ class GlobalStatusBar extends Component {
                         {this.renderClock()}
 
                         {!this.props.loggedIn ?
-                            <LoginButton text="Log in here" onClick={() => this.setState({
+                            <LoginButton onClick={() => this.setState({
                                 loginDialogOpen : true
-                            })} /> : 
+                            })}>{"Log in here"}</LoginButton> : 
                             <UserSettingButton 
                                 user={this.props.currentUser} onClick={this.openUserMenu}/>}
                     </Toolbar>

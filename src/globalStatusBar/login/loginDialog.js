@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import { DialogTitle, DialogContent, DialogContentText, Dialog, DialogActions, Grid } from '@material-ui/core';
 import { TextField, Button, Slide } from '@material-ui/core';
 
-import {validateID, validateKey} from './libValidate.js';
+import {validateID, validateKey} from '../lib/libValidateLogin.js';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Lock from '@material-ui/icons/Lock';
+import {fade} from '../lib/libTransition.js';
 
 /**
- * @name LoginDialog the login dialog
- * @param {boolean} open : the visibility of the dialog
- * @param {function} onClose : the function called when the dialog closes.
+ * @name LoginDialog 
+ * @description The login dialog.
+ *              ALL PROPS WILL BE PASSED DOWN TO <Dialog />
  * @param {String} slideDirection : direction that the dialog slides in.
- * @example <LoginDialog open={this.state.open} closeer={() => {this.state.open = false}} 
+ * @param {function} TransitionComponent : TransitionComponent that the dialog uses.
+ *                                         Overrides slideDirection.
+ * @example <LoginDialog open={this.state.open} onClose={() => {this.state.open = false}} 
  *           slideDirection={'up'} />
  * 
  * @author minhducsun2002
@@ -29,21 +32,15 @@ class LoginDialog extends Component {
             passkeyRef : React.createRef(),
             passkey: '',
 
-            loginInvokerRef: React.createRef()
+            loginInvokerRef: React.createRef(),
+            testRef: React.createRef(),
         }
-
 
         this.login = this.login.bind(this);
         this.handleUserIDChange = this.handleUserIDChange.bind(this);
         this.handleKeyChange = this.handleKeyChange.bind(this);
-        this.slideIn = this.slideIn.bind(this);
         this.resolveEnterKey = this.resolveEnterKey.bind(this);
     }
-
-    slideIn(props) {
-        return <Slide direction={this.props.slideDirection || 'up'} {...props} />;
-        // by default the dialog slides upwards
-    }   
 
     resolveEnterKey = (event) => {
         if (event.keyCode === 13)
@@ -84,8 +81,9 @@ class LoginDialog extends Component {
 
     render() {
         return (
-            <Dialog open={this.props.open} onClose={this.props.onClose}
-            TransitionComponent={this.slideIn}>
+            <Dialog {...this.props}
+            TransitionComponent={this.props.TransitionComponent
+                ? this.props.TransitionComponent : fade}>
             
                 <DialogTitle>Log in</DialogTitle>
                 
@@ -103,7 +101,9 @@ class LoginDialog extends Component {
                             <TextField autoFocus={true} label="ID" value={this.state.id}
                             onChange={this.handleUserIDChange} fullWidth={true}
                             error={!this.state.validId} /* if invalid ID, must be addressed */
-                            onKeyDown={this.resolveEnterKey}>
+                            onKeyDown={this.resolveEnterKey}
+                            ref={this.state.testRef}
+                            >
                             </TextField>
                         </Grid>
                     </Grid>
