@@ -1,36 +1,36 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import React from 'react'
+import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 
 class LangSelection extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            currentLang: "cpp",
-            anchorEl: null
-        };
-        this.handleChoice = this.handleChoice.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        //this.handleClose = this.handleClose.bind(this);
+            currentLang: 'cpp',
+            anchorEl: null,
+        }
+        this.handleChoice = this.handleChoice.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     handleClick(event) {
         this.setState({
-            anchorEl: event.currentTarget
-        });
-    };
-    
+            anchorEl: event.currentTarget,
+        })
+    }
+
     handleChoice(newLang) {
         this.setState({
-            currentLang: newLang?newLang:this.state.lang,
-            anchorEl: null
-        });
-    };
+            currentLang: newLang ? newLang : this.state.currentLang,
+            anchorEl: null,
+        })
+        this.props.callbackFromParent(this.state.currentLang)
+    }
 
     render() {
-        const {lang} = this.props;
-        const {currentLang} = this.state;
+        const { lang } = this.props
+        const { currentLang } = this.state
         return (
             <div>
                 <Button
@@ -39,21 +39,25 @@ class LangSelection extends React.Component {
                     onClick={this.handleClick}
                 >
                     Change Language...
-        </Button>
+                </Button>
                 <Menu
                     id="simple-menu"
                     anchorEl={this.state.anchorEl}
                     open={Boolean(this.state.anchorEl)}
                     onClose={() => this.handleChoice(null)}
                 >
-                    {lang.map((x) => <MenuItem onClick={() => this.handleChoice(x)}>{x}</MenuItem>)}
+                    {lang.map(x => (
+                        <MenuItem onClick={() => this.handleChoice(x)}>
+                            {x}
+                        </MenuItem>
+                    ))}
                 </Menu>
                 <h2>{currentLang}</h2>
             </div>
-        );
+        )
     }
 }
 
-LangSelection.defaultProps = { lang : ["cpp","java","python"] };
+LangSelection.defaultProps = { lang: ['cpp', 'java', 'python'] }
 
-export default LangSelection;
+export default LangSelection

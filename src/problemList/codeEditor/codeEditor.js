@@ -1,6 +1,5 @@
-import React from 'react';
-import MonacoEditor from 'react-monaco-editor';
-
+import React from 'react'
+import MonacoEditor from 'react-monaco-editor'
 
 /**
  * Monaco Api: https://microsoft.github.io/monaco-editor/api/index.html
@@ -10,46 +9,48 @@ import MonacoEditor from 'react-monaco-editor';
 
 class CodeEditor extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             code: '',
-            //lang: null,
-            
-            editorComponent: undefined
+            lang: null,
+            editorComponent: undefined,
         }
-        this.editorDidMount = this.editorDidMount.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.editorDidMount = this.editorDidMount.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
     editorDidMount(editor, monaco) {
-        console.log('editorDidMount', editor);
+        console.log('editorDidMount', editor)
         this.setState({
-            editorComponent : editor
+            editorComponent: editor,
         })
-        editor.layout();
-        editor.focus();
+        editor.layout()
+        editor.focus()
     }
     onChange(newValue, e) {
-        console.log('onChange', newValue, e);
+        console.log('onChange', newValue, e)
     }
     render() {
-        const code = this.state.code;
+        const code = this.state.code
         const options = {
-            selectOnLineNumbers: true
-        };
+            selectOnLineNumbers: true,
+        }
         return (
-            <MonacoEditor
-                // width="500"
-                height="300"
-                language=/*{this.state.lang}*/"cpp"
-                theme="vs-dark"
-                value={code}
-                options={options}
-                onChange={this.onChange}
-                editorDidMount={this.editorDidMount}
-            />
+            <>
+                <MonacoEditor
+                    // width="500"
+                    height="300"
+                    language={this.state.lang}
+                    theme="vs-dark"
+                    value={code}
+                    options={options}
+                    onChange={this.onChange}
+                    editorDidMount={this.editorDidMount}
+                />
+                <h1>{this.state.lang}</h1>
+            </>
         )
     }
 }
 
-export default CodeEditor;
+export default CodeEditor
