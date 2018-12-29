@@ -39,8 +39,8 @@ class CodeEditor extends React.Component {
         };
         return (
             <MonacoEditor
-                width="500"
-                height="600"
+                // width="500"
+                height="300"
                 language=/*{this.state.lang}*/"cpp"
                 theme="vs-dark"
                 value={code}

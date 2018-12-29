@@ -9,6 +9,7 @@ class CodeBox extends React.Component {
             <div style={{
                 flexGrow: 1
             }}>
+                <LangSelection/>
                 <CodeEditor />
             </div>
         )

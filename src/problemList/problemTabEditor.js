@@ -21,11 +21,15 @@ class ProblemTabEditor extends React.Component {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
-                <Grid container spacing={0} alignItems="flex-start">
-                    <Grid item>
+                <Grid container spacing={8} alignItems="flex-start">
+                    <Grid item style={{
+                        width: "50%",
+                    }}>
                         <ProblemTab />
                     </Grid>
-                    <Grid item>
+                    <Grid item style={{
+                        width: "50%",
+                    }}>
                         <CodeBox />
                     </Grid>
                 </Grid>

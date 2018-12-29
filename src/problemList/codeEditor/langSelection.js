@@ -7,7 +7,7 @@ class LangSelection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: "cpp",
+            currentLang: "cpp",
             anchorEl: null
         };
         this.handleChoice = this.handleChoice.bind(this);
@@ -23,12 +23,14 @@ class LangSelection extends React.Component {
     
     handleChoice(newLang) {
         this.setState({
-            lang: newLang?newLang:this.state.lang,
+            currentLang: newLang?newLang:this.state.lang,
             anchorEl: null
         });
     };
 
     render() {
+        const {lang} = this.props;
+        const {currentLang} = this.state;
         return (
             <div>
                 <Button
@@ -44,14 +46,14 @@ class LangSelection extends React.Component {
                     open={Boolean(this.state.anchorEl)}
                     onClose={() => this.handleChoice(null)}
                 >
-                    <MenuItem onClick={() => this.handleChoice("cpp")}>C++</MenuItem>
-                    <MenuItem onClick={() => this.handleChoice("java")}>Java</MenuItem>
-                    <MenuItem onClick={() => this.handleChoice("python")}>Python</MenuItem>
+                    {lang.map((x) => <MenuItem onClick={() => this.handleChoice(x)}>{x}</MenuItem>)}
                 </Menu>
-                <h1>{this.state.lang}</h1>
+                <h2>{currentLang}</h2>
             </div>
         );
     }
 }
+
+LangSelection.defaultProps = { lang : ["cpp","java","python"] };
 
 export default LangSelection;
