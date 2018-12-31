@@ -38,7 +38,7 @@ class CodeEditor extends React.Component {
         return (
             <>
                 <MonacoEditor
-                    height="300"
+                    height="500"
                     language={this.state.lang}
                     theme="vs-dark"
                     value={code}
@@ -46,7 +46,7 @@ class CodeEditor extends React.Component {
                     onChange={this.onChange}
                     editorDidMount={this.editorDidMount}
                 />
-                Editor Language: {this.state.lang}
+                {/*Editor Language: {this.state.lang}*/}
             </>
         )
     }

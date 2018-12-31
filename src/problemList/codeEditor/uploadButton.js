@@ -2,32 +2,27 @@ import React from 'react'
 import { Button } from '@material-ui/core'
 
 /**
- * @description The Download Button
+ * @description The upload button, currently not working
  * Button Api: https://material-ui.com/api/button/
  */
 
-class DownloadButton extends React.Component {
+class UploadButton extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this)
     }
     //handeClick
     handleClick() {
-        alert('Download function excuted!')
+        alert('Upload function executed!')
     }
     //render
     render() {
         return (
-            <Button
-                size="large"
-                variant="contained"
-                fullWidth="true" //enable fullwidth
-                onClick={this.handleClick}
-            >
+            <Button variant="flat" onClick={this.handleClick}>
                 {this.props.children}
             </Button>
         )
     }
 }
 
-export default DownloadButton
+export default UploadButton

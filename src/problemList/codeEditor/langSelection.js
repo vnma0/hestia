@@ -21,7 +21,9 @@ class LangSelection extends React.Component {
     }
 
     handleChoice(newLang) {
-        this.props.callbackFromParent(newLang ? newLang : this.state.currentLang)
+        this.props.callbackFromParent(
+            newLang ? newLang : this.state.currentLang
+        )
         this.setState({
             currentLang: newLang ? newLang : this.state.currentLang,
             anchorEl: null,
@@ -30,10 +32,10 @@ class LangSelection extends React.Component {
 
     render() {
         const { lang } = this.props
-        const { currentLang } = this.state
         return (
             <div>
                 <Button
+                    variant="flat"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
                     aria-haspopup="true"
                     onClick={this.handleClick}
@@ -51,7 +53,8 @@ class LangSelection extends React.Component {
                             {x}
                         </MenuItem>
                     ))}
-                </Menu>Current Language: {currentLang}
+                </Menu>
+                {/*<h2>Current Language: {currentLang}</h2>*/}
             </div>
         )
     }

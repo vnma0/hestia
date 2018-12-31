@@ -1,6 +1,9 @@
 import React from 'react'
 import LangSelection from './langSelection'
 import CodeEditor from './codeEditor'
+import { Grid } from '@material-ui/core'
+import UploadButton from './uploadButton'
+import SubmitButton from './submitButton'
 
 class CodeBox extends React.Component {
     constructor(props) {
@@ -23,9 +26,17 @@ class CodeBox extends React.Component {
                     flexGrow: 1,
                 }}
             >
-                <LangSelection callbackFromParent={this.langCallback} />
-                Parent Lang: {this.state.currentLang}
-                <CodeEditor lang={this.state.currentLang}/>
+                <Grid container spacing={8} alignItems="flex-start">
+                    <Grid item>
+                        <LangSelection callbackFromParent={this.langCallback} />
+                    </Grid>
+                    <Grid item>
+                        <UploadButton>Upload file</UploadButton>
+                    </Grid>
+                </Grid>
+                {/*Parent Lang: {this.state.currentLang}*/}
+                <CodeEditor lang={this.state.currentLang} />
+                <SubmitButton>Submit</SubmitButton>
             </div>
         )
     }
