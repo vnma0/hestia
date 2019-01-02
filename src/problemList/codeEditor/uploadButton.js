@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
+import { InputBase, FormControl} from '@material-ui/core'
 
 /**
  * @name UploadButton
@@ -19,11 +19,13 @@ class UploadButton extends React.Component {
     //render
     render() {
         return (
-            <Button variant="flat" onClick={this.handleClick}>
-                {this.props.children}
-            </Button>
+            <InputBase type="file">Upload</InputBase >
         )
     }
 }
 
-export default UploadButton
+export default UploadButton;
+
+// <Button variant="flat" onClick={this.handleClick}>
+//                 {this.props.children}
+//             </Button>
