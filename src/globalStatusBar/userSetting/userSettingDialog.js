@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import { DialogTitle, DialogContent, Dialog, DialogActions, AppBar, Tabs, Tab } from '@material-ui/core';
-import { Button, Slide } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import PasswordChangeDialog from './passwordChange/passwordChangeDialog.js';
 import {fade} from '../lib/libTransition.js';
 

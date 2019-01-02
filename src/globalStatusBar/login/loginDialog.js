@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { DialogTitle, DialogContent, DialogContentText, Dialog, DialogActions, Grid } from '@material-ui/core';
-import { TextField, Button, Slide } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 
 import {validateID, validateKey} from '../lib/libValidateLogin.js';
 
