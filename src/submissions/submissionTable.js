@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, TableBody, TableCell, TableRow, TableHead, Paper } from "@material-ui/core";
+import { Table, TableBody, TableCell, TableRow, TableHead, Paper, TableSortLabel } from "@material-ui/core";
 
 import ContestantSignature from './signature/contestantSignature.js';
 import ProblemSignature from './signature/problemSignature.js';
@@ -83,12 +83,38 @@ class Submission extends React.Component {
 */
 
 class SubmissionTable extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			submissionList : this.props.submissionList
+		}
+		// Yeah, in order to support sorting
+		// and since props are immutable
+		// we mirror them to this.state and mutate it instead
+		this.sortBy = this.sortBy.bind(this);
+	}
+
+	sortBy(field) {
+		this.setState({
+			submissionList : this.state.submissionList.sort((a, b) => {
+				let a1 = a[field], b1 = b[field];
+				if (a1 < b1) return -1;
+				if (a1 > b1) return 1;
+				return 0;
+			})
+		})
+	}
+
 	render() {
 		return (
 			<Paper>
 				<Table>
 					<TableHead>
-						<TableCell>Submitted by</TableCell>
+						<TableCell>
+							<TableSortLabel direction="asc" onClick={() => this.sortBy("contestant")}>
+								Submitted by
+							</TableSortLabel>
+						</TableCell>
 						<TableCell>Problem</TableCell>
 						<TableCell>Programming language</TableCell>
 						<TableCell>Verdict</TableCell>
@@ -97,7 +123,7 @@ class SubmissionTable extends React.Component {
 						<TableCell>Timestamp</TableCell>
 					</TableHead>
 					<TableBody>
-						{this.props.submissionList.map(submission => {
+						{this.state.submissionList.map(submission => {
 							return (
 								<Submission contestant={submission.contestant} problem={submission.problem}
 								language={submission.language} verdict={submission.verdict}
