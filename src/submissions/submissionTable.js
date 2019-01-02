@@ -68,16 +68,16 @@ class Submission extends React.Component {
  */
 /*
 	<SubmissionTable submissionList={[{
-		contestant : 'minhducsun2002', problem : 'A',
-		verdict : 'AC', executionTime: '00:00:123', memory : '1TB', submissionTimestamp: '00:00:00',
+		contestant : 'minhducsun123456', problem : 'A',
+		verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', submissionTimestamp: '00:00:00',
 		language : 'Perl',
 	},{
 		contestant : 'minhducsun2002', problem : 'A',
-		verdict : 'WA', executionTime: '11:00:234', memory : '1TB', submissionTimestamp: '00:00:00',
+		verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', submissionTimestamp: '00:00:00',
 		language : 'Pascal',
 	},{
-		contestant : 'minhducsun2002', problem : 'A',
-		verdict : 'AC', executionTime: '38:46:115', memory : '1TB', submissionTimestamp: '00:00:00',
+		contestant : 'minhducsun123456', problem : 'A',
+		verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', submissionTimestamp: '00:00:00',
 		language : 'C99',
 	}]}/>
 */
@@ -86,7 +86,8 @@ class SubmissionTable extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			submissionList : this.props.submissionList
+			submissionList : this.props.submissionList,
+			reverseSort : true
 		}
 		// Yeah, in order to support sorting
 		// and since props are immutable
@@ -97,11 +98,18 @@ class SubmissionTable extends React.Component {
 	sortBy(field) {
 		this.setState({
 			submissionList : this.state.submissionList.sort((a, b) => {
+				// yeah, simple sorting lambda...
 				let a1 = a[field], b1 = b[field];
 				if (a1 < b1) return -1;
 				if (a1 > b1) return 1;
 				return 0;
-			})
+			}),
+			reverseSort : !this.state.reverseSort
+		})
+		this.setState({
+			submissionList :
+				this.state.reverseSort ?
+					this.state.submissionList.reverse() : this.state.submissionList
 		})
 	}
 
@@ -111,16 +119,47 @@ class SubmissionTable extends React.Component {
 				<Table>
 					<TableHead>
 						<TableCell>
-							<TableSortLabel direction="asc" onClick={() => this.sortBy("contestant")}>
+							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+								active onClick={() => this.sortBy("contestant")}>
 								Submitted by
 							</TableSortLabel>
 						</TableCell>
-						<TableCell>Problem</TableCell>
-						<TableCell>Programming language</TableCell>
-						<TableCell>Verdict</TableCell>
-						<TableCell>Execution duration</TableCell>
-						<TableCell>memory consumed</TableCell>
-						<TableCell>Timestamp</TableCell>
+						<TableCell>
+							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+								active onClick={() => this.sortBy("problem")}>
+								Problem
+							</TableSortLabel>
+						</TableCell>
+						<TableCell>
+							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+								active onClick={() => this.sortBy("language")}>
+								Programming language
+							</TableSortLabel>
+						</TableCell>
+						<TableCell>
+							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+								active onClick={() => this.sortBy("verdict")}>
+								Verdict
+							</TableSortLabel>
+						</TableCell>
+						<TableCell>
+							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+								active onClick={() => this.sortBy("executionTime")}>
+								Verdict
+							</TableSortLabel>
+						</TableCell>
+						<TableCell>
+							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+								active onClick={() => this.sortBy("memory")}>
+								Memory consumed
+							</TableSortLabel>
+						</TableCell>
+						<TableCell>
+							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+								active onClick={() => this.sortBy("submissionTimestamp")}>
+								Timestamp
+							</TableSortLabel>
+						</TableCell>
 					</TableHead>
 					<TableBody>
 						{this.state.submissionList.map(submission => {
