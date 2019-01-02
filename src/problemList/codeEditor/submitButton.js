@@ -2,7 +2,9 @@ import React from 'react'
 import { Button } from '@material-ui/core'
 
 /**
+ * @name SubmitButton
  * Button Api: https://material-ui.com/api/button/
+ * Input Api: https://material-ui.com/api/input/
  */
 
 class SubmitButton extends React.Component {

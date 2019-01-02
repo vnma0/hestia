@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '@material-ui/core'
 
 /**
+ * @name UploadButton
  * @description The upload button, currently not working
  * Button Api: https://material-ui.com/api/button/
  */

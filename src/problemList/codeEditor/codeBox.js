@@ -27,9 +27,9 @@ class CodeBox extends React.Component {
                 }}
             >
                 <Grid container spacing={8} alignItems="flex-start">
-                    <Grid item>
-                        <LangSelection callbackFromParent={this.langCallback} />
-                    </Grid>
+                    {<Grid item>
+                        <LangSelection disabled="true" callbackFromParent={this.langCallback} />
+                    </Grid>}
                     <Grid item>
                         <UploadButton>Upload file</UploadButton>
                     </Grid>

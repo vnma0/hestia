@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '@material-ui/core'
 
 /**
+ * @name DownloadButton
  * @description The Download Button
  * Button Api: https://material-ui.com/api/button/
  */

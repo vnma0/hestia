@@ -3,6 +3,13 @@ import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
+/**
+ * @name LangSelection
+ * @param {Array:String} lang Language name
+ * @param {Boolean} disabled If true, the button will be disabled.
+ * @description The language selection tab
+ */
+
 class LangSelection extends React.Component {
     constructor(props) {
         super(props)
@@ -35,6 +42,7 @@ class LangSelection extends React.Component {
         return (
             <div>
                 <Button
+                    disabled={this.props.disabled}
                     variant="flat"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
                     aria-haspopup="true"
@@ -54,12 +62,11 @@ class LangSelection extends React.Component {
                         </MenuItem>
                     ))}
                 </Menu>
-                {/*<h2>Current Language: {currentLang}</h2>*/}
             </div>
         )
     }
 }
 
-LangSelection.defaultProps = { lang: ['cpp', 'java', 'python'] }
+LangSelection.defaultProps = { lang: ['cpp', 'java', 'python'] , disabled: false }
 
-export default LangSelection
+export default LangSelection;
