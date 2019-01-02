@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Slide, Zoom, Collapse, Fade, Grow} from '@material-ui/core';
 
 const StandardTiming = {enter: 500, exit: 500};
