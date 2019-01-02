@@ -17,7 +17,7 @@ import MemorySignature from './signature/memorySignature.js';
  * @param {String} language : Submission language identifier
  * @param {String} verdict : Submission's judged verdict
  * @param {String} executionTime : Submission's execution time
- * @param {String} memload : Memory consumption of the submission
+ * @param {String} memload : memory consumption of the submission
  * @param {String} timestamp : The time of submission.
  * @returns {React.Component} : A <TableRow> containing all nicely-formatted information.
  */
@@ -59,7 +59,7 @@ class Submission extends React.Component {
 /**
  * @name SubmissionTable
  * @param {Array} SubmissionList : An array containing objects satisfying this schema : 
- * 					{owner, Problem, Language, Verdict, ExecutionTime, Memory, SubmissionTimestamp}
+ * 					{contestant, Problem, Language, Verdict, ExecutionTime, memory, SubmissionTimestamp}
  * @return {Table} : a <Table> containing submissions
  */
 
@@ -68,16 +68,16 @@ class Submission extends React.Component {
  */
 /*
 	<SubmissionTable submissionList={[{
-		owner : 'minhducsun2002', problem : 'A',
-		verdict : 'AC', executionTime: '00:00:123', Memory : '1TB', submissionTimestamp: '00:00:00',
+		contestant : 'minhducsun2002', problem : 'A',
+		verdict : 'AC', executionTime: '00:00:123', memory : '1TB', submissionTimestamp: '00:00:00',
 		language : 'Perl',
 	},{
-		owner : 'minhducsun2002', problem : 'A',
-		verdict : 'WA', executionTime: '11:00:234', Memory : '1TB', submissionTimestamp: '00:00:00',
+		contestant : 'minhducsun2002', problem : 'A',
+		verdict : 'WA', executionTime: '11:00:234', memory : '1TB', submissionTimestamp: '00:00:00',
 		language : 'Pascal',
 	},{
-		owner : 'minhducsun2002', problem : 'A',
-		verdict : 'AC', executionTime: '38:46:115', Memory : '1TB', submissionTimestamp: '00:00:00',
+		contestant : 'minhducsun2002', problem : 'A',
+		verdict : 'AC', executionTime: '38:46:115', memory : '1TB', submissionTimestamp: '00:00:00',
 		language : 'C99',
 	}]}/>
 */
@@ -93,7 +93,7 @@ class SubmissionTable extends React.Component {
 						<TableCell>Programming language</TableCell>
 						<TableCell>Verdict</TableCell>
 						<TableCell>Execution duration</TableCell>
-						<TableCell>Memory consumed</TableCell>
+						<TableCell>memory consumed</TableCell>
 						<TableCell>Timestamp</TableCell>
 					</TableHead>
 					<TableBody>
