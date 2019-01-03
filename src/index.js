@@ -3,17 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css'
 import 'typeface-roboto';
 import * as serviceWorker from './serviceWorker';
+import { Button } from '@material-ui/core';
+
 import GlobalStatusBar from './globalStatusBar/globalStatusBar.js'
 import Sidenav from './sidenav/sidenav.js';
-import { Button } from '@material-ui/core';
+import SubmissionTable from './submissions/submissionTable.js';
+
+import SubmissionLauncher from './submissions/submissionLauncher.js';
 
 class Hestia extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sidebarOpen : false
+            sidebarOpen : false,
+            currentPage : 'front'
         }
+        this.changePage = this.changePage.bind(this);
     }
+
+    changePage(to) {
+        this.setState({
+            currentPage: to,
+            sidebarOpen: false
+            // close after clicking
+        })
+    }
+
     render() {
         return (
             <>
@@ -25,8 +40,24 @@ class Hestia extends React.Component {
                 <Sidenav open={this.state.sidebarOpen} onClose={() => this.setState({
                     sidebarOpen: false
                 })} pages={[
-                    <Button onClick={() => alert(1)}>Alert (1)</Button>
+                    <Button onClick={() => this.changePage('front')}>Alert (1)</Button>,
+                    <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>
                 ]} />
+                {this.state.currentPage === "submissions" && <>
+                    <SubmissionTable submissionList={[{
+                        contestant : 'minhducsun123456', problem : 'A',
+                        verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', submissionTimestamp: '00:00:00',
+                        language : 'Perl',
+                    },{
+                        contestant : 'minhducsun2002', problem : 'A',
+                        verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', submissionTimestamp: '00:00:00',
+                        language : 'Pascal',
+                    },{
+                        contestant : 'minhducsun123456', problem : 'A',
+                        verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', submissionTimestamp: '00:00:00',
+                        language : 'C99',
+                    }]}/>
+                </>}
             </>
         )
     }
