@@ -21,7 +21,7 @@ class SubmitButton extends React.Component {
         return (
             <Button
                 variant="contained"
-                fullWidth="true"
+                fullWidth={true}
                 onClick={this.handleClick}
             >
                 {this.props.children}
@@ -30,4 +30,4 @@ class SubmitButton extends React.Component {
     }
 }
 
-export default SubmitButton
+export default SubmitButton;

@@ -10,6 +10,7 @@ class CodeBox extends React.Component {
         super(props)
         this.state = {
             currentLang: 'cpp',
+            fileValue: null,
         }
     }
 
@@ -34,7 +35,6 @@ class CodeBox extends React.Component {
                         <UploadButton>Upload file</UploadButton>
                     </Grid>
                 </Grid>
-                {/*Parent Lang: {this.state.currentLang}*/}
                 <CodeEditor lang={this.state.currentLang} />
                 <SubmitButton>Submit</SubmitButton>
             </div>

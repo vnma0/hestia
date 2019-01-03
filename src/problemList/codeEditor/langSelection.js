@@ -45,7 +45,7 @@ class LangSelection extends React.Component {
                     disabled={this.props.disabled}
                     variant="flat"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
-                    aria-haspopup="true"
+                    aria-haspopup={true}
                     onClick={this.handleClick}
                 >
                     Change Language...

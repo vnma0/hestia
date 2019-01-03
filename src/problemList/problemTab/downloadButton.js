@@ -22,7 +22,7 @@ class DownloadButton extends React.Component {
             <Button
                 size="large"
                 variant="contained"
-                fullWidth="true" //enable fullwidth
+                fullWidth={true}
                 onClick={this.handleClick}
             >
                 {this.props.children}
