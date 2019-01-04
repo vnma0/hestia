@@ -46,15 +46,15 @@ class Hestia extends React.Component {
                 {this.state.currentPage === "submissions" && <>
                     <SubmissionTable submissionList={[{
                         contestant : 'minhducsun123456', problem : 'A',
-                        verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', submissionTimestamp: '00:00:00',
+                        verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', timestamp: '00:00:00',
                         language : 'Perl',
                     },{
                         contestant : 'minhducsun2002', problem : 'A',
-                        verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', submissionTimestamp: '00:00:00',
+                        verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', timestamp: '00:00:00',
                         language : 'Pascal',
                     },{
                         contestant : 'minhducsun123456', problem : 'A',
-                        verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', submissionTimestamp: '00:00:00',
+                        verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', timestamp: '00:00:00',
                         language : 'C99',
                     }]}/>
                 </>}

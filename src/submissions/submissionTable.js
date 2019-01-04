@@ -17,7 +17,7 @@ import MemorySignature from './signature/memorySignature.js';
  * @param {String} language : Submission language identifier
  * @param {String} verdict : Submission's judged verdict
  * @param {String} executionTime : Submission's execution time
- * @param {String} memload : memory consumption of the submission
+ * @param {String} memory : memory consumption of the submission
  * @param {String} timestamp : The time of submission.
  * @returns {React.Component} : A <TableRow> containing all nicely-formatted information.
  */
@@ -29,7 +29,7 @@ class Submission extends React.Component {
 			<TableRow style={{
 				backgroundColor: (this.props.verdict==="AC"
 				|| this.props.verdict==="Accepted" ? '#A5D6A7' : '')
-			}}>
+			}} button onClick={() => alert(1)}>
 				<TableCell>
 					<ContestantSignature contestantName={this.props.contestant}/>
 				</TableCell>
@@ -46,7 +46,7 @@ class Submission extends React.Component {
 					<ExecTimeSignature time={this.props.executionTime} />
 				</TableCell>
 				<TableCell>
-					<MemorySignature memload={this.props.memload} />
+					<MemorySignature memory={this.props.memory} />
 				</TableCell>
 				<TableCell>
 					<TimestampSignature time={this.props.timestamp} />
@@ -69,15 +69,15 @@ class Submission extends React.Component {
 /*
 	<SubmissionTable submissionList={[{
 		contestant : 'minhducsun123456', problem : 'A',
-		verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', submissionTimestamp: '00:00:00',
+		verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', timestamp: '00:00:00',
 		language : 'Perl',
 	},{
 		contestant : 'minhducsun2002', problem : 'A',
-		verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', submissionTimestamp: '00:00:00',
+		verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', timestamp: '00:00:00',
 		language : 'Pascal',
 	},{
 		contestant : 'minhducsun123456', problem : 'A',
-		verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', submissionTimestamp: '00:00:00',
+		verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', timestamp: '00:00:00',
 		language : 'C99',
 	}]}/>
 */
@@ -145,7 +145,7 @@ class SubmissionTable extends React.Component {
 						<TableCell>
 							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
 								active onClick={() => this.sortBy("executionTime")}>
-								Verdict
+								Execution duration
 							</TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -156,7 +156,7 @@ class SubmissionTable extends React.Component {
 						</TableCell>
 						<TableCell>
 							<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
-								active onClick={() => this.sortBy("submissionTimestamp")}>
+								active onClick={() => this.sortBy("timestamp")}>
 								Timestamp
 							</TableSortLabel>
 						</TableCell>
@@ -164,10 +164,7 @@ class SubmissionTable extends React.Component {
 					<TableBody>
 						{this.state.submissionList.map(submission => {
 							return (
-								<Submission contestant={submission.contestant} problem={submission.problem}
-								language={submission.language} verdict={submission.verdict}
-								executionTime={submission.executionTime} memload={submission.memory}
-								timestamp={submission.submissionTimestamp}/>
+								<Submission {...submission}/>
 							);
 						})}
 					</TableBody>
