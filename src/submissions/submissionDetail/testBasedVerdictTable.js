@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
+import { Table, TableHead, TableCell, TableRow, TableBody, Typography, CardContent } from '@material-ui/core';
 import MemorySignature from '../signature/memorySignature';
 import ExecTimeSignature from '../signature/execTimeSignature';
 import VerdictSignature from '../signature/verdictSignature';
@@ -73,7 +73,16 @@ class ResultTable extends React.Component {
                 </Table>
             )
         // else if an empty array or invalid variable type was supplied, assume ACM problem
-            return (<></>)
+            return (
+                <CardContent>
+                    <Typography variant="h6">
+                        No test-based judgement details available.
+                    </Typography>
+                    <Typography component="p">
+                        I guess this is an ACM problem?
+                    </Typography>
+                </CardContent>
+            )
     }
 }
 

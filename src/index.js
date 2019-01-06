@@ -47,7 +47,11 @@ class Hestia extends React.Component {
                     <SubmissionTable submissionList={[{
                         contestant : 'minhducsun123456', problem : 'A',
                         verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', timestamp: '00:00:00',
-                        language : 'Perl',
+                        language : 'Perl', tests : [
+                            {verdict : 'AC', executionTime : '1000h', memory : '1TB', mark : '30'},
+                            {verdict : 'AC', executionTime : '1000d', memory : '1MB', mark : '50'},
+                            {verdict : 'AC', executionTime : '0.1s', memory : '5TB', mark : '300'}
+                        ]
                     },{
                         contestant : 'minhducsun2002', problem : 'A',
                         verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', timestamp: '00:00:00',
@@ -55,7 +59,9 @@ class Hestia extends React.Component {
                     },{
                         contestant : 'minhducsun123456', problem : 'A',
                         verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', timestamp: '00:00:00',
-                        language : 'C99',
+                        language : 'C99', tests : [
+                            {verdict : 'AC', executionTime : '5s', memory : '10TB', mark : '30'}
+                        ]
                     }]}/>
                 </>}
             </>

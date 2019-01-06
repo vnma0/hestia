@@ -3,7 +3,7 @@ import Error from '@material-ui/icons/Error';
 
 /**
  * @name ExitErrorVerdictSignature
- * @desc 'Memory exhausted' verdict's icon, margin-and-color-calibrated
+ * @desc 'Error during runtime' verdict's icon, margin-and-color-calibrated
  * @returns {<Error />} An 'error' SVG icon 
  */
 
