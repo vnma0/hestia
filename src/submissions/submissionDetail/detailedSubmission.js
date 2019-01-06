@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Drawer, CardContent, CardHeader, IconButton, Paper, Table, TableHead, TableCell, TableRow, TableBody, Divider } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 
 import ResultTable from './testBasedVerdictTable.js';
 import VerdictSignature from '../signature/verdictSignature';
@@ -16,15 +17,22 @@ import VerdictSignature from '../signature/verdictSignature';
 class DetailedSubmission extends React.Component {
     render() {
         return (
-            <Drawer anchor="right" {...this.props}>
+            <Drawer anchor="right" {...this.props} PaperProps={{
+                style : {margin : 0, overflowX: 'hidden'}
+            }} >
                 <Paper>
                     <CardHeader avatar={<AccountCircle />}
                         title={this.props.contestant}
                         subheader={'Submitted : ' + this.props.timestamp}
                         action={
-                            <IconButton disabled>
-                                <VerdictSignature verdict={this.props.verdict} reversed />
-                            </IconButton>
+                            <>
+                                <IconButton disabled style={{ marginTop: 10, marginRight: 0, paddingRight: 0 }}>
+                                    <VerdictSignature verdict={this.props.verdict} reversed />
+                                </IconButton>
+                                <IconButton onClick={this.props.onClose}>
+                                    <ExitToApp />
+                                </IconButton>
+                            </>
                         } />
                 </Paper>
                 <CardContent>
