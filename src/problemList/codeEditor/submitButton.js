@@ -16,20 +16,19 @@ class SubmitButton extends React.Component {
     handleClick() {
         let final = this.props.code
         console.log('see this ', final)
-        alert(
-            final !== ''
-                ? this.props.lang !== null
-                    ? 'Submitted: \n' + String(final)
-                    : 'No language chosen, please pick a language.'
-                : 'Input is empty.'
-        )
+        alert('Submitted: \n' + String(final))
     }
 
     render() {
         return (
             <Button
+                disabled={this.props.disabled}
                 variant="contained"
-                fullWidth={true}
+                color="primary"
+                style={{
+                    // backgroundColor: this.props.disabled ? '' : '#1af46a',
+                    // color: this.props.disabled ? '' : 'white',
+                }}
                 onClick={this.handleClick}
             >
                 {this.props.children}

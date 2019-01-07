@@ -1,17 +1,17 @@
 import React from 'react'
-// import LangSelection from './langSelection'
 import CodeEditor from './codeEditor'
-import { Grid, Typography, AppBar } from '@material-ui/core'
+import { Grid, AppBar } from '@material-ui/core'
 import UploadButton from './uploadButton'
 import SubmitButton from './submitButton'
 import ConfirmButton from './confirmButton'
 import LangSelection from './langSelection'
+import FileDisplay from './fileDisplay'
 
 class CodeBox extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            fileName: 'No File Chosen',
+            fileName: undefined,
             fileCode: '',
             code: '',
             lang: null,
@@ -19,6 +19,10 @@ class CodeBox extends React.Component {
         this.onFileChange = this.onFileChange.bind(this)
         this.onConfirm = this.onConfirm.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
+        this.handleLangChange = this.handleLangChange.bind(this)
+    }
+    handleLangChange = newLang => {
+        this.setState({ lang: newLang })
     }
     //update editor
     handleUpdate = code => {
@@ -50,7 +54,9 @@ class CodeBox extends React.Component {
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
                             <Grid item>
-                                <LangSelection />
+                                <LangSelection onChange={this.handleLangChange}>
+                                    Language: {this.state.lang ? this.state.lang : "None"}
+                                </LangSelection>
                             </Grid>
                             <Grid item>
                                 <UploadButton sendFile={this.onFileChange}>
@@ -60,10 +66,25 @@ class CodeBox extends React.Component {
                             <Grid item>
                                 <ConfirmButton confirm={this.onConfirm} />
                             </Grid>
+                            <Grid
+                                item
+                                style={{
+                                    flexGrow: 1,
+                                }}
+                            >
+                                <FileDisplay fileName={this.state.fileName} />
+                            </Grid>
                             <Grid item>
-                                <Typography variant="subtitle1">
-                                    {'File: ' + this.state.fileName}
-                                </Typography>
+                                <SubmitButton
+                                    disabled={
+                                        this.state.code === '' ||
+                                        this.state.lang === null
+                                    }
+                                    code={this.state.code}
+                                    lang={this.state.lang}
+                                >
+                                    Submit
+                                </SubmitButton>
                             </Grid>
                         </Grid>
                     </div>
@@ -72,9 +93,6 @@ class CodeBox extends React.Component {
                         update={this.handleUpdate}
                         code={this.state.code}
                     />
-                    <SubmitButton code={this.state.code} lang={this.state.lang}>
-                        Submit
-                    </SubmitButton>
                 </AppBar>
             </div>
         )

@@ -28,10 +28,12 @@ class LangSelection extends React.Component {
     }
 
     handleChose(newLang) {
+        let finalLang=newLang ? newLang : this.state.currentLang;
         this.setState({
-            currentLang: newLang ? newLang : this.state.currentLang,
+            currentLang: finalLang,
             anchorEl: null,
         })
+        this.props.onChange(finalLang);
     }
 
     render() {
@@ -43,7 +45,7 @@ class LangSelection extends React.Component {
                     aria-haspopup={true}
                     onClick={this.handleClick}
                 >
-                    {"Current Language: " + (this.state.currentLang===null ? "None" : this.state.currentLang)}
+                    {this.props.children}
                 </Button>
                 <Menu
                     id="menu"
