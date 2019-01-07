@@ -1,5 +1,4 @@
-const http = require('http'),
-    server = http.createServer();
+const http = require('http');
 
 var configParser = require("./configParser.js");
 var config = undefined;
@@ -12,17 +11,12 @@ configParser((data) => {
 })
 
 var bootstrap = () => {
-    server.listen(Number(config["source"]["port"]));
-    server.on('request', (request, response) => {
-        let buffer = http.request({
-            host : `${config["destination"]["host"]}`,
-            port : Number(config["destination"]["port"]),
-            method : request.method,
-            headers : request.headers,
-            auth : request.auth
-        }, (res) => res.pipe(response));
-        request.pipe(buffer);
-    });
-    console.log(`Server listening on port ${Number(config["source"]["port"])},
-        ready to proxy requests to ${config["destination"]["host"]}:${config["destination"]["port"]}`);
+    var httpProxy = require('http-proxy').createProxyServer({});
+    var server = http.createServer((req, res) => {
+        httpProxy.web(req, res, {
+            target: `http://${config["destination"]["host"]}:${config["destination"]["port"]}`
+        })
+    })
+    server.listen(Number(config["source"]["port"]))
+    console.log(`Hestia proxy is now listening on port ${config["source"]["port"]} and ready to relay requests`);
 }
