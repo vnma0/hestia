@@ -1,0 +1,10 @@
+{
+    "source": {
+        "port": 4000
+    },
+    "destination": {
+        "host": "localhost",
+        "port": 3000
+    },
+    "comment" : "Configuration for proxifying requests. CORS policy blocks direct access..."
+}
