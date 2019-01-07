@@ -9,7 +9,6 @@ import MenuItem from '@material-ui/core/MenuItem'
  * @param {Boolean} disabled If true, the button will be disabled.
  * @description The language selection tab, WORK IN PROGRESS
  */
-
 class LangSelection extends React.Component {
     constructor(props) {
         super(props)
@@ -28,12 +27,12 @@ class LangSelection extends React.Component {
     }
 
     handleChose(newLang) {
-        let finalLang=newLang ? newLang : this.state.currentLang;
+        let finalLang = newLang ? newLang : this.state.currentLang
         this.setState({
             currentLang: finalLang,
             anchorEl: null,
         })
-        this.props.onChange(finalLang);
+        this.props.onChange(finalLang)
     }
 
     render() {
@@ -55,7 +54,7 @@ class LangSelection extends React.Component {
                 >
                     {this.props.lang.map(x => (
                         <MenuItem onClick={() => this.handleChose(x)}>
-                            {x}
+                            {x.display}
                         </MenuItem>
                     ))}
                 </Menu>
@@ -64,6 +63,12 @@ class LangSelection extends React.Component {
     }
 }
 
-LangSelection.defaultProps = { lang: ['cpp', 'java', 'python'] }
+LangSelection.defaultProps = {
+    lang: [
+        { display: 'C++', name: 'cpp' },
+        { display: 'Java', name: 'java' },
+        { display: 'Python', name: 'python' },
+    ],
+}
 
-export default LangSelection;
+export default LangSelection

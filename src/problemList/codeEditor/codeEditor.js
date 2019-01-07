@@ -1,5 +1,6 @@
 import React from 'react'
 import MonacoEditor from 'react-monaco-editor'
+import * as monaco from 'monaco-editor'; //For syntax highlighting, do not delete
 
 /**
  * @name CodeEditor
@@ -21,7 +22,7 @@ class CodeEditor extends React.Component {
     }
 
     editorDidMount(editor, monaco) {
-        console.log('editorDidMount', editor)
+        //console.log('editorDidMount', editor)
         this.setState({
             editorComponent: editor,
         })
@@ -42,7 +43,7 @@ class CodeEditor extends React.Component {
             <>
                 <MonacoEditor
                     height="500"
-                    language={this.state.lang}
+                    language={this.props.lang}
                     theme="vs-dark"
                     value={this.props.code}
                     options={options}

@@ -14,7 +14,7 @@ class CodeBox extends React.Component {
             fileName: undefined,
             fileCode: '',
             code: '',
-            lang: null,
+            lang: {display:"C++", name:"cpp"},
         }
         this.onFileChange = this.onFileChange.bind(this)
         this.onConfirm = this.onConfirm.bind(this)
@@ -55,7 +55,7 @@ class CodeBox extends React.Component {
                         <Grid container spacing={8} alignItems="center">
                             <Grid item>
                                 <LangSelection onChange={this.handleLangChange}>
-                                    Language: {this.state.lang ? this.state.lang : "None"}
+                                    Language: {this.state.lang ? this.state.lang.display : "None"}
                                 </LangSelection>
                             </Grid>
                             <Grid item>
@@ -89,7 +89,7 @@ class CodeBox extends React.Component {
                         </Grid>
                     </div>
                     <CodeEditor
-                        lang={this.state.currentLang}
+                        lang={this.state.lang.name}
                         update={this.handleUpdate}
                         code={this.state.code}
                     />
