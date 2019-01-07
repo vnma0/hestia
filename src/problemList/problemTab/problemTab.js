@@ -10,8 +10,7 @@ import DownloadButton from './downloadButton'
 /**
  * @name ProblemTab
  * @description Tabs for displaying problems
- * @param {Object[string]} pId: id of the problem
- * @param {Object[string]} pStatement: The problem's statement
+ * @param {Array : Object[String, String, String]} problems: id of the problem ([id, statement, link])
  * @author Who_cares?
  * Tabs Api: https://material-ui.com/api/tabs/
  */
@@ -37,8 +36,11 @@ const styles = theme => ({
     },
 })
 class ProblemTab extends React.Component {
-    state = {
-        value: 0, //Current tab
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: 0, //Current tab
+        }
     }
     //Handle change
     handleChange = (event, value) => {
@@ -46,32 +48,30 @@ class ProblemTab extends React.Component {
     }
     //render
     render() {
-        const { pId, pStatement, classes } = this.props
-        const { value } = this.state
-
         return (
-            <div className={classes.root}>
+            <div className={this.props.classes.root}>
                 <AppBar position="static" color="default">
                     <Tabs
-                        value={value}
+                        value={this.state.value}
                         onChange={this.handleChange}
                         indicatorColor="primary"
                         textColor="primary"
                         scrollable
                         scrollButtons="auto"
                     >
-                        {pId.map(x => (
-                            <Tab label={x} />
+                        {this.props.problems.map(x => (
+                            <Tab label={x.id} />
                         ))}
                     </Tabs>
+                    <TabContainer>
+                        {this.props.problems[this.state.value].statement}
+                    </TabContainer>
+                    <DownloadButton
+                        link={this.props.problems[this.state.value].link}
+                    >
+                        Download
+                    </DownloadButton>
                 </AppBar>
-                {pStatement.map(
-                    (x, i) =>
-                        value === i && (
-                            <TabContainer id={'Tab ' + i}>{x}</TabContainer>
-                        )
-                )}
-                <DownloadButton>Download statement file</DownloadButton>
             </div>
         )
     }
@@ -82,13 +82,9 @@ ProblemTab.propTypes = {
 }
 
 ProblemTab.defaultProps = {
-    pId: ['A', 'B', 'C', 'D', 'E'],
-    pStatement: [
-        'No preview available',
-        'No preview available',
-        'No preview available',
-        'No preview available',
-        'No preview available',
+    problems: [
+        { id: 'A', statement: 'To Google', link: 'https://www.google.com.vn/' },
+        { id: 'B', statement: 'To GitHub', link: 'https://github.com/' },
     ],
 }
 

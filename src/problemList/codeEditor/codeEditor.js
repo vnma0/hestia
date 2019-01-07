@@ -16,12 +16,25 @@ class CodeEditor extends React.Component {
             lang: null,
             editorComponent: undefined,
         }
-
+        this.editorDidMount = this.editorDidMount.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
+    editorDidMount(editor, monaco) {
+        console.log('editorDidMount', editor)
+        this.setState({
+            editorComponent: editor,
+        })
+        editor.layout()
+        editor.focus()
+    }
+    onChange(newValue, e) {
+        console.log('onChange', newValue,"spaced", e);
+        this.props.update(newValue);
+    }
 
     render() {
-        const { code } = this.state.code
+        console.log(this.props.code)
         const options = {
             selectOnLineNumbers: true,
         }
@@ -31,30 +44,14 @@ class CodeEditor extends React.Component {
                     height="500"
                     language={this.state.lang}
                     theme="vs-dark"
-                    value={code}
+                    value={this.props.code}
                     options={options}
                     onChange={this.onChange}
                     editorDidMount={this.editorDidMount}
                 />
-                {/*Editor Language: {this.state.lang}*/}
             </>
         )
     }
 }
 
 export default CodeEditor
-
-// this.editorDidMount = this.editorDidMount.bind(this)
-// this.onChange = this.onChange.bind(this)
-
-// editorDidMount(editor, monaco) {
-//     console.log('editorDidMount', editor)
-//     this.setState({
-//         editorComponent: editor,
-//     })
-//     editor.layout()
-//     editor.focus()
-// }
-// onChange(newValue, e) {
-//     console.log('onChange', newValue, e)
-// }

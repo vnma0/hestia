@@ -7,17 +7,17 @@ import MenuItem from '@material-ui/core/MenuItem'
  * @name LangSelection
  * @param {Array:String} lang Language name
  * @param {Boolean} disabled If true, the button will be disabled.
- * @description The language selection tab
+ * @description The language selection tab, WORK IN PROGRESS
  */
 
 class LangSelection extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentLang: 'cpp',
+            currentLang: null,
             anchorEl: null,
         }
-        this.handleChoice = this.handleChoice.bind(this)
+        this.handleChoice = this.handleChose.bind(this)
         this.handleClick = this.handleClick.bind(this)
     }
 
@@ -27,10 +27,7 @@ class LangSelection extends React.Component {
         })
     }
 
-    handleChoice(newLang) {
-        this.props.callbackFromParent(
-            newLang ? newLang : this.state.currentLang
-        )
+    handleChose(newLang) {
         this.setState({
             currentLang: newLang ? newLang : this.state.currentLang,
             anchorEl: null,
@@ -38,26 +35,24 @@ class LangSelection extends React.Component {
     }
 
     render() {
-        const { lang } = this.props
         return (
             <div>
                 <Button
-                    disabled={this.props.disabled}
                     variant="flat"
-                    aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                    aria-owns={this.state.anchorEl ? 'menu' : undefined}
                     aria-haspopup={true}
                     onClick={this.handleClick}
                 >
-                    Change Language...
+                    {"Current Language: " + (this.state.currentLang===null ? "None" : this.state.currentLang)}
                 </Button>
                 <Menu
-                    id="simple-menu"
+                    id="menu"
                     anchorEl={this.state.anchorEl}
                     open={Boolean(this.state.anchorEl)}
-                    onClose={() => this.handleChoice(null)}
+                    onClose={() => this.handleChose(null)}
                 >
-                    {lang.map(x => (
-                        <MenuItem onClick={() => this.handleChoice(x)}>
+                    {this.props.lang.map(x => (
+                        <MenuItem onClick={() => this.handleChose(x)}>
                             {x}
                         </MenuItem>
                     ))}
@@ -67,6 +62,6 @@ class LangSelection extends React.Component {
     }
 }
 
-LangSelection.defaultProps = { lang: ['cpp', 'java', 'python'] , disabled: false }
+LangSelection.defaultProps = { lang: ['cpp', 'java', 'python'] }
 
 export default LangSelection;

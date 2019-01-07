@@ -24,7 +24,7 @@ class ProblemTabEditor extends React.Component {
     render() {
         const { classes } = this.props
         return (
-            <div className={classes.root}>
+            <div className={classes.root} style={{marginTop: "10px"}}>
                 <Grid container spacing={8} alignItems="flex-start">
                     <Grid
                         item

@@ -14,7 +14,6 @@ class DownloadButton extends React.Component {
     }
     //handeClick
     handleClick() {
-        alert('Download function excuted!')
     }
     //render
     render() {
@@ -23,6 +22,8 @@ class DownloadButton extends React.Component {
                 size="large"
                 variant="contained"
                 fullWidth={true}
+                href={this.props.link}
+                target="_blank"
                 onClick={this.handleClick}
             >
                 {this.props.children}
@@ -31,4 +32,4 @@ class DownloadButton extends React.Component {
     }
 }
 
-export default DownloadButton
+export default DownloadButton;

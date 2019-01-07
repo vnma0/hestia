@@ -12,11 +12,19 @@ class SubmitButton extends React.Component {
         super(props)
         this.handleClick = this.handleClick.bind(this)
     }
-    //handeClick
+
     handleClick() {
-        alert('Submit function executed!')
+        let final = this.props.code
+        console.log('see this ', final)
+        alert(
+            final !== ''
+                ? this.props.lang !== null
+                    ? 'Submitted: \n' + String(final)
+                    : 'No language chosen, please pick a language.'
+                : 'Input is empty.'
+        )
     }
-    //render
+
     render() {
         return (
             <Button
@@ -30,4 +38,4 @@ class SubmitButton extends React.Component {
     }
 }
 
-export default SubmitButton;
+export default SubmitButton
