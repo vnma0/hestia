@@ -5,7 +5,7 @@ import Memory from '@material-ui/icons/Memory';
 /**
  * @name MemorySignature : Submission's memory consumption. FlexGrow. 
  *                       All props are passed down to <Typography>.
- * @param {String} memload : Memory consumption.
+ * @param {String} memory : Memory consumption.
  * @return {React.Component} : A <Typography> that shows the timestamp of current submission.
  *                             Children override if exist.
  * @author minhducsun2002
@@ -26,7 +26,7 @@ class MemorySignature extends Component {
                     <Typography variant='overline' color="inherit" style={{
                         flexGrow: 1, display: 'inline-block'
                     }} {...this.props}>
-                        {this.props.children ? this.props.children : this.props.memload}
+                        {this.props.children ? this.props.children : this.props.memory}
                     </Typography>
                 </Grid>
             </Grid>

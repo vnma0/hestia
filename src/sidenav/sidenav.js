@@ -10,8 +10,9 @@ import {Drawer, ListItem, List} from '@material-ui/core';
 class Sidenav extends Component {
     renderItems() {
         return this.props.pages.map(page => {
+            // mirroring onClick function 
             return (
-                <ListItem>
+                <ListItem onClick={page.props.onClick} button={page.props.button}>
                     {page}
                 </ListItem>
             )
