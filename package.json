@@ -8,6 +8,7 @@
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
     "http-proxy": "^1.17.0",
+    "ip": "^1.1.5",
     "monaco-editor": "^0.15.6",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

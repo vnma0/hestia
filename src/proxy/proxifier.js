@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require('http'), ip = require('ip');
 
 var configParser = require("./configParser.js");
 var config = undefined;
@@ -18,5 +18,8 @@ var bootstrap = () => {
         })
     })
     server.listen(Number(config["source"]["port"]))
-    console.log(`Hestia proxy is now listening on port ${config["source"]["port"]} and ready to relay requests`);
+
+    console.log(`Hestia proxy is now ready to relay HTTP requests.`);
+    console.log(`If you're on the network, the proxy can be accessed at ${ip.address()}.`)
+    console.log(`Listening on port ${config["source"]["port"]} and forwarding to ${config["destination"]["host"]}:${config["destination"]["port"]}`)
 }
