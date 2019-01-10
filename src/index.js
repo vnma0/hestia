@@ -5,20 +5,24 @@ import 'typeface-roboto';
 import * as serviceWorker from './serviceWorker';
 import { Button } from '@material-ui/core';
 
-import GlobalStatusBar from './globalStatusBar/globalStatusBar.js'
-import Sidenav from './sidenav/sidenav.js';
-import SubmissionTable from './submissions/submissionTable.js';
+import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
+import Sidenav from './app/sidenav/sidenav.js';
+import SubmissionTable from './app/submissions/submissionTable.js';
 
-import SubmissionLauncher from './submissions/submissionLauncher.js';
+import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 
 class Hestia extends React.Component {
     constructor(props) {
         super(props);
+        window.hestia = {};
         this.state = {
             sidebarOpen : false,
-            currentPage : 'front'
+            currentPage : 'front',
+            loggedIn : false
         }
         this.changePage = this.changePage.bind(this);
+        this.updateLoginState = this.updateLoginState.bind(this);
+        window.hestia.updateLoginState = this.updateLoginState;
     }
 
     changePage(to) {
@@ -29,11 +33,18 @@ class Hestia extends React.Component {
         })
     }
 
+    updateLoginState() {
+        this.setState({
+            loggedIn : window.hestia.loggedIn
+        })
+    }
+
     render() {
+        // initialize global variable
         return (
             <>
                 <GlobalStatusBar contestName="Kỳ thi 1" currentUser="Test User"
-                    contestTimeLeft="00:00:00" contestDuration="23:59:59" loggedIn={true}
+                    contestTimeLeft="00:00:00" contestDuration="23:59:59" loggedIn={this.state.loggedIn}
                     menuOpen={() => this.setState({
                         sidebarOpen : true
                     })}/>
@@ -69,7 +80,7 @@ class Hestia extends React.Component {
     }
 }
 
-ReactDOM.render(<Hestia/>, document.querySelector('#root'));
+ReactDOM.render(<Hestia />, document.querySelector('#root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

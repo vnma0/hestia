@@ -18,7 +18,7 @@
     "typeface-roboto": "0.0.54"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=5000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test"
   },
@@ -41,12 +41,11 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "proxy": "http://localhost:4000/",
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.2",
     "@babel/node": "^7.2.2",
-    "@babel/preset-env": "^7.2.0",
-    "jest": "^23.6.0",
-    "nodemon": "^1.18.9"
+    "@babel/preset-env": "^7.2.0"
   }
 }

@@ -1,4 +1,5 @@
 const fs = require("fs");
+const join = require('path').join;
 var config = undefined, callback;
 
 /**
@@ -8,7 +9,7 @@ var config = undefined, callback;
  */
 
 
-const hardcodedFilePath = '../../config/proxy.json';
+const hardcodedFilePath = join(process.cwd(), '/../../config/proxy.json');
 const initialValues =
     '{"source":{"address":"1.1.1.1","port":"3000"},"destination":{"address":"localhost","port":"3000"}}'
 // the initial value MUST be hardcoded : we cannot trust the user to not deleting the sample file

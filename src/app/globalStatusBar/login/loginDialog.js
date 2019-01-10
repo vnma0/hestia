@@ -3,10 +3,14 @@ import { DialogTitle, DialogContent, DialogContentText, Dialog, DialogActions, G
 import { TextField, Button } from '@material-ui/core';
 
 import {validateID, validateKey} from '../lib/libValidateLogin.js';
+import VerdictSignature from '../../submissions/signature/verdictSignature.js'
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Lock from '@material-ui/icons/Lock';
 import {fade} from '../lib/libTransition.js';
+
+import login from './stub/login.js'
 
 /**
  * @name LoginDialog 
@@ -34,9 +38,10 @@ class LoginDialog extends Component {
 
             loginInvokerRef: React.createRef(),
             testRef: React.createRef(),
-        }
 
-        this.login = this.login.bind(this);
+            loginInProgress : false,
+            errorLogin : false
+        }
         this.handleUserIDChange = this.handleUserIDChange.bind(this);
         this.handleKeyChange = this.handleKeyChange.bind(this);
         this.resolveEnterKey = this.resolveEnterKey.bind(this);
@@ -53,17 +58,6 @@ class LoginDialog extends Component {
              */
             
     }    
-
-    login = (event) => {
-        if (this.state.validId === false)
-            // if invalidID, stop immediately
-            return false;
-        alert(`You attempted to log in with username
-            '${this.state.id}' and password '${this.state.passkey}'`)
-        /**
-         * @todo Implement log in function & integrate with cookies
-         */
-    }
 
     handleUserIDChange = (event) => {
         this.setState({
@@ -85,7 +79,9 @@ class LoginDialog extends Component {
             TransitionComponent={this.props.TransitionComponent
                 ? this.props.TransitionComponent : fade}>
             
-                <DialogTitle>Log in</DialogTitle>
+                <DialogTitle>
+                    {this.state.errorLogin ? 'Error logging in.' : 'Log in'}
+                </DialogTitle>
                 
                 <DialogContent>
                     <DialogContentText>
@@ -124,13 +120,25 @@ class LoginDialog extends Component {
                     </Grid>
 
                 </DialogContent>
-                
+
                 <DialogActions>
-                    <Button onClick={this.props.onClose}>
+                    <Button disabled={this.state.loginInProgress} 
+                        onClick={this.props.onClose}>
                         Cancel
                     </Button>
-                    <Button onClick={this.login} ref={this.state.loginInvokerRef}>
-                        Log in
+                    <Button disabled={this.state.loginInProgress} onClick={() => {
+                        login(this.state.id, this.state.passkey, () => 
+                            this.setState({
+                                loginInProgress : false,
+                                errorLogin : !window.hestia.loggedIn
+                            })) && this.forceUpdate()
+                            // if login finished, hide the loading circle
+                        this.setState({
+                            loginInProgress : true
+                        })
+                    }} ref={this.state.loginInvokerRef}>
+                        {this.state.loginInProgress
+                            ? <CircularProgress size={20}/> : "Log in"}
                     </Button>
                 </DialogActions>
             </Dialog>
