@@ -1,8 +1,9 @@
-import React from 'react';
-import MonacoEditor from 'react-monaco-editor';
-
+import React from 'react'
+import MonacoEditor from 'react-monaco-editor'
+import * as monaco from 'monaco-editor'; //For syntax highlighting, do not delete
 
 /**
+ * @name CodeEditor
  * Monaco Api: https://microsoft.github.io/monaco-editor/api/index.html
  * Put in option: https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html
  * React monaco editor: https://github.com/superRaytin/react-monaco-editor
@@ -10,46 +11,48 @@ import MonacoEditor from 'react-monaco-editor';
 
 class CodeEditor extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             code: '',
             lang: null,
-            
-            editorComponent: undefined
+            editorComponent: undefined,
         }
-        this.editorDidMount = this.editorDidMount.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.editorDidMount = this.editorDidMount.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
     editorDidMount(editor, monaco) {
-        console.log('editorDidMount', editor);
+        //console.log('editorDidMount', editor)
         this.setState({
-            editorComponent : editor
+            editorComponent: editor,
         })
-        editor.layout();
-        editor.focus();
+        editor.layout()
+        editor.focus()
     }
     onChange(newValue, e) {
-        console.log('onChange', newValue, e);
+        console.log('onChange', newValue,"spaced", e);
+        this.props.update(newValue);
     }
+
     render() {
-        const code = this.state.code;
+        console.log(this.props.code)
         const options = {
-            selectOnLineNumbers: true
-        };
+            selectOnLineNumbers: true,
+        }
         return (
-            <MonacoEditor
-                width="500"
-                height="600"
-                language="cpp"
-                theme="vs-dark"
-                value={code}
-                options={options}
-                onChange={this.onChange}
-                editorDidMount={this.editorDidMount}
-            />
+            <>
+                <MonacoEditor
+                    height="500"
+                    language={this.props.currentLang}
+                    theme="vs-dark"
+                    value={this.props.code}
+                    options={options}
+                    onChange={this.onChange}
+                    editorDidMount={this.editorDidMount}
+                />
+            </>
         )
     }
 }
 
-export default CodeEditor;
+export default CodeEditor

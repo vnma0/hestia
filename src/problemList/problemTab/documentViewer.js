@@ -1,7 +1,9 @@
 import React from 'react';
 import { Document, Page } from 'react-Pdf';
 
-
+/**
+ * WIP (Work in progress)
+ */
 class Pdf extends React.Component {
     constructor(props){
         super(props);
