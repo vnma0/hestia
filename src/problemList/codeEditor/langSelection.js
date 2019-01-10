@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
+import { MenuItem, Tooltip } from '@material-ui/core'
 
 /**
  * @name LangSelection
@@ -37,14 +37,16 @@ class LangSelection extends React.Component {
     render() {
         return (
             <div>
-                <Button
-                    variant="contained"
-                    aria-owns={this.state.anchorEl ? 'menu' : undefined}
-                    aria-haspopup={true}
-                    onClick={this.handleClick}
-                >
-                    {this.props.children}
-                </Button>
+                <Tooltip title="Change coding language" placement="bottom">
+                    <Button
+                        variant="contained"
+                        aria-owns={this.state.anchorEl ? 'menu' : undefined}
+                        aria-haspopup={true}
+                        onClick={this.handleClick}
+                    >
+                        {this.props.children}
+                    </Button>
+                </Tooltip>
                 <Menu
                     id="menu"
                     anchorEl={this.state.anchorEl}

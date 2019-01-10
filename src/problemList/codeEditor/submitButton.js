@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
+import { Button } from '@material-ui/core'
 
 /**
  * @name SubmitButton
@@ -14,11 +14,12 @@ class SubmitButton extends React.Component {
     }
 
     handleClick() {
-        let element=document.createElement("a");
+        let element = document.createElement('a')
         let submitFile = new Blob([this.props.code], { type: 'text/plain' })
-        element.href = URL.createObjectURL(submitFile);
-        element.download = this.props.submitFileName + '.' + this.props.extension;
-        element.click();
+        element.href = URL.createObjectURL(submitFile)
+        element.download =
+            this.props.submitFileName + '.' + this.props.extension
+        element.click()
     }
 
     render() {

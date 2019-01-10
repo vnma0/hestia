@@ -1,6 +1,5 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Tooltip from '@material-ui/core/Tooltip'
+import { Button, Tooltip } from '@material-ui/core'
 
 /**
  * @name UploadButton
@@ -25,7 +24,7 @@ class UploadButton extends React.Component {
     render() {
         return (
             <>
-                <Tooltip title="Upload local file">
+                <Tooltip title="Upload local file" placement="bottom">
                     <Button component="label" variant="contained">
                         {this.props.children}
                         <input
