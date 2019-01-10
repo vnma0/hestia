@@ -1,6 +1,7 @@
 import React from 'react'
 import CodeEditor from './codeEditor'
-import { Grid, AppBar } from '@material-ui/core'
+import AppBar from '@material-ui/core/AppBar'
+import Grid from '@material-ui/core/Grid'
 import UploadButton from './uploadButton'
 import SubmitButton from './submitButton'
 import ConfirmButton from './confirmButton'
@@ -14,34 +15,31 @@ class CodeBox extends React.Component {
             fileName: undefined,
             fileCode: '',
             code: '',
-            lang: {display:"C++", name:"cpp"},
+            currentLangId: 0,
         }
-        this.onFileChange = this.onFileChange.bind(this)
-        this.onConfirm = this.onConfirm.bind(this)
+        this.handleFileChange = this.handleFileChange.bind(this)
+        this.handleConfirm = this.handleConfirm.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
         this.handleLangChange = this.handleLangChange.bind(this)
     }
     handleLangChange = newLang => {
-        this.setState({ lang: newLang })
+        this.setState({ currentLangId: newLang })
     }
-    //update editor
+
     handleUpdate = code => {
         this.setState({ code: code })
-        console.log('Change ', this.state.code)
     }
-    //after picking a file
-    onFileChange = (file, fileName) => {
+
+    handleFileChange = (file, fileName) => {
         console.log(fileName)
         this.setState({ fileCode: file, fileName: fileName })
     }
-    //on pressing the ConfirmButton
-    onConfirm = () => {
+
+    handleConfirm = () => {
         if (this.state.fileCode !== '')
-            if (window.confirm('Confirm?')) {
-                this.setState({
-                    code: this.state.fileCode,
-                })
-            }
+            this.setState({
+                code: this.state.fileCode,
+            })
     }
     render() {
         return (
@@ -54,17 +52,22 @@ class CodeBox extends React.Component {
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
                             <Grid item>
-                                <LangSelection onChange={this.handleLangChange}>
-                                    Language: {this.state.lang ? this.state.lang.display : "None"}
+                                <LangSelection
+                                    lang={this.props.lang}
+                                    handleChange={this.handleLangChange}
+                                >
+                                    Language:{' '}
+                                    {
+                                        this.props.lang[
+                                            this.state.currentLangId
+                                        ].display
+                                    }
                                 </LangSelection>
                             </Grid>
                             <Grid item>
-                                <UploadButton sendFile={this.onFileChange}>
+                                <UploadButton sendFile={this.handleFileChange}>
                                     Upload file
                                 </UploadButton>
-                            </Grid>
-                            <Grid item>
-                                <ConfirmButton confirm={this.onConfirm} />
                             </Grid>
                             <Grid
                                 item
@@ -72,16 +75,27 @@ class CodeBox extends React.Component {
                                     flexGrow: 1,
                                 }}
                             >
-                                <FileDisplay fileName={this.state.fileName} />
+                                    <FileDisplay fileName={this.state.fileName}>
+                                        No file chosen
+                                    </FileDisplay>
+                            </Grid>
+                            <Grid item>
+                                <ConfirmButton confirm={this.handleConfirm} />
                             </Grid>
                             <Grid item>
                                 <SubmitButton
                                     disabled={
                                         this.state.code === '' ||
-                                        this.state.lang === null
+                                        this.state.currentLangId === null
+                                    }
+                                    submitFileName={this.props.submitFileName}
+                                    extension={
+                                        this.props.lang[
+                                            this.state.currentLangId
+                                        ].extension
                                     }
                                     code={this.state.code}
-                                    lang={this.state.lang}
+                                    currentLangId={this.state.currentLangId}
                                 >
                                     Submit
                                 </SubmitButton>
@@ -89,7 +103,9 @@ class CodeBox extends React.Component {
                         </Grid>
                     </div>
                     <CodeEditor
-                        lang={this.state.lang.name}
+                        currentLang={
+                            this.props.lang[this.state.currentLangId].name
+                        }
                         update={this.handleUpdate}
                         code={this.state.code}
                     />
@@ -97,6 +113,16 @@ class CodeBox extends React.Component {
             </div>
         )
     }
+}
+
+CodeBox.defaultProps = {
+    lang: [
+        { display: 'C++', name: 'cpp', extension: ['cpp'] },
+        { display: 'JavaScript', name: 'javascript', extension: ['js'] },
+        { display: 'Python', name: 'python', extension: ['py'] },
+        { display: 'Java', name: 'java', extension: ['java'] },
+        { display: 'Typescript', name: 'typescript', extension: ['ts'] },
+    ],
 }
 
 export default CodeBox

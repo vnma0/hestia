@@ -43,7 +43,7 @@ class CodeEditor extends React.Component {
             <>
                 <MonacoEditor
                     height="500"
-                    language={this.props.lang}
+                    language={this.props.currentLang}
                     theme="vs-dark"
                     value={this.props.code}
                     options={options}

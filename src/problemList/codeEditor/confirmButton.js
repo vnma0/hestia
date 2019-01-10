@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import Tooltip from '@material-ui/core/Tooltip'
 import Done from '@material-ui/icons/Done'
 
 /**
@@ -10,22 +11,24 @@ import Done from '@material-ui/icons/Done'
 class ConfirmButton extends React.Component {
     constructor(props) {
         super(props)
-        this.handleClick=this.handleClick.bind(this);
+        this.handleClick = this.handleClick.bind(this)
     }
     //handeClick
     handleClick() {
-        this.props.confirm();
+        this.props.confirm()
     }
     //render
     render() {
         return (
             <>
-                <Button onClick={this.handleClick}>
-                    <Done/>
-                </Button>
+                <Tooltip title="Send file to editor">
+                    <Button variant="contained" onClick={this.handleClick}>
+                        <Done />
+                    </Button>
+                </Tooltip>
             </>
         )
     }
 }
 
-export default ConfirmButton;
+export default ConfirmButton

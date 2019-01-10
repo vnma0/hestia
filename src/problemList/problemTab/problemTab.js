@@ -10,7 +10,7 @@ import DownloadButton from './downloadButton'
 /**
  * @name ProblemTab
  * @description Tabs for displaying problems
- * @param {Array : Object[String, String, String]} problems: id of the problem ([id, statement, link])
+ * @param {Array [ Object { String, String, String } ]} problems: id of the problem ([id, statement, link])
  * @author Who_cares?
  * Tabs Api: https://material-ui.com/api/tabs/
  */
@@ -44,7 +44,7 @@ class ProblemTab extends React.Component {
     }
     //Handle change
     handleChange = (event, value) => {
-        this.setState({ value })
+        this.props.handleTabChange(value);
     }
     //render
     render() {
@@ -52,22 +52,22 @@ class ProblemTab extends React.Component {
             <div className={this.props.classes.root}>
                 <AppBar position="static" color="default">
                     <Tabs
-                        value={this.state.value}
+                        value={this.props.value}
                         onChange={this.handleChange}
                         indicatorColor="primary"
                         textColor="primary"
                         scrollable
                         scrollButtons="auto"
                     >
-                        {this.props.problems.map(x => (
+                        {this.props.problem.map(x => (
                             <Tab label={x.id} />
                         ))}
                     </Tabs>
                     <TabContainer>
-                        {this.props.problems[this.state.value].statement}
+                        {this.props.problem[this.props.value].statement}
                     </TabContainer>
                     <DownloadButton
-                        link={this.props.problems[this.state.value].link}
+                        link={this.props.problem[this.props.value].link}
                     >
                         Download
                     </DownloadButton>
@@ -79,13 +79,6 @@ class ProblemTab extends React.Component {
 
 ProblemTab.propTypes = {
     classes: PropTypes.object.isRequired,
-}
-
-ProblemTab.defaultProps = {
-    problems: [
-        { id: 'A', statement: 'To Google', link: 'https://www.google.com.vn/' },
-        { id: 'B', statement: 'To GitHub', link: 'https://github.com/' },
-    ],
 }
 
 export default withStyles(styles)(ProblemTab)

@@ -13,7 +13,6 @@ class LangSelection extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentLang: null,
             anchorEl: null,
         }
         this.handleChoice = this.handleChose.bind(this)
@@ -27,19 +26,19 @@ class LangSelection extends React.Component {
     }
 
     handleChose(newLang) {
-        let finalLang = newLang ? newLang : this.state.currentLang
         this.setState({
-            currentLang: finalLang,
             anchorEl: null,
         })
-        this.props.onChange(finalLang)
+        if (newLang !== null) {
+            this.props.handleChange(newLang)
+        }
     }
 
     render() {
         return (
             <div>
                 <Button
-                    variant="flat"
+                    variant="contained"
                     aria-owns={this.state.anchorEl ? 'menu' : undefined}
                     aria-haspopup={true}
                     onClick={this.handleClick}
@@ -52,8 +51,8 @@ class LangSelection extends React.Component {
                     open={Boolean(this.state.anchorEl)}
                     onClose={() => this.handleChose(null)}
                 >
-                    {this.props.lang.map(x => (
-                        <MenuItem onClick={() => this.handleChose(x)}>
+                    {this.props.lang.map((x, i) => (
+                        <MenuItem onClick={() => this.handleChose(i)}>
                             {x.display}
                         </MenuItem>
                     ))}
@@ -61,14 +60,6 @@ class LangSelection extends React.Component {
             </div>
         )
     }
-}
-
-LangSelection.defaultProps = {
-    lang: [
-        { display: 'C++', name: 'cpp' },
-        { display: 'Java', name: 'java' },
-        { display: 'Python', name: 'python' },
-    ],
 }
 
 export default LangSelection
