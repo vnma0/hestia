@@ -8,8 +8,10 @@ import { Button } from '@material-ui/core';
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js';
 import SubmissionTable from './app/submissions/submissionTable.js';
+import ProblemList from './app/problemList/problemList.js';
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
+import ProblemLauncher from './app/problemList/problemLauncher.js'
 
 class Hestia extends React.Component {
     constructor(props) {
@@ -52,7 +54,8 @@ class Hestia extends React.Component {
                     sidebarOpen: false
                 })} pages={[
                     <Button onClick={() => this.changePage('front')}>Alert (1)</Button>,
-                    <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>
+                    <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>,
+                    <ProblemLauncher onClick={() => this.changePage('problems')} button/>
                 ]} />
                 {this.state.currentPage === "submissions" && <>
                     <SubmissionTable submissionList={[{
@@ -74,6 +77,16 @@ class Hestia extends React.Component {
                             {verdict : 'AC', executionTime : '5s', memory : '10TB', mark : '30'}
                         ]
                     }]}/>
+                </>}
+                {this.state.currentPage === "problems" && <>
+                    <ProblemList problem={[
+                        {
+                            id: 'A', name : 'Problem 1', statement : 'Problem 1\'s statement', link : 'git-scm.com'
+                        },
+                        {
+                            id: 'B', name : 'Problem 2', statement : 'Problem 2\'s statement', link : 'git-scm.com'
+                        }
+                    ]}/>
                 </>}
             </>
         )

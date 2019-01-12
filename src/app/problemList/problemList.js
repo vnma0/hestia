@@ -5,7 +5,7 @@ class ProblemList extends React.Component {
     render() {
         return(
             <>
-                <ProblemTabEditor/>
+                <ProblemTabEditor {...this.props}/>
             </>
         )
     }

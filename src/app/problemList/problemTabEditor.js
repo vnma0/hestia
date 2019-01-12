@@ -1,26 +1,13 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 import ProblemTab from './problemTab/problemTab'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import CodeBox from './codeEditor/codeBox'
 
 /**
  * @author Dat Ngo
  * @description Combine all components
- * @param {Array[ Object {id,name,statement,link} ]} problem problem ID, problem name, statement, download link
+ * @param {Array : Object {id, name, statement, link} } problem problem ID, problem name, statement, download link
  */
-
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing.unit * 2,
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-})
 
 class ProblemTabEditor extends React.Component {
     constructor(props){
@@ -36,9 +23,8 @@ class ProblemTabEditor extends React.Component {
         })    
     }
     render() {
-        const { classes } = this.props
         return (
-            <div className={classes.root} style={{ marginTop: '10px' }}>
+            <div style={{ marginTop: '10px' }}>
                 <Grid container spacing={8} alignItems="flex-start">
                     <Grid
                         item
@@ -62,10 +48,6 @@ class ProblemTabEditor extends React.Component {
     }
 }
 
-ProblemTabEditor.propTypes = {
-    classes: PropTypes.object.isRequired,
-}
-
 ProblemTabEditor.defaultProps = {
     problem: [
         {
@@ -83,4 +65,4 @@ ProblemTabEditor.defaultProps = {
     ],
 }
 
-export default withStyles(styles)(ProblemTabEditor)
+export default ProblemTabEditor

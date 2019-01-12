@@ -30,12 +30,14 @@ class CodeEditor extends React.Component {
         editor.focus()
     }
     onChange(newValue, e) {
-        console.log('onChange', newValue,"spaced", e);
-        this.props.update(newValue);
+        // console.log('onChange', newValue,"spaced", e);
+        this.setState({
+            code: newValue
+        })
     }
 
     render() {
-        console.log(this.props.code)
+        // console.log(this.props.code)
         const options = {
             selectOnLineNumbers: true,
         }
@@ -46,9 +48,10 @@ class CodeEditor extends React.Component {
                     language={this.props.currentLang}
                     theme="vs-dark"
                     value={this.props.code}
-                    options={options}
+                    // options={options}
                     onChange={this.onChange}
                     editorDidMount={this.editorDidMount}
+                    // requireConfig={{ baseUrl: '/', paths: { vs: 'vs' }, url: '/vs/loader.js' }}
                 />
             </>
         )

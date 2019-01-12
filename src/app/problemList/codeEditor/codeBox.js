@@ -30,7 +30,7 @@ class CodeBox extends React.Component {
     }
 
     handleFileChange = (file, fileName) => {
-        console.log(fileName)
+        // console.log(fileName)
         this.setState({ fileCode: file, fileName: fileName })
     }
 
@@ -42,19 +42,16 @@ class CodeBox extends React.Component {
     }
     render() {
         return (
-            <div
-                style={{
+            <div style={{
                     flexGrow: 1,
-                }}
-            >
+                }} >
                 <AppBar position="static" color="default">
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
                             <Grid item>
                                 <LangSelection
                                     lang={this.props.lang}
-                                    handleChange={this.handleLangChange}
-                                >
+                                    handleChange={this.handleLangChange} >
                                     Language:{' '}
                                     {
                                         this.props.lang[
