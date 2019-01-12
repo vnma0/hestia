@@ -1,26 +1,35 @@
-import React from 'react';
+import React from 'react'
 import { Button } from '@material-ui/core'
 
 /**
+ * @name DownloadButton
+ * @description The Download Button
  * Button Api: https://material-ui.com/api/button/
  */
 
-class downloadButton extends React.Component {
-    handleClick() {
-        alert("Button pressed");
+class DownloadButton extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleClick = this.handleClick.bind(this)
     }
-
+    //handeClick
+    handleClick() {
+    }
+    //render
     render() {
         return (
             <Button
-                    size="large"
-                    variant="contained"
-                    onClick={() => this.handleClick}
-                >
-                    {this.props.children}
+                size="large"
+                variant="contained"
+                fullWidth={true}
+                href={this.props.link}
+                target="_blank"
+                onClick={this.handleClick}
+            >
+                {this.props.children}
             </Button>
         )
     }
 }
 
-export default downloadButton;
+export default DownloadButton;

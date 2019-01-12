@@ -1,61 +1,67 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import React from 'react'
+import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import { MenuItem, Tooltip } from '@material-ui/core'
 
+/**
+ * @name LangSelection
+ * @param {Array:String} lang Language name
+ * @param {Boolean} disabled If true, the button will be disabled.
+ * @description The language selection tab, WORK IN PROGRESS
+ */
 class LangSelection extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            str: 'C++',
-            anchorEl: null
-        };
-        this.handleChose = this.handleChose.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+            anchorEl: null,
+        }
+        this.handleChoice = this.handleChose.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
-    handleClick(event){
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleClose(){
-        this.setState({ anchorEl: null });
-    };
-
-    handleChose() {
+    handleClick(event) {
         this.setState({
-            str: this.props.lang[1],
-            anchorEl: null
-        });
-    };
+            anchorEl: event.currentTarget,
+        })
+    }
+
+    handleChose(newLang) {
+        this.setState({
+            anchorEl: null,
+        })
+        if (newLang !== null) {
+            this.props.handleChange(newLang)
+        }
+    }
 
     render() {
-        const { anchorEl, str } = this.state;
-        const { lang } = this.props;
         return (
             <div>
-                <Button
-                    aria-owns={anchorEl ? 'simple-menu' : undefined}
-                    aria-haspopup="true"
-                    onClick={this.handleClick}
-                >
-                    Change Language...
-        </Button>
+                <Tooltip title="Change coding language" placement="bottom">
+                    <Button
+                        variant="contained"
+                        aria-owns={this.state.anchorEl ? 'menu' : undefined}
+                        aria-haspopup={true}
+                        onClick={this.handleClick}
+                    >
+                        {this.props.children}
+                    </Button>
+                </Tooltip>
                 <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={this.handleClose}
+                    id="menu"
+                    anchorEl={this.state.anchorEl}
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={() => this.handleChose(null)}
                 >
-                    {lang.map((x, i) => <MenuItem onClick={this.handleChose}>{x}</MenuItem>)}
+                    {this.props.lang.map((x, i) => (
+                        <MenuItem onClick={() => this.handleChose(i)}>
+                            {x.display}
+                        </MenuItem>
+                    ))}
                 </Menu>
-                <h1>{str}</h1>
             </div>
-        );
+        )
     }
 }
 
-LangSelection.defaultProps = { lang: ['C++', 'JavaScript'] };
-
-export default LangSelection;
+export default LangSelection
