@@ -27,6 +27,8 @@ var bootstrap = () => {
     })
     server.listen(Number(proxyConfig["source"]["port"]))
 
+    server.on('error', (err) =>  console.log(err))
+
     console.log(`Hestia proxy is now ready to relay HTTP requests.`);
     console.log(`If you're on the network, the proxy can be accessed at ${ip.address()}.`)
     console.log(`Listening on port ${proxyConfig["source"]["port"]} and forwarding to ${proxyConfig["destination"]["host"]}:${proxyConfig["destination"]["port"]}`)
