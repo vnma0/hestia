@@ -25,7 +25,11 @@ var bootstrap = () => {
             target: `http://${proxyConfig["destination"]["host"]}:${proxyConfig["destination"]["port"]}`
         })
     })
-    server.listen(Number(proxyConfig["source"]["port"]))
+    try {
+        server.listen(Number(proxyConfig["source"]["port"]))
+    } catch (error) {
+        console.log(error)
+    }
 
     server.on('error', (err) =>  console.log(err))
 
