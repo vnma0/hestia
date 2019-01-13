@@ -1,4 +1,19 @@
 /**
+ * @name constructRequestBody
+ * @desc Create an URLSearchParam object suitable to be sent as log in request
+ * @param {String} username - Username
+ * @param {String} password - Password
+ * @return {URLSearchParams} `new URLSearchParam()` with given params
+ */
+
+function constructRequestBody(username, password) {
+    let out = new URLSearchParams();
+    out.append('username', username);
+    out.append('password', password);
+    return out;
+}
+
+/**
  * @name login
  * @desc Log in function. On completion, window.hestia.loggedIn will have the result of the log in attempt
  * @param {String} username - Username
@@ -15,7 +30,7 @@ async function login (username, password, func) {
             'Content-Type' : 'application/x-www-form-urlencoded',
             'Access-Control-Allow-Origin' : `http://${window.location.hostname}:${window.location.port}`
         },
-        body : new URLSearchParams(`username=${username}&password=${password}`),
+        body : constructRequestBody(username, password),
         mode : 'cors'
         })
         .then(res => {
