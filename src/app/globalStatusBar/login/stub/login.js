@@ -23,7 +23,7 @@ async function login (username, password, func) {
             return res.text()
         })
         // trigger React forceUpdate()
-        .then(window.hestia.user.username = username)
+        .then(() => window.hestia.user.username = username)
         // set username
         .then(func);
         // execute callback
