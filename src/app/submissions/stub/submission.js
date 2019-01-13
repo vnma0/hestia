@@ -26,7 +26,7 @@ async function submissionParse(func) {
                     score: sub["score"],
                     tests : (sub["tests"] ? sub["tests"] : []).map(test => {
                         return {
-                            executionTime: String(test.time) + 's',
+                            executionTime: String(test.time) + ' s',
                             verdict: test.verdict,
                             mark : test.score,
                         }

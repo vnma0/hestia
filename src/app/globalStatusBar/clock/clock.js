@@ -9,6 +9,7 @@ import AccessTime from '@material-ui/icons/AccessTime';
  * @description A simple clock that shows time left and the duration of the contest
  * @property {string} timeLeft : time left until the end of the contest
  * @property {string} duration : time allocated for the whole contest
+ * @property {Boolean} ended : whether contest stopped
  * @returns {React.Component} : a @material-ui/core/Button that shows the current time
  *                              or (in case supplied) content passed as children.
  *                              If both are supplied, only the children components get rendered.
@@ -19,11 +20,11 @@ import AccessTime from '@material-ui/icons/AccessTime';
 class CountdownClock extends Component {
     render() {
         return (
-            <Button style={(this.props.timeLeft !== "00:00:00" ? {
-                color : 'black', backgroundColor : 'yellow'
+            <Button style={(this.props.ended ? {
+                color : 'white', backgroundColor : 'black'
                 // if contest is running, yellow background
             } : {
-                color : 'white', backgroundColor : 'black'
+                color : 'black', backgroundColor : 'yellow'
                 // else we just make it black
             })} disabled>
                 <AccessTime style={{marginRight : '10px'}}/>

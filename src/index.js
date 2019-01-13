@@ -14,6 +14,8 @@ import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
 import publicParse from './app/globalStatusBar/staticStub/public.js';
 
+import timeAgo from './external/timeAgo.js';
+
 class Hestia extends React.Component {
     constructor(props) {
         super(props);
@@ -32,6 +34,7 @@ class Hestia extends React.Component {
             contestName: '',
             contestTimeLeft : '',
             contestDuration : '',
+            contestEnded: false
         }
         this.changePage = this.changePage.bind(this);
         this.updateState = this.updateState.bind(this);
@@ -44,11 +47,16 @@ class Hestia extends React.Component {
         let current = new Date();
         if (window.hestia.contest.time.end < current)
             return this.setState({
-                contestTimeLeft: "00:00:00"
+                contestTimeLeft: "Ended",
+                contestDuration : "Ended",
+                contestEnded : true
             })
-        let delta = window.hestia.contest.time.end - current;
+        if (window.hestia.contest.time.start > current)
+            return this.setState({
+                contestTimeLeft: timeAgo(current, window.hestia.contest.time.start)
+            })
         this.setState({
-            contestTimeLeft : new Date(delta).toLocaleTimeString('vi-VN', { timeZone: 'UTC' })
+            contestTimeLeft : timeAgo(current, window.hestia.contest.time.end)
         });
     }
 
@@ -85,8 +93,7 @@ class Hestia extends React.Component {
 
             contestName : window.hestia.contest.name,
             contestDuration : 
-                new Date(window.hestia.contest.time.end.getTime() - window.hestia.contest.time.start.getTime())
-                    .toLocaleTimeString('vi-VN', { timeZone: 'UTC' }),
+                timeAgo(window.hestia.contest.time.start, window.hestia.contest.time.end)
         })
         this.contestTimeout();
     }
