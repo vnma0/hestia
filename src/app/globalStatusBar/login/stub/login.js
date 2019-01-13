@@ -28,7 +28,6 @@ async function login (username, password, func) {
         method : "POST",
         headers : {
             'Content-Type' : 'application/x-www-form-urlencoded',
-            'Access-Control-Allow-Origin' : `http://${window.location.hostname}:${window.location.port}`
         },
         body : constructRequestBody(username, password),
         mode : 'cors'

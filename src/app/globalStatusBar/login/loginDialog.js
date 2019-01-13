@@ -74,7 +74,9 @@ class LoginDialog extends Component {
 
     render() {
         return (
-            <Dialog {...this.props}
+            <Dialog {...this.props} disableEscapeKeyDown={this.state.loginInProgress}
+            disableBackdropClick={this.state.loginInProgress}
+            // if logging in, no exiting
             TransitionComponent={this.props.TransitionComponent
                 ? this.props.TransitionComponent : fade}>
             
