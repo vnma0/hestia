@@ -38,7 +38,9 @@ const verdictIcon = {
     "RTE": <ExitErrorVerdictSignature />,
     "Runtime error" : <ExitErrorVerdictSignature />,
 
-    "unknown" : <UnknownVerdictSignature />
+
+
+    "Unknown" : <UnknownVerdictSignature />
 }
 
 // CSS colour of verdicts
@@ -65,7 +67,7 @@ class VerdictSignature extends Component {
         // in order to allow reversion, we render HERE.
         this.state = {
             icon : <Grid item>
-                {this.props.verdict ? verdictIcon[this.props.verdict] : verdictIcon["unknown"]}
+                {verdictIcon[this.props.verdict] ? verdictIcon[this.props.verdict] : verdictIcon["Unknown"]}
             </Grid>,
             verdictText : <Grid item>
                 <Typography variant='body1' style={{
