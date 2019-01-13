@@ -42,25 +42,27 @@ class Submission extends React.Component {
                     // green color if successful
                 }} {...this.props}>
                     <TableCell>
-                        <ContestantSignature contestantName={this.props.contestant}/>
+                        <ContestantSignature contestantName={this.props.contestant || "N/A"}/>
                     </TableCell>
                     <TableCell>
-                        <ProblemSignature problemName={this.props.problem} />
+                        <ProblemSignature problemName={this.props.problem || "N/A"} />
                     </TableCell>
                     <TableCell>
-                        <LanguageSignature languageName={this.props.language} />
+                        <LanguageSignature languageName={this.props.language || "N/A"} />
                     </TableCell>
                     <TableCell>
-                        <VerdictSignature verdict={this.props.verdict}/>
+                        <VerdictSignature verdict={this.props.verdict || "N/A"}/>
                     </TableCell>
                     <TableCell>
-                        <ExecTimeSignature time={this.props.executionTime} />
+                        <ExecTimeSignature time={this.props.executionTime || "N/A"} />
                     </TableCell>
                     <TableCell>
-                        <MemorySignature memory={this.props.memory} />
+                        <MemorySignature memory={this.props.memory || "N/A"} />
                     </TableCell>
                     <TableCell>
-                        <TimestampSignature time={this.props.timestamp} />
+                        {/* <TimestampSignature time={this.props.timestamp || "N/A"} /> */}
+                        {/* table overflow; will fix later, I guess */}
+                        {this.props.timestamp || "N/A"}
                     </TableCell>
                 </TableRow>
             </>

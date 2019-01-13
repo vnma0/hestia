@@ -1,20 +1,20 @@
 import React from "react";
-import { Table, TableBody, TableCell, TableHead, Paper, TableSortLabel, } from "@material-ui/core";
+import { Table, TableBody, TableCell, TableHead, Paper, TableSortLabel, TableRow } from "@material-ui/core";
 
 import Submission from './submission.js';
 import DetailedSubmission from './submissionDetail/detailedSubmission';
 
 /**
  * @name SubmissionTable
- * @param {Array : Object({contestant, Problem, Language, Verdict, ExecutionTime, memory, timestamp, test})} SubmissionList : An array containing objects satisfying this schema : 
- * 					{contestant, Problem, Language, Verdict, ExecutionTime, memory, timestamp, test}. All props are strings.
- * 					except "tests" which is an {Array : Object ({verdict, executionTime, memory, mark})}
- * @return {Table} : a <Table /> containing submissions
+ * @param `{Array : Object({contestant, Problem, Language, Verdict, ExecutionTime, memory, timestamp, test})}` `SubmissionList` 
+ * 					- An array containing objects satisfying this schema : 
+ * 					`{contestant, Problem, Language, Verdict, ExecutionTime, memory, timestamp, test}`
+ * 					- All props are strings,
+ * 					except `tests` which is an `{Array : Object ({verdict, executionTime, memory, mark})}`
+ * @return {Table} : a `<Table />` containing submissions
  */
 
-/**
- * @example here
- */
+// example here
 /*
 	<SubmissionTable submissionList={[{
 		contestant : 'minhducsun123456', problem : 'A',
@@ -75,50 +75,54 @@ class SubmissionTable extends React.Component {
 		return (
 			<>
 				<Paper>
-					<Table>
+					<Table style={{
+						tableLayout: 'fixed'
+					}}>
 						<TableHead>
-							<TableCell>
-								<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
-									active onClick={() => this.sortBy("contestant")}>
-									Submitted by
-								</TableSortLabel>
-							</TableCell>
-							<TableCell>
-								<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
-									active onClick={() => this.sortBy("problem")}>
-									Problem
-								</TableSortLabel>
-							</TableCell>
-							<TableCell>
-								<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
-									active onClick={() => this.sortBy("language")}>
-									Programming language
-								</TableSortLabel>
-							</TableCell>
-							<TableCell>
-								<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
-									active onClick={() => this.sortBy("verdict")}>
-									Verdict
-								</TableSortLabel>
-							</TableCell>
-							<TableCell>
-								<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
-									active onClick={() => this.sortBy("executionTime")}>
-									Execution duration
-								</TableSortLabel>
-							</TableCell>
-							<TableCell>
-								<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
-									active onClick={() => this.sortBy("memory")}>
-									Memory consumed
-								</TableSortLabel>
-							</TableCell>
-							<TableCell>
-								<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
-									active onClick={() => this.sortBy("timestamp")}>
-									Timestamp
-								</TableSortLabel>
-							</TableCell>
+							<TableRow>
+								<TableCell>
+									<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+										active onClick={() => this.sortBy("contestant")}>
+										Submitted by
+									</TableSortLabel>
+								</TableCell>
+								<TableCell>
+									<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+										active onClick={() => this.sortBy("problem")}>
+										Problem
+									</TableSortLabel>
+								</TableCell>
+								<TableCell>
+									<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+										active onClick={() => this.sortBy("language")}>
+										Programming language
+									</TableSortLabel>
+								</TableCell>
+								<TableCell>
+									<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+										active onClick={() => this.sortBy("verdict")}>
+										Verdict
+									</TableSortLabel>
+								</TableCell>
+								<TableCell>
+									<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+										active onClick={() => this.sortBy("executionTime")}>
+										Execution duration
+									</TableSortLabel>
+								</TableCell>
+								<TableCell>
+									<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+										active onClick={() => this.sortBy("memory")}>
+										Memory consumed
+									</TableSortLabel>
+								</TableCell>
+								<TableCell>
+									<TableSortLabel direction={this.state.reverseSort ? "desc" : "asc"}
+										active onClick={() => this.sortBy("timestamp")}>
+										Timestamp
+									</TableSortLabel>
+								</TableCell>
+							</TableRow>
 						</TableHead>
 						<TableBody>
 							{this.state.submissionList.map(submission => {

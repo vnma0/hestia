@@ -9,9 +9,9 @@ import VerdictSignature from '../signature/verdictSignature';
 
 /**
  * @name DetailedSubmission 
- * @desc Fully-detailed report for a submission. ALL PROPS ARE PASSED DOWN TO <Dialog />
- * @param (Same requirements as for a <Submission />)
- * @returns {React.Component} A <Dialog /> component
+ * @desc Fully-detailed report for a submission. ALL PROPS ARE PASSED DOWN TO `<Dialog />`
+ * @param (Same requirements as for a `<Submission />`)
+ * @returns {React.Component} A `<Dialog />` component
  */
 
 class DetailedSubmission extends React.Component {
@@ -43,8 +43,8 @@ class DetailedSubmission extends React.Component {
                         </TableHead>
                         <TableBody>
                             <TableRow>
-                                <TableCell>{this.props.language}</TableCell>
-                                <TableCell>{this.props.problem}</TableCell>
+                                <TableCell>{this.props.language || "N/A"}</TableCell>
+                                <TableCell>{this.props.problem || "N/A"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

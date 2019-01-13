@@ -7,7 +7,7 @@ import { Button } from '@material-ui/core';
 
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js';
-import SubmissionTable from './app/submissions/submissionTable.js';
+import Submission from './app/submissions/submissionWrapper.js';
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 
@@ -19,7 +19,9 @@ class Hestia extends React.Component {
         super(props);
         window.hestia = {
             user : {},
-            contest : {}
+            contest : {},
+            submissions : [],
+            problem : {}
         };
         this.state = {
             sidebarOpen : false,
@@ -48,7 +50,6 @@ class Hestia extends React.Component {
         this.setState({
             contestTimeLeft : new Date(delta).toLocaleTimeString('vi-VN', { timeZone: 'UTC' })
         });
-        // this.forceUpdate();
     }
 
     componentWillMount() {
@@ -107,25 +108,7 @@ class Hestia extends React.Component {
                     <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>,
                 ]} />
                 {this.state.currentPage === "submissions" && <>
-                    <SubmissionTable submissionList={[{
-                        contestant : 'minhducsun123456', problem : 'A',
-                        verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', timestamp: '00:00:00',
-                        language : 'Perl', tests : [
-                            {verdict : 'AC', executionTime : '1000h', memory : '1TB', mark : '30'},
-                            {verdict : 'AC', executionTime : '1000d', memory : '1MB', mark : '50'},
-                            {verdict : 'AC', executionTime : '0.1s', memory : '5TB', mark : '300'}
-                        ]
-                    },{
-                        contestant : 'minhducsun2002', problem : 'A',
-                        verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', timestamp: '00:00:00',
-                        language : 'Pascal',
-                    },{
-                        contestant : 'minhducsun123456', problem : 'A',
-                        verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', timestamp: '00:00:00',
-                        language : 'C99', tests : [
-                            {verdict : 'AC', executionTime : '5s', memory : '10TB', mark : '30'}
-                        ]
-                    }]}/>
+                    <Submission />
                 </>}
             </>
         )

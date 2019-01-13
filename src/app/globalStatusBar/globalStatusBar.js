@@ -100,7 +100,7 @@ class GlobalStatusBar extends Component {
     render() {
         return (
             <>
-                <AppBar position="static">
+                <AppBar position="sticky">
                     <Toolbar>
                         <IconButton onClick={this.props.menuOpen} style={{
                             marginLeft : -12, marginRight : 12,

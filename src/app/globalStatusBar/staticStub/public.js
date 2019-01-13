@@ -9,10 +9,13 @@ async function publicParse(func) {
     return fetch(`http://${window.location.hostname}:${window.location.port}/info`)
         .then(res => res.json())
         .then(responseBody => {
-            window.hestia.contest.name = responseBody["name"];
-            window.hestia.contest.time = {
-                start : new Date(responseBody["startTime"]),
-                end : new Date(responseBody["endTime"])
+            window.hestia.contest = {
+                name : responseBody["name"],
+                time : {
+                    start : new Date(responseBody["startTime"]),
+                    end : new Date(responseBody["endTime"])
+                },
+                problemList : responseBody["probList"]
             }
         })
         .then(func)

@@ -7,6 +7,7 @@ import TimeoutVerdictIcon from './verdictIcons/timeoutVerdictSignature.js';
 import MemExhaustedVerdictSignature from './verdictIcons/memExhaustVerdictSignature.js';
 import ExitErrorVerdictSignature from './verdictIcons/exitErrorVerdictSignature.js';
 import UnknownVerdictSignature from './verdictIcons/unknownVerdictSignature';
+import PendingVerdictSignature from './verdictIcons/pendingVerdictSignature';
 
 /**
  * @name VerdictSignature : Submission's judged verdict. FlexGrow.
@@ -38,7 +39,7 @@ const verdictIcon = {
     "RTE": <ExitErrorVerdictSignature />,
     "Runtime error" : <ExitErrorVerdictSignature />,
 
-
+    "Pending" : <PendingVerdictSignature />,
 
     "Unknown" : <UnknownVerdictSignature />
 }
