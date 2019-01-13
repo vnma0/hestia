@@ -3,7 +3,6 @@ import { DialogTitle, DialogContent, DialogContentText, Dialog, DialogActions, G
 import { TextField, Button } from '@material-ui/core';
 
 import {validateID, validateKey} from '../lib/libValidateLogin.js';
-import VerdictSignature from '../../submissions/signature/verdictSignature.js'
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -127,11 +126,14 @@ class LoginDialog extends Component {
                         Cancel
                     </Button>
                     <Button disabled={this.state.loginInProgress} onClick={() => {
-                        login(this.state.id, this.state.passkey, () => 
-                            this.setState({
-                                loginInProgress : false,
-                                errorLogin : !window.hestia.loggedIn
-                            })) && this.forceUpdate()
+                        login(this.state.id, this.state.passkey, () => {
+                                this.setState({
+                                    loginInProgress : false,
+                                    errorLogin : !window.hestia.user.loggedIn
+                                });
+                                window.hestia.updateState();
+                                this.forceUpdate();
+                            })
                             // if login finished, hide the loading circle
                         this.setState({
                             loginInProgress : true

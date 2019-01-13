@@ -10,6 +10,8 @@ import UserSettingButton from './userSetting/userSettingButton.js';
 import UserSettingMenu from './userSetting/userSettingMenu.js';
 import UserSettingDialog from './userSetting/userSettingDialog.js';
 
+import logout from './userSetting/stub/logout.js'
+
 /**
  * @name GlobalStatusBar
  * @description Global sticky status bar at the top of the screen
@@ -50,7 +52,7 @@ class GlobalStatusBar extends Component {
     renderLoginDialog() {
         return (
             <LoginDialog
-                open={this.state.loginDialogOpen && !window.hestia.loggedIn}
+                open={this.state.loginDialogOpen && !window.hestia.user.loggedIn}
                 // don't open if logged in
                 onClose={this.closeLoginDialog}/>
         )
@@ -124,7 +126,8 @@ class GlobalStatusBar extends Component {
 
                 <UserSettingMenu anchorEl={this.state.userMenuAnchorElement}
                 user={this.props.currentUser} open={this.state.userMenuOpen}
-                onClose={this.closeUserMenu} showProfileAction={this.openUserSettingDialog}/>
+                onClose={this.closeUserMenu} showProfileAction={this.openUserSettingDialog}
+                logoutAction={() => logout(() => window.location.reload(true))} />
             </>
         )
     }

@@ -8,23 +8,65 @@ import { Button } from '@material-ui/core';
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js';
 import SubmissionTable from './app/submissions/submissionTable.js';
-import ProblemList from './app/problemList/problemList.js';
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
-import ProblemLauncher from './app/problemList/problemLauncher.js'
+
+import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
+import publicParse from './app/globalStatusBar/staticStub/public.js';
 
 class Hestia extends React.Component {
     constructor(props) {
         super(props);
-        window.hestia = {};
+        window.hestia = {
+            user : {},
+            contest : {}
+        };
         this.state = {
             sidebarOpen : false,
             currentPage : 'front',
-            loggedIn : false
+            loggedIn : false,
+            username : '',
+
+            contestName: '',
+            contestTimeLeft : '',
+            contestDuration : '',
         }
         this.changePage = this.changePage.bind(this);
-        this.updateLoginState = this.updateLoginState.bind(this);
-        window.hestia.updateLoginState = this.updateLoginState;
+        this.updateState = this.updateState.bind(this);
+        this.contestTimeout = this.contestTimeout.bind(this);
+
+        window.hestia.updateState = this.updateState;
+    }
+
+    contestTimeout() {
+        let current = new Date();
+        if (window.hestia.contest.time.end < current)
+            return this.setState({
+                contestTimeLeft: "00:00:00"
+            })
+        let delta = window.hestia.contest.time.end - current;
+        this.setState({
+            contestTimeLeft : new Date(delta).toLocaleTimeString('vi-VN', { timeZone: 'UTC' })
+        });
+        // this.forceUpdate();
+    }
+
+    componentWillMount() {
+        publicParse(this.updateState);
+        verifyLogin(() => {
+                this.setState({
+                    loggedIn : window.hestia.user.loggedIn,
+                    username : window.hestia.user.username
+                })
+                this.setState({
+                    clockInterval : setInterval(this.contestTimeout, 1000)
+                })
+            }
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.clockInterval);
     }
 
     changePage(to) {
@@ -35,18 +77,26 @@ class Hestia extends React.Component {
         })
     }
 
-    updateLoginState() {
+    updateState() {
         this.setState({
-            loggedIn : window.hestia.loggedIn
+            loggedIn : window.hestia.user.loggedIn,
+            username : window.hestia.user.username,
+
+            contestName : window.hestia.contest.name,
+            contestDuration : 
+                new Date(window.hestia.contest.time.end.getTime() - window.hestia.contest.time.start.getTime())
+                    .toLocaleTimeString('vi-VN', { timeZone: 'UTC' }),
         })
+        this.contestTimeout();
     }
 
     render() {
-        // initialize global variable
         return (
             <>
-                <GlobalStatusBar contestName="Kỳ thi 1" currentUser="Test User"
-                    contestTimeLeft="00:00:00" contestDuration="23:59:59" loggedIn={this.state.loggedIn}
+                <GlobalStatusBar contestName={this.state.contestName} currentUser={this.state.username}
+                    contestTimeLeft={this.state.contestTimeLeft}
+                    contestDuration={this.state.contestDuration}
+                    loggedIn={this.state.loggedIn}
                     menuOpen={() => this.setState({
                         sidebarOpen : true
                     })}/>
@@ -55,7 +105,6 @@ class Hestia extends React.Component {
                 })} pages={[
                     <Button onClick={() => this.changePage('front')}>Alert (1)</Button>,
                     <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>,
-                    <ProblemLauncher onClick={() => this.changePage('problems')} button/>
                 ]} />
                 {this.state.currentPage === "submissions" && <>
                     <SubmissionTable submissionList={[{
@@ -77,16 +126,6 @@ class Hestia extends React.Component {
                             {verdict : 'AC', executionTime : '5s', memory : '10TB', mark : '30'}
                         ]
                     }]}/>
-                </>}
-                {this.state.currentPage === "problems" && <>
-                    <ProblemList problem={[
-                        {
-                            id: 'A', name : 'Problem 1', statement : 'Problem 1\'s statement', link : 'git-scm.com'
-                        },
-                        {
-                            id: 'B', name : 'Problem 2', statement : 'Problem 2\'s statement', link : 'git-scm.com'
-                        }
-                    ]}/>
                 </>}
             </>
         )
