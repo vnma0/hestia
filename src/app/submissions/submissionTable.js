@@ -78,7 +78,8 @@ class SubmissionTable extends React.Component {
 			submissionList :
 				this.state.reverseSort ?
 					this.state.submissionList.reverse() : this.state.submissionList
-		})
+		});
+		this.forceUpdate();
 	}
 
 	render() {

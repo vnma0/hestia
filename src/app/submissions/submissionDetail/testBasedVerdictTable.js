@@ -21,13 +21,13 @@ class AttestationSampleResult extends React.Component {
                 <TableCell>
                     <VerdictSignature verdict={this.props.verdict || "N/A"} />
                 </TableCell>
-                <TableCell>
+                <TableCell align="justify">
                     <ExecTimeSignature time={this.props.executionTime || "N/A"} />
                 </TableCell>
-                <TableCell>
+                <TableCell align="right">
                     <MemorySignature memory={this.props.memory || "N/A"}/>
                 </TableCell>
-                <TableCell>
+                <TableCell align="right">
                     {this.props.mark}
                 </TableCell>
             </TableRow>

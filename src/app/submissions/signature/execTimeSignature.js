@@ -18,7 +18,7 @@ class ExecTimeSignature extends Component {
          * @desc Here I just, er, well, use <Grid> to align things properly.
          */
         return (
-            <Grid container spacing={8} alignItems="flex-start">
+            <Grid container spacing={8} alignItems="flex-start" justify="space-between">
                 <Grid item>
                     <AccessTime style={{marginRight : '10px', marginTop: '2.5px'}}/>
                 </Grid>

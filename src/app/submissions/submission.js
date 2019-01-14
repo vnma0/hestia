@@ -37,8 +37,8 @@ class Submission extends React.Component {
 		return (
             <>
                 <TableRow style={{
-                    backgroundColor: (this.props.verdict==="AC"
-                    || this.props.verdict==="Accepted" ? '#A5D6A7' : '')
+                    // backgroundColor: (this.props.verdict==="AC"
+                    // || this.props.verdict==="Accepted" ? '#A5D6A7' : '')
                     // green color if successful
                 }} {...this.props}>
                     <TableCell>

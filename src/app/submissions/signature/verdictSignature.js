@@ -8,6 +8,7 @@ import MemExhaustedVerdictSignature from './verdictIcons/memExhaustVerdictSignat
 import ExitErrorVerdictSignature from './verdictIcons/exitErrorVerdictSignature.js';
 import UnknownVerdictSignature from './verdictIcons/unknownVerdictSignature';
 import PendingVerdictSignature from './verdictIcons/pendingVerdictSignature';
+import CompilationErrorVerdictSignature from './verdictIcons/compilationErrorVerdictSignature.js';;
 
 /**
  * @name VerdictSignature : Submission's judged verdict. FlexGrow.
@@ -39,6 +40,8 @@ const verdictIcon = {
     "RTE": <ExitErrorVerdictSignature />,
     "Runtime error" : <ExitErrorVerdictSignature />,
 
+    "CE" : <CompilationErrorVerdictSignature />,
+
     "Pending" : <PendingVerdictSignature />,
 
     "Unknown" : <UnknownVerdictSignature />
@@ -56,10 +59,14 @@ const color = {
     "TLE": '#ff3d00',
     "Time limit violated" : '#ff3d00',
 
-    "MLE": 'blue',
+    "MLE": '',
 
     "RE": '#d500f9',
-    "RTE": '#d500f9'
+    "RTE": '#d500f9',
+
+    "Pending" : "blue",
+
+    "CE" : "#632920"
 }
 
 class VerdictSignature extends Component {
