@@ -1,6 +1,9 @@
 import React from 'react'
+import { AppBar, Grid } from '@material-ui/core'
+
+const mime = require('mime');
+
 import CodeEditor from './codeEditor'
-import {AppBar,Grid} from '@material-ui/core'
 import UploadButton from './uploadButton'
 import SubmitButton from './submitButton'
 import ConfirmButton from './confirmButton'
@@ -42,22 +45,16 @@ class CodeBox extends React.Component {
     }
     render() {
         return (
-            <div style={{
-                    flexGrow: 1,
-                }} >
+            <div style={{ flexGrow: 1 }}>
                 <AppBar position="static" color="default">
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
                             <Grid item>
                                 <LangSelection
                                     lang={this.props.lang}
-                                    handleChange={this.handleLangChange} >
-                                    Language:{' '}
-                                    {
-                                        this.props.lang[
-                                            this.state.currentLangId
-                                        ].display
-                                    }
+                                    handleChange={this.handleLangChange}>
+                                    Language : {' '}
+                                    {this.props.lang[this.state.currentLangId].display}
                                 </LangSelection>
                             </Grid>
                             <Grid item>
@@ -65,46 +62,35 @@ class CodeBox extends React.Component {
                                     Upload file
                                 </UploadButton>
                             </Grid>
-                            <Grid
-                                item
+                            <Grid item
                                 style={{
                                     flexGrow: 1,
-                                }}
-                            >
-                                    <FileDisplay fileName={this.state.fileName}>
-                                        No file chosen
-                                    </FileDisplay>
+                                }} >
+                                <FileDisplay fileName={this.state.fileName}>
+                                    No file chosen
+                                </FileDisplay>
                             </Grid>
                             <Grid item>
                                 <ConfirmButton confirm={this.handleConfirm} />
                             </Grid>
                             <Grid item>
                                 <SubmitButton
-                                    disabled={
-                                        this.state.code === '' ||
-                                        this.state.currentLangId === null
-                                    }
+                                    disabled={this.state.code === '' ||
+                                        this.state.currentLangId === null}
                                     submitFileName={this.props.submitFileName}
-                                    extension={
-                                        this.props.lang[
-                                            this.state.currentLangId
-                                        ].extension
-                                    }
+                                    extension={this.props.lang[this.state.currentLangId].extension}
                                     code={this.state.code}
-                                    currentLangId={this.state.currentLangId}
-                                >
+                                    currentLangId={this.state.currentLangId}>
                                     Submit
                                 </SubmitButton>
                             </Grid>
                         </Grid>
                     </div>
                     <CodeEditor
-                        currentLang={
-                            this.props.lang[this.state.currentLangId].name
-                        }
+                        currentMIME={this.props
+                            .lang[this.state.currentLangId].extension[0]}
                         update={this.handleUpdate}
-                        code={this.state.code}
-                    />
+                        code={this.state.code} />
                 </AppBar>
             </div>
         )
@@ -113,11 +99,11 @@ class CodeBox extends React.Component {
 
 CodeBox.defaultProps = {
     lang: [
-        { display: 'C++', name: 'cpp', extension: ['cpp'] },
-        { display: 'JavaScript', name: 'javascript', extension: ['js'] },
-        { display: 'Python', name: 'python', extension: ['py'] },
-        { display: 'Java', name: 'java', extension: ['java'] },
-        { display: 'Typescript', name: 'typescript', extension: ['ts'] },
+        { display: 'C++', extension: ['cpp'] },
+        { display: 'JavaScript', extension: ['js'] },
+        { display: 'Python', extension: ['py'] },
+        { display: 'Java', extension: ['java'] },
+        { display: 'Typescript', extension: ['ts'] },
     ],
 }
 

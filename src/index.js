@@ -8,8 +8,10 @@ import { Button } from '@material-ui/core';
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js';
 import Submission from './app/submissions/submissionWrapper.js';
+import ProblemList from './app/problemList/problemList.js';
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
+import ProblemLauncher from './app/problemList/problemLauncher.js';
 
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
 import publicParse from './app/globalStatusBar/staticStub/public.js';
@@ -113,10 +115,12 @@ class Hestia extends React.Component {
                 })} pages={[
                     <Button onClick={() => this.changePage('front')}>Alert (1)</Button>,
                     <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>,
+                    <ProblemLauncher onClick={() => this.changePage('problems')} button/>
                 ]} />
                 {this.state.currentPage === "submissions" && <>
                     <Submission />
                 </>}
+                {this.state.currentPage === 'problems' && <ProblemList />}
             </>
         )
     }

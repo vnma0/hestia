@@ -1,61 +1,19 @@
 import React from 'react'
-import MonacoEditor from 'react-monaco-editor'
-import * as monaco from 'monaco-editor'; //For syntax highlighting, do not delete
+import CodeMirror from 'react-codemirror';
+require('codemirror/lib/codemirror.css');
+require('codemirror/mode/clike/clike');
 
 /**
  * @name CodeEditor
- * Monaco Api: https://microsoft.github.io/monaco-editor/api/index.html
- * Put in option: https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html
- * React monaco editor: https://github.com/superRaytin/react-monaco-editor
+ * @param {String} currentLang - current language to highlight
  */
 
 class CodeEditor extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            code: '',
-            lang: null,
-            editorComponent: undefined,
-        }
-        this.editorDidMount = this.editorDidMount.bind(this)
-        this.onChange = this.onChange.bind(this)
-    }
-
-    editorDidMount(editor, monaco) {
-        //console.log('editorDidMount', editor)
-        this.setState({
-            editorComponent: editor,
-        })
-        editor.layout()
-        editor.focus()
-    }
-    onChange(newValue, e) {
-        // console.log('onChange', newValue,"spaced", e);
-        this.setState({
-            code: newValue
-        })
-    }
-
     render() {
-        // console.log(this.props.code)
-        const options = {
-            selectOnLineNumbers: true,
-        }
-        return (
-            <>
-                <MonacoEditor
-                    height="500"
-                    language={this.props.currentLang}
-                    theme="vs-dark"
-                    value={this.props.code}
-                    // options={options}
-                    onChange={this.onChange}
-                    editorDidMount={this.editorDidMount}
-                    // requireConfig={{ baseUrl: '/', paths: { vs: 'vs' }, url: '/vs/loader.js' }}
-                />
-            </>
-        )
+        return <CodeMirror options={{
+            mode: 'text/x-c'
+        }} value={this.props.code} onChange={this.props.update} />
     }
 }
 
-export default CodeEditor
+export default CodeEditor;

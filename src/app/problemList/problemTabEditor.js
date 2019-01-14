@@ -24,8 +24,10 @@ class ProblemTabEditor extends React.Component {
     }
     render() {
         return (
-            <div style={{ marginTop: '10px' }}>
-                <Grid container spacing={8} alignItems="flex-start">
+            <div style={{ marginTop: 10 }}>
+                <Grid container spacing={8} alignItems="stretch" style={{
+                    width: '100%'
+                }}>
                     <Grid
                         item
                         style={{
