@@ -5,13 +5,13 @@ require('codemirror/mode/clike/clike');
 
 /**
  * @name CodeEditor
- * @param {String} currentLang - current language to highlight
+ * @param {String} currentMIME - current language to highlight
  */
 
 class CodeEditor extends React.Component {
     render() {
         return <CodeMirror options={{
-            mode: 'text/x-c'
+            mode: this.props.currentMIME
         }} value={this.props.code} onChange={this.props.update} />
     }
 }

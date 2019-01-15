@@ -1,14 +1,14 @@
 import React from 'react'
 import { AppBar, Grid } from '@material-ui/core'
 
-const mime = require('mime');
-
 import CodeEditor from './codeEditor'
 import UploadButton from './uploadButton'
 import SubmitButton from './submitButton'
 import ConfirmButton from './confirmButton'
 import LangSelection from './langSelection'
 import FileDisplay from './fileDisplay'
+
+const mime = require('mime');
 
 class CodeBox extends React.Component {
     constructor(props) {
@@ -87,8 +87,8 @@ class CodeBox extends React.Component {
                         </Grid>
                     </div>
                     <CodeEditor
-                        currentMIME={this.props
-                            .lang[this.state.currentLangId].extension[0]}
+                        currentMIME={mime.getType(this.props
+                            .lang[this.state.currentLangId].extension[0])}
                         update={this.handleUpdate}
                         code={this.state.code} />
                 </AppBar>
