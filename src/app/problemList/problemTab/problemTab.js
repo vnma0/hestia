@@ -23,10 +23,6 @@ function TabContainer(props) {
         </Typography>
     )
 }
-//Still don't understand this :/
-TabContainer.propTypes = {
-    children: PropTypes.node.isRequired,
-}
 //Style options of the tabs
 const styles = theme => ({
     root: {
@@ -37,7 +33,7 @@ const styles = theme => ({
 })
 class ProblemTab extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             value: 0, //Current tab
         }
@@ -51,24 +47,23 @@ class ProblemTab extends React.Component {
         return (
             <div className={this.props.classes.root}>
                 <AppBar position="static" color="default">
-                    <Tabs
-                        value={this.props.value}
+                    <Tabs value={this.props.value}
                         onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        scrollable
-                        scrollButtons="auto"
-                    >
+                        indicatorColor="primary" textColor="primary"
+                        scrollable scrollButtons="auto">
                         {this.props.problem.map(x => (
                             <Tab label={x.id} />
                         ))}
                     </Tabs>
                     <TabContainer>
-                        {this.props.problem[this.props.value].statement}
+                        {this.props.problem[this.props.value] ? 
+                            this.props.problem[this.props.value].statement : ''}
                     </TabContainer>
-                    <DownloadButton
-                        link={this.props.problem[this.props.value].link}
-                    >
+                    <DownloadButton style={{
+                        display :  this.props.problem[this.props.value] ? '' : 'none'
+                    }}
+                        link={this.props.problem[this.props.value] ? 
+                            this.props.problem[this.props.value].link : ''}>
                         Download
                     </DownloadButton>
                 </AppBar>

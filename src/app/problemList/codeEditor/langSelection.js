@@ -5,7 +5,7 @@ import { MenuItem, Tooltip } from '@material-ui/core'
 
 /**
  * @name LangSelection
- * @param {Array:String} lang Language name
+ * @param {Array: String} lang Language name
  * @param {Boolean} disabled If true, the button will be disabled.
  * @description The language selection tab, WORK IN PROGRESS
  */
@@ -36,30 +36,25 @@ class LangSelection extends React.Component {
 
     render() {
         return (
-            <div>
-                <Tooltip title="Change coding language" placement="bottom">
-                    <Button
-                        variant="contained"
-                        aria-owns={this.state.anchorEl ? 'menu' : undefined}
-                        aria-haspopup={true}
-                        onClick={this.handleClick}
-                    >
-                        {this.props.children}
-                    </Button>
-                </Tooltip>
-                <Menu
-                    id="menu"
-                    anchorEl={this.state.anchorEl}
-                    open={Boolean(this.state.anchorEl)}
-                    onClose={() => this.handleChose(null)}
-                >
-                    {this.props.lang.map((x, i) => (
-                        <MenuItem onClick={() => this.handleChose(i)}>
-                            {x.display}
-                        </MenuItem>
-                    ))}
-                </Menu>
-            </div>
+                <>
+                    <Tooltip title="Change coding language" placement="bottom">
+                        <Button variant="contained"
+                            aria-owns={this.state.anchorEl ? 'menu' : undefined}
+                            aria-haspopup={true} onClick={this.handleClick}>
+                            {this.props.children}
+                        </Button>
+                    </Tooltip>
+                    <Menu id="menu"
+                        anchorEl={this.state.anchorEl}
+                        open={Boolean(this.state.anchorEl)}
+                        onClose={() => this.handleChose(null)} >
+                        {this.props.displayLang.map((x, i) => (
+                            <MenuItem onClick={() => this.handleChose(i)}>
+                                {x}
+                            </MenuItem>
+                        ))}
+                    </Menu>
+                </>
         )
     }
 }

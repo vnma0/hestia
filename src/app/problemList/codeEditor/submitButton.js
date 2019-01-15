@@ -1,42 +1,40 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
+import { Button, CircularProgress } from '@material-ui/core'
+
+import submit from './stub/submit.js'
 
 /**
- * @name SubmitButton
- * Button Api: https://material-ui.com/api/button/
- * Input Api: https://material-ui.com/api/input/
+ * @name SubmitButton 
+ * @desc Button to submit source code; all props will be passed down to `<Button />`
+ * @param {String} code - source code
+ * @param {String} ext - file extension of source code
+ * @param {String} fileName - file name WITHOUT extension. Concat with `ext`.
+ * @return {React.Component} - a `<Button />` element that submits `onClick`
  */
 
 class SubmitButton extends React.Component {
     constructor(props) {
-        super(props)
-        this.handleClick = this.handleClick.bind(this)
+        super(props);
+        this.state = {
+            submitting : false
+        }
     }
-
-    handleClick() {
-        let element = document.createElement('a')
-        let submitFile = new Blob([this.props.code], { type: 'text/plain' })
-        element.href = URL.createObjectURL(submitFile)
-        element.download =
-            this.props.submitFileName + '.' + this.props.extension
-        element.click()
-    }
-
     render() {
         return (
-            <Button
-                disabled={this.props.disabled}
+            <Button {...this.props}
+                disabled={this.props.disabled || this.state.submitting}
                 variant="contained"
                 color="primary"
-                style={
-                    {
-                        // backgroundColor: this.props.disabled ? '' : '#1af46a',
-                        // color: this.props.disabled ? '' : 'white',
-                    }
-                }
-                onClick={this.handleClick}
-            >
-                {this.props.children}
+                onClick={() => {
+                    this.setState({ submitting : true })
+                    submit(this.props.code, this.props.fileName, this.props.ext,
+                        () => this.setState({
+                            submitting : false
+                        }))
+                }}>
+                {this.state.submitting 
+                    ? <CircularProgress size={20}/>
+                    : this.props.children}
             </Button>
         )
     }

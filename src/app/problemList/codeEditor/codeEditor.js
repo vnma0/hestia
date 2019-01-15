@@ -11,7 +11,12 @@ require('codemirror/mode/clike/clike');
 class CodeEditor extends React.Component {
     render() {
         return <CodeMirror options={{
-            mode: this.props.currentMIME
+            mode: this.props.currentMIME,
+            tabSize: 4,
+            lineNumbers: true,
+            autofocus: true,
+            undoDepth: 200,
+            scrollbarStyle: null
         }} value={this.props.code} onChange={this.props.update} />
     }
 }

@@ -3,7 +3,7 @@ import { Button, Tooltip } from '@material-ui/core'
 
 /**
  * @name UploadButton
- * @description The upload button, currently not working
+ * @description The upload button
  */
 
 class UploadButton extends React.Component {

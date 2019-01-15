@@ -15,7 +15,8 @@ async function publicParse(func) {
                     start : new Date(responseBody["startTime"]),
                     end : new Date(responseBody["endTime"])
                 },
-                problemList : responseBody["probList"]
+                problemList : (responseBody["probList"]),
+                acceptedMIME : responseBody["acceptMIME"]
             }
         })
         .then(func)

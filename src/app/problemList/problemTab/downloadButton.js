@@ -18,7 +18,7 @@ class DownloadButton extends React.Component {
     //render
     render() {
         return (
-            <Button
+            <Button {...this.props}
                 size="large"
                 variant="contained"
                 fullWidth={true}
