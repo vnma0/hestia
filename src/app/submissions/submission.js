@@ -29,8 +29,7 @@ class Submission extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            detailsExpanded : false,
-            anchorRef : React.createRef()
+            detailsExpanded : false
         }
     }
 	render() {
@@ -42,7 +41,8 @@ class Submission extends React.Component {
                     // green color if successful
                 }} {...this.props}>
                     <TableCell>
-                        <ContestantSignature contestantName={this.props.contestant || "N/A"}/>
+                        <ContestantSignature
+                            contestantName={window.hestia.user.username || "N/A"}/>
                     </TableCell>
                     <TableCell>
                         <ProblemSignature problemName={this.props.problem || "N/A"} />

@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css'
 import 'typeface-roboto';
 
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { isUndefined } from 'util';
+
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js';
 import Submission from './app/submissions/submissionWrapper.js';
 import ProblemList from './app/problemList/problemList.js';
-import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
+import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper';
+import Notify from './app/notifier/notify.js'
+import { slideIn } from './app/globalStatusBar/lib/libTransition.js';
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 import ProblemLauncher from './app/problemList/problemLauncher.js';
@@ -17,8 +22,6 @@ import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
 import publicParse from './app/globalStatusBar/staticStub/public.js';
 
 import timeAgo from './external/timeAgo.js';
-
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom"
 
 class Hestia extends React.Component {
     constructor(props) {
@@ -40,12 +43,15 @@ class Hestia extends React.Component {
             contestDuration : '',
             contestEnded: false,
 
-            redirect : undefined
+            redirect : undefined,
+
+            notifyMessage : undefined,
+            open: false
         }
-        this.changePage = this.changePage.bind(this);
         this.updateState = this.updateState.bind(this);
         this.contestTimeout = this.contestTimeout.bind(this);
-
+        this.notify = this.notify.bind(this);
+        window.hestia.pushNotification = this.notify
         window.hestia.updateState = this.updateState;
     }
 
@@ -84,14 +90,6 @@ class Hestia extends React.Component {
         clearInterval(this.state.clockInterval);
     }
 
-    changePage(to) {
-        this.setState({
-            currentPage: to,
-            sidebarOpen: false
-            // close after clicking
-        })
-    }
-
     updateState() {
         this.setState({
             loggedIn : window.hestia.user.loggedIn,
@@ -104,6 +102,14 @@ class Hestia extends React.Component {
         this.contestTimeout();
     }
 
+    notify(message) {
+        this.setState({
+            message: message,
+            open: true
+        });
+        // setTimeout(() => this.setState({ message : undefined, open: false }), 3000)
+    }
+
     render() {
         if (this.state.redirect) {
             this.setState({
@@ -113,6 +119,18 @@ class Hestia extends React.Component {
         }
         return (
             <>
+                <Notify open={this.state.open && !isUndefined(this.state.message)} 
+                    onClose={() => this.setState({ open: false, message: undefined })} 
+                    message={this.state.message} autoHideDuration={1000}
+                    TransitionComponent={(props) => slideIn(props, 'left')} 
+                    transitionDuration={{
+                        enter: 10,
+                        exit: 100
+                    }}
+                    anchorOrigin={{
+                        horizontal : 'center',
+                        vertical: 'top'
+                    }}/>
                 <GlobalStatusBar contestName={this.state.contestName} currentUser={this.state.username}
                     contestTimeLeft={this.state.contestTimeLeft}
                     contestDuration={this.state.contestDuration}

@@ -1,3 +1,5 @@
+import submissionParse from '../../../submissions/stub/submission.js'
+
 /**
  * @name constructRequestBody
  * @desc Create an URLSearchParam object suitable to be sent as log in request
@@ -36,9 +38,10 @@ async function login (username, password, func) {
             window.hestia.user.loggedIn = res.ok;
             return res.text()
         })
-        // trigger React forceUpdate()
         .then(() => window.hestia.user.username = username)
         // set username
+        .then(submissionParse(window.hestia.user.username, window.hestia.updateSubmission))
+        // load submission list
         .then(func);
         // execute callback
 }

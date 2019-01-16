@@ -28,9 +28,12 @@ class SubmitButton extends React.Component {
                 onClick={() => {
                     this.setState({ submitting : true })
                     submit(this.props.code, this.props.fileName, this.props.ext,
-                        () => this.setState({
-                            submitting : false
-                        }))
+                        (ok) => {
+                            this.setState({
+                                submitting : false
+                            });
+                            window.hestia.pushNotification(ok ? undefined : 'Error submitting solution.')
+                        })
                 }}>
                 {this.state.submitting 
                     ? <CircularProgress size={20}/>

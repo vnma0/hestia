@@ -18,7 +18,8 @@ class Scoreboard extends React.Component {
      */
     AddProblemToHead() {
         this.props.problem.map(problems => {
-            this.props.header.push({ name: problems })
+            this.props.header.push({ name: problems });
+            return;
         })
     }
     /**
@@ -27,7 +28,7 @@ class Scoreboard extends React.Component {
      */
     SortBoard() {
         this.props.data.sort((a, b) => {
-            if (a.Score == b.Score) {
+            if (a.Score === b.Score) {
                 return a.Penalty > b.Penalty ? 1 : -1
             } else return a.Score > b.Score ? -1 : 1
         })

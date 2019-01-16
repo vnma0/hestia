@@ -1,3 +1,5 @@
+import submissionParse from '../../../submissions/stub/submission.js';
+
 /**
  * @name verifyLogin
  * @desc Verify user permission if logged in using `/users` route of Wafter
@@ -19,6 +21,10 @@ async function verifyLogin(func) {
                 if (window.hestia.user.loggedIn) {
                     window.hestia.user.username = JSON.parse(responseBody)["username"];
                     window.hestia.user.userId = JSON.parse(responseBody)["_id"];
+                    submissionParse(window.hestia.user.username, () => {
+                        if (typeof window.hestia.updateSubmission === "function")
+                            window.hestia.updateSubmission();
+                    })
                 }
             }
             catch (err) {

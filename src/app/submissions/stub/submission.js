@@ -1,12 +1,13 @@
 /**
  * @name submissionParse
  * @desc Fetch the submission table
+ * @param {String} name - contestant name, passed after logging in succeeded
  * @param {Function} func - Function to execute after fetching & mapping done
  * @return {Promise} a `fetch()` `Promise`
  * @author minhducsun2002
  */
 
-async function submissionParse(func) {
+async function submissionParse(name = window.hestia.user.username, func) {
     return fetch(`http://${window.location.hostname}:${window.location.port}/subs`)
         .then(res => res.json())
         .catch(() => {return []})
@@ -19,7 +20,7 @@ async function submissionParse(func) {
             for (let sub of subsTable) {
                 // console.log(sub)
                 window.hestia.submissions.push({
-                    contestant : window.hestia.user.username,
+                    contestant : name,
                     verdict: sub["status"],
                     timestamp: new Date(sub["date"]).toLocaleString(),
                     id: sub["_id"],
@@ -35,7 +36,10 @@ async function submissionParse(func) {
                 })
             };
         })
-        .then(func)
+        .then(() => {
+            if (typeof func === "function")
+                func();
+        })
 }
 
 export default submissionParse;
