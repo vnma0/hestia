@@ -12,7 +12,7 @@ require('codemirror/mode/clike/clike');
 class CodeEditor extends React.Component {
     render() {
         return <CodeMirror options={{
-            mode: mime.getExtension(this.props.ext),
+            mode: mime.getType(this.props.ext),
             tabSize: 4,
             lineNumbers: true,
             autofocus: true,

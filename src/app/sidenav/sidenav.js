@@ -12,7 +12,7 @@ class Sidenav extends Component {
         return this.props.pages.map(page => {
             // mirroring onClick function 
             return (
-                <ListItem onClick={page.props.onClick} button={page.props.button}>
+                <ListItem onClick={page.props.onClick} button={page.props.button} key={page}>
                     {page}
                 </ListItem>
             )

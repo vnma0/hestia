@@ -3,8 +3,8 @@
         "port": 4000
     },
     "destination": {
-        "host": "localhost",
-        "port": 3000
+        "host": "192.168.0.105",
+        "port": 3001
     },
     "comment" : "Configuration for proxifying requests. CORS policy blocks direct access..."
 }

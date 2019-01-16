@@ -13,6 +13,7 @@
     "react": "^16.6.3",
     "react-codemirror": "^1.0.0",
     "react-dom": "^16.6.3",
+    "react-lazy-load": "^3.0.13",
     "react-pdf": "^4.0.0",
     "react-scripts": "^2.1.3",
     "typeface-roboto": "0.0.54"

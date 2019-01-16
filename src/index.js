@@ -9,9 +9,11 @@ import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js';
 import Submission from './app/submissions/submissionWrapper.js';
 import ProblemList from './app/problemList/problemList.js';
+import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 import ProblemLauncher from './app/problemList/problemLauncher.js';
+import ScoreboardLauncher from './app/scoreboard/scoreboardLauncher.js';
 
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
 import publicParse from './app/globalStatusBar/staticStub/public.js';
@@ -47,7 +49,7 @@ class Hestia extends React.Component {
 
     contestTimeout() {
         let current = new Date();
-        if (window.hestia.contest.time.end < current)
+        if (window.hestia.contest.time.end && window.hestia.contest.time.end < current)
             return this.setState({
                 contestTimeLeft: "Ended",
                 contestDuration : "Ended",
@@ -115,12 +117,12 @@ class Hestia extends React.Component {
                 })} pages={[
                     <Button onClick={() => this.changePage('front')}>Alert (1)</Button>,
                     <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>,
-                    <ProblemLauncher onClick={() => this.changePage('problems')} button/>
+                    <ProblemLauncher onClick={() => this.changePage('problems')} button/>,
+                    <ScoreboardLauncher onClick={() => this.changePage('scoreboard')} button/>
                 ]} />
-                {this.state.currentPage === "submissions" && <>
-                    <Submission />
-                </>}
+                {this.state.currentPage === "submissions" && <Submission />}
                 {this.state.currentPage === 'problems' && <ProblemList />}
+                {this.state.currentPage === 'scoreboard' && <ScoreboardWrapper />}
             </>
         )
     }
