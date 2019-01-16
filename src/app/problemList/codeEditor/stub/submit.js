@@ -7,13 +7,15 @@
  */
 
 function constructData(code, filename, ext) {
-    if (ext === 'c') ext = 'cpp'
+    // if (ext === 'c') ext = 'cpp'
 
     // force inject .c -> .cpp here
     // gotta fix later I guess
 
     let out = new FormData();
-    out.append('code', code, `${filename}.${ext}`);
+    out.append('code', new File(
+        [code], `${filename}.${ext}`
+    ), `${filename}.${ext}`);
     return out;
 }
 
@@ -29,6 +31,10 @@ function constructData(code, filename, ext) {
  */
 
 async function submit(code, filename, ext, func) {
+    console.log('code : ', code);
+    console.log('filename : ', filename)
+    console.log('ext : ', ext);
+    console.log(constructData(code, filename, ext));
     return fetch(`http://${window.location.hostname}:${window.location.port}/subs`, {
         method: "POST",
         body: constructData(code, filename, ext)

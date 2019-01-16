@@ -8,8 +8,6 @@ import SubmitButton from './submitButton'
 import LangSelection from './langSelection'
 // import FileDisplay from './fileDisplay'
 
-const mime = require('mime');
-
 class CodeBox extends React.Component {
     constructor(props) {
         super(props)
@@ -82,14 +80,14 @@ class CodeBox extends React.Component {
                                     disabled={this.state.code === '' ||
                                         this.state.currentLangId === null}
                                     fileName={this.props.submitFileName} code={this.state.code}
-                                    ext={mime.getExtension(this.props.mime[this.state.currentLangId])}>
+                                    ext={this.props.ext[this.state.currentLangId]}>
                                     Submit
                                 </SubmitButton>
                             </Grid>
                         </Grid>
                     </div>
                     <CodeEditor
-                        currentMIME={this.props.mime[this.state.currentLangId]}
+                        ext={this.props.ext[this.state.currentLangId]}
                         update={this.handleUpdate}
                         code={this.state.code} />
                 </AppBar>

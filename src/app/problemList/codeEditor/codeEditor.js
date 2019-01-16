@@ -1,5 +1,6 @@
 import React from 'react'
 import CodeMirror from 'react-codemirror';
+const mime = require('mime');
 require('codemirror/lib/codemirror.css');
 require('codemirror/mode/clike/clike');
 
@@ -11,7 +12,7 @@ require('codemirror/mode/clike/clike');
 class CodeEditor extends React.Component {
     render() {
         return <CodeMirror options={{
-            mode: this.props.currentMIME,
+            mode: mime.getExtension(this.props.ext),
             tabSize: 4,
             lineNumbers: true,
             autofocus: true,

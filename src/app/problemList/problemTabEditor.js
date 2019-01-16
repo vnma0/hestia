@@ -16,33 +16,33 @@ class ProblemTabEditor extends React.Component {
         super(props);
         this.state = {
             currentTab: 0,
-            acceptedMIME : [],
+            ext: [],
             problem: [],
-            displayLang : []
+            displayLang : undefined
         }
         this.handleTabChange = this.handleTabChange.bind(this);
     }
 
     componentDidMount() {
-        if (!window.hestia.contest.acceptedMIME || !window.hestia.contest.problemList) {
-            this.setState({
+        if (window.hestia.contest.ext !== undefined && window.hestia.contest.problemList !== undefined) {
+            this.setState({ 
                 displayLang : 
-                    window.hestia.contest.acceptedMIME.map(string => {
-                        return parseMIME(string)
+                    window.hestia.contest.ext.map(string => {
+                        return parseEXT(string)
                     }),
                 problem: window.hestia.contest.problemList,
-                acceptedMIME : window.hestia.contest.acceptedMIME
+                ext : window.hestia.contest.ext
             });
             this.forceUpdate()
         }
         else 
             publicParse(() => this.setState({
                 displayLang : 
-                    window.hestia.contest.acceptedMIME.map(string => {
-                        return parseMIME(string)
+                    window.hestia.contest.ext.map(string => {
+                        return parseEXT(string)
                     }),
                 problem: window.hestia.contest.problemList,
-                acceptedMIME : window.hestia.contest.acceptedMIME
+                ext : window.hestia.contest.ext
             }) || this.forceUpdate())
     }
 
@@ -67,8 +67,9 @@ class ProblemTabEditor extends React.Component {
                     }}>
                         <CodeBox 
                             submitFileName={this.state.problem[this.state.currentTab] || ''}
-                            mime={this.state.acceptedMIME || []} 
-                            displayLang={this.state.displayLang}/>
+                            ext={this.state.ext} 
+                            displayLang={this.state.displayLang
+                                || this.state.ext.map(parseEXT)}/>
                     </Grid>
                 </Grid>
             </div>
@@ -76,12 +77,12 @@ class ProblemTabEditor extends React.Component {
     }
 }
 
-function parseMIME(string)
+function parseEXT(string)
 {
     switch(string) {
-        case "text/x-c" : return 'C++';
-        case "text/x-java-source" : return 'OpenJDK 1.7.0-internal (developer build)'
-        case "text/x-script.python" : return 'Python 3.3.2'
+        case "cpp" : return 'C++';
+        case "java" : return 'OpenJDK 1.7.0-internal (developer build)'
+        case "py" : return 'Python 3.3.2'
         default : return string
     }
 }

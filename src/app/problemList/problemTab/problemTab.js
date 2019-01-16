@@ -23,14 +23,8 @@ function TabContainer(props) {
         </Typography>
     )
 }
-//Style options of the tabs
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        width: '100%',
-        backgroundColor: theme.palette.background.paper,
-    },
-})
+
+
 class ProblemTab extends React.Component {
     constructor(props) {
         super(props);
@@ -45,14 +39,14 @@ class ProblemTab extends React.Component {
     //render
     render() {
         return (
-            <div className={this.props.classes.root}>
+            <div>
                 <AppBar position="static" color="default">
                     <Tabs value={this.props.value}
                         onChange={this.handleChange}
                         indicatorColor="primary" textColor="primary"
                         scrollable scrollButtons="auto">
                         {this.props.problem.map(x => (
-                            <Tab label={x.id} />
+                            <Tab label={x} />
                         ))}
                     </Tabs>
                     <TabContainer>
@@ -72,8 +66,4 @@ class ProblemTab extends React.Component {
     }
 }
 
-ProblemTab.propTypes = {
-    classes: PropTypes.object.isRequired,
-}
-
-export default withStyles(styles)(ProblemTab)
+export default ProblemTab
