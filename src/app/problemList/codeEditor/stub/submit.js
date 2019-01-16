@@ -31,10 +31,6 @@ function constructData(code, filename, ext) {
  */
 
 async function submit(code, filename, ext, func) {
-    console.log('code : ', code);
-    console.log('filename : ', filename)
-    console.log('ext : ', ext);
-    console.log(constructData(code, filename, ext));
     return fetch(`http://${window.location.hostname}:${window.location.port}/subs`, {
         method: "POST",
         body: constructData(code, filename, ext)
