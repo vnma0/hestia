@@ -15,9 +15,14 @@ async function verifyLogin(func) {
         .then(responseBody => {
             // if logging in failed, JSON.parse would fail
             // and I don't know how to handle rejection
-            if (window.hestia.user.loggedIn) {
-                window.hestia.user.username = JSON.parse(responseBody)["username"];
-                window.hestia.user.userId = JSON.parse(responseBody)["_id"];
+            try {
+                if (window.hestia.user.loggedIn) {
+                    window.hestia.user.username = JSON.parse(responseBody)["username"];
+                    window.hestia.user.userId = JSON.parse(responseBody)["_id"];
+                }
+            }
+            catch (err) {
+                console.log(err);
             }
         })
         .then(func);

@@ -9,6 +9,7 @@
 async function submissionParse(func) {
     return fetch(`http://${window.location.hostname}:${window.location.port}/subs`)
         .then(res => res.json())
+        .catch(() => {return []})
         .then(subsTable => {
             if (!("submissions" in window.hestia))
                 window.hestia.submissions = [];

@@ -2,21 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'
 import 'typeface-roboto';
-import * as serviceWorker from './serviceWorker';
-import { Button } from '@material-ui/core';
 
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js';
 import Submission from './app/submissions/submissionWrapper.js';
 import ProblemList from './app/problemList/problemList.js';
+import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 import ProblemLauncher from './app/problemList/problemLauncher.js';
+import ScoreboardLauncher from './app/scoreboard/scoreboardLauncher.js';
 
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
 import publicParse from './app/globalStatusBar/staticStub/public.js';
 
 import timeAgo from './external/timeAgo.js';
+
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom"
 
 class Hestia extends React.Component {
     constructor(props) {
@@ -36,7 +38,9 @@ class Hestia extends React.Component {
             contestName: '',
             contestTimeLeft : '',
             contestDuration : '',
-            contestEnded: false
+            contestEnded: false,
+
+            redirect : undefined
         }
         this.changePage = this.changePage.bind(this);
         this.updateState = this.updateState.bind(this);
@@ -47,7 +51,7 @@ class Hestia extends React.Component {
 
     contestTimeout() {
         let current = new Date();
-        if (window.hestia.contest.time.end < current)
+        if (window.hestia.contest.time.end && window.hestia.contest.time.end < current)
             return this.setState({
                 contestTimeLeft: "Ended",
                 contestDuration : "Ended",
@@ -101,6 +105,12 @@ class Hestia extends React.Component {
     }
 
     render() {
+        if (this.state.redirect) {
+            this.setState({
+                redirect: undefined,
+            })
+            return <Router>{this.state.redirect}</Router>
+        }
         return (
             <>
                 <GlobalStatusBar contestName={this.state.contestName} currentUser={this.state.username}
@@ -110,25 +120,35 @@ class Hestia extends React.Component {
                     menuOpen={() => this.setState({
                         sidebarOpen : true
                     })}/>
-                <Sidenav open={this.state.sidebarOpen} onClose={() => this.setState({
-                    sidebarOpen: false
-                })} pages={[
-                    <Button onClick={() => this.changePage('front')}>Alert (1)</Button>,
-                    <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>,
-                    <ProblemLauncher onClick={() => this.changePage('problems')} button/>
-                ]} />
-                {this.state.currentPage === "submissions" && <>
-                    <Submission />
-                </>}
+                {/* {this.state.currentPage === "submissions" && <Submission />}
                 {this.state.currentPage === 'problems' && <ProblemList />}
+                {this.state.currentPage === 'scoreboard' && <ScoreboardWrapper />} */}
+                <Router>
+                    <div>
+                        <Sidenav open={this.state.sidebarOpen} onClose={() => this.setState({
+                            sidebarOpen: false
+                        })} pages={[
+                                <SubmissionLauncher onClick={() => this.setState({
+                                    redirect : <Redirect push to="/submissions"/>,
+                                    sidebarOpen: false
+                                })} button/>,
+                                <ProblemLauncher onClick={() => this.setState({
+                                    redirect : <Redirect push to="/problems"/>,
+                                    sidebarOpen: false
+                                })} button/>,
+                                <ScoreboardLauncher onClick={() => this.setState({
+                                    redirect : <Redirect push to="/scoreboard"/>,
+                                    sidebarOpen: false
+                                })} button/>
+                        ]} />
+                        <Route path="/submissions" component={Submission} />
+                        <Route path="/problems" component={ProblemList}/>
+                        <Route path="/scoreboard" component={ScoreboardWrapper}/>
+                    </div>
+                </Router>
             </>
         )
     }
 }
 
 ReactDOM.render(<Hestia />, document.querySelector('#root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
