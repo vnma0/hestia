@@ -42,6 +42,7 @@
     "not op_mini all"
   ],
   "proxy": "http://localhost:4000/",
+  "homepage": "./",
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.2",

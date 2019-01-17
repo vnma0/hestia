@@ -10,7 +10,6 @@
 async function submissionParse(name = window.hestia.user.username, func) {
     return fetch(`http://${window.location.hostname}:${window.location.port}/subs`)
         .then(res => res.json())
-        .catch(() => {return []})
         .then(subsTable => {
             if (!("submissions" in window.hestia))
                 window.hestia.submissions = [];
@@ -39,6 +38,10 @@ async function submissionParse(name = window.hestia.user.username, func) {
         .then(() => {
             if (typeof func === "function")
                 func();
+        })
+        .catch(() => {
+            if (typeof window.hestia.pushNotification === "function")
+                window.hestia.pushNotification("Failed to fetch data")
         })
 }
 

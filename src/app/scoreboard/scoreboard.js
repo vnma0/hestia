@@ -4,11 +4,11 @@ import { Table, TableBody, TableCell, TableRow, TableHead } from '@material-ui/c
 /**
  * @name Scoreboard
  * @desc Display scoreboard updated after a submission result applied
- * @param {Object} data The current information (Handle, Penalty, Score for each problem) of a contestant
+ * @param {Array : Object (String, Number, Number)} data The current information (Handle, Penalty, Score for each problem) of a contestant
  * @param {String} data.Handle Name of contestant
  * @param {Number} data.Penalty Total Penalty of a contestant
  * @param {Number} data.Score current score the contestant have
- * @param {String} problem - Problem name (and followed with B, C,... or customized by the contest host)
+ * @param {Array : String} problem - Problem name (and followed with B, C,... or customized by the contest host)
  * @returns {Table} Display current Score of contest
  */
 class Scoreboard extends React.Component {
@@ -40,14 +40,16 @@ class Scoreboard extends React.Component {
     CalculatorScore() {
         this.props.data.map(element => {
             return this.props.problem.map(problems => {
-                element.Score += element[problems]
+                // element.Score += element[problems]
+                // var a = null
             })
         })
     }
     render() {
+        // console.log(this.props.data)
         this.AddProblemToHead()
         this.CalculatorScore()
-        this.SortBoard()
+        // this.SortBoard()
         let head = this.props.header.map(cell => {
             return <TableCell>{cell.name}</TableCell>
         })
@@ -55,6 +57,7 @@ class Scoreboard extends React.Component {
             return (
                 <TableRow>
                     {this.props.header.map(cell => {
+                        // if ()
                         return <TableCell>{row[cell.name]}</TableCell>
                     })}
                 </TableRow>

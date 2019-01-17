@@ -32,7 +32,9 @@ class SubmitButton extends React.Component {
                             this.setState({
                                 submitting : false
                             });
-                            window.hestia.pushNotification(ok ? undefined : 'Error submitting solution.')
+                            window.hestia.pushNotification(ok 
+                                ? 'Successfully submitted'
+                                : 'Error submitting solution.')
                         })
                 }}>
                 {this.state.submitting 

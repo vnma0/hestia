@@ -7,7 +7,7 @@
 
 async function publicParse(func) {
     return fetch(`http://${window.location.hostname}:${window.location.port}/info`)
-        .then(res => res.json())
+        .then(res => res.json()).catch(err => {})
         .then(responseBody => {
             window.hestia.contest = {
                 name : responseBody["name"],
@@ -16,10 +16,14 @@ async function publicParse(func) {
                     end : new Date(responseBody["endTime"])
                 },
                 problemList : (responseBody["probList"]),
-                ext: (responseBody["ext"] || ["cpp", "py", "java"])
+                ext: (responseBody["allowedCodeExt"] || [".cpp", ".py", ".java"])
             }
         })
         .then(func)
+        .catch(() => {
+            if (typeof window.hestia.pushNotification === "function")
+                window.hestia.pushNotification("Failed to fetch data")
+        })
 }
 
 export default publicParse;

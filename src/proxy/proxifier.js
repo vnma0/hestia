@@ -1,3 +1,23 @@
+var staticServe = function(req, res) {  
+    var resolvedBase = path.resolve(staticBasePath);
+    var safeSuffix = path.normalize(req.url).replace(/^(\.\.[\/\\])+/, '');
+    var fileLoc = path.join(resolvedBase, safeSuffix);
+
+    fs.readFile(fileLoc, function(err, data) {
+        if (err) {
+            res.writeHead(404, 'Not Found');
+            res.write('404: File Not Found!');
+            return res.end();
+        }
+
+        res.statusCode = 200;
+
+        res.write(data);
+        return res.end();
+    });
+};
+
+
 const http = require('http'), ip = require('ip');
 
 var configParser = require("./configParser.js");
@@ -19,7 +39,9 @@ configParser((data) => {
  */
 
 var bootstrap = () => {
-    var httpProxy = require('http-proxy').createProxyServer({});
+    var httpProxy = require('http-proxy').createProxyServer({
+        ssl: staticServe
+    });
     var server = http.createServer((req, res) => {
         httpProxy.web(req, res, {
             target: `http://${proxyConfig["destination"]["host"]}:${proxyConfig["destination"]["port"]}`

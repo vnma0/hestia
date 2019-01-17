@@ -14,8 +14,8 @@ function constructData(code, filename, ext) {
 
     let out = new FormData();
     out.append('code', new File(
-        [code], `${filename}.${ext}`
-    ), `${filename}.${ext}`);
+        [code], `${filename}${ext}`
+    ), `${filename}${ext}`);
     return out;
 }
 
@@ -31,10 +31,15 @@ function constructData(code, filename, ext) {
  */
 
 async function submit(code, filename, ext, func) {
+    window.test = constructData(code, filename, ext)
     return fetch(`http://${window.location.hostname}:${window.location.port}/subs`, {
         method: "POST",
         body: constructData(code, filename, ext)
     }).then(res => res.ok).then(func)
+    .catch(() => {
+        if (typeof window.hestia.pushNotification === "function")
+            window.hestia.pushNotification("Failed to submit")
+    })
 }
 
 export default submit
