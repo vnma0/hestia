@@ -22,34 +22,8 @@ class Scoreboard extends React.Component {
             return;
         })
     }
-    /**
-     * @function SortBoard
-     * @desc Sort board after a submission result applied
-     */
-    SortBoard() {
-        this.props.data.sort((a, b) => {
-            if (a.Score === b.Score) {
-                return a.Penalty > b.Penalty ? 1 : -1
-            } else return a.Score > b.Score ? -1 : 1
-        })
-    }
-    /**
-     * @function CalculatorScore
-     * @desc Calculate total score of a team after a submission result applied
-     */
-    CalculatorScore() {
-        this.props.data.map(element => {
-            return this.props.problem.map(problems => {
-                // element.Score += element[problems]
-                // var a = null
-            })
-        })
-    }
     render() {
-        // console.log(this.props.data)
         this.AddProblemToHead()
-        this.CalculatorScore()
-        // this.SortBoard()
         let head = this.props.header.map(cell => {
             return <TableCell>{cell.name}</TableCell>
         })

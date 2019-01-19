@@ -29,7 +29,7 @@ async function parseScore(func) {
         })
         .catch(() => {
             if (typeof window.hestia.pushNotification === "function")
-                window.hestia.pushNotification("Failed to fetch data")
+                window.hestia.pushNotification("Failed to load scoreboard")
         })
 }
 

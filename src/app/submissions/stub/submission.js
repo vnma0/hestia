@@ -41,7 +41,7 @@ async function submissionParse(name = window.hestia.user.username, func) {
         })
         .catch(() => {
             if (typeof window.hestia.pushNotification === "function")
-                window.hestia.pushNotification("Failed to fetch data")
+                window.hestia.pushNotification("Failed to fetch submission board")
         })
 }
 

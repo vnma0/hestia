@@ -8,12 +8,33 @@ class ScoreboardWrapper extends React.Component {
         super(props);
         this.state = {
             scoreboard: [],
-            problem: []
+            problem: [],
+
+            interval : undefined
         }
     }
 
-
     componentDidMount() {
+        score(() => {
+                clearInterval(this.state.interval);
+                this.setState({
+                    interval : setInterval(this.update, 30000)
+                });
+                this.update()
+        })
+    }
+
+    componentWillUnmount() {
+        score(() => {
+                clearInterval(this.state.interval);
+                this.setState({
+                    interval : setInterval(this.update, 1000 * 60 * 5)
+                });
+                this.update()
+        })
+    }
+
+    update() {
         score(() => {
             let b = window.hestia.contest.scoreboard.map(record => {
                 let a = record.result;
@@ -24,8 +45,8 @@ class ScoreboardWrapper extends React.Component {
                 }
                 a = Object.assign(a, {
                     Name : record.name,
-                    Penalty : Number(record.score),
-                    AC : record.aced
+                    "Stat #1" : Number(record.score),
+                    "Stat #2" : record.aced
                 })
                 return a;
             })
@@ -39,7 +60,7 @@ class ScoreboardWrapper extends React.Component {
 
     render() {
         return <Scoreboard problem={this.state.problem} data={this.state.scoreboard} 
-            header={[{ name: "Name" }, { name: "Penalty" }, { name : "AC" }]}/>
+            header={[{ name: "Name" }, { name: "Stat #1" }, { name : "Stat #2" }]}/>
     }
 }
 

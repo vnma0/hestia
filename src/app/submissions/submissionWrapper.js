@@ -16,9 +16,9 @@ class Submissions extends React.Component {
     }
 
     update = () => {
-        this.setState({
+        submissionParse(() => this.setState({
             submissions: window.hestia.submissions
-        });
+        }))
         this.forceUpdate()
     }
 
@@ -26,7 +26,7 @@ class Submissions extends React.Component {
         submissionParse(() => {
                 clearInterval(this.state.interval);
                 this.setState({
-                    interval : setInterval(this.update, 30000)
+                    interval :  setInterval(this.update, 5000)
                 });
                 this.update()
         })
