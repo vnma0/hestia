@@ -133,8 +133,8 @@ class Hestia extends React.Component {
                         exit: 100
                     }}
                     anchorOrigin={{
-                        horizontal : 'center',
-                        vertical: 'top'
+                        horizontal : 'left',
+                        vertical: 'bottom'
                     }}/>
                 <GlobalStatusBar contestName={this.state.contestName} currentUser={this.state.username}
                     contestTimeLeft={this.state.contestTimeLeft}
