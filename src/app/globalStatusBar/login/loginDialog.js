@@ -80,9 +80,7 @@ class LoginDialog extends Component {
             TransitionComponent={this.props.TransitionComponent
                 ? this.props.TransitionComponent : fade}>
             
-                <DialogTitle>
-                    {this.state.errorLogin ? 'Error logging in.' : 'Log in'}
-                </DialogTitle>
+                <DialogTitle>Log in</DialogTitle>
                 
                 <DialogContent>
                     <DialogContentText>
@@ -134,6 +132,8 @@ class LoginDialog extends Component {
                                     errorLogin : !window.hestia.user.loggedIn
                                 });
                                 window.hestia.updateState();
+                                if (!window.hestia.user.loggedIn)
+                                    window.hestia.pushNotification("Failed to log in")
                                 this.forceUpdate();
                             })
                             // if login finished, hide the loading circle
