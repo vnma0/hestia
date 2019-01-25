@@ -40,7 +40,11 @@ async function login (username, password, func) {
         })
         .then(() => window.hestia.user.username = username)
         // set username
-        .then(submissionParse(window.hestia.user.username, window.hestia.updateSubmission))
+        .then(() => {
+            if (window.hestia.user.loggedIn)
+                submissionParse(window.hestia.user.username, window.hestia.updateSubmission)
+            // only update if logged in
+        })
         // load submission list
         .then(func);
         // execute callback
