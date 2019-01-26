@@ -7,19 +7,20 @@
  * @author minhducsun2002
  */
 
-async function submissionParse(name = window.hestia.user.username, func) {
+async function submissionParse(func) {
     return fetch(`http://${window.location.hostname}:${window.location.port}/subs`)
         .then(res => res.json())
         .then(subsTable => {
-            if (!("submissions" in window.hestia))
-                window.hestia.submissions = [];
+			// reprocess each time instead of appending old array
+            window.hestia.submissions = [];
+
             if (!("problem" in window.hestia))
                 window.hestia.problem = {};
 
             for (let sub of subsTable) {
                 // console.log(sub)
                 window.hestia.submissions.push({
-                    contestant : name,
+                    contestant : sub["username"],
                     verdict: sub["status"],
                     timestamp: new Date(sub["date"]).toLocaleString(),
                     id: sub["_id"],
