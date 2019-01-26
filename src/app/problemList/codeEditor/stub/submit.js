@@ -35,10 +35,17 @@ async function submit(code, filename, ext, func) {
     return fetch(`http://${window.location.hostname}:${window.location.port}/subs`, {
         method: "POST",
         body: constructData(code, filename, ext)
-    }).then(res => res.ok).then(func)
+    }).then(res => {
+        if (!res.ok) {
+            // if (typeof window.hestia.pushNotification === "function")
+                window.hestia.pushNotification
+                    (`Failure during submission : ${res.statusText}`)
+        }
+        return res.ok;
+    }).then(func)
     .catch(() => {
         if (typeof window.hestia.pushNotification === "function")
-            window.hestia.pushNotification("Failed to submit")
+            window.hestia.pushNotification("Failed to submit. It seems like a transmission error...")
     })
 }
 
