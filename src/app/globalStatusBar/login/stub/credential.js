@@ -9,7 +9,7 @@ import submissionParse from '../../../submissions/stub/submission.js';
  */
 
 async function verifyLogin(func) {
-    return fetch(`http://${window.location.hostname}:${window.location.port}/users`)
+    return fetch(`http://${window.location.hostname}:${window.location.port}/api/users`)
         .then(res => {
             window.hestia.user.loggedIn = (res.status !== 401);
             return res.text();

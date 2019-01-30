@@ -8,7 +8,7 @@
  */
 
 async function submissionParse(func) {
-    return fetch(`http://${window.location.hostname}:${window.location.port}/subs`)
+    return fetch(`http://${window.location.hostname}:${window.location.port}/api/subs`)
         .then(res => res.json())
         .then(subsTable => {
 			// reprocess each time instead of appending old array

@@ -32,7 +32,7 @@ function constructData(code, filename, ext) {
 
 async function submit(code, filename, ext, func) {
     window.test = constructData(code, filename, ext)
-    return fetch(`http://${window.location.hostname}:${window.location.port}/subs`, {
+    return fetch(`http://${window.location.hostname}:${window.location.port}/api/subs`, {
         method: "POST",
         body: constructData(code, filename, ext)
     }).then(res => {

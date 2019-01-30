@@ -6,7 +6,7 @@
  */
 
 async function publicParse(func) {
-    return fetch(`http://${window.location.hostname}:${window.location.port}/info`)
+    return fetch(`http://${window.location.hostname}:${window.location.port}/api/info`)
         .then(res => res.json()).catch(err => {})
         .then(responseBody => {
             window.hestia.contest = {

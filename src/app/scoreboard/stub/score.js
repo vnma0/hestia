@@ -8,7 +8,7 @@ import { isUndefined } from "util";
  */
 
 async function parseScore(func) {
-    return fetch(`http://${window.location.hostname}:${window.location.port}/score`)
+    return fetch(`http://${window.location.hostname}:${window.location.port}/api/score`)
         .then(res => {
             if (res.status === 304) 
                 // no change required; return nothing
