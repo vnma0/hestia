@@ -42,7 +42,7 @@ class Submission extends React.Component {
                 }} {...this.props}>
                     <TableCell>
                         <ContestantSignature
-                            contestantName={window.hestia.user.username || "N/A"}/>
+                            contestantName={this.props.contestant || "N/A"}/>
                     </TableCell>
                     <TableCell>
                         <ProblemSignature problemName={this.props.problem || "N/A"} />

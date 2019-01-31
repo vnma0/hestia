@@ -1,7 +1,6 @@
 /**
  * @name submissionParse
  * @desc Fetch the submission table
- * @param {String} name - contestant name, passed after logging in succeeded
  * @param {Function} func - Function to execute after fetching & mapping done
  * @return {Promise} a `fetch()` `Promise`
  * @author minhducsun2002
