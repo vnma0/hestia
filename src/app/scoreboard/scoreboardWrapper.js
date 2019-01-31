@@ -59,8 +59,14 @@ class ScoreboardWrapper extends React.Component {
     }
 
     render() {
-        return <Scoreboard problem={this.state.problem} data={this.state.scoreboard} 
-            header={[{ name: "Name" }, { name: "Stat #1" }, { name : "Stat #2" }]}/>
+        return (
+            <div style={{
+                overflowX: "auto"
+            }}>
+                <Scoreboard problem={this.state.problem} data={this.state.scoreboard} 
+                header={[{ name: "Name" }, { name: "Stat #1" }, { name : "Stat #2" }]}/>
+            </div>
+        )
     }
 }
 
