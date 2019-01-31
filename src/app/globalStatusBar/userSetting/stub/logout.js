@@ -7,7 +7,7 @@
  */
 
 async function logout(func) {
-    return fetch(`http://${window.location.hostname}:${window.location.port}/api/logout`,)
+    return fetch(`http://${window.location.hostname}:${window.location.port}/logout`,)
         .then(() => {
             window.hestia.user = {}
         }).then(func)

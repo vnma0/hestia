@@ -26,7 +26,7 @@ function constructRequestBody(username, password) {
  */
 
 async function login (username, password, func) {
-    return fetch(`http://${window.location.hostname}:${window.location.port}/api/login`, {
+    return fetch(`http://${window.location.hostname}:${window.location.port}/login`, {
         method : "POST",
         headers : {
             'Content-Type' : 'application/x-www-form-urlencoded',
