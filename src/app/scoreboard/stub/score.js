@@ -21,16 +21,18 @@ async function parseScore(func) {
             // 304 status received
                 return;
 
-            if (!("scoreboard" in window.hestia.contest))
-                window.hestia.contest.scoreboard = [];
-            responseBody.map(record => {
-                window.hestia.contest.scoreboard.push({
+            
+            window.hestia.contest.scoreboard = [];
+            // overwriting data each time we `fetch()`
+
+            responseBody.map(record => ({
                     name: record.name,
                     result: record.result,
                     aced: record.aced,
                     score: record.score
                 })
-            })
+            );
+            window.hestia.contest.scoreboard = responseBody
         }).then(() => {
             if (typeof func === "function")
                 func();
