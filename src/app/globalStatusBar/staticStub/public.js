@@ -7,7 +7,7 @@
 
 async function publicParse(func) {
     return fetch(
-        `http://${window.location.hostname}:${window.location.port}/api/info`
+        `/api/info`
     )
         .then(res => res.json())
         .catch(err => {})
