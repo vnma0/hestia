@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Drawer, ListItem, List} from '@material-ui/core';
+import React, { Component } from 'react'
+import { Drawer, ListItem, List } from '@material-ui/core'
 
 /**
- * @name Sidenav 
+ * @name Sidenav
  * @desc Sidebar navigation. All props are passed down to <Drawer>
  * @param {Array : Object(React.Component)} pages : an array with respective React.Component to launch pages onClick
  */
@@ -10,9 +10,13 @@ import {Drawer, ListItem, List} from '@material-ui/core';
 class Sidenav extends Component {
     renderItems() {
         return this.props.pages.map(page => {
-            // mirroring onClick function 
+            // mirroring onClick function
             return (
-                <ListItem onClick={page.props.onClick} button={page.props.button} key={page}>
+                <ListItem
+                    onClick={page.props.onClick}
+                    button={page.props.button}
+                    key={page}
+                >
                     {page}
                 </ListItem>
             )
@@ -21,12 +25,10 @@ class Sidenav extends Component {
     render() {
         return (
             <Drawer anchor="left" {...this.props}>
-                <List>
-                    {this.renderItems()}
-                </List>
+                <List>{this.renderItems()}</List>
             </Drawer>
         )
     }
 }
 
-export default Sidenav;
+export default Sidenav

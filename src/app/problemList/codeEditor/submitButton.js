@@ -4,7 +4,7 @@ import { Button, CircularProgress } from '@material-ui/core'
 import submit from './stub/submit.js'
 
 /**
- * @name SubmitButton 
+ * @name SubmitButton
  * @desc Button to submit source code; all props will be passed down to `<Button />`
  * @param {String} code - source code
  * @param {String} ext - file extension of source code
@@ -14,27 +14,36 @@ import submit from './stub/submit.js'
 
 class SubmitButton extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            submitting : false
+            submitting: false,
         }
     }
     render() {
         return (
-            <Button {...this.props}
+            <Button
+                {...this.props}
                 disabled={this.props.disabled || this.state.submitting}
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                    this.setState({ submitting : true })
-                    submit(this.props.code, this.props.fileName, this.props.ext,
-                        () => this.setState({
-                            submitting : false
-                        }))
-                }}>
-                {this.state.submitting 
-                    ? <CircularProgress size={20}/>
-                    : this.props.children}
+                    this.setState({ submitting: true })
+                    submit(
+                        this.props.code,
+                        this.props.fileName,
+                        this.props.ext,
+                        () =>
+                            this.setState({
+                                submitting: false,
+                            })
+                    )
+                }}
+            >
+                {this.state.submitting ? (
+                    <CircularProgress size={20} />
+                ) : (
+                    this.props.children
+                )}
             </Button>
         )
     }

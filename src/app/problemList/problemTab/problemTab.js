@@ -22,40 +22,51 @@ function TabContainer(props) {
     )
 }
 
-
 class ProblemTab extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             value: 0, //Current tab
         }
     }
     //Handle change
     handleChange = (event, value) => {
-        this.props.handleTabChange(value);
+        this.props.handleTabChange(value)
     }
     //render
     render() {
         return (
             <div>
                 <AppBar position="static" color="default">
-                    <Tabs value={this.props.value}
+                    <Tabs
+                        value={this.props.value}
                         onChange={this.handleChange}
-                        indicatorColor="primary" textColor="primary"
-                        scrollable scrollButtons="auto">
+                        indicatorColor="primary"
+                        textColor="primary"
+                        scrollable
+                        scrollButtons="auto"
+                    >
                         {this.props.problem.map(x => (
                             <Tab label={x} />
                         ))}
                     </Tabs>
                     <TabContainer>
-                        {this.props.problem[this.props.value] ? 
-                            this.props.problem[this.props.value].statement : ''}
+                        {this.props.problem[this.props.value]
+                            ? this.props.problem[this.props.value].statement
+                            : ''}
                     </TabContainer>
-                    <DownloadButton style={{
-                        display :  this.props.problem[this.props.value] ? '' : 'none'
-                    }}
-                        link={this.props.problem[this.props.value] ? 
-                            this.props.problem[this.props.value].link : ''}>
+                    <DownloadButton
+                        style={{
+                            display: this.props.problem[this.props.value]
+                                ? ''
+                                : 'none',
+                        }}
+                        link={
+                            this.props.problem[this.props.value]
+                                ? this.props.problem[this.props.value].link
+                                : ''
+                        }
+                    >
                         Download
                     </DownloadButton>
                 </AppBar>

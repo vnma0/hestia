@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Menu, MenuItem} from '@material-ui/core'
+import React, { Component } from 'react'
+import { Menu, MenuItem } from '@material-ui/core'
 
 /**
  * @name UserSettingMenu
@@ -15,18 +15,14 @@ class UserSettingMenu extends Component {
     render() {
         return (
             <Menu {...this.props}>
-                <MenuItem disabled>
-                    Welcome back, {this.props.user}
-                </MenuItem>
+                <MenuItem disabled>Welcome back, {this.props.user}</MenuItem>
                 <MenuItem onClick={this.props.showProfileAction}>
                     Change user settings
                 </MenuItem>
-                <MenuItem onClick={this.props.logoutAction}>
-                    Log out
-                </MenuItem>
+                <MenuItem onClick={this.props.logoutAction}>Log out</MenuItem>
             </Menu>
         )
     }
 }
 
-export default UserSettingMenu;
+export default UserSettingMenu

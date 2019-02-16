@@ -36,25 +36,30 @@ class LangSelection extends React.Component {
 
     render() {
         return (
-                <>
-                    <Tooltip title="Change coding language" placement="bottom">
-                        <Button variant="contained"
-                            aria-owns={this.state.anchorEl ? 'menu' : undefined}
-                            aria-haspopup={true} onClick={this.handleClick}>
-                            {this.props.children}
-                        </Button>
-                    </Tooltip>
-                    <Menu id="menu"
-                        anchorEl={this.state.anchorEl}
-                        open={Boolean(this.state.anchorEl)}
-                        onClose={() => this.handleChose(null)} >
-                        {this.props.displayLang.map((x, i) => (
-                            <MenuItem onClick={() => this.handleChose(i)}>
-                                {x}
-                            </MenuItem>
-                        ))}
-                    </Menu>
-                </>
+            <>
+                <Tooltip title="Change coding language" placement="bottom">
+                    <Button
+                        variant="contained"
+                        aria-owns={this.state.anchorEl ? 'menu' : undefined}
+                        aria-haspopup={true}
+                        onClick={this.handleClick}
+                    >
+                        {this.props.children}
+                    </Button>
+                </Tooltip>
+                <Menu
+                    id="menu"
+                    anchorEl={this.state.anchorEl}
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={() => this.handleChose(null)}
+                >
+                    {this.props.displayLang.map((x, i) => (
+                        <MenuItem onClick={() => this.handleChose(i)}>
+                            {x}
+                        </MenuItem>
+                    ))}
+                </Menu>
+            </>
         )
     }
 }

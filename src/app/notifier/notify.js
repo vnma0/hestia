@@ -1,7 +1,7 @@
-import React from 'react';
-import { Snackbar } from '@material-ui/core';
+import React from 'react'
+import { Snackbar } from '@material-ui/core'
 
-import {slideIn} from '../globalStatusBar/lib/libTransition.js';
+import { slideIn } from '../globalStatusBar/lib/libTransition.js'
 
 /**
  * @name Notify
@@ -11,10 +11,8 @@ import {slideIn} from '../globalStatusBar/lib/libTransition.js';
 
 class Notify extends React.Component {
     render() {
-        return (
-            <Snackbar {...this.props}/>
-        )
+        return <Snackbar {...this.props} />
     }
 }
 
-export default Notify;
+export default Notify

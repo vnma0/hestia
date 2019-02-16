@@ -1,5 +1,11 @@
 import React from 'react'
-import { Table, TableBody, TableCell, TableRow, TableHead } from '@material-ui/core'
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableRow,
+    TableHead,
+} from '@material-ui/core'
 
 /**
  * @name Scoreboard
@@ -18,8 +24,8 @@ class Scoreboard extends React.Component {
      */
     AddProblemToHead() {
         this.props.problem.map(problems => {
-            this.props.header.push({ name: problems });
-            return;
+            this.props.header.push({ name: problems })
+            return
         })
     }
     render() {

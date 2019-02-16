@@ -1,14 +1,26 @@
-import React from 'react';
+import React from 'react'
 
-import { Drawer, CardContent, CardHeader, IconButton, Paper, Table, TableHead, TableCell, TableRow, TableBody, Divider } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import ExitToApp from '@material-ui/icons/ExitToApp';
+import {
+    Drawer,
+    CardContent,
+    CardHeader,
+    IconButton,
+    Paper,
+    Table,
+    TableHead,
+    TableCell,
+    TableRow,
+    TableBody,
+    Divider,
+} from '@material-ui/core'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import ExitToApp from '@material-ui/icons/ExitToApp'
 
-import ResultTable from './testBasedVerdictTable.js';
-import VerdictSignature from '../signature/verdictSignature';
+import ResultTable from './testBasedVerdictTable.js'
+import VerdictSignature from '../signature/verdictSignature'
 
 /**
- * @name DetailedSubmission 
+ * @name DetailedSubmission
  * @desc Fully-detailed report for a submission. ALL PROPS ARE PASSED DOWN TO `<Dialog />`
  * @param (Same requirements as for a `<Submission />`)
  * @returns {React.Component} A `<Dialog />` component
@@ -17,23 +29,39 @@ import VerdictSignature from '../signature/verdictSignature';
 class DetailedSubmission extends React.Component {
     render() {
         return (
-            <Drawer anchor="right" {...this.props} PaperProps={{
-                style : {margin : 0, overflowX: 'hidden'}
-            }} >
+            <Drawer
+                anchor="right"
+                {...this.props}
+                PaperProps={{
+                    style: { margin: 0, overflowX: 'hidden' },
+                }}
+            >
                 <Paper>
-                    <CardHeader avatar={<AccountCircle />}
+                    <CardHeader
+                        avatar={<AccountCircle />}
                         title={this.props.contestant}
                         subheader={'Submitted : ' + this.props.timestamp}
                         action={
                             <>
-                                <IconButton disabled style={{ marginTop: 10, marginRight: 0, paddingRight: 0 }}>
-                                    <VerdictSignature verdict={this.props.verdict} reversed />
+                                <IconButton
+                                    disabled
+                                    style={{
+                                        marginTop: 10,
+                                        marginRight: 0,
+                                        paddingRight: 0,
+                                    }}
+                                >
+                                    <VerdictSignature
+                                        verdict={this.props.verdict}
+                                        reversed
+                                    />
                                 </IconButton>
                                 <IconButton onClick={this.props.onClose}>
                                     <ExitToApp />
                                 </IconButton>
                             </>
-                        } />
+                        }
+                    />
                 </Paper>
                 <CardContent>
                     <Table>
@@ -43,8 +71,12 @@ class DetailedSubmission extends React.Component {
                         </TableHead>
                         <TableBody>
                             <TableRow>
-                                <TableCell>{this.props.language || "N/A"}</TableCell>
-                                <TableCell>{this.props.problem || "N/A"}</TableCell>
+                                <TableCell>
+                                    {this.props.language || 'N/A'}
+                                </TableCell>
+                                <TableCell>
+                                    {this.props.problem || 'N/A'}
+                                </TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -56,4 +88,4 @@ class DetailedSubmission extends React.Component {
     }
 }
 
-export default DetailedSubmission;
+export default DetailedSubmission

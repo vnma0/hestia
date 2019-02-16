@@ -1,14 +1,14 @@
-import React from 'react';
-import ProblemTabEditor from './problemTabEditor';
+import React from 'react'
+import ProblemTabEditor from './problemTabEditor'
 
 class ProblemList extends React.Component {
     render() {
-        return(
+        return (
             <>
-                <ProblemTabEditor {...this.props}/>
+                <ProblemTabEditor {...this.props} />
             </>
         )
     }
 }
 
-export default ProblemList;
+export default ProblemList

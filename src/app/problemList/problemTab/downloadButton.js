@@ -13,12 +13,12 @@ class DownloadButton extends React.Component {
         this.handleClick = this.handleClick.bind(this)
     }
     //handeClick
-    handleClick() {
-    }
+    handleClick() {}
     //render
     render() {
         return (
-            <Button {...this.props}
+            <Button
+                {...this.props}
                 size="large"
                 variant="contained"
                 fullWidth={true}
@@ -32,4 +32,4 @@ class DownloadButton extends React.Component {
     }
 }
 
-export default DownloadButton;
+export default DownloadButton

@@ -1,9 +1,9 @@
 /**
  * @name constructData
- * @param {String} code 
- * @param {String} filename 
+ * @param {String} code
+ * @param {String} filename
  * @param {String} ext
- * @author minhducsun2002 
+ * @author minhducsun2002
  */
 
 function constructData(code, filename, ext) {
@@ -12,17 +12,19 @@ function constructData(code, filename, ext) {
     // force inject .c -> .cpp here
     // gotta fix later I guess
 
-    let out = new FormData();
-    out.append('code', new File(
-        [code], `${filename}${ext}`
-    ), `${filename}${ext}`);
-    return out;
+    let out = new FormData()
+    out.append(
+        'code',
+        new File([code], `${filename}${ext}`),
+        `${filename}${ext}`
+    )
+    return out
 }
 
 /**
  * @name submit
- * @desc Function to submit code using `POST` `fetch()` 
- * @param {String} code - code 
+ * @desc Function to submit code using `POST` `fetch()`
+ * @param {String} code - code
  * @param {String} filename - File name WITHOUT extension
  * @param {String} ext - extension
  * @param {String} func - function to call when `fetch()` completed.
@@ -32,21 +34,29 @@ function constructData(code, filename, ext) {
 
 async function submit(code, filename, ext, func) {
     window.test = constructData(code, filename, ext)
-    return fetch(`http://${window.location.hostname}:${window.location.port}/api/subs`, {
-        method: "POST",
-        body: constructData(code, filename, ext)
-    }).then(res => {
-        if (!res.ok) {
-            // if (typeof window.hestia.pushNotification === "function")
-                window.hestia.pushNotification
-                    (`Failure during submission : ${res.statusText}`)
+    return fetch(
+        `http://${window.location.hostname}:${window.location.port}/api/subs`,
+        {
+            method: 'POST',
+            body: constructData(code, filename, ext),
         }
-        return res.ok;
-    }).then(func)
-    .catch(() => {
-        if (typeof window.hestia.pushNotification === "function")
-            window.hestia.pushNotification("Failed to submit. It seems like a transmission error...")
-    })
+    )
+        .then(res => {
+            if (!res.ok) {
+                // if (typeof window.hestia.pushNotification === "function")
+                window.hestia.pushNotification(
+                    `Failure during submission : ${res.statusText}`
+                )
+            }
+            return res.ok
+        })
+        .then(func)
+        .catch(() => {
+            if (typeof window.hestia.pushNotification === 'function')
+                window.hestia.pushNotification(
+                    'Failed to submit. It seems like a transmission error...'
+                )
+        })
 }
 
 export default submit

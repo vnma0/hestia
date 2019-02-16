@@ -1,13 +1,13 @@
-import React from 'react';
-import { TableRow, TableCell } from '@material-ui/core';
+import React from 'react'
+import { TableRow, TableCell } from '@material-ui/core'
 
-import ContestantSignature from './signature/contestantSignature.js';
-import ProblemSignature from './signature/problemSignature.js';
-import LanguageSignature from './signature/languageSignature.js';
-import VerdictSignature from './signature/verdictSignature.js';
-import ExecTimeSignature from './signature/execTimeSignature.js';
-import TimestampSignature from './signature/timestampSignature.js';
-import MemorySignature from './signature/memorySignature.js';
+import ContestantSignature from './signature/contestantSignature.js'
+import ProblemSignature from './signature/problemSignature.js'
+import LanguageSignature from './signature/languageSignature.js'
+import VerdictSignature from './signature/verdictSignature.js'
+import ExecTimeSignature from './signature/execTimeSignature.js'
+import TimestampSignature from './signature/timestampSignature.js'
+import MemorySignature from './signature/memorySignature.js'
 
 /**
  * @name Submission
@@ -24,50 +24,63 @@ import MemorySignature from './signature/memorySignature.js';
  * @returns {React.Component} : A <TableRow> containing all nicely-formatted information.
  */
 
-
 class Submission extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            detailsExpanded : false
+            detailsExpanded: false,
         }
     }
-	render() {
-		return (
+    render() {
+        return (
             <>
-                <TableRow style={{
-                    // backgroundColor: (this.props.verdict==="AC"
-                    // || this.props.verdict==="Accepted" ? '#A5D6A7' : '')
-                    // green color if successful
-                }} {...this.props}>
+                <TableRow
+                    style={
+                        {
+                            // backgroundColor: (this.props.verdict==="AC"
+                            // || this.props.verdict==="Accepted" ? '#A5D6A7' : '')
+                            // green color if successful
+                        }
+                    }
+                    {...this.props}
+                >
                     <TableCell>
                         <ContestantSignature
-                            contestantName={this.props.contestant || "N/A"}/>
+                            contestantName={this.props.contestant || 'N/A'}
+                        />
                     </TableCell>
                     <TableCell>
-                        <ProblemSignature problemName={this.props.problem || "N/A"} />
+                        <ProblemSignature
+                            problemName={this.props.problem || 'N/A'}
+                        />
                     </TableCell>
                     <TableCell>
-                        <LanguageSignature languageName={this.props.language || "N/A"} />
+                        <LanguageSignature
+                            languageName={this.props.language || 'N/A'}
+                        />
                     </TableCell>
                     <TableCell>
-                        <VerdictSignature verdict={this.props.verdict || "N/A"}/>
+                        <VerdictSignature
+                            verdict={this.props.verdict || 'N/A'}
+                        />
                     </TableCell>
                     <TableCell>
-                        <ExecTimeSignature time={this.props.executionTime || "N/A"} />
+                        <ExecTimeSignature
+                            time={this.props.executionTime || 'N/A'}
+                        />
                     </TableCell>
                     <TableCell>
-                        <MemorySignature memory={this.props.memory || "N/A"} />
+                        <MemorySignature memory={this.props.memory || 'N/A'} />
                     </TableCell>
                     <TableCell>
                         {/* <TimestampSignature time={this.props.timestamp || "N/A"} /> */}
                         {/* table overflow; will fix later, I guess */}
-                        {this.props.timestamp || "N/A"}
+                        {this.props.timestamp || 'N/A'}
                     </TableCell>
                 </TableRow>
             </>
-		)
-	}
+        )
+    }
 }
 
-export default Submission;
+export default Submission

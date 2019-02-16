@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/vnma0/hestia/issues"
   },
-  "homepage": "https://github.com/vnma0/hestia#readme",
+  "homepage": "./",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -41,8 +41,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:4000/",
-  "homepage": "./",
+  "proxy": "http://10.147.19.25:3001/",
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.2",

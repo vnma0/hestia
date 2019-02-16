@@ -18,7 +18,6 @@ class CodeBox extends React.Component {
             currentLangId: 0,
         }
 
-
         this.handleFileChange = this.handleFileChange.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
@@ -49,14 +48,22 @@ class CodeBox extends React.Component {
                 <AppBar position="static" color="default">
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
-                            <Grid item style={{
-                                flexGrow: 1
-                            }}>
+                            <Grid
+                                item
+                                style={{
+                                    flexGrow: 1,
+                                }}
+                            >
                                 <LangSelection
                                     displayLang={this.props.displayLang || []}
-                                    handleChange={this.handleLangChange}>
+                                    handleChange={this.handleLangChange}
+                                >
                                     {/* Language : {' '} */}
-                                    {this.props.displayLang[this.state.currentLangId]}
+                                    {
+                                        this.props.displayLang[
+                                            this.state.currentLangId
+                                        ]
+                                    }
                                 </LangSelection>
                             </Grid>
                             {/* <Grid item>
@@ -77,10 +84,16 @@ class CodeBox extends React.Component {
                             </Grid> */}
                             <Grid item>
                                 <SubmitButton
-                                    disabled={this.state.code === '' ||
-                                        this.state.currentLangId === null}
-                                    fileName={this.props.submitFileName} code={this.state.code}
-                                    ext={this.props.ext[this.state.currentLangId]}>
+                                    disabled={
+                                        this.state.code === '' ||
+                                        this.state.currentLangId === null
+                                    }
+                                    fileName={this.props.submitFileName}
+                                    code={this.state.code}
+                                    ext={
+                                        this.props.ext[this.state.currentLangId]
+                                    }
+                                >
                                     Submit
                                 </SubmitButton>
                             </Grid>
@@ -89,7 +102,8 @@ class CodeBox extends React.Component {
                     <CodeEditor
                         ext={this.props.ext[this.state.currentLangId]}
                         update={this.handleUpdate}
-                        code={this.state.code} />
+                        code={this.state.code}
+                    />
                 </AppBar>
             </div>
         )

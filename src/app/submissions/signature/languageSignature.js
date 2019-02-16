@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Typography} from '@material-ui/core'
+import React, { Component } from 'react'
+import { Typography } from '@material-ui/core'
 
 /**
  * @name LanguageSignature : Language's ID / name / whatever. FlexGrow.
@@ -13,11 +13,20 @@ import {Typography} from '@material-ui/core'
 class LanguageSignature extends Component {
     render() {
         return (
-        <Typography variant='subtitle2' color="inherit" style={{
-            flexGrow: 1
-        }} {...this.props}>{this.props.children ? this.props.children : this.props.languageName}</Typography>
+            <Typography
+                variant="subtitle2"
+                color="inherit"
+                style={{
+                    flexGrow: 1,
+                }}
+                {...this.props}
+            >
+                {this.props.children
+                    ? this.props.children
+                    : this.props.languageName}
+            </Typography>
         )
     }
 }
 
-export default LanguageSignature;
+export default LanguageSignature

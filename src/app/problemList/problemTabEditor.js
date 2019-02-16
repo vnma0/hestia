@@ -13,63 +13,86 @@ import publicParse from '../globalStatusBar/staticStub/public.js'
 
 class ProblemTabEditor extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             currentTab: 0,
             ext: [],
             problem: [],
-            displayLang : undefined
+            displayLang: undefined,
         }
-        this.handleTabChange = this.handleTabChange.bind(this);
+        this.handleTabChange = this.handleTabChange.bind(this)
     }
 
     componentDidMount() {
-        if (window.hestia.contest.ext !== undefined && window.hestia.contest.problemList !== undefined) {
-            this.setState({ 
-                displayLang : 
-                    window.hestia.contest.ext.map(string => {
-                        return parseEXT(string)
-                    }),
+        if (
+            window.hestia.contest.ext !== undefined &&
+            window.hestia.contest.problemList !== undefined
+        ) {
+            this.setState({
+                displayLang: window.hestia.contest.ext.map(string => {
+                    return parseEXT(string)
+                }),
                 problem: window.hestia.contest.problemList,
-                ext : window.hestia.contest.ext
-            });
+                ext: window.hestia.contest.ext,
+            })
             this.forceUpdate()
-        }
-        else 
-            publicParse(() => this.setState({
-                displayLang : 
-                    window.hestia.contest.ext.map(string => {
-                        return parseEXT(string)
-                    }),
-                problem: window.hestia.contest.problemList,
-                ext : window.hestia.contest.ext
-            }) || this.forceUpdate())
+        } else
+            publicParse(
+                () =>
+                    this.setState({
+                        displayLang: window.hestia.contest.ext.map(string => {
+                            return parseEXT(string)
+                        }),
+                        problem: window.hestia.contest.problemList,
+                        ext: window.hestia.contest.ext,
+                    }) || this.forceUpdate()
+            )
     }
 
     handleTabChange(value) {
         this.setState({
-            currentTab: value
+            currentTab: value,
         })
     }
     render() {
         return (
             <div style={{ marginTop: 10 }}>
-                <Grid container spacing={8} alignItems="stretch" style={{
-                    width: '100%'
-                }}>
-                    <Grid item style={{
-                        width: '50%',
-                    }}>
-                        <ProblemTab problem={this.state.problem} handleTabChange={this.handleTabChange} value={this.state.currentTab} />
+                <Grid
+                    container
+                    spacing={8}
+                    alignItems="stretch"
+                    style={{
+                        width: '100%',
+                    }}
+                >
+                    <Grid
+                        item
+                        style={{
+                            width: '50%',
+                        }}
+                    >
+                        <ProblemTab
+                            problem={this.state.problem}
+                            handleTabChange={this.handleTabChange}
+                            value={this.state.currentTab}
+                        />
                     </Grid>
-                    <Grid item style={{
-                        width: '50%',
-                    }}>
-                        <CodeBox 
-                            submitFileName={this.state.problem[this.state.currentTab] || ''}
-                            ext={this.state.ext} 
-                            displayLang={this.state.displayLang
-                                || this.state.ext.map(parseEXT)}/>
+                    <Grid
+                        item
+                        style={{
+                            width: '50%',
+                        }}
+                    >
+                        <CodeBox
+                            submitFileName={
+                                this.state.problem[this.state.currentTab] || ''
+                            }
+                            ext={this.state.ext}
+                            displayLang={
+                                this.state.displayLang ||
+                                this.state.ext.map(parseEXT)
+                            }
+                        />
                     </Grid>
                 </Grid>
             </div>
@@ -77,13 +100,16 @@ class ProblemTabEditor extends React.Component {
     }
 }
 
-function parseEXT(string)
-{
-    switch(string) {
-        case "cpp" : return 'C++';
-        case "java" : return 'OpenJDK 1.7.0-internal (developer build)'
-        case "py" : return 'Python 3.3.2'
-        default : return string
+function parseEXT(string) {
+    switch (string) {
+        case 'cpp':
+            return 'C++'
+        case 'java':
+            return 'OpenJDK 1.7.0-internal (developer build)'
+        case 'py':
+            return 'Python 3.3.2'
+        default:
+            return string
     }
 }
 

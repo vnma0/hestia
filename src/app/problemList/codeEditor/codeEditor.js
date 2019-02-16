@@ -1,8 +1,8 @@
 import React from 'react'
-import CodeMirror from 'react-codemirror';
-const mime = require('mime');
-require('codemirror/lib/codemirror.css');
-require('codemirror/mode/clike/clike');
+import CodeMirror from 'react-codemirror'
+const mime = require('mime')
+require('codemirror/lib/codemirror.css')
+require('codemirror/mode/clike/clike')
 
 /**
  * @name CodeEditor
@@ -11,15 +11,21 @@ require('codemirror/mode/clike/clike');
 
 class CodeEditor extends React.Component {
     render() {
-        return <CodeMirror options={{
-            mode: mime.getType(this.props.ext),
-            tabSize: 4,
-            lineNumbers: true,
-            autofocus: true,
-            undoDepth: 200,
-            scrollbarStyle: null
-        }} value={this.props.code} onChange={this.props.update} />
+        return (
+            <CodeMirror
+                options={{
+                    mode: mime.getType(this.props.ext),
+                    tabSize: 4,
+                    lineNumbers: true,
+                    autofocus: true,
+                    undoDepth: 200,
+                    scrollbarStyle: null,
+                }}
+                value={this.props.code}
+                onChange={this.props.update}
+            />
+        )
     }
 }
 
-export default CodeEditor;
+export default CodeEditor

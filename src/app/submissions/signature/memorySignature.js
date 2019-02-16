@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {Typography, Grid} from '@material-ui/core'
-import Memory from '@material-ui/icons/Memory';
+import React, { Component } from 'react'
+import { Typography, Grid } from '@material-ui/core'
+import Memory from '@material-ui/icons/Memory'
 
 /**
- * @name MemorySignature : Submission's memory consumption. FlexGrow. 
+ * @name MemorySignature : Submission's memory consumption. FlexGrow.
  *                       All props are passed down to <Typography>.
  * @param {String} memory : Memory consumption.
  * @return {React.Component} : A <Typography> that shows the timestamp of current submission.
@@ -20,13 +20,23 @@ class MemorySignature extends Component {
         return (
             <Grid container spacing={8} alignItems="flex-start">
                 <Grid item>
-                    <Memory style={{marginRight : '10px', marginTop: '2.5px'}} />
+                    <Memory
+                        style={{ marginRight: '10px', marginTop: '2.5px' }}
+                    />
                 </Grid>
                 <Grid item>
-                    <Typography variant='overline' color="inherit" style={{
-                        flexGrow: 1, display: 'inline-block'
-                    }} {...this.props}>
-                        {this.props.children ? this.props.children : this.props.memory}
+                    <Typography
+                        variant="overline"
+                        color="inherit"
+                        style={{
+                            flexGrow: 1,
+                            display: 'inline-block',
+                        }}
+                        {...this.props}
+                    >
+                        {this.props.children
+                            ? this.props.children
+                            : this.props.memory}
                     </Typography>
                 </Grid>
             </Grid>
@@ -34,4 +44,4 @@ class MemorySignature extends Component {
     }
 }
 
-export default MemorySignature;
+export default MemorySignature

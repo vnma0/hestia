@@ -1,6 +1,6 @@
-import React from 'react';
-import { ListItemIcon, ListItemText } from '@material-ui/core';
-import Send from '@material-ui/icons/Send';
+import React from 'react'
+import { ListItemIcon, ListItemText } from '@material-ui/core'
+import Send from '@material-ui/icons/Send'
 
 /**
  * @name SubmissionLauncher
@@ -14,12 +14,10 @@ class SubmissionLauncher extends React.Component {
                 <ListItemIcon>
                     <Send />
                 </ListItemIcon>
-                <ListItemText>
-                    Submissions
-                </ListItemText>
+                <ListItemText>Submissions</ListItemText>
             </>
         )
     }
 }
 
-export default SubmissionLauncher;
+export default SubmissionLauncher

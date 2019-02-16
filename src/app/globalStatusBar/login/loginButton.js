@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Button} from '@material-ui/core';
+import React, { Component } from 'react'
+import { Button } from '@material-ui/core'
 
 /**
  * @name LoginButton
@@ -18,4 +18,4 @@ class LoginButton extends Component {
     }
 }
 
-export default LoginButton;
+export default LoginButton

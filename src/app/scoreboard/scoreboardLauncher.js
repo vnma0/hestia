@@ -1,6 +1,6 @@
-import React from 'react';
-import { ListItemIcon, ListItemText } from '@material-ui/core';
-import Send from '@material-ui/icons/Send';
+import React from 'react'
+import { ListItemIcon, ListItemText } from '@material-ui/core'
+import Send from '@material-ui/icons/Send'
 
 /**
  * @name ScoreboardLauncher
@@ -14,12 +14,10 @@ class ScoreboardLauncher extends React.Component {
                 <ListItemIcon>
                     <Send />
                 </ListItemIcon>
-                <ListItemText>
-                    Scoreboard
-                </ListItemText>
+                <ListItemText>Scoreboard</ListItemText>
             </>
         )
     }
 }
 
-export default ScoreboardLauncher;
+export default ScoreboardLauncher

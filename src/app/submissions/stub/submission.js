@@ -7,43 +7,45 @@
  */
 
 async function submissionParse(func) {
-    return fetch(`http://${window.location.hostname}:${window.location.port}/api/subs`)
+    return fetch(
+        `http://${window.location.hostname}:${window.location.port}/api/subs`
+    )
         .then(res => res.json())
         .then(subsTable => {
-			// reprocess each time instead of appending old array
-            window.hestia.submissions = [];
+            // reprocess each time instead of appending old array
+            window.hestia.submissions = []
 
-            if (!("problem" in window.hestia))
-                window.hestia.problem = {};
+            if (!('problem' in window.hestia)) window.hestia.problem = {}
 
             for (let sub of subsTable) {
                 // console.log(sub)
                 window.hestia.submissions.push({
-                    contestant : sub["username"],
-                    verdict: sub["status"],
-                    timestamp: new Date(sub["date"]).toLocaleString(),
-                    id: sub["_id"],
-                    problem:  window.hestia.problem[sub["prob_id"]] || sub["prob_id"],
-                    score: sub["score"],
-                    tests : (sub["tests"] ? sub["tests"] : []).map(test => {
+                    contestant: sub['username'],
+                    verdict: sub['status'],
+                    timestamp: new Date(sub['date']).toLocaleString(),
+                    id: sub['_id'],
+                    problem:
+                        window.hestia.problem[sub['prob_id']] || sub['prob_id'],
+                    score: sub['score'],
+                    tests: (sub['tests'] ? sub['tests'] : []).map(test => {
                         return {
                             executionTime: String(test.time) + ' s',
                             verdict: test.verdict,
-                            mark : test.score,
+                            mark: test.score,
                         }
-                    })
+                    }),
                 })
-            };
+            }
         })
         .then(() => {
-            if (typeof func === "function")
-                func();
+            if (typeof func === 'function') func()
         })
         .catch(() => {
-            if (typeof window.hestia.pushNotification === "function")
-                window.hestia.pushNotification("Failed to fetch submission board")
+            if (typeof window.hestia.pushNotification === 'function')
+                window.hestia.pushNotification(
+                    'Failed to fetch submission board'
+                )
         })
 }
 
-export default submissionParse;
-
+export default submissionParse

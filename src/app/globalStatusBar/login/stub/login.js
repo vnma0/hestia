@@ -9,10 +9,10 @@ import submissionParse from '../../../submissions/stub/submission.js'
  */
 
 function constructRequestBody(username, password) {
-    let out = new URLSearchParams();
-    out.append('username', username);
-    out.append('password', password);
-    return out;
+    let out = new URLSearchParams()
+    out.append('username', username)
+    out.append('password', password)
+    return out
 }
 
 /**
@@ -25,29 +25,37 @@ function constructRequestBody(username, password) {
  * @author minhducsun2002
  */
 
-async function login (username, password, func) {
-    return fetch(`http://${window.location.hostname}:${window.location.port}/login`, {
-        method : "POST",
-        headers : {
-            'Content-Type' : 'application/x-www-form-urlencoded',
-        },
-        body : constructRequestBody(username, password),
-        mode : 'cors'
-        })
-        .then(res => {
-            window.hestia.user.loggedIn = res.ok;
-            return res.text()
-        })
-        .then(() => window.hestia.user.username = username)
-        // set username
-        .then(() => {
-            if (window.hestia.user.loggedIn)
-                submissionParse(window.hestia.user.username, window.hestia.updateSubmission)
-            // only update if logged in
-        })
-        // load submission list
-        .then(func);
-        // execute callback
+async function login(username, password, func) {
+    return (
+        fetch(
+            `http://${window.location.hostname}:${window.location.port}/login`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: constructRequestBody(username, password),
+                mode: 'cors',
+            }
+        )
+            .then(res => {
+                window.hestia.user.loggedIn = res.ok
+                return res.text()
+            })
+            .then(() => (window.hestia.user.username = username))
+            // set username
+            .then(() => {
+                if (window.hestia.user.loggedIn)
+                    submissionParse(
+                        window.hestia.user.username,
+                        window.hestia.updateSubmission
+                    )
+                // only update if logged in
+            })
+            // load submission list
+            .then(func)
+    )
+    // execute callback
 }
 
-export default login;
+export default login

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react'
 import ContestNameText from './contestName.js'
 
 /**
@@ -8,7 +8,6 @@ import ContestNameText from './contestName.js'
  * @return {React.Component} an empty-tag component containing <ContestNameText /
  * @author minhducsun2002
  */
-
 
 class ContestSignature extends Component {
     render() {
@@ -21,4 +20,4 @@ class ContestSignature extends Component {
     }
 }
 
-export default ContestSignature;
+export default ContestSignature
