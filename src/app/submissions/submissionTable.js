@@ -62,27 +62,15 @@ class SubmissionTable extends React.Component {
     }
 
     sortBy(field) {
-        if (field !== 'timestamp')
             this.setState({
                 submissionList: this.state.submissionList.sort((a, b) => {
-                    // yeah, simple sorting lambda...
-                    let a1 = a[field],
-                        b1 = b[field]
+                    let a1 = (field !== 'timestamp' ? a[field] : new Date(a['timestamp']),
+                        b1 = (field !== 'timestamp' ? b[field] : new Date(b['timestamp'])
                     if (a1 < b1) return -1
                     if (a1 > b1) return 1
                     return 0
                 }),
-                reverseSort: !this.state.reverseSort,
-            })
-        else
-            this.setState({
-                submissionList: this.state.submissionList.sort((a, b) => {
-                    let a1 = new Date(a['timestamp']),
-                        b1 = new Date(b['timestamp'])
-                    if (a1 < b1) return -1
-                    if (a1 > b1) return 1
-                    return 0
-                }),
+				reverseSort: !this.state.reverseSort
             })
         this.setState({
             submissionList: this.state.reverseSort
