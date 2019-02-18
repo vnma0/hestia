@@ -64,8 +64,9 @@ class SubmissionTable extends React.Component {
     sortBy(field) {
             this.setState({
                 submissionList: this.state.submissionList.sort((a, b) => {
-                    let a1 = (field !== 'timestamp' ? a[field] : new Date(a['timestamp']),
-                        b1 = (field !== 'timestamp' ? b[field] : new Date(b['timestamp'])
+                    let a1 = (field !== 'timestamp' ? a[field] : new Date(a['timestamp'])),
+                        b1 = (field !== 'timestamp' ? b[field] : new Date(b['timestamp']))
+
                     if (a1 < b1) return -1
                     if (a1 > b1) return 1
                     return 0
