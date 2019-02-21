@@ -53,7 +53,7 @@ class DetailedSubmission extends React.Component {
                                 >
                                     <VerdictSignature
                                         verdict={this.props.verdict}
-                                        reversed
+                                        reversed iconOnly
                                     />
                                 </IconButton>
                                 <IconButton onClick={this.props.onClose}>

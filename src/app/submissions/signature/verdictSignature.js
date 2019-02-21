@@ -13,10 +13,10 @@ import CompilationErrorVerdictSignature from './verdictIcons/compilationErrorVer
 /**
  * @name VerdictSignature : Submission's judged verdict. FlexGrow.
  *                          All props are passed down to <Typography>.
- * @param {String} verdict : Judged verdict.
- * @param {Boolean} iconOnly : Whether to return icon only or with the verdict text.
- * @param {Boolean} reversed : Whether the verdict text should appear before or after the icon.
- * @return {React.Component} : A <Typography> that shows the verdict.
+ * @param {String} `verdict` - Judged verdict.
+ * @param {Boolean} `iconOnly` - Whether to return icon only or with the verdict text.
+ * @param {Boolean} `reversed` - Whether the verdict text should appear before or after the icon.
+ * @return {React.Component} - A <Typography> that shows the verdict.
  *                             Children override if exist.
  * @author minhducsun2002
  */
