@@ -99,10 +99,11 @@ class SubmissionTable extends React.Component {
                                                 ? 'desc'
                                                 : 'asc'
                                         }
-                                        active
+                                        active={false}
                                         onClick={() =>
                                             this.sortBy('contestant')
                                         }
+                                        hideSortIcon
                                     >
                                         Submitted by
                                     </TableSortLabel>
@@ -114,7 +115,7 @@ class SubmissionTable extends React.Component {
                                                 ? 'desc'
                                                 : 'asc'
                                         }
-                                        active
+                                        active={false} hideSortIcon
                                         onClick={() => this.sortBy('problem')}
                                     >
                                         Problem
@@ -127,7 +128,7 @@ class SubmissionTable extends React.Component {
                                                 ? 'desc'
                                                 : 'asc'
                                         }
-                                        active
+                                        active={false} hideSortIcon
                                         onClick={() => this.sortBy('language')}
                                     >
                                         Programming language
@@ -140,7 +141,7 @@ class SubmissionTable extends React.Component {
                                                 ? 'desc'
                                                 : 'asc'
                                         }
-                                        active
+                                        active={false} hideSortIcon
                                         onClick={() => this.sortBy('verdict')}
                                     >
                                         Verdict
@@ -153,7 +154,7 @@ class SubmissionTable extends React.Component {
                                                 ? 'desc'
                                                 : 'asc'
                                         }
-                                        active
+                                        active={false} hideSortIcon
                                         onClick={() =>
                                             this.sortBy('executionTime')
                                         }
@@ -168,7 +169,7 @@ class SubmissionTable extends React.Component {
                                                 ? 'desc'
                                                 : 'asc'
                                         }
-                                        active
+                                        active={false} hideSortIcon
                                         onClick={() => this.sortBy('memory')}
                                     >
                                         Memory consumed
@@ -181,7 +182,7 @@ class SubmissionTable extends React.Component {
                                                 ? 'desc'
                                                 : 'asc'
                                         }
-                                        active
+                                        active={false} hideSortIcon
                                         onClick={() => this.sortBy('timestamp')}
                                     >
                                         Timestamp
