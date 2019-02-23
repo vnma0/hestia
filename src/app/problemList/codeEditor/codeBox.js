@@ -57,14 +57,8 @@ class CodeBox extends React.Component {
                             >
                                 <LangSelection
                                     displayLang={this.props.displayLang || []}
-                                    handleChange={this.handleLangChange}
-                                >
-                                    {/* Language : {' '} */}
-                                    {
-                                        this.props.displayLang[
-                                            this.state.currentLangId
-                                        ]
-                                    }
+                                    handleChange={this.handleLangChange}>
+                                    {this.props.displayLang[this.state.currentLangId]}
                                 </LangSelection>
                             </Grid>
                             {/* <Grid item>
