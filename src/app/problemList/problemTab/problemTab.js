@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
-import DownloadButton from './downloadButton'
+// import DownloadButton from './downloadButton'
 
 /**
  * @name ProblemTab
@@ -55,20 +55,6 @@ class ProblemTab extends React.Component {
                             ? this.props.problem[this.props.value].statement
                             : ''}
                     </TabContainer>
-                    <DownloadButton
-                        style={{
-                            display: this.props.problem[this.props.value]
-                                ? ''
-                                : 'none',
-                        }}
-                        link={
-                            this.props.problem[this.props.value]
-                                ? this.props.problem[this.props.value].link
-                                : ''
-                        }
-                    >
-                        Download
-                    </DownloadButton>
                 </AppBar>
             </div>
         )
