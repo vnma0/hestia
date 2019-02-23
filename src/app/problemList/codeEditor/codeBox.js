@@ -16,6 +16,7 @@ class CodeBox extends React.Component {
             fileCode: '',
             code: '',
             currentLangId: 0,
+            submitting: false
         }
 
         this.handleFileChange = this.handleFileChange.bind(this)
