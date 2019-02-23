@@ -16,36 +16,30 @@ class Submissions extends React.Component {
     }
 
     update = () => {
-        submissionParse(() =>
+        submissionParse(() => {
             this.setState({
-                submissions: window.hestia.submissions,
+                submissions: window.hestia.submissions
             })
-        )
-        this.forceUpdate()
+        })
     }
 
     componentDidMount() {
         submissionParse(() => {
-            clearInterval(this.state.interval)
             this.setState({
                 interval: setInterval(this.update, 5000),
+                submissions: window.hestia.submissions
             })
-            this.update()
         })
     }
 
     componentWillUnmount() {
         submissionParse(() => {
             clearInterval(this.state.interval)
-            this.setState({
-                interval: setInterval(this.update, 1000 * 60 * 5),
-            })
-            this.update()
         })
     }
 
     render() {
-        return <SubmissionTable submissionList={window.hestia.submissions} />
+        return <SubmissionTable submissionList={this.state.submissions} />
     }
 }
 
