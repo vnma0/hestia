@@ -232,10 +232,8 @@ class Hestia extends React.Component {
                         />
                         <Route path="/submissions" component={Submission} />
                         <Route path="/problems" component={ProblemList} />
-                        <Route
-                            path="/scoreboard"
-                            component={ScoreboardWrapper}
-                        />
+                        <Route path="/scoreboard" component={ScoreboardWrapper} />
+                        <Route path="/" component={Homepage} />
                     </div>
                 </Router>
             </>
