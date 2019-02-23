@@ -6,7 +6,7 @@ import ProblemSignature from './signature/problemSignature.js'
 import LanguageSignature from './signature/languageSignature.js'
 import VerdictSignature from './signature/verdictSignature.js'
 import ExecTimeSignature from './signature/execTimeSignature.js'
-import TimestampSignature from './signature/timestampSignature.js'
+// import TimestampSignature from './signature/timestampSignature.js'
 import MemorySignature from './signature/memorySignature.js'
 
 /**

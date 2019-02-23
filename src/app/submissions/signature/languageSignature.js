@@ -19,7 +19,6 @@ class LanguageSignature extends Component {
                 style={{
                     flexGrow: 1,
                 }}
-                {...this.props}
             >
                 {this.props.children
                     ? this.props.children

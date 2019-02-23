@@ -37,7 +37,6 @@ class ExecTimeSignature extends Component {
                             flexGrow: 1,
                             display: 'inline-block',
                         }}
-                        {...this.props}
                     >
                         {this.props.children
                             ? this.props.children

@@ -90,7 +90,6 @@ class VerdictSignature extends Component {
                             color: color[this.props.verdict],
                             fontWeight: this.props.success ? 'bold' : '',
                         }}
-                        {...this.props}
                     >
                         {this.props.children
                             ? this.props.children
