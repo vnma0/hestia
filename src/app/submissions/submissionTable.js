@@ -58,28 +58,32 @@ class SubmissionTable extends React.Component {
         // Yeah, in order to support sorting
         // and since props are immutable
         // we mirror them to this.state and mutate it instead
-        this.sortBy = this.sortBy.bind(this)
+
+        // this.sortBy = this.sortBy.bind(this)
+
+        // just keep the sorting implementation here
+        // because for now it is pretty unneeded
     }
 
-    sortBy(field) {
-            this.setState({
-                submissionList: this.state.submissionList.sort((a, b) => {
-                    let a1 = (field !== 'timestamp' ? a[field] : new Date(a['timestamp'])),
-                        b1 = (field !== 'timestamp' ? b[field] : new Date(b['timestamp']))
+    // sortBy(field) {
+    //         this.setState({
+    //             submissionList: this.state.submissionList.sort((a, b) => {
+    //                 let a1 = (field !== 'timestamp' ? a[field] : new Date(a['timestamp'])),
+    //                     b1 = (field !== 'timestamp' ? b[field] : new Date(b['timestamp']))
 
-                    if (a1 < b1) return -1
-                    if (a1 > b1) return 1
-                    return 0
-                }),
-				reverseSort: !this.state.reverseSort
-            })
-        this.setState({
-            submissionList: this.state.reverseSort
-                ? this.state.submissionList.reverse()
-                : this.state.submissionList,
-        })
-        this.forceUpdate()
-    }
+    //                 if (a1 < b1) return -1
+    //                 if (a1 > b1) return 1
+    //                 return 0
+    //             }),
+	// 			reverseSort: !this.state.reverseSort
+    //         })
+    //     this.setState({
+    //         submissionList: this.state.reverseSort
+    //             ? this.state.submissionList.reverse()
+    //             : this.state.submissionList,
+    //     })
+    //     this.forceUpdate()
+    // }
 
     render() {
         return (
@@ -100,9 +104,9 @@ class SubmissionTable extends React.Component {
                                                 : 'asc'
                                         }
                                         active={false}
-                                        onClick={() =>
-                                            this.sortBy('contestant')
-                                        }
+                                        // onClick={() =>
+                                        //     this.sortBy('contestant')
+                                        // }
                                         hideSortIcon
                                     >
                                         Submitted by
@@ -116,7 +120,7 @@ class SubmissionTable extends React.Component {
                                                 : 'asc'
                                         }
                                         active={false} hideSortIcon
-                                        onClick={() => this.sortBy('problem')}
+                                        // onClick={() => this.sortBy('problem')}
                                     >
                                         Problem
                                     </TableSortLabel>
@@ -129,7 +133,7 @@ class SubmissionTable extends React.Component {
                                                 : 'asc'
                                         }
                                         active={false} hideSortIcon
-                                        onClick={() => this.sortBy('language')}
+                                        // onClick={() => this.sortBy('language')}
                                     >
                                         Programming language
                                     </TableSortLabel>
@@ -142,7 +146,7 @@ class SubmissionTable extends React.Component {
                                                 : 'asc'
                                         }
                                         active={false} hideSortIcon
-                                        onClick={() => this.sortBy('verdict')}
+                                        // onClick={() => this.sortBy('verdict')}
                                     >
                                         Verdict
                                     </TableSortLabel>
@@ -155,9 +159,7 @@ class SubmissionTable extends React.Component {
                                                 : 'asc'
                                         }
                                         active={false} hideSortIcon
-                                        onClick={() =>
-                                            this.sortBy('executionTime')
-                                        }
+                                        // onClick={() => this.sortBy('executionTime')}
                                     >
                                         Execution duration
                                     </TableSortLabel>
@@ -170,7 +172,7 @@ class SubmissionTable extends React.Component {
                                                 : 'asc'
                                         }
                                         active={false} hideSortIcon
-                                        onClick={() => this.sortBy('memory')}
+                                        // onClick={() => this.sortBy('memory')}
                                     >
                                         Memory consumed
                                     </TableSortLabel>
@@ -183,7 +185,7 @@ class SubmissionTable extends React.Component {
                                                 : 'asc'
                                         }
                                         active={false} hideSortIcon
-                                        onClick={() => this.sortBy('timestamp')}
+                                        // onClick={() => this.sortBy('timestamp')}
                                     >
                                         Timestamp
                                     </TableSortLabel>
@@ -191,10 +193,10 @@ class SubmissionTable extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.submissionList.map(submission => {
+                            {this.state.submissionList.map((submission, index) => {
                                 return (
                                     <Submission
-                                        {...submission}
+                                        {...submission} key={index}
                                         onClick={() =>
                                             this.setState({
                                                 details: { ...submission },
