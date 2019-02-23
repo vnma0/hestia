@@ -26,7 +26,6 @@ class SubmitButton extends React.Component {
     render() {
         return (
             <Button
-                {...this.props}
                 disabled={this.props.disabled || this.state.submitting}
                 variant="contained"
                 color="primary"
