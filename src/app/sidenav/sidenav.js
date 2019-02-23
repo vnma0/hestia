@@ -9,13 +9,13 @@ import { Drawer, ListItem, List } from '@material-ui/core'
 
 class Sidenav extends Component {
     renderItems() {
-        return this.props.pages.map(page => {
+        return this.props.pages.map((page, index) => {
             // mirroring onClick function
             return (
                 <ListItem
                     onClick={page.props.onClick}
                     button={page.props.button}
-                    key={page}
+                    key={`navigator_${index}`}
                 >
                     {page}
                 </ListItem>
