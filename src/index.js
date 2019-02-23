@@ -8,6 +8,7 @@ import { isUndefined } from 'util'
 
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js'
+import Homepage from './app/home/homepage.js'
 import Submission from './app/submissions/submissionWrapper.js'
 import ProblemList from './app/problemList/problemList.js'
 import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
@@ -17,6 +18,7 @@ import { slideIn } from './app/globalStatusBar/lib/libTransition.js'
 import SubmissionLauncher from './app/submissions/submissionLauncher.js'
 import ProblemLauncher from './app/problemList/problemLauncher.js'
 import ScoreboardLauncher from './app/scoreboard/scoreboardLauncher.js'
+import HomepageLauncher from './app/home/homepageLauncher.js'
 
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js'
 import publicParse from './app/globalStatusBar/staticStub/public.js'
@@ -126,10 +128,11 @@ class Hestia extends React.Component {
 
     render() {
         if (this.state.redirect) {
+            let out = <Router>{this.state.redirect}</Router>
             this.setState({
                 redirect: undefined,
             })
-            return <Router>{this.state.redirect}</Router>
+            return out;
         }
         return (
             <>
@@ -162,9 +165,6 @@ class Hestia extends React.Component {
                         })
                     }
                 />
-                {/* {this.state.currentPage === "submissions" && <Submission />}
-                {this.state.currentPage === 'problems' && <ProblemList />}
-                {this.state.currentPage === 'scoreboard' && <ScoreboardWrapper />} */}
                 <Router>
                     <div>
                         <Sidenav
@@ -175,6 +175,20 @@ class Hestia extends React.Component {
                                 })
                             }
                             pages={[
+                                <HomepageLauncher
+                                    onClick={() =>
+                                        this.setState({
+                                            redirect: (
+                                                <Redirect
+                                                    push
+                                                    to="/"
+                                                />
+                                            ),
+                                            sidebarOpen: false,
+                                        })
+                                    }
+                                    button
+                                />,
                                 <SubmissionLauncher
                                     onClick={() =>
                                         this.setState({
@@ -213,7 +227,7 @@ class Hestia extends React.Component {
                                         })
                                     }
                                     button
-                                />,
+                                />
                             ]}
                         />
                         <Route path="/submissions" component={Submission} />
