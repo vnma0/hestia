@@ -90,20 +90,31 @@ class CodeBox extends React.Component {
                                     }
                                     fileName={this.props.submitFileName}
                                     code={this.state.code}
-                                    ext={
-                                        this.props.ext[this.state.currentLangId]
-                                    }
+                                    ext={this.props.ext[this.state.currentLangId]}
+                                    onSubmit={() => 
+                                        this.setState({
+                                            submitting: true
+                                    })}
+                                    onSubmitDone={() => this.setState({
+                                        submitting: false
+                                    })}
                                 >
                                     Submit
                                 </SubmitButton>
                             </Grid>
                         </Grid>
                     </div>
-                    <CodeEditor
-                        ext={this.props.ext[this.state.currentLangId]}
-                        update={this.handleUpdate}
-                        code={this.state.code}
-                    />
+                <div style={(
+                    this.state.submitting ? 
+                    { opacity: 0.4, pointerEvents: 'none' } : {}
+                )}>
+                        <CodeEditor
+                            readOnly={this.state.submitting}
+                            ext={this.props.ext[this.state.currentLangId]}
+                            update={this.handleUpdate}
+                            code={this.state.code}
+                        />
+                    </div>
                 </AppBar>
             </div>
         )
