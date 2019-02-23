@@ -42,12 +42,12 @@ async function submit(code, filename, ext, func) {
         }
     )
         .then(res => {
-            if (!res.ok) {
-                // if (typeof window.hestia.pushNotification === "function")
+            if (typeof window.hestia.pushNotification === "function")
                 window.hestia.pushNotification(
-                    `Failure during submission : ${res.statusText}`
+                    (res.ok ? 
+                        `Failure during submission : ${res.statusText}` : 
+                        `Successfully submitted solution`)
                 )
-            }
             return res.ok
         })
         .then(func)
