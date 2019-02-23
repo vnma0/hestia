@@ -46,8 +46,8 @@ class ProblemTab extends React.Component {
                         scrollable
                         scrollButtons="auto"
                     >
-                        {this.props.problem.map(x => (
-                            <Tab label={x} />
+                        {this.props.problem.map((x,index) => (
+                            <Tab label={x} key={index}/>
                         ))}
                     </Tabs>
                     <TabContainer>
