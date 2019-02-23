@@ -13,6 +13,7 @@ class ContestNameText extends Component {
     render() {
         return (
             <Typography
+                onClick={() => window.location = '/'}
                 variant="h5"
                 color="inherit"
                 style={{
