@@ -49,7 +49,6 @@ class SubmissionTable extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            submissionList: this.props.submissionList,
             reverseSort: true,
 
             details: undefined,
@@ -193,7 +192,7 @@ class SubmissionTable extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.submissionList.map((submission, index) => {
+                            {this.props.submissionList.map((submission, index) => {
                                 return (
                                     <Submission
                                         {...submission} key={index}
