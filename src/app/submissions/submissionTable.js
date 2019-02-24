@@ -211,7 +211,7 @@ class SubmissionTable extends React.Component {
                     <DetailedSubmission
                         {...this.state.details}
                         open={
-                            this.state.detailExtendedOpen && this.state.details
+                            this.state.detailExtendedOpen && Boolean(this.state.details)
                         }
                         onClose={() =>
                             this.setState({

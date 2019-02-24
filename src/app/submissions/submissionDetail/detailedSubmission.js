@@ -66,8 +66,10 @@ class DetailedSubmission extends React.Component {
                 <CardContent>
                     <Table>
                         <TableHead>
-                            <TableCell>Language</TableCell>
-                            <TableCell>Problem</TableCell>
+                            <TableRow>
+                                <TableCell>Language</TableCell>
+                                <TableCell>Problem</TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
                             <TableRow>
