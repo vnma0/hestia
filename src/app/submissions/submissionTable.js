@@ -11,6 +11,7 @@ import {
 
 import Submission from './submission.js'
 import DetailedSubmission from './submissionDetail/detailedSubmission'
+import Paginator from './paginationNavigator.js'
 
 /**
  * @name SubmissionTable
@@ -91,9 +92,11 @@ class SubmissionTable extends React.Component {
                     <Table
                         style={{
                             tableLayout: 'fixed',
-                        }}
-                    >
+                        }}>
                         <TableHead>
+                            <TableRow>
+                                <Paginator />
+                            </TableRow>
                             <TableRow>
                                 <TableCell>
                                     <TableSortLabel
@@ -210,9 +213,7 @@ class SubmissionTable extends React.Component {
                     {/* a global dialog to avoid re-rendering components */}
                     <DetailedSubmission
                         {...this.state.details}
-                        open={
-                            this.state.detailExtendedOpen && Boolean(this.state.details)
-                        }
+                        open={this.state.detailExtendedOpen && Boolean(this.state.details)}
                         onClose={() =>
                             this.setState({
                                 detailExtendedOpen: false,

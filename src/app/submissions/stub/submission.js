@@ -17,7 +17,7 @@ async function submissionParse(func) {
 
             if (!('problem' in window.hestia)) window.hestia.problem = {}
 
-            for (let sub of subsTable) {
+            for (let sub of subsTable.data) {
                 // console.log(sub)
                 window.hestia.submissions.push({
                     contestant: sub['username'],
