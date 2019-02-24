@@ -30,15 +30,23 @@ class Scoreboard extends React.Component {
     }
     render() {
         this.AddProblemToHead()
-        let head = this.props.header.map(cell => {
-            return <TableCell>{cell.name}</TableCell>
-        })
-        let body = this.props.data.map(row => {
+        let head = this.props.header.map((cell) => {
             return (
-                <TableRow>
-                    {this.props.header.map(cell => {
+                <TableCell key={cell.name}>
+                    {cell.name}
+                </TableCell>
+            )
+        })
+        let body = this.props.data.map((row, index_row) => {
+            return (
+                <TableRow key={`data_${index_row}`}>
+                    {this.props.header.map((cell, index_cell) => {
                         // if ()
-                        return <TableCell>{row[cell.name]}</TableCell>
+                        return (
+                            <TableCell key={`data_${index_row}_${index_cell}`}>
+                                {row[cell.name]}
+                            </TableCell>
+                        )
                     })}
                 </TableRow>
             )
@@ -51,7 +59,11 @@ class Scoreboard extends React.Component {
         */
         return (
             <Table>
-                <TableHead>{head}</TableHead>
+                <TableHead>
+                    <TableRow>
+                        {head}
+                    </TableRow>
+                </TableHead>
                 <TableBody>{body}</TableBody>
             </Table>
         )
