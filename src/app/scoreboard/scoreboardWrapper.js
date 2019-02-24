@@ -27,10 +27,6 @@ class ScoreboardWrapper extends React.Component {
     componentWillUnmount() {
         score(() => {
             clearInterval(this.state.interval)
-            this.setState({
-                interval: setInterval(this.update, 1000 * 60 * 5),
-            })
-            this.update()
         })
     }
 
