@@ -1,77 +1,224 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import './index.css'
-import 'typeface-roboto';
-import * as serviceWorker from './serviceWorker';
-import { Button } from '@material-ui/core';
+import 'typeface-roboto'
 
-import GlobalStatusBar from './globalStatusBar/globalStatusBar.js'
-import Sidenav from './sidenav/sidenav.js';
-import SubmissionTable from './submissions/submissionTable.js';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { isUndefined } from 'util'
 
-import SubmissionLauncher from './submissions/submissionLauncher.js';
+import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
+import Sidenav from './app/sidenav/sidenav.js'
+import Homepage from './app/home/homepage.js'
+import Submission from './app/submissions/submissionWrapper.js'
+import ProblemList from './app/problemList/problemList.js'
+import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
+import Notify from './app/notifier/notify.js'
+import { slideIn } from './app/globalStatusBar/lib/libTransition.js'
+
+import SubmissionLauncher from './app/submissions/submissionLauncher.js'
+import ProblemLauncher from './app/problemList/problemLauncher.js'
+import ScoreboardLauncher from './app/scoreboard/scoreboardLauncher.js'
+import HomepageLauncher from './app/home/homepageLauncher.js'
+
+import verifyLogin from './app/globalStatusBar/login/stub/credential.js'
+import publicParse from './app/globalStatusBar/staticStub/public.js'
+
+import timeAgo from './external/timeAgo.js'
 
 class Hestia extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            sidebarOpen : false,
-            currentPage : 'front'
+        super(props)
+        window.hestia = {
+            user: {},
+            contest: {},
+            submissions: [],
+            problem: {},
         }
-        this.changePage = this.changePage.bind(this);
+        this.state = {
+            sidebarOpen: false,
+            currentPage: 'front',
+            loggedIn: false,
+            username: '',
+
+            contestName: '',
+            contestTimeLeft: '',
+            contestDuration: '',
+            contestEnded: false,
+
+            redirect: undefined,
+
+            notifyMessage: undefined,
+            open: false,
+        }
+        this.updateState = this.updateState.bind(this)
+        this.contestTimeout = this.contestTimeout.bind(this)
+        this.notify = this.notify.bind(this)
+        window.hestia.pushNotification = this.notify
+        window.hestia.updateState = this.updateState
     }
 
-    changePage(to) {
-        this.setState({
-            currentPage: to,
-            sidebarOpen: false
-            // close after clicking
+    contestTimeout() {
+        let current = new Date()
+        try {
+            if (
+                window.hestia.contest.time.end &&
+                window.hestia.contest.time.end < current
+            )
+                return this.setState({
+                    contestTimeLeft: 'Ended',
+                    contestDuration: 'Ended',
+                    contestEnded: true,
+                })
+            if (window.hestia.contest.time.start > current)
+                return this.setState({
+                    contestTimeLeft: timeAgo(
+                        current,
+                        window.hestia.contest.time.start
+                    ),
+                })
+            this.setState({
+                contestTimeLeft: timeAgo(
+                    current,
+                    window.hestia.contest.time.end
+                ),
+            })
+        } catch (err) {
+            return
+        }
+    }
+
+    componentWillMount() {
+        publicParse(this.updateState)
+        verifyLogin(() => {
+            this.setState({
+                loggedIn: window.hestia.user.loggedIn,
+                username: window.hestia.user.username,
+            })
+            this.setState({
+                clockInterval: setInterval(this.contestTimeout, 1000),
+            })
         })
     }
 
+
+    componentWillUnmount() {
+        clearInterval(this.state.clockInterval);
+        this.setState({
+            redirect: undefined
+        })
+    }
+
+    updateState() {
+        this.setState({
+            loggedIn: window.hestia.user.loggedIn,
+            username: window.hestia.user.username,
+
+            contestName: window.hestia.contest.name,
+            contestDuration: timeAgo(
+                window.hestia.contest.time.start,
+                window.hestia.contest.time.end
+            ),
+        })
+        this.contestTimeout()
+    }
+
+    notify(message) {
+        this.setState({
+            message: message,
+            open: true,
+        })
+        // setTimeout(() => this.setState({ message : undefined, open: false }), 3000)
+    }
+
     render() {
+        if (this.state.redirect) {
+            let out = <Router forceRefresh>{this.state.redirect}</Router>
+            return out;
+        }
         return (
             <>
-                <GlobalStatusBar contestName="Kỳ thi 1" currentUser="Test User"
-                    contestTimeLeft="00:00:00" contestDuration="23:59:59" loggedIn={true}
-                    menuOpen={() => this.setState({
-                        sidebarOpen : true
-                    })}/>
-                <Sidenav open={this.state.sidebarOpen} onClose={() => this.setState({
-                    sidebarOpen: false
-                })} pages={[
-                    <Button onClick={() => this.changePage('front')}>Alert (1)</Button>,
-                    <SubmissionLauncher onClick={() => this.changePage('submissions')} button/>
-                ]} />
-                {this.state.currentPage === "submissions" && <>
-                    <SubmissionTable submissionList={[{
-                        contestant : 'minhducsun123456', problem : 'A',
-                        verdict : 'Accepted', executionTime: '00:00:123', memory : '1TB', timestamp: '00:00:00',
-                        language : 'Perl', tests : [
-                            {verdict : 'AC', executionTime : '1000h', memory : '1TB', mark : '30'},
-                            {verdict : 'AC', executionTime : '1000d', memory : '1MB', mark : '50'},
-                            {verdict : 'AC', executionTime : '0.1s', memory : '5TB', mark : '300'}
-                        ]
-                    },{
-                        contestant : 'minhducsun2002', problem : 'A',
-                        verdict : 'Wrong output', executionTime: '11:00:234', memory : '1TB', timestamp: '00:00:00',
-                        language : 'Pascal',
-                    },{
-                        contestant : 'minhducsun123456', problem : 'A',
-                        verdict : 'Accepted', executionTime: '38:46:115', memory : '1TB', timestamp: '00:00:00',
-                        language : 'C99', tests : [
-                            {verdict : 'AC', executionTime : '5s', memory : '10TB', mark : '30'}
-                        ]
-                    }]}/>
-                </>}
+                <Notify
+                    open={this.state.open && !isUndefined(this.state.message)}
+                    onClose={() =>
+                        this.setState({ open: false, message: undefined })
+                    }
+                    message={this.state.message}
+                    autoHideDuration={1000}
+                    TransitionComponent={props => slideIn(props, 'left')}
+                    transitionDuration={{
+                        enter: 10,
+                        exit: 100,
+                    }}
+                    anchorOrigin={{
+                        horizontal: 'left',
+                        vertical: 'bottom',
+                    }}
+                />
+                <GlobalStatusBar
+                    contestName={this.state.contestName}
+                    currentUser={this.state.username}
+                    contestTimeLeft={this.state.contestTimeLeft}
+                    contestDuration={this.state.contestDuration}
+                    loggedIn={this.state.loggedIn}
+                    menuOpen={() =>
+                        this.setState({
+                            sidebarOpen: true,
+                        })
+                    }
+                />
+                <Router>
+                    <div>
+                        <Sidenav
+                            open={this.state.sidebarOpen}
+                            onClose={() =>
+                                this.setState({
+                                    sidebarOpen: false,
+                                })
+                            }
+                            pages={[
+                                <HomepageLauncher button
+                                    onClick={() =>
+                                        this.setState({
+                                            redirect: <Redirect push to="/" />,
+                                            sidebarOpen: false,
+                                        })
+                                    }
+                                />,
+                                <SubmissionLauncher button
+                                    onClick={() =>
+                                        this.setState({
+                                            redirect: <Redirect push to="/submissions" />,
+                                            sidebarOpen: false,
+                                        })
+                                    }
+                                />,
+                                <ProblemLauncher button
+                                    onClick={() =>
+                                        this.setState({
+                                            redirect: <Redirect push to="/problems" />,
+                                            sidebarOpen: false,
+                                        })
+                                    }
+                                />,
+                                <ScoreboardLauncher button
+                                    onClick={() =>
+                                        this.setState({
+                                            redirect: <Redirect push to="/scoreboard" />,
+                                            sidebarOpen: false,
+                                        })
+                                    }
+                                />
+                            ]}
+                        />
+                        <Route path="/submissions" component={Submission} />
+                        <Route path="/problems" component={ProblemList} />
+                        <Route path="/scoreboard" component={ScoreboardWrapper} />
+                        <Route path="/" component={Homepage} />
+                    </div>
+                </Router>
             </>
         )
     }
 }
 
-ReactDOM.render(<Hestia/>, document.querySelector('#root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<Hestia />, document.querySelector('#root'))

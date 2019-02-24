@@ -1,72 +1,56 @@
-import ReactDOM from "react-dom";
-import React from "react";
+import React from 'react'
 import {
     Table,
     TableBody,
     TableCell,
     TableRow,
     TableHead,
-    Paper
-} from "@material-ui/core";
+} from '@material-ui/core'
 
 /**
- * @name ScoreBoard
+ * @name Scoreboard
  * @desc Display scoreboard updated after a submission result applied
- * @param {Object} data The current information (Handle, Penalty, Score for each problem) of a contestant
+ * @param {Array : Object (String, Number, Number)} data The current information (Handle, Penalty, Score for each problem) of a contestant
  * @param {String} data.Handle Name of contestant
  * @param {Number} data.Penalty Total Penalty of a contestant
- * @param {Number} data.Score current score the contestant have 
- * @param {String} A Problem name (and followed with B, C,... or customized by the contest host)
+ * @param {Number} data.Score current score the contestant have
+ * @param {Array : String} problem - Problem name (and followed with B, C,... or customized by the contest host)
  * @returns {Table} Display current Score of contest
  */
-class ScoreBoard extends React.Component {
+class Scoreboard extends React.Component {
     /**
      * @function AddProblemToHead
      * @desc merge problem to header
      */
     AddProblemToHead() {
         this.props.problem.map(problems => {
-            this.props.header.push({ name: problems });
-        });
-    }
-    /**
-     * @function SortBoard
-     * @desc Sort board after a submission result applied
-     */
-    SortBoard() {
-        this.props.data.sort((a, b) => {
-            if (a.Score == b.Score) {
-                return a.Penalty > b.Penalty ? 1 : -1;
-            } else return a.Score > b.Score ? -1 : 1;
-        });
-    }
-    /**
-     * @function CalculatorScore
-     * @desc Calculate total score of a team after a submission result applied
-     */
-    CalculatorScore() {
-        this.props.data.map(element => {
-            return this.props.problem.map(problems => {
-                element.Score += element[problems];
-            });
-        });
+            this.props.header.push({ name: problems })
+            return
+        })
     }
     render() {
-        this.AddProblemToHead();
-        this.CalculatorScore();
-        this.SortBoard();
-        let head = this.props.header.map(cell => {
-            return <TableCell>{cell.name}</TableCell>;
-        });
-        let body = this.props.data.map(row => {
+        this.AddProblemToHead()
+        let head = this.props.header.map((cell) => {
             return (
-                <TableRow>
-                    {this.props.header.map(cell => {
-                        return <TableCell>{row[cell.name]}</TableCell>;
+                <TableCell key={cell.name}>
+                    {cell.name}
+                </TableCell>
+            )
+        })
+        let body = this.props.data.map((row, index_row) => {
+            return (
+                <TableRow key={`data_${index_row}`}>
+                    {this.props.header.map((cell, index_cell) => {
+                        // if ()
+                        return (
+                            <TableCell key={`data_${index_row}_${index_cell}`}>
+                                {row[cell.name]}
+                            </TableCell>
+                        )
                     })}
                 </TableRow>
-            );
-        });
+            )
+        })
         /*
             the first map of body to access to all object of data.
             the second map of body to access to all cell of each row.
@@ -75,10 +59,14 @@ class ScoreBoard extends React.Component {
         */
         return (
             <Table>
-                <TableHead>{head}</TableHead>
+                <TableHead>
+                    <TableRow>
+                        {head}
+                    </TableRow>
+                </TableHead>
                 <TableBody>{body}</TableBody>
             </Table>
-        );
+        )
     }
 }
 
@@ -117,4 +105,4 @@ class ScoreBoard extends React.Component {
     document.getElementById("root")
 );
  */
-export default ScoreBoard;
+export default Scoreboard
