@@ -5,9 +5,12 @@ import {
     DialogContent,
     Dialog,
     DialogActions,
+    DialogContentText,
 } from '@material-ui/core'
 import { Button, TextField } from '@material-ui/core'
 import { fade } from '../../lib/libTransition.js'
+
+import passwordChange from '../stub/passwordChange.js'
 
 /**
  * @name PasswordChangeForm
@@ -16,8 +19,6 @@ import { fade } from '../../lib/libTransition.js'
  * @param {function} TransitionComponent : TransitionComponent that the dialog uses.
  *                                         Overrides slideDirection.
  * @param {String} user : user name to display
- * @example <PasswordChangeDialog open={this.state.open} onClose={() => {this.state.open = false}}
- *           slideDirection={'up'} />
  * @author minhducsun2002
  */
 
@@ -69,11 +70,8 @@ class PasswordChangeDialog extends Component {
     }
 
     changePassword() {
-        alert(
-            `You attempted to change password from '${this.state.oldKey}'` +
-                ` to '${this.state.newKey}'` +
-                ` and verified with '${this.state.verifyKey}'`
-        )
+        passwordChange(window.hestia.user.userId,
+            this.state.oldKey, this.state.newKey)
     }
 
     render() {
@@ -90,6 +88,11 @@ class PasswordChangeDialog extends Component {
                     Changing password for {this.props.user}
                 </DialogTitle>
                 <DialogContent>
+                    <DialogContentText>
+                        Password length must be longer than 6 and smaller than 18.
+                        <br />
+                        Upon successful operation you will be logged out - be careful.
+                    </DialogContentText>
                     <TextField
                         label="Old password"
                         type="password"
@@ -116,7 +119,7 @@ class PasswordChangeDialog extends Component {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.onClose}>Cancel</Button>
-                    <Button
+                    <Button disabled={this.state.newKey !== this.state.verifyKey}
                         onClick={this.changePassword}
                         ref={this.state.pwdChangeInvokerRef}
                     >
