@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core'
 
 /**
  * @name LoginButton
- * @description A login button. ALL PROPS PASSED ARE PASSED DOWN to <Button />
+ * @description A login button.
  * @returns {React.Component} A 'Button' that launches the login dialog onClick
  * @author minhducsun2002
  */
