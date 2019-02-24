@@ -100,8 +100,12 @@ class Hestia extends React.Component {
         })
     }
 
+
     componentWillUnmount() {
-        clearInterval(this.state.clockInterval)
+        clearInterval(this.state.clockInterval);
+        this.setState({
+            redirect: undefined
+        })
     }
 
     updateState() {
@@ -128,10 +132,7 @@ class Hestia extends React.Component {
 
     render() {
         if (this.state.redirect) {
-            let out = <Router>{this.state.redirect}</Router>
-            this.setState({
-                redirect: undefined,
-            })
+            let out = <Router forceRefresh>{this.state.redirect}</Router>
             return out;
         }
         return (
@@ -175,58 +176,37 @@ class Hestia extends React.Component {
                                 })
                             }
                             pages={[
-                                <HomepageLauncher
+                                <HomepageLauncher button
                                     onClick={() =>
                                         this.setState({
-                                            redirect: (
-                                                <Redirect
-                                                    push
-                                                    to="/"
-                                                />
-                                            ),
+                                            redirect: <Redirect push to="/" />,
                                             sidebarOpen: false,
                                         })
                                     }
-                                    button
                                 />,
-                                <SubmissionLauncher
+                                <SubmissionLauncher button
                                     onClick={() =>
                                         this.setState({
-                                            redirect: (
-                                                <Redirect
-                                                    push
-                                                    to="/submissions"
-                                                />
-                                            ),
+                                            redirect: <Redirect push to="/submissions" />,
                                             sidebarOpen: false,
                                         })
                                     }
-                                    button
                                 />,
-                                <ProblemLauncher
+                                <ProblemLauncher button
                                     onClick={() =>
                                         this.setState({
-                                            redirect: (
-                                                <Redirect push to="/problems" />
-                                            ),
+                                            redirect: <Redirect push to="/problems" />,
                                             sidebarOpen: false,
                                         })
                                     }
-                                    button
                                 />,
-                                <ScoreboardLauncher
+                                <ScoreboardLauncher button
                                     onClick={() =>
                                         this.setState({
-                                            redirect: (
-                                                <Redirect
-                                                    push
-                                                    to="/scoreboard"
-                                                />
-                                            ),
+                                            redirect: <Redirect push to="/scoreboard" />,
                                             sidebarOpen: false,
                                         })
                                     }
-                                    button
                                 />
                             ]}
                         />
