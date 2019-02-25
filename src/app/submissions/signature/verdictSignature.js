@@ -100,7 +100,7 @@ class VerdictSignature extends Component {
         }
     }
     render() {
-        if (this.props.iconOnly) return verdictIcon[this.props.verdict]
+        if (this.props.iconOnly) return this.state.icon
         else
             return (
                 <Grid container spacing={0} alignItems="flex-start">
