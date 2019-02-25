@@ -19,11 +19,7 @@ function constructURL(count, page, size) {
     return out.toString() === '' ? '' : `?${out.toString()}`
 }
 
-export default async function submissionParse(
-    count = undefined,
-    page = undefined,
-    size = undefined
-) {
+export default async function submissionParse(count, page, size) {
     return fetch(`/api/subs${constructURL(count, page, size)}`)
         .then(res => res.json())
         .then(subsTable => {
