@@ -1,4 +1,4 @@
-import { isNumber } from "util";
+import { isNumber } from 'util'
 
 /**
  * @name submissionParse
@@ -12,34 +12,25 @@ import { isNumber } from "util";
  */
 
 function constructURL(count, page, size) {
-    let out = new URLSearchParams();
-    if (isNumber(count)) out.append(`count`, count);
-    if (isNumber(page)) out.append(`page`, page);
-    if (isNumber(size)) out.append(`size`, size);
-    return (out.toString() === '') ? '' : `?${out.toString()}`;
+    let out = new URLSearchParams()
+    if (isNumber(count)) out.append(`count`, count)
+    if (isNumber(page)) out.append(`page`, page)
+    if (isNumber(size)) out.append(`size`, size)
+    return out.toString() === '' ? '' : `?${out.toString()}`
 }
 
-export default async function submissionParse(count = undefined, page = undefined, size = undefined) {
-    return fetch(
-        `/api/subs${constructURL(count, page, size)}`
-    )
+export default async function submissionParse(
+    count = undefined,
+    page = undefined,
+    size = undefined
+) {
+    return fetch(`/api/subs${constructURL(count, page, size)}`)
         .then(res => res.json())
         .then(subsTable => {
-            // reprocess each time instead of appending old array
-            window.hestia.submissions = []
-
-            if (!('problem' in window.hestia)) window.hestia.problem = {}
-            if (!('meta' in window.hestia)) window.hestia.meta = {};
-
-            window.hestia.meta = {
-                submissionsListSize : subsTable.count,
-                currentPageId : subsTable.page,
-                pageSize : subsTable.size
-            }
-
+            let submissions = []
 
             for (let sub of subsTable.data) {
-                window.hestia.submissions.push({
+                submissions.push({
                     contestant: sub['username'],
                     verdict: sub['status'],
                     timestamp: new Date(sub['date']).toLocaleString(),
@@ -55,6 +46,15 @@ export default async function submissionParse(count = undefined, page = undefine
                         }
                     }),
                 })
+            }
+
+            return {
+                submissions: submissions,
+                meta: {
+                    submissionsListSize: subsTable.count,
+                    currentPageId: subsTable.page,
+                    pageSize: subsTable.size,
+                },
             }
         })
         .catch(() => {
