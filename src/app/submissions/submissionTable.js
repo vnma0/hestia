@@ -5,7 +5,6 @@ import {
     TableCell,
     TableHead,
     Paper,
-    TableSortLabel,
     TableRow,
 } from '@material-ui/core'
 
@@ -52,7 +51,7 @@ class SubmissionTable extends React.Component {
             reverseSort: true,
 
             details: undefined,
-            detailExtendedOpen: false
+            detailExtendedOpen: false,
         }
     }
 
@@ -63,125 +62,45 @@ class SubmissionTable extends React.Component {
                     <Table
                         style={{
                             tableLayout: 'fixed',
-                        }}>
+                        }}
+                    >
                         <TableHead>
                             <TableRow>
-                                <TableCell>
-                                    <TableSortLabel
-                                        direction={
-                                            this.state.reverseSort
-                                                ? 'desc'
-                                                : 'asc'
-                                        }
-                                        active={false}
-                                        // onClick={() =>
-                                        //     this.sortBy('contestant')
-                                        // }
-                                        hideSortIcon
-                                    >
-                                        Submitted by
-                                    </TableSortLabel>
-                                </TableCell>
-                                <TableCell>
-                                    <TableSortLabel
-                                        direction={
-                                            this.state.reverseSort
-                                                ? 'desc'
-                                                : 'asc'
-                                        }
-                                        active={false} hideSortIcon
-                                        // onClick={() => this.sortBy('problem')}
-                                    >
-                                        Problem
-                                    </TableSortLabel>
-                                </TableCell>
-                                <TableCell>
-                                    <TableSortLabel
-                                        direction={
-                                            this.state.reverseSort
-                                                ? 'desc'
-                                                : 'asc'
-                                        }
-                                        active={false} hideSortIcon
-                                        // onClick={() => this.sortBy('language')}
-                                    >
-                                        Programming language
-                                    </TableSortLabel>
-                                </TableCell>
-                                <TableCell>
-                                    <TableSortLabel
-                                        direction={
-                                            this.state.reverseSort
-                                                ? 'desc'
-                                                : 'asc'
-                                        }
-                                        active={false} hideSortIcon
-                                        // onClick={() => this.sortBy('verdict')}
-                                    >
-                                        Verdict
-                                    </TableSortLabel>
-                                </TableCell>
-                                <TableCell>
-                                    <TableSortLabel
-                                        direction={
-                                            this.state.reverseSort
-                                                ? 'desc'
-                                                : 'asc'
-                                        }
-                                        active={false} hideSortIcon
-                                        // onClick={() => this.sortBy('executionTime')}
-                                    >
-                                        Execution duration
-                                    </TableSortLabel>
-                                </TableCell>
-                                <TableCell>
-                                    <TableSortLabel
-                                        direction={
-                                            this.state.reverseSort
-                                                ? 'desc'
-                                                : 'asc'
-                                        }
-                                        active={false} hideSortIcon
-                                        // onClick={() => this.sortBy('memory')}
-                                    >
-                                        Memory consumed
-                                    </TableSortLabel>
-                                </TableCell>
-                                <TableCell>
-                                    <TableSortLabel
-                                        direction={
-                                            this.state.reverseSort
-                                                ? 'desc'
-                                                : 'asc'
-                                        }
-                                        active={false} hideSortIcon
-                                        // onClick={() => this.sortBy('timestamp')}
-                                    >
-                                        Timestamp
-                                    </TableSortLabel>
-                                </TableCell>
+                                <TableCell>Submitted by</TableCell>
+                                <TableCell>Problem</TableCell>
+                                <TableCell>Programming language</TableCell>
+                                <TableCell>Verdict</TableCell>
+                                <TableCell>Execution duration</TableCell>
+                                <TableCell>Memory consumed</TableCell>
+                                <TableCell>Timestamp</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.submissionList.map((submission, index) => {
-                                return (
-                                    <Submission
-                                        {...submission} key={index}
-                                        onClick={() =>
-                                            this.setState({
-                                                details: { ...submission },
-                                                detailExtendedOpen: true,
-                                            })
-                                        }
-                                    />
-                                )
-                            })}
+                            {this.props.submissionList.map(
+                                (submission, index) => {
+                                    return (
+                                        <Submission
+                                            {...submission}
+                                            key={index}
+                                            onClick={() =>
+                                                this.setState({
+                                                    details: { ...submission },
+                                                    detailExtendedOpen: true,
+                                                })
+                                            }
+                                        />
+                                    )
+                                }
+                            )}
                         </TableBody>
                     </Table>
                     {/* a global dialog to avoid re-rendering components */}
                     <DetailedSubmission
                         {...this.state.details}
-                        open={this.state.detailExtendedOpen && Boolean(this.state.details)}
+                        open={
+                            this.state.detailExtendedOpen &&
+                            Boolean(this.state.details)
+                        }
                         onClose={() =>
                             this.setState({
                                 detailExtendedOpen: false,
