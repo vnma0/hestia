@@ -31,16 +31,13 @@ export default async function submissionParse(count, page, size) {
                     verdict: sub['status'],
                     timestamp: new Date(sub['date']).toLocaleString(),
                     id: sub['_id'],
-                    problem:
-                        window.hestia.problem[sub['prob_id']] || sub['prob_id'],
+                    problem: sub['prob_id'],
                     score: sub['score'],
-                    tests: (sub['tests'] ? sub['tests'] : []).map(test => {
-                        return {
-                            executionTime: String(test.time) + ' s',
-                            verdict: test.verdict,
-                            mark: test.score,
-                        }
-                    }),
+                    tests: (sub['tests'] ? sub['tests'] : []).map(test => ({
+                        executionTime: String(test.time),
+                        verdict: test.verdict,
+                        mark: test.score,
+                    })),
                 })
             }
 
@@ -58,5 +55,13 @@ export default async function submissionParse(count, page, size) {
                 window.hestia.pushNotification(
                     'Failed to fetch submission board'
                 )
+            return {
+                submissions: [],
+                meta: {
+                    submissionsListSize: 0,
+                    currentPageId: 0,
+                    pageSize: 10,
+                },
+            }
         })
 }
