@@ -43,7 +43,7 @@ class Submissions extends React.Component {
             loading : true
         })
         submissionParse(this.state.listSize, this.state.page, this.state.rowsPerPage)
-            .then(() => this.setState({,
+            .then(() => this.setState({
                 submissions: window.hestia.submissions,
                 rowsPerPage : window.hestia.meta.pageSize,
                 listSize: window.hestia.meta.submissionsListSize,
