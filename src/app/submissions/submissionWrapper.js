@@ -60,7 +60,7 @@ class Submissions extends React.Component {
                             </TableCell>
                             <Paginator
                                 colSpan={6}
-                                rowsPerPageOptions={[5, 10, 20, 50]}
+                                rowsPerPageOptions={[5, 10, 20, 100]}
                                 rowsPerPage={this.state.rowsPerPage}
                                 count={this.state.listSize}
                                 page={this.state.page}
@@ -74,11 +74,15 @@ class Submissions extends React.Component {
                                     }
                                 }}
                                 onChangeRowsPerPage={event => {
-                                    console.log(event.target.value)
+                                    const current =
+                                        this.state.rowsPerPage * this.state.page
+                                    const ratio = Math.floor(
+                                        current / Number(event.target.value)
+                                    )
                                     // event.target.value is the key here
                                     this.update(
                                         this.state.listSize,
-                                        this.state.page,
+                                        ratio,
                                         event.target.value
                                     )
                                 }}
