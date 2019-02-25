@@ -22,20 +22,26 @@ class Submissions extends React.Component {
             rowsPerPage: 10,
             listSize: 0,
             page: 0,
-
-            loading: false,
         }
         this.update = this.update.bind(this)
     }
 
-    componentDidMount() {
-        submissionParse().then(data =>
+    update = (listSize, page, rowsPerPage) => {
+        submissionParse(listSize, page, rowsPerPage).then(data =>
             this.setState({
                 submissions: data.submissions,
                 rowsPerPage: data.meta.pageSize,
                 listSize: data.meta.submissionsListSize,
                 page: data.meta.currentPageId,
             })
+        )
+    }
+
+    componentDidMount() {
+        this.update(
+            this.state.listSize,
+            this.state.page,
+            this.state.rowsPerPage
         )
     }
 
@@ -60,28 +66,21 @@ class Submissions extends React.Component {
                                 page={this.state.page}
                                 onChangePage={(event, page) => {
                                     if (event !== null) {
-                                        submissionParse(
+                                        this.update(
                                             this.state.listSize,
                                             page,
                                             this.state.rowsPerPage
-                                        ).then(data =>
-                                            this.setState({
-                                                submissions: data.submissions,
-                                                rowsPerPage: data.meta.pageSize,
-                                                listSize:
-                                                    data.meta
-                                                        .submissionsListSize,
-                                                page: data.meta.currentPageId,
-                                            })
                                         )
                                     }
                                 }}
                                 onChangeRowsPerPage={event => {
                                     console.log(event.target.value)
                                     // event.target.value is the key here
-                                    this.setState({
-                                        rowsPerPage: event.target.value,
-                                    })
+                                    this.update(
+                                        this.state.listSize,
+                                        this.state.page,
+                                        event.target.value
+                                    )
                                 }}
                             />
                         </TableRow>
