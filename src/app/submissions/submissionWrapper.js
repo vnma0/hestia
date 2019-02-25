@@ -2,9 +2,7 @@ import React from 'react'
 import SubmissionTable from './submissionTable'
 
 import submissionParse from './stub/submission.js'
-import { Table, TableHead, TableRow } from '@material-ui/core'
-
-import Paginator from './paginationNavigator.js'
+import { Table, TableHead, TableRow, TablePagination } from '@material-ui/core'
 
 class Submissions extends React.Component {
     constructor(props) {
@@ -41,7 +39,7 @@ class Submissions extends React.Component {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <Paginator
+                            <TablePagination
                                 colSpan={6}
                                 rowsPerPage={this.state.rowsPerPage}
                                 count={this.state.listSize}
