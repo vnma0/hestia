@@ -11,7 +11,6 @@ import {
 
 import Submission from './submission.js'
 import DetailedSubmission from './submissionDetail/detailedSubmission'
-import Paginator from './paginationNavigator.js'
 
 /**
  * @name SubmissionTable
@@ -53,37 +52,9 @@ class SubmissionTable extends React.Component {
             reverseSort: true,
 
             details: undefined,
-            detailExtendedOpen: false,
+            detailExtendedOpen: false
         }
-        // Yeah, in order to support sorting
-        // and since props are immutable
-        // we mirror them to this.state and mutate it instead
-
-        // this.sortBy = this.sortBy.bind(this)
-
-        // just keep the sorting implementation here
-        // because for now it is pretty unneeded
     }
-
-    // sortBy(field) {
-    //         this.setState({
-    //             submissionList: this.state.submissionList.sort((a, b) => {
-    //                 let a1 = (field !== 'timestamp' ? a[field] : new Date(a['timestamp'])),
-    //                     b1 = (field !== 'timestamp' ? b[field] : new Date(b['timestamp']))
-
-    //                 if (a1 < b1) return -1
-    //                 if (a1 > b1) return 1
-    //                 return 0
-    //             }),
-	// 			reverseSort: !this.state.reverseSort
-    //         })
-    //     this.setState({
-    //         submissionList: this.state.reverseSort
-    //             ? this.state.submissionList.reverse()
-    //             : this.state.submissionList,
-    //     })
-    //     this.forceUpdate()
-    // }
 
     render() {
         return (
@@ -94,9 +65,6 @@ class SubmissionTable extends React.Component {
                             tableLayout: 'fixed',
                         }}>
                         <TableHead>
-                            <TableRow>
-                                <Paginator />
-                            </TableRow>
                             <TableRow>
                                 <TableCell>
                                     <TableSortLabel
