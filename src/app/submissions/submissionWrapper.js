@@ -74,7 +74,7 @@ class Submissions extends React.Component {
                                 {this.state.loading ? <CircularProgress size={20}/> : <></>}
                             </TableCell>
                             <Paginator colSpan={6}
-                                rowsPerPageOptions={[...Array(20).keys()].map(i => i + 1)}
+                                rowsPerPageOptions={[1, 2, 5, 10, 20, 50]}
                                 rowsPerPage={this.state.rowsPerPage} count={this.state.listSize}
                                 page={this.state.page}
                                 onChangePage={(event, page) => {

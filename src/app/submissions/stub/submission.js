@@ -1,4 +1,4 @@
-import { isUndefined } from "util";
+import { isNumber } from "util";
 
 /**
  * @name submissionParse
@@ -13,9 +13,9 @@ import { isUndefined } from "util";
 
 function constructURL(count, page, size) {
     let out = new URLSearchParams();
-    if (!isUndefined(count)) out.append(`count`, count);
-    if (!isUndefined(page)) out.append(`page`, page);
-    if (!isUndefined(size)) out.append(`size`, size);
+    if (isNumber(count)) out.append(`count`, count);
+    if (isNumber(page)) out.append(`page`, page);
+    if (isNumber(size)) out.append(`size`, size);
     return (out.toString() === '') ? '' : `?${out.toString()}`;
 }
 
