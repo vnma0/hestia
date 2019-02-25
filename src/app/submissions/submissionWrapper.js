@@ -2,28 +2,24 @@ import React from 'react'
 import SubmissionTable from './submissionTable'
 
 import submissionParse from './stub/submission.js'
-import {
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    CircularProgress,
-} from '@material-ui/core'
-
-import Paginator from './paginationNavigator.js'
+import { Table, TableHead, TableRow, TablePagination } from '@material-ui/core'
 
 class Submissions extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             submissions: [],
-            interval: undefined,
 
             rowsPerPage: 10,
             listSize: 0,
             page: 0,
         }
         this.update = this.update.bind(this)
+        this.update(
+            this.state.listSize,
+            this.state.page,
+            this.state.rowsPerPage
+        )
     }
 
     update = (listSize, page, rowsPerPage) => {
@@ -37,52 +33,34 @@ class Submissions extends React.Component {
         )
     }
 
-    componentDidMount() {
-        this.update(
-            this.state.listSize,
-            this.state.page,
-            this.state.rowsPerPage
-        )
-    }
-
     render() {
         return (
             <>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>
-                                {this.state.loading ? (
-                                    <CircularProgress size={20} />
-                                ) : (
-                                    <></>
-                                )}
-                            </TableCell>
-                            <Paginator
+                            <TablePagination
                                 colSpan={6}
-                                rowsPerPageOptions={[5, 10, 20, 100]}
                                 rowsPerPage={this.state.rowsPerPage}
                                 count={this.state.listSize}
                                 page={this.state.page}
                                 onChangePage={(event, page) => {
-                                    if (event !== null) {
-                                        this.update(
-                                            this.state.listSize,
-                                            page,
-                                            this.state.rowsPerPage
-                                        )
-                                    }
+                                    this.update(
+                                        this.state.listSize,
+                                        page,
+                                        this.state.rowsPerPage
+                                    )
                                 }}
                                 onChangeRowsPerPage={event => {
                                     const current =
                                         this.state.rowsPerPage * this.state.page
-                                    const ratio = Math.floor(
+                                    const newPage = Math.floor(
                                         current / Number(event.target.value)
                                     )
                                     // event.target.value is the key here
                                     this.update(
                                         this.state.listSize,
-                                        ratio,
+                                        newPage,
                                         event.target.value
                                     )
                                 }}
