@@ -24,7 +24,7 @@ function constructRequestBody(password, newPassword) {
  * @returns {Promise<Response>}
  */
 
-export default async function changePassword (userId = window.hestia.user.userId, 
+export default async function passwordChange (userId = window.hestia.user.userId, 
                                                 password, newPassword, func) {
     return fetch(`/api/users/${userId}`, {
         method: 'PUT',
