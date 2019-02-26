@@ -14,7 +14,7 @@ function constructRequestBody(password, newPassword) {
 }
 
 /**
- * @name changePassword
+ * @name passwordChange
  * @description Change password. Reload the page upon successful response.
  * @param {String} userId - user ID to change password
  * @param {String} password - old password
