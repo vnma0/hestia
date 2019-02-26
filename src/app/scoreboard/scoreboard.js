@@ -25,7 +25,7 @@ class Scoreboard extends React.Component {
     AddProblemToHead() {
         this.props.problem.map(problems => {
             this.props.header.push({ name: problems })
-            return
+            return undefined
         })
     }
     render() {
