@@ -68,8 +68,13 @@ class ResultTable extends React.Component {
                         <TableCell>Points awarded</TableCell>
                     </TableHead>
                     <TableBody>
-                        {this.props.tests.map(test => {
-                            return <AttestationSampleResult {...test} />
+                        {this.props.tests.map((test, idx) => {
+                            return (
+                                <AttestationSampleResult
+                                    key={`test-${idx}`}
+                                    {...test}
+                                />
+                            )
                         })}
                     </TableBody>
                 </Table>

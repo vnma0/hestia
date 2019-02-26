@@ -2,44 +2,75 @@ import React from 'react'
 import SubmissionTable from './submissionTable'
 
 import submissionParse from './stub/submission.js'
+import { Table, TableHead, TableRow, TablePagination } from '@material-ui/core'
 
 class Submissions extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             submissions: [],
-            interval: undefined,
+
+            rowsPerPage: 10,
+            listSize: 0,
+            page: 0,
         }
         this.update = this.update.bind(this)
-
-        window.hestia.updateSubmission = this.update
+        this.update(
+            this.state.listSize,
+            this.state.page,
+            this.state.rowsPerPage
+        )
     }
 
-    update = () => {
-        submissionParse(() => {
+    update = (listSize, page, rowsPerPage) => {
+        submissionParse(listSize, page, rowsPerPage).then(data =>
             this.setState({
-                submissions: window.hestia.submissions
+                submissions: data.submissions,
+                rowsPerPage: data.meta.pageSize,
+                listSize: data.meta.submissionsListSize,
+                page: data.meta.currentPageId,
             })
-        })
-    }
-
-    componentDidMount() {
-        submissionParse(() => {
-            this.setState({
-                interval: setInterval(this.update, 5000),
-                submissions: window.hestia.submissions
-            })
-        })
-    }
-
-    componentWillUnmount() {
-        submissionParse(() => {
-            clearInterval(this.state.interval)
-        })
+        )
     }
 
     render() {
-        return <SubmissionTable submissionList={this.state.submissions} />
+        return (
+            <>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TablePagination
+                                colSpan={6}
+                                rowsPerPage={this.state.rowsPerPage}
+                                count={this.state.listSize}
+                                page={this.state.page}
+                                onChangePage={(event, page) => {
+                                    this.update(
+                                        this.state.listSize,
+                                        page,
+                                        this.state.rowsPerPage
+                                    )
+                                }}
+                                onChangeRowsPerPage={event => {
+                                    const current =
+                                        this.state.rowsPerPage * this.state.page
+                                    const newPage = Math.floor(
+                                        current / Number(event.target.value)
+                                    )
+                                    // event.target.value is the key here
+                                    this.update(
+                                        this.state.listSize,
+                                        newPage,
+                                        event.target.value
+                                    )
+                                }}
+                            />
+                        </TableRow>
+                    </TableHead>
+                </Table>
+                <SubmissionTable submissionList={this.state.submissions} />
+            </>
+        )
     }
 }
 

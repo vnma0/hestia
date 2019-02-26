@@ -33,6 +33,7 @@ class Hestia extends React.Component {
             contest: {},
             submissions: [],
             problem: {},
+            meta: {}
         }
         this.state = {
             sidebarOpen: false,
