@@ -38,7 +38,7 @@ async function login(username, password, func) {
         )
             .then(res => {
                 window.hestia.user.loggedIn = res.ok
-                return res.text()
+                window.hestia.user.userId = res.json()['_id']
             })
             .then(() => (window.hestia.user.username = username))
             // set username
