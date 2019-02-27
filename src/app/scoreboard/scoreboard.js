@@ -18,29 +18,16 @@ import {
  * @returns {Table} Display current Score of contest
  */
 class Scoreboard extends React.Component {
-    /**
-     * @function AddProblemToHead
-     * @desc merge problem to header
-     */
-    AddProblemToHead() {
-        this.props.problem.map(problems => {
-            this.props.header.push({ name: problems })
-            return
-        })
-    }
     render() {
-        this.AddProblemToHead()
-        let head = this.props.header.map((cell) => {
-            return (
-                <TableCell key={cell.name}>
-                    {cell.name}
-                </TableCell>
-            )
-        })
+        let prob = this.props.problem.map(problems => ({ name: problems }))
+        let _head = this.props.header.concat(prob)
+        let head = _head.map(cell => (
+            <TableCell key={`Head_${cell.name}`}>{cell.name}</TableCell>
+        ))
         let body = this.props.data.map((row, index_row) => {
             return (
                 <TableRow key={`data_${index_row}`}>
-                    {this.props.header.map((cell, index_cell) => {
+                    {_head.map((cell, index_cell) => {
                         // if ()
                         return (
                             <TableCell key={`data_${index_row}_${index_cell}`}>
@@ -60,9 +47,7 @@ class Scoreboard extends React.Component {
         return (
             <Table>
                 <TableHead>
-                    <TableRow>
-                        {head}
-                    </TableRow>
+                    <TableRow>{head}</TableRow>
                 </TableHead>
                 <TableBody>{body}</TableBody>
             </Table>
