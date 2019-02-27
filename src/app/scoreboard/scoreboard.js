@@ -18,25 +18,9 @@ import {
  * @returns {Table} Display current Score of contest
  */
 class Scoreboard extends React.Component {
-    /**
-     * @function AddProblemToHead
-     * @desc merge problem to header
-     */
-    AddProblemToHead() {
-        this.props.problem.map(problems => {
-            this.props.header.push({ name: problems })
-            return undefined
-        })
-    }
     render() {
-        this.AddProblemToHead()
-        let head = this.props.header.map((cell) => {
-            return (
-                <TableCell key={cell.name}>
-                    {cell.name}
-                </TableCell>
-            )
-        })
+        this.props.header = this.props.problem.map((problems) => ({ name: problems }));
+        let head = this.props.header.map((cell) => (<TableCell key={cell.name}>{cell.name}</TableCell>))
         let body = this.props.data.map((row, index_row) => {
             return (
                 <TableRow key={`data_${index_row}`}>
