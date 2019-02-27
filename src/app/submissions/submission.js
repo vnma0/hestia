@@ -75,7 +75,7 @@ class Submission extends React.Component {
                     <TableCell>
                         {/* <TimestampSignature time={this.props.timestamp || "N/A"} /> */}
                         {/* table overflow; will fix later, I guess */}
-                        {this.props.timestamp || 'N/A'}
+                        {new Date(this.props.timestamp).toLocaleString() || 'N/A'}
                     </TableCell>
                 </TableRow>
             </>
