@@ -4,7 +4,7 @@ export default function timeAgo (date1, date2) {
     let from = dayjs(date1), to = dayjs(date2);
     let parsed = {};
     for (let field of ['year', 'month', 'day', 'hour', 'minute', 'second']) 
-        parsed[field] = Math.abs(from.diff(to, field))
+        parsed[field] = (to.diff(from, field))
 
     let out = '';
     if (parsed.year) out += `${parsed.year} YEAR`
