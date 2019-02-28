@@ -1,13 +1,13 @@
 var timeparts = [
-    { name: 'millenni', div: 31556736000, p: 'a', s: 'um' },
-    { name: 'centur', div: 3155673600, p: 'ies', s: 'y' },
-    { name: 'dec', div: 315567360 },
-    { name: 'yr', div: 31556736 },
-    { name: 'month', div: 2629728 },
-    { name: 'day', div: 86400 },
-    { name: 'hr', div: 3600 },
-    { name: 'min', div: 60 },
-    { name: 'sec', div: 1 },
+    // { name: 'mil', div: 31556736000, p: 'a', s: 'um' },
+    // { name: 'cent', div: 3155673600, p: 'ies', s: 'y' },
+    // { name: 'dec', div: 315567360 },
+    // { name: 'yr', div: 31556736 },
+    // { name: 'mo', div: 2629728 },
+    { name: 'd', div: 86400 },
+    { name: 'h', div: 3600 },
+    { name: 'm', div: 60 },
+    { name: 's', div: 1 },
 ]
 
 function timeAgo(comparisonDate1, comparisonDate2) {
@@ -21,17 +21,19 @@ function timeAgo(comparisonDate1, comparisonDate2) {
         interval = interval - value * timeparts[i].div
         if (value) {
             parts.push(
-                value +
-                    ' ' +
-                    timeparts[i].name +
-                    (value !== 1 ? timeparts[i].p || 's' : timeparts[i].s || '')
+                (value >= 10 ? value : '0' + String(value)) +
+                    '' +
+                    // timeparts[i].name +
+                    (value !== 1 ? timeparts[i].p || '' : timeparts[i].s || '')
             )
         }
     }
     if (parts.length === 0) {
         return '00:00:00'
     }
-    return parts.join(', ')
+    while (parts.length < 4)
+        parts.push('00');
+    return parts.join(':')
 }
 
 export default timeAgo

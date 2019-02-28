@@ -1,7 +1,7 @@
 // time remaining to contest end
 import React, { Component } from 'react'
 
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import AccessTime from '@material-ui/icons/AccessTime'
 
 /**
@@ -26,11 +26,13 @@ class CountdownClock extends Component {
                         ? {
                               color: 'white',
                               backgroundColor: 'black',
+							  fontWeight: 'normal'
                               // if contest is running, yellow background
                           }
                         : {
                               color: 'black',
                               backgroundColor: 'yellow',
+							  fontWeight: 'normal'
                               // else we just make it black
                           }
                 }
@@ -38,8 +40,7 @@ class CountdownClock extends Component {
             >
                 <AccessTime style={{ marginRight: '10px' }} />
                 {this.props.children
-                    ? this.props.children
-                    : this.props.timeLeft + ' / ' + this.props.duration}
+                    ? this.props.children : this.props.timeLeft + ' / ' + this.props.duration}
             </Button>
         )
     }
