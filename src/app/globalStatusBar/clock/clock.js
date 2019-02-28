@@ -1,7 +1,7 @@
 // time remaining to contest end
 import React, { Component } from 'react'
 
-import { Button, Typography } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import AccessTime from '@material-ui/icons/AccessTime'
 
 /**
