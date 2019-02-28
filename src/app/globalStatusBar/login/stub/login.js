@@ -1,3 +1,5 @@
+import verifyLogin from './credential.js'
+
 /**
  * @name constructRequestBody
  * @desc Create an URLSearchParam object suitable to be sent as log in request
@@ -38,10 +40,11 @@ async function login(username, password, func) {
         )
             .then(res => {
                 window.hestia.user.loggedIn = res.ok
-                window.hestia.user.userId = res.json()['_id']
             })
             .then(() => (window.hestia.user.username = username))
             // set username
+            .then(verifyLogin)
+            // get userId 
             .then(func)
     )
     // execute callback
