@@ -46,6 +46,7 @@ async function login(username, password, func) {
             .then(verifyLogin)
             // get userId 
             .then(func)
+            .catch(err => {})
     )
     // execute callback
 }
