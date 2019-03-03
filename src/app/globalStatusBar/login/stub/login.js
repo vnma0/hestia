@@ -49,7 +49,7 @@ async function login(username, password, func) {
                 if (typeof func === 'function')
                     func()
             })
-            .catch(err => {})
+            .catch(err => console.log(err))
     )
     // execute callback
 }
