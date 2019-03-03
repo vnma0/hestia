@@ -14,6 +14,10 @@ async function logout(func) {
             window.hestia.user = {}
         })
         .then(func)
+        .catch(() => {
+            if (typeof window.hestia.pushNotification === 'function')
+                window.hestia.pushNotification('Failed to log out')
+        })
 }
 
 export default logout
