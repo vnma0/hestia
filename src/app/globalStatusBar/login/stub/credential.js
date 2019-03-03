@@ -26,7 +26,10 @@ async function verifyLogin(func) {
                 console.log(err)
             }
         })
-        .then(func)
+        .then(() => {
+            if (typeof func === 'function')
+                func();
+        })
 }
 
 export default verifyLogin
