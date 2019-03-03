@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Send from '@material-ui/icons/Send'
+import BarChart from '@material-ui/icons/BarChart'
 
 /**
  * @name ScoreboardLauncher
@@ -12,7 +12,7 @@ class ScoreboardLauncher extends React.Component {
         return (
             <>
                 <ListItemIcon>
-                    <Send />
+                    <BarChart />
                 </ListItemIcon>
                 <ListItemText>Scoreboard</ListItemText>
             </>

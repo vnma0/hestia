@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Send from '@material-ui/icons/Send'
+import Description from '@material-ui/icons/Assignment'
 
 /**
  * @name ProblemLauncher
@@ -12,7 +12,7 @@ class ProblemLauncher extends React.Component {
         return (
             <>
                 <ListItemIcon>
-                    <Send />
+                    <Description />
                 </ListItemIcon>
                 <ListItemText>Problems</ListItemText>
             </>

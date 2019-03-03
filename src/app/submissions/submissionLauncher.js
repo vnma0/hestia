@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Send from '@material-ui/icons/Send'
+import DoneAll from '@material-ui/icons/CheckCircleOutline'
 
 /**
  * @name SubmissionLauncher
@@ -12,7 +12,7 @@ class SubmissionLauncher extends React.Component {
         return (
             <>
                 <ListItemIcon>
-                    <Send />
+                    <DoneAll />
                 </ListItemIcon>
                 <ListItemText>Submissions</ListItemText>
             </>
