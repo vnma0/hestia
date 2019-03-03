@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Send from '@material-ui/icons/Send'
+import Home from '@material-ui/icons/Home'
 
 /**
  * @name HomepageLauncher
@@ -12,7 +12,7 @@ class HomepageLauncher extends React.Component {
         return (
             <>
                 <ListItemIcon>
-                    <Send />
+                    <Home />
                 </ListItemIcon>
                 <ListItemText>Home</ListItemText>
             </>
