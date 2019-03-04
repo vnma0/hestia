@@ -7,7 +7,7 @@ export default function timeAgo (date1, date2) {
         parsed[field] = (to.diff(from, field))
 
     let out = '';
-    if (parsed.day % 30) out += `${parsed.day % 30}:`
+    if (parsed.day) out += `${parsed.day}:`
     out += `${padding(parsed.hour % (24))}:${padding(parsed.minute % 60)}:${padding(parsed.second % 60)}`
     return out;
 }
