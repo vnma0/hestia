@@ -62,16 +62,13 @@ class Hestia extends React.Component {
     contestTimeout() {
         let current = new Date()
         try {
-            if (
-                window.hestia.contest.time.end &&
-                window.hestia.contest.time.end < current
-            )
+            if (window.hestia.contest.time.end && window.hestia.contest.time.end < current)
                 return this.setState({
                     contestTimeLeft: 'Ended',
                     contestDuration: 'Ended',
                     contestEnded: true,
                 })
-            if (window.hestia.contest.time.start > current)
+            if (current < window.hestia.contest.time.start)
                 return this.setState({
                     contestTimeLeft: timeAgo(
                         current,
@@ -79,11 +76,11 @@ class Hestia extends React.Component {
                     ),
                     contestStarted: false
                 })
-            this.setState({
+            else this.setState({
                 contestTimeLeft: timeAgo(
-                    current,
-                    window.hestia.contest.time.end
+                    current, window.hestia.contest.time.end
                 ),
+                contestStarted: true
             })
         } catch (err) {
             return
