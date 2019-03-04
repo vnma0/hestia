@@ -10,7 +10,6 @@ async function publicParse(func) {
         `/api/info`
     )
         .then(res => res.json())
-        .catch(err => {})
         .then(responseBody => {
             window.hestia.contest = {
                 name: responseBody['name'],
