@@ -1,3 +1,5 @@
+import verifyLogin from './credential.js'
+
 /**
  * @name constructRequestBody
  * @desc Create an URLSearchParam object suitable to be sent as log in request
@@ -18,7 +20,7 @@ function constructRequestBody(username, password) {
  * @desc Log in function. On completion, window.hestia.loggedIn will have the result of the log in attempt
  * @param {String} username - Username
  * @param {String} password - Password
- * @param {Function} func - Function to call when window.hestia.updateLoginState returned.
+ * @param {Function} func - Function to call when the global object has been populated with usable value
  * @return {Promise} - a Promise that resolves to the return value of func()
  * @author minhducsun2002
  */
@@ -38,11 +40,16 @@ async function login(username, password, func) {
         )
             .then(res => {
                 window.hestia.user.loggedIn = res.ok
-                window.hestia.user.userId = res.json()['_id']
+                window.hestia.user.username = username
+                // set username
             })
-            .then(() => (window.hestia.user.username = username))
-            // set username
-            .then(func)
+            .then(verifyLogin)
+            // get userId 
+            .then(() => {
+                if (typeof func === 'function')
+                    func()
+            })
+            .catch(err => console.log(err))
     )
     // execute callback
 }
