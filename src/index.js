@@ -44,6 +44,7 @@ class Hestia extends React.Component {
             contestName: '',
             contestTimeLeft: '',
             contestDuration: '',
+            contestStarted: true,
             contestEnded: false,
 
             redirect: undefined,
@@ -76,6 +77,7 @@ class Hestia extends React.Component {
                         current,
                         window.hestia.contest.time.start
                     ),
+                    contestStarted: false
                 })
             this.setState({
                 contestTimeLeft: timeAgo(
@@ -156,6 +158,8 @@ class Hestia extends React.Component {
                     }}
                 />
                 <GlobalStatusBar
+                    started={this.state.contestStarted}
+                    ended={this.state.contestEnded}
                     contestName={this.state.contestName}
                     currentUser={this.state.username}
                     contestTimeLeft={this.state.contestTimeLeft}

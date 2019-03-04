@@ -7,11 +7,11 @@ export default function timeAgo (date1, date2) {
         parsed[field] = (to.diff(from, field))
 
     let out = '';
-    if (parsed.day % 30) out += `${parsed.day % (30)} DAY`
-    out += ` ${padding(parsed.hour % (24))}:${padding(parsed.minute % 60)}:${padding(parsed.second % 60)}`
+    if (parsed.day % 30) out += `${parsed.day % 30}:`
+    out += `${padding(parsed.hour % (24))}:${padding(parsed.minute % 60)}:${padding(parsed.second % 60)}`
     return out;
 }
 
 function padding (string) {
-    return (String(string).length < 2 ? '0' + String(string) : String(string))
+    return String(string).padStart(3 - String(string).length, '0')
 }
