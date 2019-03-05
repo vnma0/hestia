@@ -7,8 +7,7 @@
   "dependencies": {
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
-    "http-proxy": "^1.17.0",
-    "ip": "^1.1.5",
+    "dayjs": "^1.8.8",
     "mime": "^2.4.0",
     "react": "^16.6.3",
     "react-codemirror": "^1.0.0",
