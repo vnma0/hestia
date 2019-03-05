@@ -39,8 +39,8 @@ class CountdownClock extends Component {
                 disabled
             >
                 <AccessTime style={{ marginRight: '10px' }} />
-                {this.props.children
-                    ? this.props.children : this.props.timeLeft + ' / ' + this.props.duration}
+                {this.props.ended
+                    ? 'ENDED' : (this.props.children ? this.props.children : this.props.timeLeft + ' / ' + this.props.duration)}
             </Button>
         )
     }
