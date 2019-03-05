@@ -46,7 +46,7 @@ class GlobalStatusBar extends Component {
         if (this.props.loggedIn)
             // if logged in, show the clock, otherwise hide it
             return (
-                <CountdownClock ended={this.props.contestEnded}>
+                <CountdownClock ended={this.props.ended}>
                     {this.props.started
                         ? `${this.props.contestTimeLeft} / ${this.props.contestDuration}`
                         : `${this.props.contestTimeLeft} before start`}
