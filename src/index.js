@@ -29,21 +29,20 @@ class Hestia extends React.Component {
     constructor(props) {
         super(props)
         window.hestia = {
-            user: {},
-            contest: {},
-            submissions: [],
-            problem: {},
-            meta: {}
+            contest: {}
         }
         this.state = {
             sidebarOpen: false,
             currentPage: 'front',
-            loggedIn: false,
-            username: '',
+            user: {
+                loggedIn: false,
+                username: '',
+                id: ''
+            },
 
             contestName: '',
             contestTimeLeft: '',
-            contestDuration: '',
+            contestTimeStart: new Date(), contestTimeEnd: new Date(),
             contestStarted: true,
             contestEnded: false,
 
@@ -52,50 +51,48 @@ class Hestia extends React.Component {
             notifyMessage: undefined,
             open: false,
         }
-        this.updateState = this.updateState.bind(this)
         this.contestTimeout = this.contestTimeout.bind(this)
+        
         this.notify = this.notify.bind(this)
         window.hestia.pushNotification = this.notify
-        window.hestia.updateState = this.updateState
     }
 
     contestTimeout() {
         let current = new Date()
-        try {
-            if (window.hestia.contest.time.end && window.hestia.contest.time.end < current)
-                return this.setState({
-                    contestTimeLeft: 'Ended',
-                    contestDuration: 'Ended',
-                    contestEnded: true,
-                })
-            if (current < window.hestia.contest.time.start)
-                return this.setState({
-                    contestTimeLeft: timeAgo(
-                        current,
-                        window.hestia.contest.time.start
-                    ),
-                    contestStarted: false
-                })
-            else this.setState({
-                contestTimeLeft: timeAgo(
-                    current, window.hestia.contest.time.end
-                ),
-                contestStarted: true
+        if (this.state.contestTimeStart && this.state.contestTimeEnd < current)
+        // contest already ended
+            return this.setState({
+                contestEnded: true
             })
-        } catch (err) {
-            return
-        }
+        if (current < this.state.contestTimeStart)
+        // contest is not started
+            return this.setState({
+                contestTimeLeft: timeAgo(current, this.state.contestTimeStart),
+                contestStarted: false
+            })
+        // contest is in progress
+        else this.setState({
+            contestTimeLeft: timeAgo(current, this.state.contestTimeEnd),
+            contestStarted: true
+        })
     }
 
     componentWillMount() {
-        publicParse(this.updateState)
-        verifyLogin(() => {
+        publicParse().then((data) => {
             this.setState({
-                loggedIn: window.hestia.user.loggedIn,
-                username: window.hestia.user.username,
+                contestName: data.name,
+                contestTimeStart: data.time.start,
+                contestTimeEnd: data.time.end
             })
+        })
+        verifyLogin().then((data) => {
             this.setState({
-                clockInterval: setInterval(this.contestTimeout, 1000),
+                user: {
+                    loggedIn: data.ok,
+                    username: data.username,
+                    id: data.id
+                },
+                clockInterval: setInterval(this.contestTimeout, 1000)
             })
         })
     }
@@ -108,26 +105,11 @@ class Hestia extends React.Component {
         })
     }
 
-    updateState() {
-        this.setState({
-            loggedIn: window.hestia.user.loggedIn,
-            username: window.hestia.user.username,
-
-            contestName: window.hestia.contest.name,
-            contestDuration: timeAgo(
-                window.hestia.contest.time.start,
-                window.hestia.contest.time.end
-            ),
-        })
-        this.contestTimeout()
-    }
-
     notify(message) {
         this.setState({
             message: message,
             open: true,
         })
-        // setTimeout(() => this.setState({ message : undefined, open: false }), 3000)
     }
 
     render() {
@@ -155,13 +137,13 @@ class Hestia extends React.Component {
                     }}
                 />
                 <GlobalStatusBar
+                    currentUser={this.state.user.username}
+                    loggedIn={this.state.user.loggedIn}
                     started={this.state.contestStarted}
                     ended={this.state.contestEnded}
                     contestName={this.state.contestName}
-                    currentUser={this.state.username}
                     contestTimeLeft={this.state.contestTimeLeft}
-                    contestDuration={this.state.contestDuration}
-                    loggedIn={this.state.loggedIn}
+                    contestDuration={timeAgo(this.state.contestTimeStart, this.state.contestTimeEnd)}
                     menuOpen={() =>
                         this.setState({
                             sidebarOpen: true,
