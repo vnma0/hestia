@@ -59,7 +59,7 @@ class GlobalStatusBar extends Component {
         return (
             <LoginDialog
                 open={
-                    this.state.loginDialogOpen && !window.hestia.user.loggedIn
+                    this.state.loginDialogOpen && !this.state.loggedIn
                 }
                 // don't open if logged in
                 onClose={this.closeLoginDialog}

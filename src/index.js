@@ -28,9 +28,7 @@ import timeAgo from './external/timeAgo.js'
 class Hestia extends React.Component {
     constructor(props) {
         super(props)
-        window.hestia = {
-            contest: {}
-        }
+        window.hestia = {}
         this.state = {
             sidebarOpen: false,
             currentPage: 'front',
