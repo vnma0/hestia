@@ -10,14 +10,14 @@ async function publicParse() {
     )
         .then(res => res.json())
         .then(responseBody => ({
-            name: responseBody['name'],
+            name: String(responseBody['name']),
             time: {
                 start: new Date(responseBody['startTime']),
                 end: new Date(responseBody['endTime']),
             },
-            problemList: responseBody['probList'],
+            problems: responseBody['probList'],
             ext: responseBody['allowedCodeExt'] || ['.cpp', '.py', '.java'],
-            mode: responseBody['mode']
+            mode: String(responseBody['mode'])
         }))
         .catch(() => {
             if (typeof window.hestia.pushNotification === 'function')
@@ -28,7 +28,7 @@ async function publicParse() {
                     start: new Date(),
                     end: new Date()
                 },
-                problemList: [],
+                problems: [],
                 ext: ['null'],
                 mode: 'OI'
             })

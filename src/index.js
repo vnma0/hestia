@@ -10,7 +10,7 @@ import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js'
 import Homepage from './app/home/homepage.js'
 import Submission from './app/submissions/submissionWrapper.js'
-import ProblemList from './app/problemList/problemList.js'
+import ProblemWrapper from './app/problemList/problemWrapper.js'
 import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
 import Notify from './app/notifier/notify.js'
 import { slideIn } from './app/globalStatusBar/lib/libTransition.js'
@@ -90,16 +90,8 @@ class Hestia extends React.Component {
                     username: data.username,
                     id: data.id
                 },
-                clockInterval: setInterval(this.contestTimeout, 1000)
-            })
-        })
-    }
-
-
-    componentWillUnmount() {
-        clearInterval(this.state.clockInterval);
-        this.setState({
-            redirect: undefined
+            });
+            setInterval(this.contestTimeout, 1000)
         })
     }
 
@@ -193,7 +185,7 @@ class Hestia extends React.Component {
                             ]}
                         />
                         <Route path="/submissions" component={Submission} />
-                        <Route path="/problems" component={ProblemList} />
+                        <Route path="/problems" component={ProblemWrapper} />
                         <Route path="/scoreboard" component={ScoreboardWrapper} />
                         <Route path="/" component={Homepage} />
                     </div>

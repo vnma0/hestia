@@ -81,11 +81,12 @@ class CodeBox extends React.Component {
                                 <SubmitButton
                                     disabled={
                                         this.state.code === '' ||
-                                        this.state.currentLangId === null
+                                        this.state.currentLangId === null ||
+                                        this.props.ext.size === 0
                                     }
                                     fileName={this.props.submitFileName}
                                     code={this.state.code}
-                                    ext={this.props.ext[this.state.currentLangId]}
+                                    ext={this.props.ext[this.state.currentLangId] || ''}
                                     onSubmit={() => 
                                         this.setState({
                                             submitting: true
