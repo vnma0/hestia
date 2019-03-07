@@ -17,6 +17,7 @@ import logout from './userSetting/stub/logout.js'
  * @description Global sticky status bar at the top of the screen
  * @param {Object <Date, Date>} `contestTime` - Object containing two properties, `start` and `end` representing start & end time
  * @param {String} currentUser currently logged in user
+ * @param {String} currentUserId currently logged in user ID
  * @param {boolean} loggedIn true if user has logged in, otherwise false
  * @param {function} menuOpen function to open the menu/sidenav/etc.. (called upon menu button click)
  * @author minhducsun2002
@@ -64,6 +65,7 @@ class GlobalStatusBar extends Component {
     renderUserSettingDialog() {
         return (
             <UserSettingDialog
+                userId={this.props.currentUserId}
                 user={this.props.currentUser}
                 open={this.state.userSettingDialogOpen}
                 onClose={this.closeUserSettingDialog}

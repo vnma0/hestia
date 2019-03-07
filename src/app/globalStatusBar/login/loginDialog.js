@@ -17,6 +17,7 @@ import Lock from '@material-ui/icons/Lock'
 import { fade } from '../lib/libTransition.js'
 
 import login from './stub/login.js'
+import { pushNotification } from '../../notifier/notify.js'
 
 /**
  * @name LoginDialog
@@ -157,8 +158,8 @@ class LoginDialog extends Component {
                                     })
                                     if (success) window.location.reload();
                                         else 
-                                    if (typeof window.hestia.pushNotification === 'function')
-                                        window.hestia.pushNotification('Failed to log in.')
+                                    if (typeof pushNotification === 'function')
+                                        pushNotification('Failed to log in.')
                                 })
                             // if login finished, hide the loading circle
                             this.setState({

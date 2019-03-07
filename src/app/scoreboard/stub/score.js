@@ -1,11 +1,12 @@
+import { pushNotification } from '../../notifier/notify.js'
+
 /**
  * @name parseScore
  * @desc `fetch()` scoreboard
- * @param {Function} func - Function to call when window.hestia.contest.scoreboard has been updated
- * @returns {Promise} a `fetch()` `Promise`
+ * @returns {Promise<Response>} a `fetch()` `Promise`
  */
 
-async function parseScore(func) {
+async function parseScore() {
     return fetch(
         `/api/score`
     )
@@ -19,8 +20,8 @@ async function parseScore(func) {
             }))
         })
         .catch((err) => {
-            if (typeof window.hestia.pushNotification === 'function')
-                window.hestia.pushNotification('Failed to load scoreboard')
+            if (typeof pushNotification === 'function')
+                pushNotification('Failed to load scoreboard')
             if (process.env.NODE_ENV === 'development')
                 console.log(err)
             return []

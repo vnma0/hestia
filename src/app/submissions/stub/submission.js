@@ -1,4 +1,5 @@
 import { isNumber } from 'util'
+import { pushNotification } from '../../notifier/notify.js'
 
 /**
  * @name submissionParse
@@ -51,8 +52,8 @@ export default async function submissionParse(count, page, size) {
             }
         })
         .catch(() => {
-            if (typeof window.hestia.pushNotification === 'function')
-                window.hestia.pushNotification(
+            if (typeof pushNotification === 'function')
+                pushNotification(
                     'Failed to fetch submission board'
                 )
             return {

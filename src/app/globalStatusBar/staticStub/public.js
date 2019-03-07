@@ -1,3 +1,5 @@
+import { pushNotification } from '../../notifier/notify.js'
+
 /**
  * @name publicParse
  * @desc Parse contest public information
@@ -20,8 +22,8 @@ async function publicParse() {
             mode: String(responseBody['mode'])
         }))
         .catch(() => {
-            if (typeof window.hestia.pushNotification === 'function')
-                window.hestia.pushNotification('Failed to fetch data')
+            if (typeof pushNotification === 'function')
+                pushNotification('Failed to fetch data')
             return ({
                 name: '',
                 time: {

@@ -1,3 +1,5 @@
+import { pushNotification } from '../../../notifier/notify.js'
+
 /**
  * @name constructData
  * @param {String} code
@@ -42,8 +44,8 @@ async function submit(code, filename, ext, func) {
         }
     )
         .then(res => {
-            if (typeof window.hestia.pushNotification === "function")
-                window.hestia.pushNotification(
+            if (typeof pushNotification === "function")
+                pushNotification(
                     (res.ok ? 
                         `Successfully submitted solution` :
                         `Failure during submission : ${res.statusText}`)
@@ -52,8 +54,8 @@ async function submit(code, filename, ext, func) {
         })
         .then(func)
         .catch(() => {
-            if (typeof window.hestia.pushNotification === 'function')
-                window.hestia.pushNotification(
+            if (typeof pushNotification === 'function')
+                pushNotification(
                     'Failed to submit. It seems like a transmission error...'
                 )
         })

@@ -1,3 +1,5 @@
+import { pushNotification } from '../../../notifier/notify.js'
+
 /**
  * @name constructRequestBody
  * @desc Create an URLSearchParam object suitable to be sent as log in request
@@ -38,8 +40,8 @@ async function login(username, password) {
         )
             .then(res => res.ok)
             .catch(err => {
-                if (typeof window.hestia.pushNotification === 'function')
-                    window.hestia.pushNotification('Failed to log in.')
+                if (typeof pushNotification === 'function')
+                    pushNotification('Failed to log in.')
                 if (process.env.NODE_ENV === 'development')
                     console.log(err);
                 return false;

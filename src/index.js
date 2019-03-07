@@ -4,7 +4,6 @@ import './index.css'
 import 'typeface-roboto'
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import { isUndefined } from 'util'
 
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js'
@@ -26,7 +25,6 @@ import publicParse from './app/globalStatusBar/staticStub/public.js'
 class Hestia extends React.Component {
     constructor(props) {
         super(props)
-        window.hestia = {}
         this.state = {
             sidebarOpen: false,
             currentPage: 'front',
@@ -44,12 +42,7 @@ class Hestia extends React.Component {
 
             redirect: undefined,
 
-            notifyMessage: undefined,
-            open: false,
         }
-        
-        this.notify = this.notify.bind(this)
-        window.hestia.pushNotification = this.notify
     }
 
     componentWillMount() {
@@ -70,13 +63,6 @@ class Hestia extends React.Component {
         })
     }
 
-    notify(message) {
-        this.setState({
-            message: message,
-            open: true,
-        })
-    }
-
     render() {
         if (this.state.redirect) {
             let out = <Router forceRefresh>{this.state.redirect}</Router>
@@ -85,11 +71,6 @@ class Hestia extends React.Component {
         return (
             <>
                 <Notify
-                    open={this.state.open && !isUndefined(this.state.message)}
-                    onClose={() =>
-                        this.setState({ open: false, message: undefined })
-                    }
-                    message={this.state.message}
                     autoHideDuration={1000}
                     TransitionComponent={props => slideIn(props, 'left')}
                     transitionDuration={{
@@ -103,6 +84,7 @@ class Hestia extends React.Component {
                 />
                 <GlobalStatusBar
                     currentUser={this.state.user.username}
+                    currentUserId={this.state.user.id}
                     loggedIn={this.state.user.loggedIn}
                     contestName={this.state.contestName}
                     contestTime={this.state.contestTime}

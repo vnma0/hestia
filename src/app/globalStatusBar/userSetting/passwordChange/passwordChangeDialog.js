@@ -70,7 +70,7 @@ class PasswordChangeDialog extends Component {
     }
 
     changePassword() {
-        passwordChange(window.hestia.user.userId,
+        passwordChange(this.props.userId,
             this.state.oldKey, this.state.newKey)
     }
 
