@@ -15,13 +15,10 @@ import logout from './userSetting/stub/logout.js'
 /**
  * @name GlobalStatusBar
  * @description Global sticky status bar at the top of the screen
- * @param {String} contestTimeLeft time left for current contest
- * @param {String} contestDuration duration of current contest
+ * @param {Object <Date, Date>} `contestTime` - Object containing two properties, `start` and `end` representing start & end time
  * @param {String} currentUser currently logged in user
  * @param {boolean} loggedIn true if user has logged in, otherwise false
  * @param {function} menuOpen function to open the menu/sidenav/etc.. (called upon menu button click)
- * @param {Boolean} started whether contest start
- * @param {Boolean} ended whether contest ended
  * @author minhducsun2002
  */
 
@@ -46,10 +43,7 @@ class GlobalStatusBar extends Component {
         if (this.props.loggedIn)
             // if logged in, show the clock, otherwise hide it
             return (
-                <CountdownClock ended={this.props.ended}>
-                    {this.props.started
-                        ? `${this.props.contestTimeLeft} / ${this.props.contestDuration}`
-                        : `${this.props.contestTimeLeft} before start`}
+                <CountdownClock time={this.props.contestTime}>
                 </ CountdownClock>
             )
         else return <></>

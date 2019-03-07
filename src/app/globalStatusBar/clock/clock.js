@@ -4,25 +4,42 @@ import React, { Component } from 'react'
 import { Button } from '@material-ui/core'
 import AccessTime from '@material-ui/icons/AccessTime'
 
+import timeAgo from '../../../external/timeAgo.js';
+
 /**
  * @name CountdownClock
  * @description A simple clock that shows time left and the duration of the contest
- * @property {string} timeLeft : time left until the end of the contest
- * @property {string} duration : time allocated for the whole contest
- * @property {Boolean} ended : whether contest stopped
- * @returns {React.Component} : a @material-ui/core/Button that shows the current time
- *                              or (in case supplied) content passed as children.
- *                              If both are supplied, only the children components get rendered.
- * @example <CountdownClock timeLeft="00:00:01" duration="23:59:59" />
+ * @param {Object <Date, Date>} `time` - Object containing two properties, `start` and `end` representing start & end time
  * @author minhducsun2002
  */
 
 class CountdownClock extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            current : timeAgo(new Date(), this.props.time.end),
+            duration : timeAgo(this.props.time.start, this.props.time.end),
+            started : new Date() > this.props.time.start,
+            ended : this.props.time.end < new Date()
+        }
+    }
+
+    componentDidMount() {
+        setInterval(() => {
+            this.setState({
+                current : timeAgo(new Date(), this.props.time.end),
+                duration : timeAgo(this.props.time.start, this.props.time.end),
+                started : new Date() > this.props.time.start,
+                ended : this.props.time.end < new Date()
+            })
+        }, 1000)
+    }
+
     render() {
         return (
             <Button
                 style={
-                    this.props.ended
+                    this.state.ended
                         ? {
                               color: 'white',
                               backgroundColor: 'black',
@@ -39,8 +56,10 @@ class CountdownClock extends Component {
                 disabled
             >
                 <AccessTime style={{ marginRight: '10px' }} />
-                {this.props.ended
-                    ? 'ENDED' : (this.props.children ? this.props.children : this.props.timeLeft + ' / ' + this.props.duration)}
+                {this.state.ended
+                    ? 'ENDED' : (this.props.started 
+                        ? `${this.state.current} / ${this.state.duration}`
+                        : `${timeAgo(new Date(), this.props.time.start)} BEFORE START`)}
             </Button>
         )
     }
