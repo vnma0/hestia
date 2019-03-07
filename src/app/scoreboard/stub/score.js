@@ -1,5 +1,3 @@
-import { isUndefined } from 'util'
-
 /**
  * @name parseScore
  * @desc `fetch()` scoreboard
@@ -11,35 +9,21 @@ async function parseScore(func) {
     return fetch(
         `/api/score`
     )
-        .then(res => {
-            if (res.status === 304)
-                // no change required; return nothing
-                return
-            else return res.json()
-        })
+        .then(res => res.json())
         .then(responseBody => {
-            if (isUndefined(responseBody))
-                // responseBody will be `undefined` if
-                // 304 status received
-                return
-
-            window.hestia.contest.scoreboard = []
-            // overwriting data each time we `fetch()`
-
-            responseBody.map(record => ({
+            return responseBody.map(record => ({
                 name: record.name,
                 result: record.result,
                 aced: record.aced,
                 score: record.score,
             }))
-            window.hestia.contest.scoreboard = responseBody
         })
-        .then(() => {
-            if (typeof func === 'function') func()
-        })
-        .catch(() => {
+        .catch((err) => {
             if (typeof window.hestia.pushNotification === 'function')
                 window.hestia.pushNotification('Failed to load scoreboard')
+            if (process.env.NODE_ENV === 'development')
+                console.log(err)
+            return []
         })
 }
 

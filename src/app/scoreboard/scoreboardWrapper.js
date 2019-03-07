@@ -2,54 +2,34 @@ import React from 'react'
 import Scoreboard from './scoreboard.js'
 
 import score from './stub/score.js'
+import publicParse from '../globalStatusBar/staticStub/public.js';
 
 class ScoreboardWrapper extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            scoreboard: [],
-            problem: [],
+            result: [],
+            problems: [],
 
             interval: undefined,
         }
+        this.update = this.update.bind(this)
     }
 
     componentDidMount() {
-        score(() => {
-            clearInterval(this.state.interval)
+        publicParse().then((data) => {
             this.setState({
-                interval: setInterval(this.update, 30000),
+                problems: data.problems,
             })
-            this.update()
         })
-    }
-
-    componentWillUnmount() {
-        score(() => {
-            clearInterval(this.state.interval)
-        })
+        this.update()
+        setInterval(this.update, 30000)
     }
 
     update() {
-        score(() => {
-            let b = window.hestia.contest.scoreboard.map(record => {
-                let a = record.result
-                for (let key in record.result) {
-                    if (record.result[key].pri === null)
-                        record.result[key].pri = '∅'
-                    record.result[key] = record.result[key].pri
-                }
-                a = Object.assign(a, {
-                    Name: record.name,
-                    'Stat #1': Number(record.score),
-                    'Stat #2': record.aced,
-                })
-                return a
-            })
-
+        score().then((data) => {
             this.setState({
-                scoreboard: b,
-                problem: window.hestia.contest.problemList,
+                result: data
             })
         })
     }
@@ -61,15 +41,7 @@ class ScoreboardWrapper extends React.Component {
                     overflowX: 'auto',
                 }}
             >
-                <Scoreboard
-                    problem={this.state.problem}
-                    data={this.state.scoreboard}
-                    header={[
-                        { name: 'Name' },
-                        { name: 'Stat #1' },
-                        { name: 'Stat #2' },
-                    ]}
-                />
+                <Scoreboard problems={this.state.problems} results={this.state.result}/>
             </div>
         )
     }
