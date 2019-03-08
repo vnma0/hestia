@@ -57,8 +57,8 @@ class CountdownClock extends Component {
             >
                 <AccessTime style={{ marginRight: '10px' }} />
                 {this.state.ended
-                    ? 'ENDED' : (this.props.started 
-                        ? `${this.state.current} / ${this.state.duration}`
+                    ? 'ENDED' : (this.state.started 
+                        ? `TIME LEFT : ${this.state.current} / ${this.state.duration}`
                         : `${timeAgo(new Date(), this.props.time.start)} BEFORE START`)}
             </Button>
         )
