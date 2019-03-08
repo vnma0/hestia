@@ -10,11 +10,10 @@ async function logout() {
     return fetch(
         `/api/logout`
     )
-        .then(window.location.reload)
-        .catch(() => {
-            if (typeof pushNotification === 'function')
-                pushNotification('Failed to log out')
-        })
+    .catch(() => {
+        if (typeof pushNotification === 'function')
+            pushNotification('Failed to log out')
+    })
 }
 
 export default logout

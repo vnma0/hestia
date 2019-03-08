@@ -156,9 +156,7 @@ class GlobalStatusBar extends Component {
                     open={this.state.userMenuOpen}
                     onClose={this.closeUserMenu}
                     showProfileAction={this.openUserSettingDialog}
-                    logoutAction={() =>
-                        logout(() => window.location.reload(true))
-                    }
+                    logoutAction={() => logout().then(() => window.location.reload(true))}
                 />
             </>
         )
