@@ -1,31 +1,39 @@
+import { pushNotification } from '../../notifier/notify.js'
+
 /**
  * @name publicParse
  * @desc Parse contest public information
- * @param {Function} func - Function to execute after the promise resolves.
  * @author minhducsun2002
  */
 
-async function publicParse(func) {
+async function publicParse() {
     return fetch(
         `/api/info`
     )
         .then(res => res.json())
-        .then(responseBody => {
-            window.hestia.contest = {
-                name: responseBody['name'],
-                time: {
-                    start: new Date(responseBody['startTime']),
-                    end: new Date(responseBody['endTime']),
-                },
-                problemList: responseBody['probList'],
-                ext: responseBody['allowedCodeExt'] || ['.cpp', '.py', '.java'],
-                mode: responseBody['mode'],
-            }
-        })
-        .then(func)
+        .then(responseBody => ({
+            name: String(responseBody['name']),
+            time: {
+                start: new Date(responseBody['startTime']),
+                end: new Date(responseBody['endTime']),
+            },
+            problems: responseBody['probList'],
+            ext: responseBody['allowedCodeExt'] || ['.cpp', '.py', '.java'],
+            mode: String(responseBody['mode'])
+        }))
         .catch(() => {
-            if (typeof window.hestia.pushNotification === 'function')
-                window.hestia.pushNotification('Failed to fetch data')
+            if (typeof pushNotification === 'function')
+                pushNotification('Failed to fetch data')
+            return ({
+                name: '',
+                time: {
+                    start: new Date(),
+                    end: new Date()
+                },
+                problems: [],
+                ext: ['null'],
+                mode: 'OI'
+            })
         })
 }
 

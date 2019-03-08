@@ -1,4 +1,4 @@
-import verifyLogin from './credential.js'
+import { pushNotification } from '../../../notifier/notify.js'
 
 /**
  * @name constructRequestBody
@@ -17,7 +17,7 @@ function constructRequestBody(username, password) {
 
 /**
  * @name login
- * @desc Log in function. On completion, window.hestia.loggedIn will have the result of the log in attempt
+ * @desc Log in function. On completion, the page will get reloaded if successful
  * @param {String} username - Username
  * @param {String} password - Password
  * @param {Function} func - Function to call when the global object has been populated with usable value
@@ -25,7 +25,7 @@ function constructRequestBody(username, password) {
  * @author minhducsun2002
  */
 
-async function login(username, password, func) {
+async function login(username, password) {
     return (
         fetch(
             `/api/login`,
@@ -38,20 +38,15 @@ async function login(username, password, func) {
                 mode: 'cors',
             }
         )
-            .then(res => {
-                window.hestia.user.loggedIn = res.ok
-                window.hestia.user.username = username
-                // set username
+            .then(res => res.ok)
+            .catch(err => {
+                if (typeof pushNotification === 'function')
+                    pushNotification('Failed to log in.')
+                if (process.env.NODE_ENV === 'development')
+                    console.log(err);
+                return false;
             })
-            .then(verifyLogin)
-            // get userId 
-            .then(() => {
-                if (typeof func === 'function')
-                    func()
-            })
-            .catch(err => console.log(err))
     )
-    // execute callback
 }
 
 export default login

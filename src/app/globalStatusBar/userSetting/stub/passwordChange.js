@@ -1,3 +1,5 @@
+import { pushNotification } from '../../../notifier/notify.js'
+
 /**
  * @name constructRequestBody
  * @description Create an `URLSearchParams` object suitable for sending as credential changing request
@@ -24,7 +26,7 @@ function constructRequestBody(password, newPassword) {
  * @returns {Promise<Response>}
  */
 
-export default async function passwordChange (userId = window.hestia.user.userId, 
+export default async function passwordChange (userId, 
                                                 password, newPassword, func) {
     return fetch(`/api/users/${userId}/password`, {
         method: 'PUT',
@@ -44,8 +46,8 @@ export default async function passwordChange (userId = window.hestia.user.userId
         if (typeof func === 'function')
             func(okay);
     }).catch(err => {
-        if (typeof window.hestia.pushNotification === 'function')
-            window.hestia.pushNotification(
+        if (typeof pushNotification === 'function')
+            pushNotification(
                 'Failed to change your password'
             )
     })

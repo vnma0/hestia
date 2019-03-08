@@ -22,7 +22,7 @@ function TabContainer(props) {
     )
 }
 
-class ProblemTab extends React.Component {
+class ProblemTab extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
@@ -46,14 +46,13 @@ class ProblemTab extends React.Component {
                         scrollable
                         scrollButtons="auto"
                     >
-                        {this.props.problem.map((x,index) => (
+                        {this.props.problems.map((x,index) => (
                             <Tab label={x} key={index}/>
                         ))}
                     </Tabs>
                     <TabContainer>
-                        {this.props.problem[this.props.value]
-                            ? this.props.problem[this.props.value].statement
-                            : ''}
+                        {this.props.problems[this.props.value]
+                            ? this.props.problems[this.props.value].statement : ''}
                     </TabContainer>
                 </AppBar>
             </div>

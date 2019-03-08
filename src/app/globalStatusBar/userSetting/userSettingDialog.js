@@ -91,7 +91,7 @@ class UserSettingDialog extends Component {
                 <PasswordChangeDialog
                     open={this.state.pwdChangeDialogOpen}
                     slideDirection="left"
-                    user={this.props.user}
+                    userId={this.props.userId}
                     onClose={() =>
                         this.setState({
                             pwdChangeDialogOpen: false,

@@ -32,17 +32,13 @@ class SubmitButton extends React.Component {
                 onClick={() => {
                     this.setState({ submitting: true })
                     this.props.onSubmit();
-                    submit(
-                        this.props.code,
-                        this.props.fileName,
-                        this.props.ext,
-                        () => {
-                            this.props.onSubmitDone();
-                            this.setState({
-                                submitting: false,
-                            })
-                        }
-                    )
+                    submit(this.props.code, this.props.fileName, this.props.ext)
+                    .then(() => {
+                        this.props.onSubmitDone();
+                        this.setState({
+                            submitting: false,
+                        })
+                    })
                 }}
             >
                 {this.state.submitting ? (

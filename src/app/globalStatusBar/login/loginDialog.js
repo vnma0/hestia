@@ -17,6 +17,7 @@ import Lock from '@material-ui/icons/Lock'
 import { fade } from '../lib/libTransition.js'
 
 import login from './stub/login.js'
+import { pushNotification } from '../../notifier/notify.js'
 
 /**
  * @name LoginDialog
@@ -150,21 +151,19 @@ class LoginDialog extends Component {
                     <Button
                         disabled={this.state.loginInProgress}
                         onClick={() => {
-                            login(this.state.id, this.state.passkey, () => {
-                                this.setState({
-                                    loginInProgress: false,
-                                    errorLogin: !window.hestia.user.loggedIn,
+                            login(this.state.id, this.state.passkey)
+                                .then((success) => {
+                                    this.setState({
+                                        loginInProgress: false,
+                                    })
+                                    if (success) window.location.reload();
+                                        else 
+                                    if (typeof pushNotification === 'function')
+                                        pushNotification('Failed to log in.')
                                 })
-                                window.hestia.updateState()
-                                if (!window.hestia.user.loggedIn)
-                                    window.hestia.pushNotification(
-                                        'Failed to log in'
-                                    )
-                                this.forceUpdate()
-                            })
                             // if login finished, hide the loading circle
                             this.setState({
-                                loginInProgress: true,
+                                loginInProgress: true
                             })
                         }}
                         ref={this.state.loginInvokerRef}

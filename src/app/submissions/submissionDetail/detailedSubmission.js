@@ -26,12 +26,33 @@ import VerdictSignature from '../signature/verdictSignature'
  * @returns {React.Component} A `<Dialog />` component
  */
 
+export let toggleDetailedSubmission;
+
 class DetailedSubmission extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open : false,
+            details: {}
+        }
+
+        toggleDetailedSubmission = this.toggle = this.toggle.bind(this);
+    }
+
+    toggle(props) {
+        this.setState({
+            open: !this.state.open,
+            details: props
+        })
+    }
+
     render() {
         return (
             <Drawer
                 anchor="right"
                 {...this.props}
+                open={this.state.open}
+                onClose={this.toggle}
                 PaperProps={{
                     style: { margin: 0, overflowX: 'hidden' },
                 }}
@@ -39,8 +60,8 @@ class DetailedSubmission extends React.Component {
                 <Paper>
                     <CardHeader
                         avatar={<AccountCircle />}
-                        title={this.props.contestant}
-                        subheader={'Submitted : ' + this.props.timestamp}
+                        title={this.state.details.contestant}
+                        subheader={'Submitted : ' + this.state.details.timestamp}
                         action={
                             <>
                                 <IconButton
@@ -52,11 +73,11 @@ class DetailedSubmission extends React.Component {
                                     }}
                                 >
                                     <VerdictSignature
-                                        verdict={this.props.verdict}
+                                        verdict={this.state.details.verdict}
                                         reversed iconOnly
                                     />
                                 </IconButton>
-                                <IconButton onClick={this.props.onClose}>
+                                <IconButton onClick={this.state.details.onClose}>
                                     <ExitToApp />
                                 </IconButton>
                             </>
@@ -74,16 +95,16 @@ class DetailedSubmission extends React.Component {
                         <TableBody>
                             <TableRow>
                                 <TableCell>
-                                    {this.props.language || 'N/A'}
+                                    {this.state.details.language || 'N/A'}
                                 </TableCell>
                                 <TableCell>
-                                    {this.props.problem || 'N/A'}
+                                    {this.state.details.problem || 'N/A'}
                                 </TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
                     <Divider />
-                    <ResultTable tests={this.props.tests} />
+                    <ResultTable tests={this.state.details.tests} />
                 </CardContent>
             </Drawer>
         )

@@ -4,13 +4,12 @@ import './index.css'
 import 'typeface-roboto'
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import { isUndefined } from 'util'
 
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js'
 import Homepage from './app/home/homepage.js'
 import Submission from './app/submissions/submissionWrapper.js'
-import ProblemList from './app/problemList/problemList.js'
+import ProblemWrapper from './app/problemList/problemWrapper.js'
 import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
 import Notify from './app/notifier/notify.js'
 import { slideIn } from './app/globalStatusBar/lib/libTransition.js'
@@ -22,112 +21,46 @@ import HomepageLauncher from './app/home/homepageLauncher.js'
 
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js'
 import publicParse from './app/globalStatusBar/staticStub/public.js'
-
-import timeAgo from './external/timeAgo.js'
+import { toggleSidenav } from './app/sidenav/sidenav.js'
 
 class Hestia extends React.Component {
     constructor(props) {
         super(props)
-        window.hestia = {
-            user: {},
-            contest: {},
-            submissions: [],
-            problem: {},
-            meta: {}
-        }
         this.state = {
-            sidebarOpen: false,
             currentPage: 'front',
-            loggedIn: false,
-            username: '',
+            user: {
+                loggedIn: false,
+                username: '',
+                id: ''
+            },
 
             contestName: '',
-            contestTimeLeft: '',
-            contestDuration: '',
-            contestStarted: true,
-            contestEnded: false,
+            contestTime: {
+                start: new Date(),
+                end: new Date()
+            },
 
             redirect: undefined,
 
-            notifyMessage: undefined,
-            open: false,
-        }
-        this.updateState = this.updateState.bind(this)
-        this.contestTimeout = this.contestTimeout.bind(this)
-        this.notify = this.notify.bind(this)
-        window.hestia.pushNotification = this.notify
-        window.hestia.updateState = this.updateState
-    }
-
-    contestTimeout() {
-        let current = new Date()
-        try {
-            if (window.hestia.contest.time.end && window.hestia.contest.time.end < current)
-                return this.setState({
-                    contestTimeLeft: 'Ended',
-                    contestDuration: 'Ended',
-                    contestEnded: true,
-                })
-            if (current < window.hestia.contest.time.start)
-                return this.setState({
-                    contestTimeLeft: timeAgo(
-                        current,
-                        window.hestia.contest.time.start
-                    ),
-                    contestStarted: false
-                })
-            else this.setState({
-                contestTimeLeft: timeAgo(
-                    current, window.hestia.contest.time.end
-                ),
-                contestStarted: true
-            })
-        } catch (err) {
-            return
         }
     }
 
     componentWillMount() {
-        publicParse(this.updateState)
-        verifyLogin(() => {
+        publicParse().then((data) => {
             this.setState({
-                loggedIn: window.hestia.user.loggedIn,
-                username: window.hestia.user.username,
-            })
-            this.setState({
-                clockInterval: setInterval(this.contestTimeout, 1000),
+                contestName: data.name,
+                contestTime : data.time
             })
         })
-    }
-
-
-    componentWillUnmount() {
-        clearInterval(this.state.clockInterval);
-        this.setState({
-            redirect: undefined
+        verifyLogin().then((data) => {
+            this.setState({
+                user: {
+                    loggedIn: data.ok,
+                    username: data.username,
+                    id: data.id
+                },
+            });
         })
-    }
-
-    updateState() {
-        this.setState({
-            loggedIn: window.hestia.user.loggedIn,
-            username: window.hestia.user.username,
-
-            contestName: window.hestia.contest.name,
-            contestDuration: timeAgo(
-                window.hestia.contest.time.start,
-                window.hestia.contest.time.end
-            ),
-        })
-        this.contestTimeout()
-    }
-
-    notify(message) {
-        this.setState({
-            message: message,
-            open: true,
-        })
-        // setTimeout(() => this.setState({ message : undefined, open: false }), 3000)
     }
 
     render() {
@@ -138,11 +71,6 @@ class Hestia extends React.Component {
         return (
             <>
                 <Notify
-                    open={this.state.open && !isUndefined(this.state.message)}
-                    onClose={() =>
-                        this.setState({ open: false, message: undefined })
-                    }
-                    message={this.state.message}
                     autoHideDuration={1000}
                     TransitionComponent={props => slideIn(props, 'left')}
                     transitionDuration={{
@@ -155,28 +83,16 @@ class Hestia extends React.Component {
                     }}
                 />
                 <GlobalStatusBar
-                    started={this.state.contestStarted}
-                    ended={this.state.contestEnded}
+                    currentUser={this.state.user.username}
+                    currentUserId={this.state.user.id}
+                    loggedIn={this.state.user.loggedIn}
                     contestName={this.state.contestName}
-                    currentUser={this.state.username}
-                    contestTimeLeft={this.state.contestTimeLeft}
-                    contestDuration={this.state.contestDuration}
-                    loggedIn={this.state.loggedIn}
-                    menuOpen={() =>
-                        this.setState({
-                            sidebarOpen: true,
-                        })
-                    }
+                    contestTime={this.state.contestTime}
+                    menuOpen={toggleSidenav}
                 />
                 <Router>
                     <div>
                         <Sidenav
-                            open={this.state.sidebarOpen}
-                            onClose={() =>
-                                this.setState({
-                                    sidebarOpen: false,
-                                })
-                            }
                             pages={[
                                 <HomepageLauncher button
                                     onClick={() =>
@@ -213,7 +129,7 @@ class Hestia extends React.Component {
                             ]}
                         />
                         <Route path="/submissions" component={Submission} />
-                        <Route path="/problems" component={ProblemList} />
+                        <Route path="/problems" component={ProblemWrapper} />
                         <Route path="/scoreboard" component={ScoreboardWrapper} />
                         <Route path="/" component={Homepage} />
                     </div>

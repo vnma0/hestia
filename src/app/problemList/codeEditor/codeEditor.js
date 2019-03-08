@@ -16,7 +16,7 @@ require('codemirror/mode/clike/clike')
  * @author minhducsun2002
  */
 
-class CodeEditor extends React.Component {
+class CodeEditor extends React.PureComponent {
     render() {
         return (
             <CodeMirror

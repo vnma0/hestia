@@ -1,34 +1,32 @@
 /**
  * @name verifyLogin
- * @desc Verify user permission if logged in using `/users` route of Wafter
- * @param {Function} func - Function to execute after the promise resolves.
- * @return {Promise} a fetch() that resolves to the return value of func()
+ * @desc Verify user permission if logged in using `/api/users` route of Wafter
+ * @returns {Promise<Response>}
  * @author minhducsun2002
  */
 
-async function verifyLogin(func) {
+async function verifyLogin() {
     return fetch(
         `/api/users`
     )
         .then(res => {
-            window.hestia.user.loggedIn = res.status !== 401
+            if (!res.ok) 
+                throw new Error('Attempt to automatically log in failed')
             return res.text()
         })
-        .then(responseBody => {
-            // if logging in failed, JSON.parse would fail
-            // and I don't know how to handle rejection
-            try {
-                if (window.hestia.user.loggedIn) {
-                    window.hestia.user.username = JSON.parse(responseBody)['username']
-                    window.hestia.user.userId = JSON.parse(responseBody)['_id']
-                }
-            } catch (err) {
-                console.log(err)
+        .then(response => ({
+            ok: true,
+            username : JSON.parse(response)['username'],
+            id : JSON.parse(response)['_id']
+        }))
+        .catch(err => {
+            if (process.env.NODE_ENV === 'development')
+                // hide all errors on production builds
+                    console.log(err)
+            return {
+                ok: false,
+                username: 'null', id: 'null'
             }
-        })
-        .then(() => {
-            if (typeof func === 'function')
-                func();
         })
 }
 

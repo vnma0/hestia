@@ -7,7 +7,24 @@ import { Drawer, ListItem, List } from '@material-ui/core'
  * @param {Array : Object(React.Component)} pages : an array with respective React.Component to launch pages onClick
  */
 
+export let toggleSidenav;
+
 class Sidenav extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open : false
+        }
+
+        toggleSidenav = this.toggle = this.toggle.bind(this)
+    }
+
+    toggle() {
+        this.setState({
+            open: !this.state.open
+        })
+    }
+
     renderItems() {
         return this.props.pages.map((page, index) => {
             // mirroring onClick function
@@ -24,7 +41,8 @@ class Sidenav extends Component {
     }
     render() {
         return (
-            <Drawer anchor="left" {...this.props}>
+            <Drawer anchor="left" {...this.props} open={this.state.open}
+                onClose={this.toggle}>
                 <List>{this.renderItems()}</List>
             </Drawer>
         )

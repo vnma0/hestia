@@ -1,5 +1,13 @@
 import dayjs from 'dayjs';
 
+/**
+ * @name timeAgo
+ * @description return a `String` representing time delta between `date1` and `date2`
+ * @param {Date} `date1`
+ * @param {Date} `date2`
+ * @returns {String}
+ */
+
 export default function timeAgo (date1, date2) {
     let from = dayjs(date1), to = dayjs(date2);
     let parsed = {};
