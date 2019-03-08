@@ -22,7 +22,7 @@ function TabContainer(props) {
     )
 }
 
-class ProblemTab extends React.Component {
+class ProblemTab extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
@@ -52,8 +52,7 @@ class ProblemTab extends React.Component {
                     </Tabs>
                     <TabContainer>
                         {this.props.problems[this.props.value]
-                            ? this.props.problems[this.props.value].statement
-                            : ''}
+                            ? this.props.problems[this.props.value].statement : ''}
                     </TabContainer>
                 </AppBar>
             </div>

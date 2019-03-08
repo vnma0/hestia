@@ -8,7 +8,7 @@ import SubmitButton from './submitButton'
 import LangSelection from './langSelection'
 // import FileDisplay from './fileDisplay'
 
-class CodeBox extends React.Component {
+class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
@@ -49,12 +49,8 @@ class CodeBox extends React.Component {
                 <AppBar position="static" color="default">
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
-                            <Grid
-                                item
-                                style={{
-                                    flexGrow: 1,
-                                }}
-                            >
+                            <Grid item
+                                style={{ flexGrow: 1 }} >
                                 <LangSelection
                                     displayLang={this.props.displayLang || []}
                                     handleChange={this.handleLangChange}>

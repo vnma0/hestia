@@ -29,29 +29,14 @@ class ProblemTabEditor extends React.Component {
     render() {
         return (
             <div style={{ marginTop: 10 }}>
-                <Grid
-                    container
-                    spacing={8}
-                    alignItems="stretch"
-                    style={{
-                        width: '100%',
-                    }}>
-                    <Grid
-                        item
-                        style={{
-                            width: '50%',
-                        }}>
+                <Grid container spacing={8} alignItems="stretch" style={{ width: '100%' }}>
+                    <Grid item style={{ width: '50%' }}>
                         <ProblemTab
                             problems={this.props.problems}
                             handleTabChange={this.handleTabChange}
-                            value={this.state.currentTab}
-                        />
+                            value={this.state.currentTab} />
                     </Grid>
-                    <Grid
-                        item
-                        style={{
-                            width: '50%',
-                        }}>
+                    <Grid item style={{ width: '50%' }}>
                         <CodeBox
                             submitFileName={this.props.problems[this.state.currentTab] || ''}
                             ext={this.props.ext}
