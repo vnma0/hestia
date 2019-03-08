@@ -29,13 +29,10 @@ function constructData(code, filename, ext) {
  * @param {String} code - code
  * @param {String} filename - File name WITHOUT extension
  * @param {String} ext - extension
- * @param {String} func - function to call when `fetch()` completed.
- *                        Will be passed `res.ok` as the only argument
  * @returns {Promise} - a `fetch()` `Promise`
  */
 
-async function submit(code, filename, ext, func) {
-    window.test = constructData(code, filename, ext)
+async function submit(code, filename, ext) {
     return fetch(
         `/api/subs`,
         {
@@ -52,7 +49,6 @@ async function submit(code, filename, ext, func) {
                 )
             return res.ok
         })
-        .then(func)
         .catch(() => {
             if (typeof pushNotification === 'function')
                 pushNotification(
