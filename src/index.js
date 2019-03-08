@@ -21,12 +21,12 @@ import HomepageLauncher from './app/home/homepageLauncher.js'
 
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js'
 import publicParse from './app/globalStatusBar/staticStub/public.js'
+import { toggleSidenav } from './app/sidenav/sidenav.js'
 
 class Hestia extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            sidebarOpen: false,
             currentPage: 'front',
             user: {
                 loggedIn: false,
@@ -88,21 +88,11 @@ class Hestia extends React.Component {
                     loggedIn={this.state.user.loggedIn}
                     contestName={this.state.contestName}
                     contestTime={this.state.contestTime}
-                    menuOpen={() =>
-                        this.setState({
-                            sidebarOpen: true,
-                        })
-                    }
+                    menuOpen={toggleSidenav}
                 />
                 <Router>
                     <div>
                         <Sidenav
-                            open={this.state.sidebarOpen}
-                            onClose={() =>
-                                this.setState({
-                                    sidebarOpen: false,
-                                })
-                            }
                             pages={[
                                 <HomepageLauncher button
                                     onClick={() =>
