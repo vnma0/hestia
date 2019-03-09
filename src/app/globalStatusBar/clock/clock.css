@@ -9,9 +9,9 @@
 }
 
 .clock-ended {
-    background-color: black !important
+    background-color: unset !important
 }
 
 .clock-notstarted {
-    background-color: teal !important
+    background-color: lightseagreen !important
 }
