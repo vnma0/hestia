@@ -18,6 +18,7 @@ import ExitToApp from '@material-ui/icons/ExitToApp'
 
 import ResultTable from './testBasedVerdictTable.js'
 import VerdictSignature from '../signature/verdictSignature'
+import { isUndefined } from 'util';
 
 /**
  * @name DetailedSubmission
@@ -40,8 +41,11 @@ class DetailedSubmission extends React.Component {
     }
 
     toggle(props) {
+        let openable = !isUndefined(props.contestant) 
+            && !isUndefined(props.timestamp)
+            && !isUndefined(props.verdict)
         this.setState({
-            open: !this.state.open,
+            open: !this.state.open && openable,
             details: props
         })
     }
@@ -55,8 +59,7 @@ class DetailedSubmission extends React.Component {
                 onClose={this.toggle}
                 PaperProps={{
                     style: { margin: 0, overflowX: 'hidden' },
-                }}
-            >
+                }}>
                 <Paper>
                     <CardHeader
                         avatar={<AccountCircle />}
@@ -70,14 +73,13 @@ class DetailedSubmission extends React.Component {
                                         marginTop: 10,
                                         marginRight: 0,
                                         paddingRight: 0,
-                                    }}
-                                >
+                                    }}>
                                     <VerdictSignature
                                         verdict={this.state.details.verdict}
                                         reversed iconOnly
                                     />
                                 </IconButton>
-                                <IconButton onClick={this.state.details.onClose}>
+                                <IconButton onClick={this.toggle}>
                                     <ExitToApp />
                                 </IconButton>
                             </>
