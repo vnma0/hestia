@@ -1,7 +1,7 @@
 // time remaining to contest end
 import React, { Component } from 'react'
 
-import { Button } from '@material-ui/core'
+import { Button, Tooltip } from '@material-ui/core'
 import AccessTime from '@material-ui/icons/AccessTime'
 
 import timeAgo from '../../../external/timeAgo.js';
@@ -37,30 +37,34 @@ class CountdownClock extends Component {
 
     render() {
         return (
-            <Button
-                style={
-                    this.state.ended
-                        ? {
-                              color: 'white',
-                              backgroundColor: 'black',
-							  fontWeight: 'normal'
-                              // if contest is running, yellow background
-                          }
-                        : {
-                              color: 'black',
-                              backgroundColor: 'yellow',
-							  fontWeight: 'normal'
-                              // else we just make it black
-                          }
-                }
-                disabled
-            >
-                <AccessTime style={{ marginRight: '10px' }} />
-                {this.state.ended
-                    ? 'ENDED' : (this.state.started 
-                        ? `TIME LEFT : ${this.state.current} / ${this.state.duration}`
-                        : `${timeAgo(new Date(), this.props.time.start)} BEFORE START`)}
-            </Button>
+            <Tooltip placement="bottom"
+                title={`${(this.props.time.start).toLocaleString()}`
+                        + ` - ${(this.props.time.end).toLocaleString()}`}>
+                <span>
+                    <Button disabled
+                        style={
+                            this.state.ended
+                                ? {
+                                    color: 'white',
+                                    backgroundColor: 'black',
+                                    fontWeight: 'normal'
+                                    // if contest is running, yellow background
+                                }
+                                : {
+                                    color: 'black',
+                                    backgroundColor: 'yellow',
+                                    fontWeight: 'normal'
+                                    // else we just make it black
+                                }
+                        }>
+                        <AccessTime style={{ marginRight: '10px' }} />
+                        {this.state.ended
+                            ? 'ENDED' : (this.state.started 
+                                ? `TIME LEFT : ${this.state.current} / ${this.state.duration}`
+                                : `${timeAgo(new Date(), this.props.time.start)} BEFORE START`)}
+                    </Button>
+                </span>
+            </Tooltip>
         )
     }
 }
