@@ -1,0 +1,17 @@
+#clock {
+    font-weight: normal;
+    color: white;
+}
+
+.clock-inprogress {
+    color: black !important;
+    background-color: yellow !important
+}
+
+.clock-ended {
+    background-color: black !important
+}
+
+.clock-notstarted {
+    background-color: teal !important
+}
