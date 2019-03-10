@@ -1,5 +1,6 @@
 import { isNumber } from 'util'
 import { pushNotification } from '../../notifier/notify.js'
+import { name } from '../../../lib/libExtHIName.js'
 
 /**
  * @name submissionParse
@@ -30,6 +31,7 @@ export default async function submissionParse(count, page, size) {
                 submissions.push({
                     contestant: sub['username'],
                     verdict: sub['status'],
+                    language: name[String(sub['ext']).toLowerCase().replace('.', '')],
                     timestamp: new Date(sub['date']).toLocaleString(),
                     id: sub['_id'],
                     problem: sub['prob_id'],
