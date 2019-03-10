@@ -27,10 +27,10 @@ class Scoreboard extends React.PureComponent {
                             return (
                                 <TableRow key={`row_${index}`}>
                                     <TableCell>{record.name}</TableCell>
-                                    <TableCell>{record.score}</TableCell>
+                                    <TableCell>{parseFloat(Number(record.score)).toFixed(2)}</TableCell>
                                     <TableCell>{record.aced}</TableCell>
                                     {this.props.problems.map(entries => (<TableCell key={`row_${index}_${entries}`}>
-                                                {record.result[entries].pri === null ? '∅' : record.result[entries].pri}
+                                                {record.result[entries].pri === null ? '∅' : parseFloat(Number(record.result[entries].pri)).toFixed(2)}
                                             </TableCell>)
                                     )}
                                 </TableRow>
