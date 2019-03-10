@@ -18,7 +18,8 @@ import ExitToApp from '@material-ui/icons/ExitToApp'
 
 import ResultTable from './testBasedVerdictTable.js'
 import VerdictSignature from '../signature/verdictSignature'
-import { isUndefined } from 'util';
+
+var isUndefined = (arg) => (arg === undefined);
 
 /**
  * @name DetailedSubmission
