@@ -39,7 +39,10 @@ class DetailedSubmission extends React.Component {
         }
 
         toggleDetailedSubmission = this.toggle = this.toggle.bind(this);
+        this.close = this.close.bind(this);
     }
+
+    close = () => this.setState({ open: false })
 
     toggle(props) {
         let openable = !isUndefined(props.contestant) 
@@ -57,7 +60,7 @@ class DetailedSubmission extends React.Component {
                 anchor="right"
                 {...this.props}
                 open={this.state.open}
-                onClose={this.toggle}
+                onClose={this.close}
                 PaperProps={{
                     style: { margin: 0, overflowX: 'hidden' },
                 }}>
@@ -80,7 +83,7 @@ class DetailedSubmission extends React.Component {
                                         reversed iconOnly
                                     />
                                 </IconButton>
-                                <IconButton onClick={this.toggle}>
+                                <IconButton onClick={this.close}>
                                     <ExitToApp />
                                 </IconButton>
                             </>
