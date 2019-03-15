@@ -45,15 +45,12 @@ class SubmissionTable extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.submissionList.map(submission => {
-                                return (
-                                    <Submission
-                                        {...submission}
-                                        key={submission.id}
-                                        onClick={() => toggleDetailedSubmission(submission)}
-                                    />
-                                )
-                            })}
+                            {this.props.submissionList.map(submission => 
+                                (<Submission
+                                    {...submission}
+                                    key={submission.id}
+                                    onClick={() => toggleDetailedSubmission(submission)} />)
+                            )}
                         </TableBody>
                     </Table>
                     {/* a global dialog to avoid re-rendering components */}
