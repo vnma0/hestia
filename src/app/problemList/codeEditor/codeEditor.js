@@ -1,9 +1,13 @@
 import React from 'react'
-import CodeMirror from 'react-codemirror'
 import PropTypes from 'prop-types'
-const mime = require('mime')
-require('codemirror/lib/codemirror.css')
-require('codemirror/mode/clike/clike')
+import AceEditor from 'react-ace';
+
+import parseExt from './extParser.js';
+
+require('brace/mode/c_cpp'); require('brace/mode/java');
+require('brace/mode/javascript'); require('brace/mode/python');
+require('brace/mode/csharp'); require('brace/mode/css');
+require('brace/mode/sass')
 
 /**
  * @name CodeEditor
@@ -12,25 +16,20 @@ require('codemirror/mode/clike/clike')
  *                            Signature : `function (newValue : String)`
  * @param {Boolean} `readOnly` - Whether the editor's value should be locked to read-only.
  * @param {String} `code` - Editor's value.
- * @returns {React.Component} - a `<CodeMirror />` component
+ * @returns {React.Component} - a `<AceEditor />` component
  * @author minhducsun2002
  */
 
 class CodeEditor extends React.PureComponent {
     render() {
         return (
-            <CodeMirror
-                options={{
-                    mode: mime.getType(this.props.ext),
-                    tabSize: 4,
-                    lineNumbers: true,
-                    autofocus: true,
-                    undoDepth: 200,
-                    scrollbarStyle: null,
-                    readOnly: this.props.readOnly
-                }}
+            <AceEditor
+                defaultValue="Your code here"
+                mode={parseExt(this.props.ext.replace('.', '').toLowerCase())}
                 value={this.props.code}
                 onChange={this.props.update}
+                width='100%'
+                readOnly={this.props.readOnly}
             />
         )
     }
