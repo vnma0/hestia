@@ -8,7 +8,11 @@ import { pushNotification } from '../../notifier/notify.js'
 
 export default async function downloadSubmission(id) {
     return fetch(`/api/subs/${String(id)}/source`)
-        .then(res => res.text())
+        .then(res => {
+            if (res.status != 200)
+                throw new Error ('Error fetching source code : response code is not 200')
+            return res.text()
+        })
         .catch((err) => {
             if (process.env.NODE_ENV === 'development') {
                 console.log(err);
