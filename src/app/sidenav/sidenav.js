@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Drawer, ListItem, List } from '@material-ui/core'
 
 /**
  * @name Sidenav
  * @desc Sidebar navigation. All props are passed down to <Drawer>
- * @param {Array : Object(React.Component)} pages : an array with respective React.Component to launch pages onClick
+ * @param {Array <Object({React.Component, link})>} pages : an array with respective React.Component to launch pages with desired link
  */
 
 export let toggleSidenav;
@@ -26,15 +27,14 @@ class Sidenav extends Component {
     }
 
     renderItems() {
-        return this.props.pages.map((page, index) => {
+        return this.props.pages.map((entry, index) => {
             // mirroring onClick function
             return (
-                <ListItem
-                    onClick={page.props.onClick}
-                    button={page.props.button}
-                    key={`navigator_${index}`}
-                >
-                    {page}
+                <ListItem component={Link} to={entry.link}
+                    onClick={entry.page.props.onClick}
+                    button={entry.page.props.button}
+                    key={`navigator_${index}`}>
+                    {entry.page}
                 </ListItem>
             )
         })
