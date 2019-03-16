@@ -43,6 +43,7 @@ const verdictIcon = {
     CE: <CompilationErrorVerdictSignature />,
 
     Pending: <PendingVerdictSignature />,
+    null : <PendingVerdictSignature />,
 
     Unknown: <UnknownVerdictSignature />,
 }

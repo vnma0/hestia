@@ -29,7 +29,7 @@ export default async function submissionParse(count, page, size) {
             for (let sub of subsTable.data) {
                 submissions.push({
                     contestant: sub['username'],
-                    verdict: sub['status'],
+                    verdict: (sub['status'] === null) ? "Pending" : sub['status'],
                     timestamp: new Date(sub['date']).toLocaleString(),
                     id: sub['_id'],
                     problem: sub['prob_id'],
