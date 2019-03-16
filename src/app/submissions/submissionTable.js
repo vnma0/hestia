@@ -28,11 +28,7 @@ class SubmissionTable extends React.Component {
         return (
             <>
                 <Paper>
-                    <Table
-                        style={{
-                            tableLayout: 'fixed',
-                        }}
-                    >
+                    <Table style={{ tableLayout: 'fixed' }}>
                         <TableHead>
                             <TableRow>
                                 <TableCell>Submitted by</TableCell>
@@ -42,6 +38,7 @@ class SubmissionTable extends React.Component {
                                 <TableCell>Execution duration</TableCell>
                                 <TableCell>Memory consumed</TableCell>
                                 <TableCell>Timestamp</TableCell>
+                                <TableCell>Download</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
