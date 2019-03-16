@@ -38,10 +38,7 @@ class Hestia extends React.Component {
             contestTime: {
                 start: new Date(),
                 end: new Date()
-            },
-
-            redirect: undefined,
-
+            }
         }
     }
 
@@ -64,10 +61,6 @@ class Hestia extends React.Component {
     }
 
     render() {
-        if (this.state.redirect) {
-            let out = <Router forceRefresh>{this.state.redirect}</Router>
-            return out;
-        }
         return (
             <>
                 <Notify
