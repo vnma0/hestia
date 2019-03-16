@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import 'typeface-roboto'
 
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js'
@@ -94,38 +94,22 @@ class Hestia extends React.Component {
                     <div>
                         <Sidenav
                             pages={[
-                                <HomepageLauncher button
-                                    onClick={() =>
-                                        this.setState({
-                                            redirect: <Redirect push to="/" />,
-                                            sidebarOpen: false,
-                                        })
-                                    }
-                                />,
-                                <SubmissionLauncher button
-                                    onClick={() =>
-                                        this.setState({
-                                            redirect: <Redirect push to="/submissions" />,
-                                            sidebarOpen: false,
-                                        })
-                                    }
-                                />,
-                                <ProblemLauncher button
-                                    onClick={() =>
-                                        this.setState({
-                                            redirect: <Redirect push to="/problems" />,
-                                            sidebarOpen: false,
-                                        })
-                                    }
-                                />,
-                                <ScoreboardLauncher button
-                                    onClick={() =>
-                                        this.setState({
-                                            redirect: <Redirect push to="/scoreboard" />,
-                                            sidebarOpen: false,
-                                        })
-                                    }
-                                />
+                                {
+                                    page : <HomepageLauncher button onClick={toggleSidenav}/>,
+                                    link : '/'
+                                },
+                                {
+                                    page : <SubmissionLauncher button onClick={toggleSidenav}/>,
+                                    link : '/submissions'
+                                },
+                                {
+                                    page : <ProblemLauncher button onClick={toggleSidenav}/>,
+                                    link : '/problems'
+                                },
+                                {
+                                    page : <ScoreboardLauncher button onClick={toggleSidenav}/>,
+                                    link : '/scoreboard'
+                                }
                             ]}
                         />
                         <Route path="/submissions" component={Submission} />
