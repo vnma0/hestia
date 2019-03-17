@@ -11,6 +11,7 @@ import Homepage from './app/home/homepage.js'
 import Submission from './app/submissions/submissionWrapper.js'
 import ProblemWrapper from './app/problemList/problemWrapper.js'
 import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
+import Info from './app/about/about.js'
 import Notify from './app/notifier/notify.js'
 import { slideIn } from './app/globalStatusBar/lib/libTransition.js'
 
@@ -18,10 +19,13 @@ import SubmissionLauncher from './app/submissions/submissionLauncher.js'
 import ProblemLauncher from './app/problemList/problemLauncher.js'
 import ScoreboardLauncher from './app/scoreboard/scoreboardLauncher.js'
 import HomepageLauncher from './app/home/homepageLauncher.js'
+import AboutLauncher from './app/about/aboutLauncher.js'
 
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js'
 import publicParse from './app/globalStatusBar/staticStub/public.js'
 import { toggleSidenav } from './app/sidenav/sidenav.js'
+
+import { toggleAbout } from './app/about/about.js'
 
 class Hestia extends React.Component {
     constructor(props) {
@@ -102,6 +106,14 @@ class Hestia extends React.Component {
                                 {
                                     page : <ScoreboardLauncher button onClick={toggleSidenav}/>,
                                     link : '/scoreboard'
+                                },
+                                {
+                                    page : <AboutLauncher button onClick={
+                                        () => {
+                                            toggleSidenav();
+                                            toggleAbout()
+                                        }
+                                    } />
                                 }
                             ]}
                         />
@@ -111,6 +123,7 @@ class Hestia extends React.Component {
                         <Route path="/" component={Homepage} />
                     </div>
                 </Router>
+                <Info />
             </>
         )
     }

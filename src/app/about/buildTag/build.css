@@ -1,0 +1,8 @@
+.chip-development {
+    border: 1px solid red !important;
+    background-color: #ffcdcd !important;
+}
+
+.chip-production {
+    border: 1px solid green !important;
+}

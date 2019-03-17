@@ -7,6 +7,7 @@
   "dependencies": {
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
+    "cross-env": "^5.2.0",
     "dayjs": "^1.8.8",
     "mime": "^2.4.0",
     "react": "^16.6.3",
@@ -17,7 +18,7 @@
     "typeface-roboto": "0.0.54"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env REACT_APP_HESTIA_COMMIT=$(git rev-parse HEAD) REACT_APP_HESTIA_VERSION=$(git describe --tags) react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test"
   },

@@ -30,7 +30,8 @@ class Sidenav extends Component {
         return this.props.pages.map((entry, index) => {
             // mirroring onClick function
             return (
-                <ListItem component={Link} to={entry.link}
+                <ListItem {...(entry.link
+                    ? {component: Link, to: entry.link} : {})}
                     onClick={entry.page.props.onClick}
                     button={entry.page.props.button}
                     key={`navigator_${index}`}>
