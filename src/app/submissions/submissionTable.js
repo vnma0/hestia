@@ -43,7 +43,7 @@ class SubmissionTable extends React.PureComponent {
                             {this.props.submissionList.map(submission => 
                                 (<Submission {...submission} key={submission.id} 
                                     onClick={() => {
-                                        addDetails({ tests : submission.tests });
+                                        addDetails({ tests : submission.tests, id : submission.id });
                                         toggleDetails();
                                     }}/>))}
                         </TableBody>

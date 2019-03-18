@@ -1,7 +1,8 @@
 import React from 'react';
-import { Dialog, DialogActions, Button } from '@material-ui/core';
+import { Dialog, DialogActions, Button, Grid } from '@material-ui/core';
 
 import ResultTable from './testBasedVerdictTable.js'
+import CodePanel from './codePanel.js';
 
 export let toggleDetails;
 export let addDetails;
@@ -32,8 +33,15 @@ export default class SubmissionDetails extends React.PureComponent {
     render() {
         return (
             <Dialog open={this.state.open} onClose={this.toggle} maxWidth="md"
-                fullWidth scroll="body">
-                <ResultTable tests={this.state.details.tests}/>
+                fullWidth scroll="body" >
+                <Grid container>
+                    <Grid item>
+                        <ResultTable tests={this.state.details.tests}/>
+                    </Grid>
+                    <Grid item>
+                        <CodePanel id={this.state.details.id}/>
+                    </Grid>
+                </Grid>
                 <DialogActions>
                     <Button onClick={this.toggle}>
                         Close
