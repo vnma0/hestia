@@ -9,8 +9,7 @@ import {
 } from '@material-ui/core'
 
 import Submission from './submission.js'
-import DetailedSubmission from './submissionDetail/detailedSubmission'
-
+import SubmissionDetail from './submissionDetail/submissionDetail.js'
 /**
  * @name SubmissionTable
  * @param `{Array : Object({contestant, Problem, Language, Verdict, ExecutionTime, memory, timestamp, test})}` `SubmissionList`
@@ -21,9 +20,9 @@ import DetailedSubmission from './submissionDetail/detailedSubmission'
  * @return {Table} : a `<Table />` containing submissions
  */
 
-import { toggleDetailedSubmission } from './submissionDetail/detailedSubmission';
+import { toggleDetails, addDetails } from './submissionDetail/submissionDetail.js';
 
-class SubmissionTable extends React.Component {
+class SubmissionTable extends React.PureComponent {
     render() {
         return (
             <>
@@ -41,19 +40,15 @@ class SubmissionTable extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.submissionList.map(submission => {
-                                return (
-                                    <Submission
-                                        {...submission}
-                                        key={submission.id}
-                                        onClick={() => toggleDetailedSubmission(submission)}
-                                    />
-                                )
-                            })}
+                            {this.props.submissionList.map(submission => 
+                                (<Submission {...submission} key={submission.id} 
+                                    onClick={() => {
+                                        addDetails({ tests : submission.tests });
+                                        toggleDetails();
+                                    }}/>))}
                         </TableBody>
                     </Table>
-                    {/* a global dialog to avoid re-rendering components */}
-                    <DetailedSubmission />
+                    <SubmissionDetail />
                 </Paper>
             </>
         )

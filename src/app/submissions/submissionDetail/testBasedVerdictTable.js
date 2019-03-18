@@ -30,9 +30,7 @@ class AttestationSampleResult extends React.Component {
                     <VerdictSignature verdict={this.props.verdict || 'N/A'} />
                 </TableCell>
                 <TableCell align="justify">
-                    <ExecTimeSignature
-                        time={this.props.executionTime || 'N/A'}
-                    />
+                    <ExecTimeSignature time={this.props.executionTime || 'N/A'} />
                 </TableCell>
                 <TableCell align="right">
                     <MemorySignature memory={this.props.memory || 'N/A'} />
@@ -62,10 +60,14 @@ class ResultTable extends React.Component {
             return (
                 <Table>
                     <TableHead>
-                        <TableCell>Verdict</TableCell>
-                        <TableCell>Execution duration</TableCell>
-                        <TableCell>Memory consumed</TableCell>
-                        <TableCell>Points awarded</TableCell>
+                        <TableRow style={{
+                            minHeight: 24
+                        }}>
+                            <TableCell>Verdict</TableCell>
+                            <TableCell>Execution duration</TableCell>
+                            <TableCell>Memory consumed</TableCell>
+                            <TableCell>Points awarded</TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.props.tests.map((test, idx) => {
