@@ -38,7 +38,6 @@ class SubmissionTable extends React.Component {
                                 <TableCell>Execution duration</TableCell>
                                 <TableCell>Memory consumed</TableCell>
                                 <TableCell>Timestamp</TableCell>
-                                <TableCell>Download</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

@@ -9,7 +9,7 @@ import ExecTimeSignature from './signature/execTimeSignature.js'
 // import TimestampSignature from './signature/timestampSignature.js'
 import MemorySignature from './signature/memorySignature.js'
 
-import SubmissionDownloadButton from './submission/downloadCell.js'
+// import SubmissionDownloadButton from './submission/downloadCell.js'
 
 /**
  * @name Submission
@@ -69,9 +69,6 @@ class Submission extends React.Component {
                         {/* <TimestampSignature time={this.props.timestamp || "N/A"} /> */}
                         {/* table overflow; will fix later, I guess */}
                         {new Date(this.props.timestamp).toLocaleString() || 'N/A'}
-                    </TableCell>
-                    <TableCell>
-                        <SubmissionDownloadButton id={this.props.id}/>
                     </TableCell>
                 </TableRow>
             </>
