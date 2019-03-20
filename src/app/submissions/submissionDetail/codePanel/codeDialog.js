@@ -24,7 +24,7 @@ export default class CodeDialog extends React.PureComponent {
     render() {
         return (
             <Dialog open={this.state.open} onClose={this.toggle}
-                maxWidth="md" fullWidth scroll="body">
+                scroll="body">
                 <CodePanel id={this.props.id}/>
                 <DialogActions>
                     <Button onClick={this.toggle}>

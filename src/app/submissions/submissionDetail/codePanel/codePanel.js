@@ -12,7 +12,8 @@ export default class CodePanel extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            code : ''
+            code : '',
+            ref : React.createRef()
         }
     }
 
@@ -35,7 +36,8 @@ export default class CodePanel extends React.PureComponent {
             <>
                 {this.state.code.length > 0
                     ? <CardContent>
-                        <AceEditor value={this.state.code} readOnly/>
+                        <AceEditor value={this.state.code} readOnly
+                            ref={this.state.ref}/>
                     </CardContent>
                     : <CardContent>
                         <Typography variant="h6">
