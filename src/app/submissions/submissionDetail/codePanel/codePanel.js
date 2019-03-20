@@ -1,7 +1,12 @@
 import React from 'react';
-import downloadSubmission from '../stub/download.js';
+import downloadSubmission from '../../stub/download.js';
 import { CardContent, Typography } from '@material-ui/core';
 import AceEditor from 'react-ace';
+
+/**
+ * @name CodePanel
+ * @param {String} id : Submission ID to get
+ */
 
 export default class CodePanel extends React.PureComponent {
     constructor(props) {
@@ -19,6 +24,10 @@ export default class CodePanel extends React.PureComponent {
                 })
             })
         }
+    }
+
+    componentDidUpdate() {
+        this.componentDidMount()
     }
 
     render() {

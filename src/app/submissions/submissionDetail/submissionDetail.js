@@ -1,11 +1,19 @@
 import React from 'react';
-import { Dialog, DialogActions, Button, Grid } from '@material-ui/core';
+import { Dialog, DialogActions, Button } from '@material-ui/core';
 
 import ResultTable from './testBasedVerdictTable.js'
-import CodePanel from './codePanel.js';
+import CodeDialog from './codePanel/codeDialog.js';
+
+import { toggleCodeDialog } from './codePanel/codeDialog.js';
 
 export let toggleDetails;
 export let addDetails;
+
+/**
+ * @name SubmissionDetails
+ * @param {String} id : ID of the submission, used to get back source code
+ * @param {} tests : pass the `tests` component as defined in `submissionTable.js`
+ */
 
 export default class SubmissionDetails extends React.PureComponent {
     constructor(props) {
@@ -32,22 +40,21 @@ export default class SubmissionDetails extends React.PureComponent {
 
     render() {
         return (
-            <Dialog open={this.state.open} onClose={this.toggle} maxWidth="md"
-                fullWidth scroll="body" >
-                <Grid container>
-                    <Grid item>
-                        <ResultTable tests={this.state.details.tests}/>
-                    </Grid>
-                    <Grid item>
-                        <CodePanel id={this.state.details.id}/>
-                    </Grid>
-                </Grid>
-                <DialogActions>
-                    <Button onClick={this.toggle}>
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            <>
+                <Dialog open={this.state.open} onClose={this.toggle} maxWidth="md"
+                    fullWidth scroll="body" >
+                    <ResultTable tests={this.state.details.tests}/>
+                    <DialogActions>
+                        <Button onClick={toggleCodeDialog}>
+                            Show source code
+                        </Button>
+                        <Button onClick={this.toggle}>
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <CodeDialog id={this.state.details.id}/>
+            </>
         )
     }
 }

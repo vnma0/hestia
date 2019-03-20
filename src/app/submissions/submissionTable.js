@@ -16,7 +16,7 @@ import SubmissionDetail from './submissionDetail/submissionDetail.js'
  * 					- An array containing objects satisfying this schema :
  * 					`{contestant, Problem, Language, Verdict, ExecutionTime, memory, timestamp, test}`
  * 					- All props are strings,
- * 					except `tests` which is an `{Array : Object ({verdict, executionTime, memory, mark})}`
+ * 					except `tests` which is an `{Array : Object ({verdict : String, executionTime : String, memory : String, mark : String})}`
  * @return {Table} : a `<Table />` containing submissions
  */
 
