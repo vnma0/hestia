@@ -24,12 +24,16 @@ import { toggleDetails, addDetails } from './submissionDetail/submissionDetail.j
 
 class SubmissionTable extends React.PureComponent {
     render() {
-        let mapping = this.props.submissionList.map(submission => 
-            (<Submission {...submission} key={submission.id} 
-                onClick={() => {
-                    addDetails({ tests : submission.tests, id : submission.id });
-                    toggleDetails();
-                }}/>))
+        let mapping =
+            this.props.submissionList.map(submission => 
+                (<Submission
+                    {...submission}
+                    key={submission.id}
+                    onClick={() => {
+                        addDetails({ tests : submission.tests, id : submission.id });
+                        toggleDetails();
+                    }}
+                />))
         return (
             <>
                 <Paper>
