@@ -4,22 +4,24 @@
  * @returns {Promise<Response>}
  */
 
-import { pushNotification } from '../../notifier/notify.js'
+import { pushNotification } from "../../notifier/notify.js";
 
 export default async function downloadSubmission(id) {
     return fetch(`/api/subs/${String(id)}/source`)
-        .then(res => {
+        .then((res) => {
             if (res.status !== 200)
-                throw new Error ('Error fetching source code : response code is not 200')
-            return res.text()
+                throw new Error(
+                    "Error fetching source code : response code is not 200"
+                );
+            return res.text();
         })
         .catch((err) => {
-            if (process.env.NODE_ENV === 'development') {
+            if (process.env.NODE_ENV === "development") {
                 console.log(err);
-                if (typeof pushNotification === 'function') {
-                    pushNotification('Failed retrieving submissions.')
+                if (typeof pushNotification === "function") {
+                    pushNotification("Failed retrieving submissions.");
                 }
             }
-            return '';
-        })
+            return undefined;
+        });
 }
