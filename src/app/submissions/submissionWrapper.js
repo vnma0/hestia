@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, TableHead, TableRow, TablePagination, Button, TableCell, LinearProgress } from '@material-ui/core'
+import { Table, TableHead, TableRow, TablePagination, Button, TableCell, LinearProgress, Tooltip } from '@material-ui/core'
 import SubmissionTable from './submissionTable.js'
 
 import submissionParse from './stub/submission.js'
@@ -64,20 +64,24 @@ class Submissions extends React.Component {
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                <Button
-                                    disabled={!this.staleUpdate || this.updateInProgress}
-                                    onClick={() => {
-                                        this.updateInProgress = true;
-                                        this.forceUpdate();
-                                        // currently updating, disable things
+                                <Tooltip
+                                    title={(!this.staleUpdate || this.updateInProgress)
+                                            ? '' : 'Update the data & change back to first page'}>
+                                    <Button
+                                        disabled={!this.staleUpdate || this.updateInProgress}
+                                        onClick={() => {
+                                            this.updateInProgress = true;
+                                            this.forceUpdate();
+                                            // currently updating, disable things
 
-                                        this.update(0, 0, this.state.rowsPerPage);
-                                        // done, applying changes & enabling things
-                                        this.updateInProgress = false;
-                                        this.triggerUpdate();
-                                    }}>
-                                    {this.updateInProgress ? 'Updating...' : 'Reload'}
-                                </Button>
+                                            this.update(0, 0, this.state.rowsPerPage);
+                                            // done, applying changes & enabling things
+                                            this.updateInProgress = false;
+                                            this.triggerUpdate();
+                                        }}>
+                                        {this.updateInProgress ? 'Updating...' : 'Reload'}
+                                    </Button>
+                                </Tooltip>
                             </TableCell>
                             <TablePagination
                                 colSpan={5}
