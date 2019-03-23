@@ -1,9 +1,9 @@
-import React from 'react'
-import Button from '@material-ui/core/Button'
-import Menu from '@material-ui/core/Menu'
-import { MenuItem, Tooltip } from '@material-ui/core'
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import { MenuItem, Tooltip } from "@material-ui/core";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 /**
  * @name LangSelection
@@ -14,28 +14,27 @@ import PropTypes from 'prop-types';
  * @returns {React.Component} a `<Button />` component displaying current chosen language
  */
 
-
 class LangSelection extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            anchorEl: undefined,
-        }
-        this.handleChoice = this.handleChoice.bind(this)
-        this.handleClick = this.handleClick.bind(this)
+            anchorEl: undefined
+        };
+        this.handleChoice = this.handleChoice.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick(event) {
         this.setState({
             anchorEl: event.currentTarget
-        })
+        });
     }
 
     handleChoice(newLang) {
         this.setState({
-            anchorEl: undefined,
-        })
-        this.props.handleChange(newLang)
+            anchorEl: undefined
+        });
+        this.props.handleChange(newLang);
     }
 
     render() {
@@ -44,10 +43,10 @@ class LangSelection extends React.Component {
                 <Tooltip title="Change language" placement="bottom">
                     <Button
                         variant="contained"
-                        aria-owns={this.state.anchorEl ? 'menu' : undefined}
+                        aria-owns={this.state.anchorEl ? "menu" : undefined}
                         aria-haspopup={true}
                         onClick={this.handleClick}>
-                        {this.props.children || 'Not chosen'}
+                        {this.props.children || "Not chosen"}
                     </Button>
                 </Tooltip>
                 <Menu
@@ -61,13 +60,13 @@ class LangSelection extends React.Component {
                     ))}
                 </Menu>
             </>
-        )
+        );
     }
 }
 
 LangSelection.propTypes = {
     handleChange: PropTypes.func,
     displayLang: PropTypes.arrayOf(PropTypes.string).isRequired
-}
+};
 
-export default LangSelection
+export default LangSelection;
