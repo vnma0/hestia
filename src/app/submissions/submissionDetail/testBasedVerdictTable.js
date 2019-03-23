@@ -30,7 +30,9 @@ class AttestationSampleResult extends React.Component {
                     <VerdictSignature verdict={this.props.verdict || 'N/A'} />
                 </TableCell>
                 <TableCell align="justify">
-                    <ExecTimeSignature time={this.props.executionTime || 'N/A'} />
+                    <ExecTimeSignature
+                        time={this.props.executionTime || 'N/A'}
+                    />
                 </TableCell>
                 <TableCell align="right">
                     <MemorySignature memory={this.props.memory || 'N/A'} />
@@ -60,9 +62,11 @@ class ResultTable extends React.Component {
             return (
                 <Table>
                     <TableHead>
-                        <TableRow style={{
-                            minHeight: 24
-                        }}>
+                        <TableRow
+                            style={{
+                                minHeight: 24,
+                            }}
+                        >
                             <TableCell>Verdict</TableCell>
                             <TableCell>Execution duration</TableCell>
                             <TableCell>Memory consumed</TableCell>

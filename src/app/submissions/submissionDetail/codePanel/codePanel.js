@@ -1,7 +1,7 @@
-import React from 'react';
-import downloadSubmission from '../../stub/download.js';
-import { CardContent, Typography } from '@material-ui/core';
-import AceEditor from 'react-ace';
+import React from 'react'
+import downloadSubmission from '../../stub/download.js'
+import { CardContent, Typography } from '@material-ui/core'
+import AceEditor from 'react-ace'
 
 /**
  * @name CodePanel
@@ -10,18 +10,18 @@ import AceEditor from 'react-ace';
 
 export default class CodePanel extends React.PureComponent {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             code: undefined,
-            ref: React.createRef()
+            ref: React.createRef(),
         }
     }
 
     componentDidMount() {
         if (this.props.id && this.props.id.constructor === String) {
-            downloadSubmission(this.props.id).then((code) => {
+            downloadSubmission(this.props.id).then(code => {
                 this.setState({
-                    code: code
+                    code: code,
                 })
             })
         }
@@ -34,19 +34,25 @@ export default class CodePanel extends React.PureComponent {
     render() {
         return (
             <>
-                {this.state.code !== undefined
-                    ? <CardContent>
-                        <AceEditor value={this.state.code} readOnly
-                            ref={this.state.ref} width="100%" />
+                {this.state.code !== undefined ? (
+                    <CardContent>
+                        <AceEditor
+                            value={this.state.code}
+                            readOnly
+                            ref={this.state.ref}
+                            width="100%"
+                        />
                     </CardContent>
-                    : <CardContent>
+                ) : (
+                    <CardContent>
                         <Typography variant="h6">
                             No code is available.
                         </Typography>
                         <Typography component="p">
                             What are you expecting?
                         </Typography>
-                    </CardContent>}
+                    </CardContent>
+                )}
             </>
         )
     }

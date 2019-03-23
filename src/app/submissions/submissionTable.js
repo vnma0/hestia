@@ -20,20 +20,23 @@ import SubmissionDetail from './submissionDetail/submissionDetail.js'
  * @return {Table} : a `<Table />` containing submissions
  */
 
-import { toggleDetails, addDetails } from './submissionDetail/submissionDetail.js';
+import {
+    toggleDetails,
+    addDetails,
+} from './submissionDetail/submissionDetail.js'
 
 class SubmissionTable extends React.PureComponent {
     render() {
-        let mapping =
-            this.props.submissionList.map(submission => 
-                (<Submission
-                    {...submission}
-                    key={submission.id}
-                    onClick={() => {
-                        addDetails({ tests : submission.tests, id : submission.id });
-                        toggleDetails();
-                    }}
-                />))
+        let mapping = this.props.submissionList.map(submission => (
+            <Submission
+                {...submission}
+                key={submission.id}
+                onClick={() => {
+                    addDetails({ tests: submission.tests, id: submission.id })
+                    toggleDetails()
+                }}
+            />
+        ))
         return (
             <>
                 <Paper>
@@ -49,9 +52,7 @@ class SubmissionTable extends React.PureComponent {
                                 <TableCell>Timestamp</TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
-                            {mapping}
-                        </TableBody>
+                        <TableBody>{mapping}</TableBody>
                     </Table>
                     <SubmissionDetail />
                 </Paper>

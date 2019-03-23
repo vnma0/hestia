@@ -27,8 +27,6 @@ import MemorySignature from './signature/memorySignature.js'
  * @returns {React.Component} : A `<TableRow>` containing all nicely-formatted information.
  */
 
-
-
 class Submission extends React.PureComponent {
     render() {
         return (
@@ -46,7 +44,8 @@ class Submission extends React.PureComponent {
                     </TableCell>
                     <TableCell>
                         <LanguageSignature
-                            languageName={this.props.language || 'N/A'} />
+                            languageName={this.props.language || 'N/A'}
+                        />
                     </TableCell>
                     <TableCell>
                         <VerdictSignature
@@ -64,7 +63,8 @@ class Submission extends React.PureComponent {
                     <TableCell>
                         {/* <TimestampSignature time={this.props.timestamp || "N/A"} /> */}
                         {/* table overflow; will fix later, I guess */}
-                        {new Date(this.props.timestamp).toLocaleString() || 'N/A'}
+                        {new Date(this.props.timestamp).toLocaleString() ||
+                            'N/A'}
                     </TableCell>
                 </TableRow>
             </>

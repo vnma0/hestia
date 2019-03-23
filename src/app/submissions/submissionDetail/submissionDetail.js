@@ -1,13 +1,13 @@
-import React from 'react';
-import { Dialog, DialogActions, Button } from '@material-ui/core';
+import React from 'react'
+import { Dialog, DialogActions, Button } from '@material-ui/core'
 
 import ResultTable from './testBasedVerdictTable.js'
-import CodeDialog from './codePanel/codeDialog.js';
+import CodeDialog from './codePanel/codeDialog.js'
 
-import { toggleCodeDialog } from './codePanel/codeDialog.js';
+import { toggleCodeDialog } from './codePanel/codeDialog.js'
 
-export let toggleDetails;
-export let addDetails;
+export let toggleDetails
+export let addDetails
 
 /**
  * @name SubmissionDetails
@@ -17,43 +17,46 @@ export let addDetails;
 
 export default class SubmissionDetails extends React.PureComponent {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            open : false,
-            details: {}
+            open: false,
+            details: {},
         }
-        toggleDetails = this.toggle = this.toggle.bind(this);
-        addDetails = this.addDetails = this.addDetails.bind(this);
+        toggleDetails = this.toggle = this.toggle.bind(this)
+        addDetails = this.addDetails = this.addDetails.bind(this)
     }
 
     toggle() {
         this.setState({
-            open : !this.state.open
+            open: !this.state.open,
         })
     }
 
     addDetails(details) {
         this.setState({
-            details : details
+            details: details,
         })
     }
 
     render() {
         return (
             <>
-                <Dialog open={this.state.open} onClose={this.toggle} maxWidth="md"
-                    fullWidth scroll="body" >
-                    <ResultTable tests={this.state.details.tests}/>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.toggle}
+                    maxWidth="md"
+                    fullWidth
+                    scroll="body"
+                >
+                    <ResultTable tests={this.state.details.tests} />
                     <DialogActions>
                         <Button onClick={toggleCodeDialog}>
                             Show source code
                         </Button>
-                        <Button onClick={this.toggle}>
-                            Close
-                        </Button>
+                        <Button onClick={this.toggle}>Close</Button>
                     </DialogActions>
                 </Dialog>
-                <CodeDialog id={this.state.details.id}/>
+                <CodeDialog id={this.state.details.id} />
             </>
         )
     }
