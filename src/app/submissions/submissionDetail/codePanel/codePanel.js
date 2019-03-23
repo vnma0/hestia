@@ -12,8 +12,8 @@ export default class CodePanel extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            code : undefined,
-            ref : React.createRef()
+            code: undefined,
+            ref: React.createRef()
         }
     }
 
@@ -21,7 +21,7 @@ export default class CodePanel extends React.PureComponent {
         if (this.props.id && this.props.id.constructor === String) {
             downloadSubmission(this.props.id).then((code) => {
                 this.setState({
-                    code : code
+                    code: code
                 })
             })
         }
@@ -37,7 +37,7 @@ export default class CodePanel extends React.PureComponent {
                 {this.state.code !== undefined
                     ? <CardContent>
                         <AceEditor value={this.state.code} readOnly
-                            ref={this.state.ref} width="100%"/>
+                            ref={this.state.ref} width="100%" />
                     </CardContent>
                     : <CardContent>
                         <Typography variant="h6">
