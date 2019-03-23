@@ -12,7 +12,7 @@ export default class CodePanel extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            code : '',
+            code : undefined,
             ref : React.createRef()
         }
     }
@@ -34,7 +34,7 @@ export default class CodePanel extends React.PureComponent {
     render() {
         return (
             <>
-                {this.state.code.length > 0
+                {this.state.code !== undefined
                     ? <CardContent>
                         <AceEditor value={this.state.code} readOnly
                             ref={this.state.ref}/>

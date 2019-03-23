@@ -20,6 +20,6 @@ export default async function downloadSubmission(id) {
                     pushNotification('Failed retrieving submissions.')
                 }
             }
-            return '';
+            return undefined;
         })
 }
