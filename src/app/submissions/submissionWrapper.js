@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, TableHead, TableRow, TablePagination, Button, TableCell } from '@material-ui/core'
+import { Table, TableHead, TableRow, TablePagination, Button, TableCell, LinearProgress } from '@material-ui/core'
 import SubmissionTable from './submissionTable.js'
 
 import submissionParse from './stub/submission.js'
@@ -16,6 +16,7 @@ class Submissions extends React.Component {
         }
         this.interval = undefined;
         this.staleUpdate = false;
+        this.updateInProgress = false;
 
         this.update = this.update.bind(this)
         this.update(
@@ -46,7 +47,6 @@ class Submissions extends React.Component {
     componentDidMount() {
         this.interval = setInterval(() => {
             submissionParse(0, 0, 1).then(data => {
-                console.log(data.meta.submissionsListSize);
                 if (data.meta.submissionsListSize > this.state.listSize)
                     this.triggerUpdate()
             })
@@ -65,12 +65,18 @@ class Submissions extends React.Component {
                         <TableRow>
                             <TableCell>
                                 <Button
-                                    disabled={!this.staleUpdate}
+                                    disabled={!this.staleUpdate || this.updateInProgress}
                                     onClick={() => {
+                                        this.updateInProgress = true;
+                                        this.forceUpdate();
+                                        // currently updating, disable things
+
                                         this.update(0, 0, this.state.rowsPerPage);
+                                        // done, applying changes & enabling things
+                                        this.updateInProgress = false;
                                         this.triggerUpdate();
                                     }}>
-                                    Reload
+                                    {this.updateInProgress ? 'Updating...' : 'Reload'}
                                 </Button>
                             </TableCell>
                             <TablePagination
@@ -102,7 +108,13 @@ class Submissions extends React.Component {
                         </TableRow>
                     </TableHead>
                 </Table>
-                <SubmissionTable submissionList={this.state.submissions} />
+                <LinearProgress style={{
+                    color: 'green',
+                    display: this.updateInProgress ? '' : 'none'
+                }}/>
+                {this.updateInProgress
+                    ? <></> 
+                    : <SubmissionTable submissionList={this.state.submissions} />}
             </>
         )
     }
