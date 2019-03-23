@@ -19,7 +19,7 @@ class LangSelection extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            anchorEl: null,
+            anchorEl: undefined,
         }
         this.handleChoice = this.handleChoice.bind(this)
         this.handleClick = this.handleClick.bind(this)
@@ -33,7 +33,7 @@ class LangSelection extends React.Component {
 
     handleChoice(newLang) {
         this.setState({
-            anchorEl: null,
+            anchorEl: undefined,
         })
         this.props.handleChange(newLang)
     }
@@ -41,7 +41,7 @@ class LangSelection extends React.Component {
     render() {
         return (
             <>
-                <Tooltip title="Change coding language" placement="bottom">
+                <Tooltip title="Change language" placement="bottom">
                     <Button
                         variant="contained"
                         aria-owns={this.state.anchorEl ? 'menu' : undefined}
@@ -52,7 +52,8 @@ class LangSelection extends React.Component {
                 </Tooltip>
                 <Menu
                     anchorEl={this.state.anchorEl}
-                    open={Boolean(this.state.anchorEl)}>
+                    open={this.state.anchorEl !== undefined}
+                    onClose={() => this.setState({ anchorEl: undefined })}>
                     {this.props.displayLang.map((x, i) => (
                         <MenuItem onClick={() => this.handleChoice(i)} key={i}>
                             {x}
