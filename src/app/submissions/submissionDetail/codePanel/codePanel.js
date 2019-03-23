@@ -37,7 +37,7 @@ export default class CodePanel extends React.PureComponent {
                 {this.state.code !== undefined
                     ? <CardContent>
                         <AceEditor value={this.state.code} readOnly
-                            ref={this.state.ref}/>
+                            ref={this.state.ref} width="100%"/>
                     </CardContent>
                     : <CardContent>
                         <Typography variant="h6">
