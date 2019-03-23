@@ -83,8 +83,6 @@ export default function parseExt(ext) {
         case 'diff':
         case 'patch':
             return 'diff'
-        case '^Dockerfile':
-            return 'dockerfile'
         case 'dot':
             return 'dot'
         case 'drl':
@@ -127,8 +125,6 @@ export default function parseExt(ext) {
             return 'gcode'
         case 'feature':
             return 'gherkin'
-        case '^.gitignore':
-            return 'gitignore'
         case 'glsl':
         case 'frag':
         case 'vert':
@@ -177,7 +173,6 @@ export default function parseExt(ext) {
         case 'jack':
             return 'jack'
         case 'jade':
-            return 'jade'
         case 'pug':
             return 'jade'
         case 'java':
@@ -223,10 +218,6 @@ export default function parseExt(ext) {
             return 'luapage'
         case 'lucene':
             return 'lucene'
-        case '^Makefile':
-        case '^GNUmakefile':
-        case '^makefile':
-        case '^OCamlMakefile':
         case 'make':
             return 'makefile'
         case 'md':
@@ -267,8 +258,6 @@ export default function parseExt(ext) {
             return 'perl6'
         case 'pgsql':
             return 'pgsql'
-        case 'blade.php':
-            return 'php_laravel_blade'
         case 'php':
         case 'inc':
         case 'phtml':
@@ -321,9 +310,6 @@ export default function parseExt(ext) {
         case 'ru':
         case 'gemspec':
         case 'rake':
-        case '^Guardfile':
-        case '^Rakefile':
-        case '^Gemfile':
             return 'ruby'
         case 'rs':
             return 'rust'
@@ -342,10 +328,7 @@ export default function parseExt(ext) {
         case 'scss':
             return 'scss'
         case 'sh':
-            return 'sh'
         case 'bash':
-            return 'sh'
-        case '^.bashrc':
             return 'sh'
         case 'sjs':
             return 'sjs'
