@@ -1,8 +1,8 @@
 import React from 'react'
-import SubmissionTable from './submissionTable'
+import { Table, TableHead, TableRow, TablePagination, Button, TableCell } from '@material-ui/core'
+import SubmissionTable from './submissionTable.js'
 
 import submissionParse from './stub/submission.js'
-import { Table, TableHead, TableRow, TablePagination } from '@material-ui/core'
 
 class Submissions extends React.Component {
     constructor(props) {
@@ -12,14 +12,19 @@ class Submissions extends React.Component {
 
             rowsPerPage: 10,
             listSize: 0,
-            page: 0,
+            page: 0
         }
+        this.interval = undefined;
+        this.staleUpdate = false;
+
         this.update = this.update.bind(this)
         this.update(
             this.state.listSize,
             this.state.page,
             this.state.rowsPerPage
         )
+
+        this.triggerUpdate = this.triggerUpdate.bind(this);
     }
 
     update = (listSize, page, rowsPerPage) => {
@@ -33,14 +38,43 @@ class Submissions extends React.Component {
         )
     }
 
+    triggerUpdate() {
+        this.staleUpdate = !this.staleUpdate;
+        this.forceUpdate()
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => {
+            submissionParse(0, 0, 1).then(data => {
+                console.log(data.meta.submissionsListSize);
+                if (data.meta.submissionsListSize > this.state.listSize)
+                    this.triggerUpdate()
+            })
+        }, 30 * 1000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval)
+    }
+
     render() {
         return (
             <>
                 <Table>
                     <TableHead>
                         <TableRow>
+                            <TableCell>
+                                <Button
+                                    disabled={!this.staleUpdate}
+                                    onClick={() => {
+                                        this.update(0, 0, this.state.rowsPerPage);
+                                        this.triggerUpdate();
+                                    }}>
+                                    Reload
+                                </Button>
+                            </TableCell>
                             <TablePagination
-                                colSpan={6}
+                                colSpan={5}
                                 rowsPerPage={this.state.rowsPerPage}
                                 count={this.state.listSize}
                                 page={this.state.page}
