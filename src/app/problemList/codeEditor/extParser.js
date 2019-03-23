@@ -7,7 +7,6 @@ export default function parseExt(ext) {
         case 'as':
             return 'actionscript'
         case 'ada':
-            return 'ada'
         case 'adb':
             return 'ada'
         case 'htaccess':
@@ -18,7 +17,6 @@ export default function parseExt(ext) {
         case 'adoc':
             return 'asciidoc'
         case 'dsl':
-            return 'asl'
         case 'asl':
             return 'asl'
         case 'asm':
