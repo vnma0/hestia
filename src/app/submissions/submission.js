@@ -1,13 +1,13 @@
-import React from 'react'
-import { TableRow, TableCell } from '@material-ui/core'
+import React from "react";
+import { TableRow, TableCell } from "@material-ui/core";
 
-import ContestantSignature from './signature/contestantSignature.js'
-import ProblemSignature from './signature/problemSignature.js'
-import LanguageSignature from './signature/languageSignature.js'
-import VerdictSignature from './signature/verdictSignature.js'
-import ExecTimeSignature from './signature/execTimeSignature.js'
+import ContestantSignature from "./signature/contestantSignature.js";
+import ProblemSignature from "./signature/problemSignature.js";
+import LanguageSignature from "./signature/languageSignature.js";
+import VerdictSignature from "./signature/verdictSignature.js";
+import ExecTimeSignature from "./signature/execTimeSignature.js";
 // import TimestampSignature from './signature/timestampSignature.js'
-import MemorySignature from './signature/memorySignature.js'
+import MemorySignature from "./signature/memorySignature.js";
 
 // import SubmissionDownloadButton from './submission/downloadCell.js'
 
@@ -34,42 +34,42 @@ class Submission extends React.PureComponent {
                 <TableRow {...this.props}>
                     <TableCell>
                         <ContestantSignature
-                            contestantName={this.props.contestant || 'N/A'}
+                            contestantName={this.props.contestant || "N/A"}
                         />
                     </TableCell>
                     <TableCell>
                         <ProblemSignature
-                            problemName={this.props.problem || 'N/A'}
+                            problemName={this.props.problem || "N/A"}
                         />
                     </TableCell>
                     <TableCell>
                         <LanguageSignature
-                            languageName={this.props.language || 'N/A'}
+                            languageName={this.props.language || "N/A"}
                         />
                     </TableCell>
                     <TableCell>
                         <VerdictSignature
-                            verdict={this.props.verdict || 'N/A'}
+                            verdict={this.props.verdict || "N/A"}
                         />
                     </TableCell>
                     <TableCell>
                         <ExecTimeSignature
-                            time={this.props.executionTime || 'N/A'}
+                            time={this.props.executionTime || "N/A"}
                         />
                     </TableCell>
                     <TableCell>
-                        <MemorySignature memory={this.props.memory || 'N/A'} />
+                        <MemorySignature memory={this.props.memory || "N/A"} />
                     </TableCell>
                     <TableCell>
                         {/* <TimestampSignature time={this.props.timestamp || "N/A"} /> */}
                         {/* table overflow; will fix later, I guess */}
                         {new Date(this.props.timestamp).toLocaleString() ||
-                            'N/A'}
+                            "N/A"}
                     </TableCell>
                 </TableRow>
             </>
-        )
+        );
     }
 }
 
-export default Submission
+export default Submission;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
     Table,
     TableHead,
@@ -6,11 +6,11 @@ import {
     TableRow,
     TableBody,
     Typography,
-    CardContent,
-} from '@material-ui/core'
-import MemorySignature from '../signature/memorySignature'
-import ExecTimeSignature from '../signature/execTimeSignature'
-import VerdictSignature from '../signature/verdictSignature'
+    CardContent
+} from "@material-ui/core";
+import MemorySignature from "../signature/memorySignature";
+import ExecTimeSignature from "../signature/execTimeSignature";
+import VerdictSignature from "../signature/verdictSignature";
 
 /**
  * @name AttestationSampleResult
@@ -27,19 +27,19 @@ class AttestationSampleResult extends React.Component {
         return (
             <TableRow>
                 <TableCell>
-                    <VerdictSignature verdict={this.props.verdict || 'N/A'} />
+                    <VerdictSignature verdict={this.props.verdict || "N/A"} />
                 </TableCell>
                 <TableCell align="justify">
                     <ExecTimeSignature
-                        time={this.props.executionTime || 'N/A'}
+                        time={this.props.executionTime || "N/A"}
                     />
                 </TableCell>
                 <TableCell align="right">
-                    <MemorySignature memory={this.props.memory || 'N/A'} />
+                    <MemorySignature memory={this.props.memory || "N/A"} />
                 </TableCell>
                 <TableCell align="right">{this.props.mark}</TableCell>
             </TableRow>
-        )
+        );
     }
 }
 
@@ -64,9 +64,8 @@ class ResultTable extends React.Component {
                     <TableHead>
                         <TableRow
                             style={{
-                                minHeight: 24,
-                            }}
-                        >
+                                minHeight: 24
+                            }}>
                             <TableCell>Verdict</TableCell>
                             <TableCell>Execution duration</TableCell>
                             <TableCell>Memory consumed</TableCell>
@@ -80,11 +79,11 @@ class ResultTable extends React.Component {
                                     key={`test-${idx}`}
                                     {...test}
                                 />
-                            )
+                            );
                         })}
                     </TableBody>
                 </Table>
-            )
+            );
         // else if an empty array or invalid variable type was supplied, assume ACM problem
         return (
             <CardContent>
@@ -95,8 +94,8 @@ class ResultTable extends React.Component {
                     I guess this is an ACM problem?
                 </Typography>
             </CardContent>
-        )
+        );
     }
 }
 
-export default ResultTable
+export default ResultTable;

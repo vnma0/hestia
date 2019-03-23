@@ -1,13 +1,13 @@
-import React from 'react'
-import { Dialog, DialogActions, Button } from '@material-ui/core'
+import React from "react";
+import { Dialog, DialogActions, Button } from "@material-ui/core";
 
-import ResultTable from './testBasedVerdictTable.js'
-import CodeDialog from './codePanel/codeDialog.js'
+import ResultTable from "./testBasedVerdictTable.js";
+import CodeDialog from "./codePanel/codeDialog.js";
 
-import { toggleCodeDialog } from './codePanel/codeDialog.js'
+import { toggleCodeDialog } from "./codePanel/codeDialog.js";
 
-export let toggleDetails
-export let addDetails
+export let toggleDetails;
+export let addDetails;
 
 /**
  * @name SubmissionDetails
@@ -17,25 +17,25 @@ export let addDetails
 
 export default class SubmissionDetails extends React.PureComponent {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             open: false,
-            details: {},
-        }
-        toggleDetails = this.toggle = this.toggle.bind(this)
-        addDetails = this.addDetails = this.addDetails.bind(this)
+            details: {}
+        };
+        toggleDetails = this.toggle = this.toggle.bind(this);
+        addDetails = this.addDetails = this.addDetails.bind(this);
     }
 
     toggle() {
         this.setState({
-            open: !this.state.open,
-        })
+            open: !this.state.open
+        });
     }
 
     addDetails(details) {
         this.setState({
-            details: details,
-        })
+            details: details
+        });
     }
 
     render() {
@@ -46,8 +46,7 @@ export default class SubmissionDetails extends React.PureComponent {
                     onClose={this.toggle}
                     maxWidth="md"
                     fullWidth
-                    scroll="body"
-                >
+                    scroll="body">
                     <ResultTable tests={this.state.details.tests} />
                     <DialogActions>
                         <Button onClick={toggleCodeDialog}>
@@ -58,6 +57,6 @@ export default class SubmissionDetails extends React.PureComponent {
                 </Dialog>
                 <CodeDialog id={this.state.details.id} />
             </>
-        )
+        );
     }
 }

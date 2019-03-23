@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 import {
     Table,
     TableBody,
     TableCell,
     TableHead,
     Paper,
-    TableRow,
-} from '@material-ui/core'
+    TableRow
+} from "@material-ui/core";
 
-import Submission from './submission.js'
-import SubmissionDetail from './submissionDetail/submissionDetail.js'
+import Submission from "./submission.js";
+import SubmissionDetail from "./submissionDetail/submissionDetail.js";
 /**
  * @name SubmissionTable
  * @param `{Array : Object({contestant, Problem, Language, Verdict, ExecutionTime, memory, timestamp, test})}` `SubmissionList`
@@ -22,25 +22,25 @@ import SubmissionDetail from './submissionDetail/submissionDetail.js'
 
 import {
     toggleDetails,
-    addDetails,
-} from './submissionDetail/submissionDetail.js'
+    addDetails
+} from "./submissionDetail/submissionDetail.js";
 
 class SubmissionTable extends React.PureComponent {
     render() {
-        let mapping = this.props.submissionList.map(submission => (
+        let mapping = this.props.submissionList.map((submission) => (
             <Submission
                 {...submission}
                 key={submission.id}
                 onClick={() => {
-                    addDetails({ tests: submission.tests, id: submission.id })
-                    toggleDetails()
+                    addDetails({ tests: submission.tests, id: submission.id });
+                    toggleDetails();
                 }}
             />
-        ))
+        ));
         return (
             <>
                 <Paper>
-                    <Table style={{ tableLayout: 'fixed' }}>
+                    <Table style={{ tableLayout: "fixed" }}>
                         <TableHead>
                             <TableRow>
                                 <TableCell>Submitted by</TableCell>
@@ -57,8 +57,8 @@ class SubmissionTable extends React.PureComponent {
                     <SubmissionDetail />
                 </Paper>
             </>
-        )
+        );
     }
 }
 
-export default SubmissionTable
+export default SubmissionTable;

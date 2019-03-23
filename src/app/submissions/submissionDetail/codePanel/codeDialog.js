@@ -1,24 +1,24 @@
-import React from 'react'
-import { Dialog, Button, DialogActions } from '@material-ui/core'
+import React from "react";
+import { Dialog, Button, DialogActions } from "@material-ui/core";
 
-import CodePanel from './codePanel.js'
+import CodePanel from "./codePanel.js";
 
-export let toggleCodeDialog
+export let toggleCodeDialog;
 
 export default class CodeDialog extends React.PureComponent {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            open: false,
-        }
+            open: false
+        };
 
-        toggleCodeDialog = this.toggle = this.toggle.bind(this)
+        toggleCodeDialog = this.toggle = this.toggle.bind(this);
     }
 
     toggle() {
         this.setState({
-            open: !this.state.open,
-        })
+            open: !this.state.open
+        });
     }
 
     render() {
@@ -29,6 +29,6 @@ export default class CodeDialog extends React.PureComponent {
                     <Button onClick={this.toggle}>Close</Button>
                 </DialogActions>
             </Dialog>
-        )
+        );
     }
 }
