@@ -13,6 +13,7 @@ class ProblemWrapper extends React.Component {
     }
 
     componentDidMount() {
+        this.componentDidUpdate()
         publicParse().then((data) => {
             this.setState({
                 problems: data.problems,
@@ -20,6 +21,12 @@ class ProblemWrapper extends React.Component {
             })
             this.forceUpdate()
         })
+    }
+
+    componentDidUpdate() {
+        if (this.props.title) {
+            document.title = String(this.props.title);
+        }
     }
 
     render() {

@@ -22,6 +22,15 @@ class Submissions extends React.Component {
         )
     }
 
+    componentDidMount() {
+        if (this.props.title) 
+            document.title = String(this.props.title)
+    }
+
+    componentWillUpdate() {
+        this.componentDidMount()
+    }
+
     update = (listSize, page, rowsPerPage) => {
         submissionParse(listSize, page, rowsPerPage).then(data =>
             this.setState({
