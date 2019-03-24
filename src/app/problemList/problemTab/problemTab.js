@@ -44,16 +44,11 @@ class ProblemTab extends React.PureComponent {
                         indicatorColor="primary"
                         textColor="primary"
                         scrollable
-                        scrollButtons="auto"
-                    >
+                        scrollButtons="auto">
                         {this.props.problems.map((x,index) => (
                             <Tab label={x} key={index}/>
                         ))}
                     </Tabs>
-                    <TabContainer>
-                        {this.props.problems[this.props.value]
-                            ? this.props.problems[this.props.value].statement : ''}
-                    </TabContainer>
                 </AppBar>
             </div>
         )
