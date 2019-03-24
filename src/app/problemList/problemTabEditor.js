@@ -1,5 +1,4 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
 import ProblemTab from './problemTab/problemTab'
 import CodeBox from './codeEditor/codeBox'
 

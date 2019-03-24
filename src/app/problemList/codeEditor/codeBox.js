@@ -1,12 +1,9 @@
 import React from 'react'
-import { AppBar, Grid } from '@material-ui/core'
+import { AppBar, Grid, Divider } from '@material-ui/core'
 
 import CodeEditor from './codeEditor'
-// import UploadButton from './uploadButton'
 import SubmitButton from './submitButton'
-// import ConfirmButton from './confirmButton'
 import LangSelection from './langSelection'
-// import FileDisplay from './fileDisplay'
 
 class CodeBox extends React.PureComponent {
     constructor(props) {
@@ -46,7 +43,8 @@ class CodeBox extends React.PureComponent {
     render() {
         return (
             <div style={{ flexGrow: 1 }}>
-                <AppBar position="static" color="default">
+                <Divider light variant="inset" />
+                <AppBar position="static" color="default" elevation={0}>
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
                             <Grid item
@@ -57,22 +55,6 @@ class CodeBox extends React.PureComponent {
                                     {this.props.displayLang[this.state.currentLangId]}
                                 </LangSelection>
                             </Grid>
-                            {/* <Grid item>
-                                <UploadButton sendFile={this.handleFileChange}>
-                                    Upload file
-                                </UploadButton>
-                            </Grid>
-                            <Grid item
-                                style={{
-                                    flexGrow: 1,
-                                }} >
-                                <FileDisplay fileName={this.state.fileName}>
-                                    No file chosen
-                                </FileDisplay>
-                            </Grid>
-                            <Grid item>
-                                <ConfirmButton confirm={this.handleConfirm} />
-                            </Grid> */}
                             <Grid item>
                                 <SubmitButton
                                     disabled={

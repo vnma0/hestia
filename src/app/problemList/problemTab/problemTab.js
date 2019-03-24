@@ -13,15 +13,6 @@ import Typography from '@material-ui/core/Typography'
  * Tabs Api: https://material-ui.com/api/tabs/
  */
 
-//The tab container
-function TabContainer(props) {
-    return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
-    )
-}
-
 class ProblemTab extends React.PureComponent {
     constructor(props) {
         super(props)
@@ -39,6 +30,7 @@ class ProblemTab extends React.PureComponent {
             <div>
                 <AppBar position="static" color="default">
                     <Tabs
+                        centered
                         value={this.props.value}
                         onChange={this.handleChange}
                         indicatorColor="primary"
