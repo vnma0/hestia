@@ -50,7 +50,7 @@ class Submissions extends React.Component {
                 if (data.meta.submissionsListSize > this.state.listSize)
                     this.triggerUpdate()
             })
-        }, 30 * 1000)
+        }, 5 * 1000)
     }
 
     componentWillUnmount() {
@@ -116,9 +116,9 @@ class Submissions extends React.Component {
                     color: 'green',
                     display: this.updateInProgress ? '' : 'none'
                 }}/>
-                {this.updateInProgress
-                    ? <></> 
-                    : <SubmissionTable submissionList={this.state.submissions} />}
+                <div style={this.updateInProgress ? { opacity: 0.4, pointerEvents: 'none' } : {}}>
+                    <SubmissionTable submissionList={this.state.submissions} />
+                </div>
             </>
         )
     }
