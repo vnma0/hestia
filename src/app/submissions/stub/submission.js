@@ -1,17 +1,6 @@
 import { isNumber } from 'util'
 import { pushNotification } from '../../notifier/notify.js'
 
-/**
- * @name submissionParse
- * @desc Fetch the submission table
- * @param {Function} func - Function to execute after fetching & mapping done
- * @param {Number} count - Number of subs limited in the selected
- * @param {Number} size - Limit the size of each page
- * @param {Number} page - Page number
- * @return {Promise} a `fetch()` `Promise`
- * @author minhducsun2002
- */
-
 function constructURL(count, page, size) {
     let out = new URLSearchParams()
     if (isNumber(count)) out.append(`count`, count)
@@ -19,6 +8,16 @@ function constructURL(count, page, size) {
     if (isNumber(size)) out.append(`size`, size)
     return out.toString() === '' ? '' : `?${out.toString()}`
 }
+
+/**
+ * @name submissionParse
+ * @desc Fetch the submission table
+ * @param {Number} count - Number of subs limited in the selected
+ * @param {Number} size - Limit the size of each page
+ * @param {Number} page - Page number
+ * @return {Promise<Response>} a `fetch()` `Promise`
+ * @author minhducsun2002
+ */
 
 export default async function submissionParse(count, page, size) {
     return fetch(`/api/subs${constructURL(count, page, size)}`)
