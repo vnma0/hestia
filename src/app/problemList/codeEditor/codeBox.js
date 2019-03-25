@@ -42,7 +42,7 @@ class CodeBox extends React.PureComponent {
     }
     render() {
         return (
-            <div style={{ flexGrow: 1 }}>
+            <>
                 <Divider light variant="inset" />
                 <AppBar position="static" color="default" elevation={0}>
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
@@ -78,9 +78,10 @@ class CodeBox extends React.PureComponent {
                             </Grid>
                         </Grid>
                     </div>
+                </AppBar>
                 <div style={(
                     this.state.submitting ? 
-                    { opacity: 0.4, pointerEvents: 'none' } : {}
+                    { opacity: 0.4, pointerEvents: 'none', height: '100%' } : { height: '100%' }
                 )}>
                         <CodeEditor
                             readOnly={this.state.submitting}
@@ -88,9 +89,8 @@ class CodeBox extends React.PureComponent {
                             update={this.handleUpdate}
                             code={this.state.code}
                         />
-                    </div>
-                </AppBar>
-            </div>
+                </div>
+            </>
         )
     }
 }

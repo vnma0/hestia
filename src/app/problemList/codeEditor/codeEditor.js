@@ -177,6 +177,8 @@ class CodeEditor extends React.PureComponent {
                 value={this.props.code}
                 onChange={this.props.update}
                 width="100%"
+                height={`${window.innerHeight * 2}px`}
+                // set height to overwhelming large, so no problems even if screens get big
                 readOnly={this.props.readOnly}
             />
         );

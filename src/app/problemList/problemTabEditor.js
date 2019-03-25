@@ -20,6 +20,14 @@ class ProblemTabEditor extends React.Component {
         this.handleTabChange = this.handleTabChange.bind(this)
     }
 
+    componentDidMount() {
+        document.querySelector('body').style.overflowY = 'hidden';
+    }
+            
+    componentWillUnmount() {
+        document.querySelector('body').style.overflowY = 'auto';
+    }
+
     handleTabChange(value) {
         this.setState({
             currentTab: value,
@@ -27,7 +35,7 @@ class ProblemTabEditor extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div style={{ height: '100%' }}>
                 <ProblemTab
                     problems={this.props.problems}
                     handleTabChange={this.handleTabChange}
