@@ -1,6 +1,6 @@
 import React from "react";
 import downloadSubmission from "../../stub/download.js";
-import { CardContent, Typography } from "@material-ui/core";
+import { CardContent, Typography, CircularProgress } from "@material-ui/core";
 import AceEditor from "react-ace";
 
 /**
@@ -13,7 +13,8 @@ export default class CodePanel extends React.PureComponent {
         super(props);
         this.state = {
             code: undefined,
-            ref: React.createRef()
+            ref: React.createRef(),
+            loading : true
         };
     }
 
@@ -21,11 +22,16 @@ export default class CodePanel extends React.PureComponent {
         if (this.props.id && this.props.id.constructor === String) {
             downloadSubmission(this.props.id).then((code) => {
                 this.setState({
-                    code: code
+                    code: code,
+                    loading: false
                 });
             });
         }
     }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return (this.state.code !== nextState.code || this.s)
+    // }
 
     componentDidUpdate() {
         this.componentDidMount();
@@ -44,14 +50,22 @@ export default class CodePanel extends React.PureComponent {
                         />
                     </CardContent>
                 ) : (
-                    <CardContent>
-                        <Typography variant="h6">
-                            No code is available.
-                        </Typography>
-                        <Typography component="p">
-                            What are you expecting?
-                        </Typography>
-                    </CardContent>
+                    this.state.loading
+                        ? <div align="center">
+                            <CardContent>
+                                <Typography variant="h6">
+                                    Loading...
+                                </Typography>
+                            </CardContent>
+                            <CircularProgress size={30} />
+                        </div> : <CardContent>
+                            <Typography variant="h6">
+                                No code is available.
+                            </Typography>
+                            <Typography component="p">
+                                What are you expecting?
+                            </Typography>
+                        </CardContent>
                 )}
             </>
         );
