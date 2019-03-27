@@ -8,6 +8,8 @@ import SubmitButton from './submitButton'
 import LangSelection from './langSelection'
 // import FileDisplay from './fileDisplay'
 
+import friendlyLang from '../../../strings/lang.json';
+
 class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props)
@@ -54,7 +56,11 @@ class CodeBox extends React.PureComponent {
                                 <LangSelection
                                     displayLang={this.props.displayLang || []}
                                     handleChange={this.handleLangChange}>
-                                    {this.props.displayLang[this.state.currentLangId]}
+                                    {friendlyLang[
+                                        String(this.props.displayLang[this.state.currentLangId])
+                                            .replace('.', '')
+                                            .toLowerCase()
+                                    ]}
                                 </LangSelection>
                             </Grid>
                             {/* <Grid item>

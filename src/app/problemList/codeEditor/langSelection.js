@@ -5,6 +5,8 @@ import { MenuItem, Tooltip } from "@material-ui/core";
 
 import PropTypes from "prop-types";
 
+import friendlyLang from '../../../strings/lang.json';
+
 /**
  * @name LangSelection
  * @description Language chooser
@@ -55,7 +57,7 @@ class LangSelection extends React.Component {
                     onClose={() => this.setState({ anchorEl: undefined })}>
                     {this.props.displayLang.map((x, i) => (
                         <MenuItem onClick={() => this.handleChoice(i)} key={i}>
-                            {x}
+                            {friendlyLang[String(x).replace('.', '').toLowerCase()]}
                         </MenuItem>
                     ))}
                 </Menu>

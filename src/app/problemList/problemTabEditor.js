@@ -40,25 +40,12 @@ class ProblemTabEditor extends React.Component {
                         <CodeBox
                             submitFileName={this.props.problems[this.state.currentTab] || ''}
                             ext={this.props.ext}
-                            displayLang={this.props.ext.map(string => parseEXT(string))}
+                            displayLang={this.props.ext}
                         />
                     </Grid>
                 </Grid>
             </div>
         )
-    }
-}
-
-function parseEXT(string) {
-    switch (string) {
-        case 'cpp':
-            return 'C++'
-        case 'java':
-            return 'OpenJDK 1.7.0-internal (developer build)'
-        case 'py':
-            return 'Python 3.3.2'
-        default:
-            return string
     }
 }
 
