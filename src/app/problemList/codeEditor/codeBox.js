@@ -51,7 +51,6 @@ class CodeBox extends React.PureComponent {
                                 <UploadButton
                                     onClick={this.inputEventFire}
                                     disabled={this.state.fileLoading}
-                                    color="primary"
                                     variant="contained"/>
                             </Grid>
                             <Grid item style={{ flexGrow: 1 }} >
