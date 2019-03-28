@@ -4,7 +4,18 @@
     "resources" : {
         "globalStatusBar" : {
             "login" : {
-                "invokingButton" : "Log in"
+                "invokingButton" : "Log in",
+                "dialog" : {
+                    "title" : "Log in",
+                    "greeting" : "Log in to submit solutions and view problems.",
+                    "username-hint": "ID",
+                    "passkey-hint": "Authentication key",
+                    "options" : {
+                        "cancel" : "Cancel",
+                        "login" : "Log in"
+                    },
+                    "error-text": "Failed to log in." 
+                }
             }
         }
     }

@@ -4,7 +4,18 @@
     "resources" : {
         "globalStatusBar" : {
             "login" : {
-                "invokingButton" : "Đăng nhập"
+                "invokingButton" : "Đăng nhập",
+                "dialog" : {
+                    "title" : "Đăng nhập",
+                    "greeting" : "Đăng nhập để xem đề và nộp các bài giải.",
+                    "username-hint": "Tên đăng nhập",
+                    "passkey-hint": "Mật khẩu",
+                    "options" : {
+                        "cancel" : "Hủy",
+                        "login" : "Đăng nhập"
+                    },
+                    "error-text": "Đăng nhập thất bại."
+                }
             }
         }
     }
