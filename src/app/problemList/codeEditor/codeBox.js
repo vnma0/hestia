@@ -105,11 +105,10 @@ class CodeBox extends React.PureComponent {
                             update={(code) => this.setState({ code: code })}
                             code={this.state.code}
                         />
-                    </div>
-                </AppBar>
+                </div>
                 <input type="file" onChange={(event) => this.processFile(event.target.files[0])}
                     ref={this.catcherRef} style={{ display: 'none' }}/>
-            </div>
+            </>
         )
     }
 }
