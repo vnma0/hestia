@@ -1,43 +1,18 @@
-import React from 'react'
-import { Button, Tooltip } from '@material-ui/core'
+import React from 'react';
+import { Button, Tooltip, CircularProgress } from '@material-ui/core';
+import CloudUpload from '@material-ui/icons/CloudUpload';
 
-/**
- * @name UploadButton
- * @description The upload button
- */
-
-class UploadButton extends React.Component {
-    constructor(props) {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-    }
-    handleChange(e) {
-        let file = e.target.files
-        let reader = new FileReader()
-        if (file[0] === undefined) return
-        reader.readAsText(file[0])
-        reader.onload = e => {
-            this.props.sendFile(String(e.target.result), String(file[0].name))
-        }
-    }
-    //render
+export default class UploadButton extends React.PureComponent {
     render() {
         return (
-            <>
-                <Tooltip title="Upload local file" placement="bottom">
-                    <Button component="label" variant="contained">
-                        {this.props.children}
-                        <input
-                            type="file"
-                            id="upload"
-                            style={{ display: 'none' }}
-                            onChange={e => this.handleChange(e)}
-                        />
-                    </Button>
-                </Tooltip>
-            </>
-        )
+            <Tooltip title="Load a file into the editor. Overwrite existing content.">
+                <Button {...this.props}>
+                    {this.props.disabled
+                        ? <CircularProgress size={20} />
+                        : <CloudUpload style={{ width: 20, height: 20 }}/>}
+                    {/* if disabled, it means a file is being loaded */}
+                </Button>
+            </Tooltip>
+        )   
     }
 }
-
-export default UploadButton
