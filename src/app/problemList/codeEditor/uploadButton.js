@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Tooltip } from '@material-ui/core';
+import { Button, Tooltip, CircularProgress } from '@material-ui/core';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 
 export default class UploadButton extends React.PureComponent {
@@ -7,7 +7,10 @@ export default class UploadButton extends React.PureComponent {
         return (
             <Tooltip title="Load a file into the editor. Overwrite existing content.">
                 <Button {...this.props}>
-                    <CloudUpload />
+                    {this.props.disabled
+                        ? <CircularProgress size={20} />
+                        : <CloudUpload style={{ width: 20, height: 20 }}/>}
+                    {/* if disabled, it means a file is being loaded */}
                 </Button>
             </Tooltip>
         )   

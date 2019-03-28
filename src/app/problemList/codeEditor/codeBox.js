@@ -48,12 +48,11 @@ class CodeBox extends React.PureComponent {
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
                             <Grid item>
-                                <UploadButton onClick={this.inputEventFire}
-                                    disabled={this.state.fileLoading}>
-                                    {this.state.fileLoading
-                                            ? <CircularProgress size={20}/>
-                                            : <></>}
-                                </UploadButton>
+                                <UploadButton
+                                    onClick={this.inputEventFire}
+                                    disabled={this.state.fileLoading}
+                                    color="primary"
+                                    variant="contained"/>
                             </Grid>
                             <Grid item style={{ flexGrow: 1 }} >
                                 <LangSelection
