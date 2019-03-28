@@ -69,7 +69,8 @@ class Hestia extends React.Component {
         return (
             <LocalizationProvider
                 {...(this.language && translations[this.language]
-                    ? {resources : translations[this.language].resources} : {})}>
+                    ? {resources : translations[this.language].resources}
+                    : {resources : translations['en_US'].resources})}>
                 <Notify
                     autoHideDuration={1000}
                     TransitionComponent={props => slideIn(props, 'left')}
