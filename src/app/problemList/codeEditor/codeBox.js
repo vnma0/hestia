@@ -1,47 +1,52 @@
 import React from 'react'
 import { AppBar, Grid, Divider } from '@material-ui/core'
 
-import CodeEditor from './codeEditor'
-import SubmitButton from './submitButton'
-import LangSelection from './langSelection'
+import CodeEditor from './codeEditor.js'
+import SubmitButton from './submitButton.js'
+import LangSelection from './langSelection.js'
+import UploadButton from './uploadButton.js';
+
+import { pushNotification } from '../../notifier/notify.js';
 
 import friendlyLang from '../../../strings/lang.json';
+
+var reader = new FileReader();
 
 class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            fileName: undefined,
-            fileCode: '',
             code: '',
-            currentLangId: 0,
-            submitting: false
+            langId: 0,
+            submitting: false,
+            fileLoading: false
         }
 
-        this.handleFileChange = this.handleFileChange.bind(this)
-        this.handleConfirm = this.handleConfirm.bind(this)
-        this.handleUpdate = this.handleUpdate.bind(this)
-        this.handleLangChange = this.handleLangChange.bind(this)
-    }
-    handleLangChange = newLang => {
-        this.setState({ currentLangId: newLang })
+        this.catcherRef = React.createRef();
+
+        this.processFile = this.processFile.bind(this);
+        this.inputEventFire = this.inputEventFire.bind(this);
     }
 
-    handleUpdate = code => {
-        this.setState({ code: code })
+    inputEventFire() {
+        this.catcherRef.current.click();
     }
 
-    handleFileChange = (file, fileName) => {
-        this.setState({ fileCode: file, fileName: fileName })
+    processFile(file) {
+        if (!file instanceof Blob && !file instanceof File)
+            // non-File input, hmm...
+            if (typeof pushNotification === 'function')
+                return pushNotification('Invalid file supplied');
+        reader.onload = () => {
+            this.setState({
+                code : reader.result,
+                fileLoading: false
+            })
+        };
+        reader.onloadstart = () => this.setState({ fileLoading: true });
+        reader.readAsText(file);
     }
 
-    handleConfirm = () => {
-        if (this.state.fileCode !== '')
-            // this.setState({
-            //     code: this.state.fileCode,
-            // })
-            this.handleUpdate(this.state.fileCode)
-    }
     render() {
         return (
             <>
@@ -49,13 +54,18 @@ class CodeBox extends React.PureComponent {
                 <AppBar position="static" color="default" elevation={0}>
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
-                            <Grid item
-                                style={{ flexGrow: 1 }} >
+                            <Grid item>
+                                <UploadButton
+                                    onClick={this.inputEventFire}
+                                    disabled={this.state.fileLoading}
+                                    variant="contained"/>
+                            </Grid>
+                            <Grid item style={{ flexGrow: 1 }} >
                                 <LangSelection
                                     displayLang={this.props.displayLang || []}
-                                    handleChange={this.handleLangChange}>
+                                    handleChange={(id) => this.setState({ langId: id })}>
                                     {friendlyLang[
-                                        String(this.props.displayLang[this.state.currentLangId])
+                                        String(this.props.displayLang[this.state.langId])
                                             .replace('.', '')
                                             .toLowerCase()
                                     ]}
@@ -65,12 +75,12 @@ class CodeBox extends React.PureComponent {
                                 <SubmitButton
                                     disabled={
                                         this.state.code === '' ||
-                                        this.state.currentLangId === null ||
+                                        this.state.langId === null ||
                                         this.props.ext.size === 0
                                     }
                                     fileName={this.props.submitFileName}
                                     code={this.state.code}
-                                    ext={this.props.ext[this.state.currentLangId] || ''}
+                                    ext={this.props.ext[this.state.langId] || ''}
                                     onSubmit={() => 
                                         this.setState({
                                             submitting: true
@@ -86,17 +96,20 @@ class CodeBox extends React.PureComponent {
                     </div>
                 </AppBar>
                 <div style={(
-                    this.state.submitting ? 
-                    { opacity: 0.4, pointerEvents: 'none', height: '100%' } : { height: '100%' }
+                    (this.state.submitting || this.state.fileLoading) ? 
+                    { opacity: 0.4, pointerEvents: 'none' } : {}
                 )}>
                         <CodeEditor
-                            readOnly={this.state.submitting}
-                            ext={this.props.ext[this.state.currentLangId]}
-                            update={this.handleUpdate}
+                            readOnly={this.state.submitting || this.state.fileLoading}
+                            ext={this.props.ext[this.state.langId]}
+                            update={(code) => this.setState({ code: code })}
                             code={this.state.code}
                         />
-                </div>
-            </>
+                    </div>
+                </AppBar>
+                <input type="file" onChange={(event) => this.processFile(event.target.files[0])}
+                    ref={this.catcherRef} style={{ display: 'none' }}/>
+            </div>
         )
     }
 }
