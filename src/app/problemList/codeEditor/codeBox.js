@@ -1,11 +1,14 @@
 import React from 'react'
-import { AppBar, Grid } from '@material-ui/core'
+import { AppBar, Grid, CircularProgress } from '@material-ui/core'
 
-import CodeEditor from './codeEditor'
-import SubmitButton from './submitButton'
-import LangSelection from './langSelection'
+import CodeEditor from './codeEditor.js'
+import SubmitButton from './submitButton.js'
+import LangSelection from './langSelection.js'
+import UploadButton from './uploadButton.js';
 
 import friendlyLang from '../../../strings/lang.json';
+
+var reader = new FileReader();
 
 class CodeBox extends React.PureComponent {
     constructor(props) {
@@ -13,8 +16,29 @@ class CodeBox extends React.PureComponent {
         this.state = {
             code: '',
             langId: 0,
-            submitting: false
+            submitting: false,
+            fileLoading: false
         }
+
+        this.catcherRef = React.createRef();
+
+        this.processFile = this.processFile.bind(this);
+        this.inputEventFire = this.inputEventFire.bind(this);
+    }
+
+    inputEventFire() {
+        this.catcherRef.current.click();
+    }
+
+    processFile(file) {
+        reader.onload = () => {
+            this.setState({
+                code : reader.result,
+                fileLoading: false
+            })
+        };
+        reader.onloadstart = () => this.setState({ fileLoading: true });
+        reader.readAsText(file);
     }
 
     render() {
@@ -23,6 +47,14 @@ class CodeBox extends React.PureComponent {
                 <AppBar position="static" color="default">
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
+                            <Grid item>
+                                <UploadButton onClick={this.inputEventFire}
+                                    disabled={this.state.fileLoading}>
+                                    {this.state.fileLoading
+                                            ? <CircularProgress size={20}/>
+                                            : <></>}
+                                </UploadButton>
+                            </Grid>
                             <Grid item style={{ flexGrow: 1 }} >
                                 <LangSelection
                                     displayLang={this.props.displayLang || []}
@@ -69,6 +101,8 @@ class CodeBox extends React.PureComponent {
                         />
                     </div>
                 </AppBar>
+                <input type="file" onChange={(event) => this.processFile(event.target.files[0])}
+                    ref={this.catcherRef} style={{ display: 'none' }}/>
             </div>
         )
     }
