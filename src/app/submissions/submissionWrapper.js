@@ -28,13 +28,9 @@ class Submissions extends React.Component {
         this.triggerUpdate = this.triggerUpdate.bind(this);
     }
 
-    componentDidMount() {
+    componentWillUpdate() {
         if (this.props.title) 
             document.title = String(this.props.title)
-    }
-
-    componentWillUpdate() {
-        this.componentDidMount()
     }
 
     update = (listSize, page, rowsPerPage) => {
@@ -54,6 +50,7 @@ class Submissions extends React.Component {
     }
 
     componentDidMount() {
+        this.componentWillUpdate();
         this.interval = setInterval(() => {
             submissionParse(0, 0, 1).then(data => {
                 if (data.meta.submissionsListSize > this.state.listSize)
