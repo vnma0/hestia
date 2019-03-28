@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Grid } from '@material-ui/core'
+import { AppBar, Grid, Divider } from '@material-ui/core'
 
 import CodeEditor from './codeEditor.js'
 import SubmitButton from './submitButton.js'
@@ -49,8 +49,9 @@ class CodeBox extends React.PureComponent {
 
     render() {
         return (
-            <div style={{ flexGrow: 1 }}>
-                <AppBar position="static" color="default">
+            <>
+                <Divider light variant="inset" />
+                <AppBar position="static" color="default" elevation={0}>
                     <div id="optionTab" style={{ margin: '1% 1%' }}>
                         <Grid container spacing={8} alignItems="center">
                             <Grid item>
@@ -93,6 +94,7 @@ class CodeBox extends React.PureComponent {
                             </Grid>
                         </Grid>
                     </div>
+                </AppBar>
                 <div style={(
                     (this.state.submitting || this.state.fileLoading) ? 
                     { opacity: 0.4, pointerEvents: 'none' } : {}

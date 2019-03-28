@@ -1,5 +1,4 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
 import ProblemTab from './problemTab/problemTab'
 import CodeBox from './codeEditor/codeBox'
 
@@ -21,6 +20,14 @@ class ProblemTabEditor extends React.Component {
         this.handleTabChange = this.handleTabChange.bind(this)
     }
 
+    componentDidMount() {
+        document.querySelector('body').style.overflowY = 'hidden';
+    }
+            
+    componentWillUnmount() {
+        document.querySelector('body').style.overflowY = 'auto';
+    }
+
     handleTabChange(value) {
         this.setState({
             currentTab: value,
@@ -28,22 +35,16 @@ class ProblemTabEditor extends React.Component {
     }
     render() {
         return (
-            <div style={{ marginTop: 10 }}>
-                <Grid container spacing={8} alignItems="stretch" style={{ width: '100%' }}>
-                    <Grid item style={{ width: '50%' }}>
-                        <ProblemTab
-                            problems={this.props.problems}
-                            handleTabChange={this.handleTabChange}
-                            value={this.state.currentTab} />
-                    </Grid>
-                    <Grid item style={{ width: '50%' }}>
-                        <CodeBox
-                            submitFileName={this.props.problems[this.state.currentTab] || ''}
-                            ext={this.props.ext}
-                            displayLang={this.props.ext}
-                        />
-                    </Grid>
-                </Grid>
+            <div style={{ height: '100%' }}>
+                <ProblemTab
+                    problems={this.props.problems}
+                    handleTabChange={this.handleTabChange}
+                    value={this.state.currentTab} />
+                <CodeBox
+                    submitFileName={this.props.problems[this.state.currentTab] || ''}
+                    ext={this.props.ext}
+                    displayLang={this.props.ext}
+                />
             </div>
         )
     }

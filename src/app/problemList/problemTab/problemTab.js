@@ -2,7 +2,6 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
 // import DownloadButton from './downloadButton'
 
 /**
@@ -12,15 +11,6 @@ import Typography from '@material-ui/core/Typography'
  * @author Who_cares?
  * Tabs Api: https://material-ui.com/api/tabs/
  */
-
-//The tab container
-function TabContainer(props) {
-    return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
-    )
-}
 
 class ProblemTab extends React.PureComponent {
     constructor(props) {
@@ -44,16 +34,11 @@ class ProblemTab extends React.PureComponent {
                         indicatorColor="primary"
                         textColor="primary"
                         scrollable
-                        scrollButtons="auto"
-                    >
+                        scrollButtons="auto">
                         {this.props.problems.map((x,index) => (
                             <Tab label={x} key={index}/>
                         ))}
                     </Tabs>
-                    <TabContainer>
-                        {this.props.problems[this.props.value]
-                            ? this.props.problems[this.props.value].statement : ''}
-                    </TabContainer>
                 </AppBar>
             </div>
         )

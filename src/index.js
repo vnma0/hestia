@@ -84,7 +84,7 @@ class Hestia extends React.Component {
                     menuOpen={toggleSidenav}
                 />
                 <Router>
-                    <div>
+                    <div style={{ height: '75%' }}>
                         <Sidenav
                             pages={[
                                 {
