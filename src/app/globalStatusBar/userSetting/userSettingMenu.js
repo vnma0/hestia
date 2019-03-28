@@ -3,6 +3,8 @@ import { Menu, MenuItem } from '@material-ui/core'
 
 import PropTypes from 'prop-types'
 
+import LocalizedMessage from 'react-l10n';
+
 /**
  * @name UserSettingMenu
  * @description A drop-down menu that allows (for now) changing profile settings & logging out
@@ -21,11 +23,16 @@ class UserSettingMenu extends Component {
         return (
             <Menu open={this.props.open} anchorEl={this.props.anchorEl}
                 onClose={this.props.onClose}>
-                <MenuItem disabled>Welcome back, {this.props.user}</MenuItem>
-                <MenuItem onClick={this.props.showProfileAction}>
-                    Change user settings
+                <MenuItem disabled>
+                    <LocalizedMessage id="globalStatusBar.userSetting.menu.greeting"/>
+                    {this.props.user}
                 </MenuItem>
-                <MenuItem onClick={this.props.logoutAction}>Log out</MenuItem>
+                <MenuItem onClick={this.props.showProfileAction}>
+                    <LocalizedMessage id="globalStatusBar.userSetting.menu.change-user-settings"/>
+                </MenuItem>
+                <MenuItem onClick={this.props.logoutAction}>
+                    <LocalizedMessage id="globalStatusBar.userSetting.menu.logout"/>
+                </MenuItem>
             </Menu>
         )
     }

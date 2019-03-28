@@ -16,6 +16,32 @@
                     },
                     "error-text": "Failed to log in." 
                 }
+            },
+            "userSetting" : {
+                "menu" : {
+                    "greeting" : "Welcome back, ",
+                    "change-user-settings" : "Change user settings",
+                    "logout" : "Log out"
+                },
+                "dialog" : {
+                    "title" : {
+                        "user-present" : "User settings for ",
+                        "user-absent" : "User settings"
+                    },
+                    "entry" : {
+                        "password" : {
+                            "title": "Password",
+                            "invokingButton" : "Change your password"
+                        },
+                        "language" : {
+                            "title": "Language"
+                        }
+                    },
+                    "options" : {
+                        "cancel" : "Cancel",
+                        "save" : "Save"
+                    }
+                }
             }
         }
     }

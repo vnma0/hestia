@@ -19,6 +19,8 @@ import { fade } from '../lib/libTransition.js'
 
 import { supportedLanguages } from '../../../l10n-loader.js';
 
+import LocalizedMessage from 'react-l10n';
+
 /**
  * @name UserSettingDialog
  * @description Dialog to change user settings.
@@ -61,8 +63,16 @@ class UserSettingDialog extends Component {
                     }
                 >
                     <DialogTitle>
-                        User settings{' '}
-                        {this.props.user ? `for ${this.props.user}` : ''}
+                        {this.props.user
+                            ? (
+                                <>
+                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.user-present"/>
+                                    {this.props.user}
+                                </>
+                            )
+                            : (
+                                <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.user-absent"/>
+                            )}
                     </DialogTitle>
                     <DialogContent>
                         <AppBar position="static">
@@ -70,8 +80,8 @@ class UserSettingDialog extends Component {
                                 value={this.state.currentTab}
                                 fullWidth
                                 onChange={(e, v) => this.setState({ currentTab: v })}>
-                                <Tab label="Password" />
-                                <Tab label="Languages"/>
+                                <Tab label={<LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.password.title"/>} />
+                                <Tab label={<LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.language.title"/>} />
                             </Tabs>
                         </AppBar>
                         {this.state.currentTab === 0 && (
@@ -87,7 +97,7 @@ class UserSettingDialog extends Component {
                                         })
                                     }
                                 >
-                                    Change your password
+                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.password.invokingButton"/>
                                 </Button>
                             </div>
                         )}
@@ -99,8 +109,12 @@ class UserSettingDialog extends Component {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.props.onClose}>Cancel</Button>
-                        <Button onClick={this.submitOptions}>Save</Button>
+                        <Button onClick={this.props.onClose}>
+                            <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.cancel"/>
+                        </Button>
+                        <Button onClick={this.submitOptions}>
+                        <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.save"/>
+                        </Button>
                     </DialogActions>
                 </Dialog>
                 <PasswordChangeDialog

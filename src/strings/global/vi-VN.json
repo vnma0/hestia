@@ -16,6 +16,33 @@
                     },
                     "error-text": "Đăng nhập thất bại."
                 }
+            },
+            "userSetting" : {
+                "menu" : {
+                    "greeting" : "Chào mừng trở lại, ",
+                    "change-user-settings" : "Thay đổi thiết lập người dùng",
+                    "logout" : "Đăng xuất"
+                },
+                "dialog" : {
+                    "title" : {
+                        "user-present" : "Thiết lập người dùng của ",
+                        "user-absent" : "Thiết lập người dùng"
+                    },
+                    "entry" : {
+                        "password" : {
+                            "title": "Mật khẩu",
+                            "invokingButton" : "Thay đổi mật khẩu"
+                        },
+                        "language" : {
+                            "title": "Ngôn ngữ"
+                        }
+                    },
+                    "options" : {
+                        "cancel" : "Hủy",
+                        "save" : "Lưu các thay đổi"
+                    }
+                }
+                
             }
         }
     }
