@@ -1,0 +1,11 @@
+{
+    "language": "en_US",
+    "display" : "English (United States)",
+    "resources" : {
+        "globalStatusBar" : {
+            "login" : {
+                "invokingButton" : "Log in"
+            }
+        }
+    }
+}

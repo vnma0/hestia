@@ -4,6 +4,10 @@ import './index.css'
 import 'typeface-roboto'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { LocalizationProvider } from 'react-l10n'
+import * as Cookies from 'js-cookie'
+
+import { translations } from './l10n-loader.js'
 
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
 import Sidenav from './app/sidenav/sidenav.js'
@@ -40,6 +44,7 @@ class Hestia extends React.Component {
                 end: new Date()
             }
         }
+        this.language = Cookies.get('language');
     }
 
     componentWillMount() {
@@ -62,7 +67,9 @@ class Hestia extends React.Component {
 
     render() {
         return (
-            <>
+            <LocalizationProvider
+                {...(this.language && translations[this.language]
+                    ? {resources : translations[this.language].resources} : {})}>
                 <Notify
                     autoHideDuration={1000}
                     TransitionComponent={props => slideIn(props, 'left')}
@@ -115,7 +122,7 @@ class Hestia extends React.Component {
                             <Homepage title={this.state.contestName} />} />
                     </div>
                 </Router>
-            </>
+            </LocalizationProvider>
         )
     }
 }
