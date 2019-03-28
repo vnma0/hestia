@@ -89,11 +89,11 @@ class CodeBox extends React.PureComponent {
                         </Grid>
                     </div>
                 <div style={(
-                    this.state.submitting ? 
+                    (this.state.submitting || this.state.fileLoading) ? 
                     { opacity: 0.4, pointerEvents: 'none' } : {}
                 )}>
                         <CodeEditor
-                            readOnly={this.state.submitting}
+                            readOnly={this.state.submitting || this.state.fileLoading}
                             ext={this.props.ext[this.state.langId]}
                             update={(code) => this.setState({ code: code })}
                             code={this.state.code}
