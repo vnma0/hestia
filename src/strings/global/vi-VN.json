@@ -1,0 +1,11 @@
+{
+    "language": "vi_VN",
+    "display" : "Vietnamese (tiếng Việt)",
+    "resources" : {
+        "globalStatusBar" : {
+            "login" : {
+                "invokingButton" : "Đăng nhập"
+            }
+        }
+    }
+}

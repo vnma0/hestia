@@ -10,8 +10,14 @@ import {
     Tab,
 } from '@material-ui/core'
 import { Button } from '@material-ui/core'
+
+import * as Cookies from 'js-cookie';
+
 import PasswordChangeDialog from './passwordChange/passwordChangeDialog.js'
+import LocaleChange from './localeChange/localeChange.js';
 import { fade } from '../lib/libTransition.js'
+
+import { supportedLanguages } from '../../../l10n-loader.js';
 
 /**
  * @name UserSettingDialog
@@ -30,15 +36,18 @@ class UserSettingDialog extends Component {
         this.state = {
             currentTab: 0,
             pwdChangeDialogOpen: false,
+
+            language: Cookies.get('language')
         }
-        this.handleChange = this.handleChange.bind(this)
+
+        this.submitOptions = this.submitOptions.bind(this);
     }
 
-    handleChange(event, value) {
-        this.setState({
-            currentTab: value,
-        })
+    submitOptions() {
+        Cookies.set('language', this.state.language);
+        this.props.onClose()
     }
+
 
     render() {
         return (
@@ -60,9 +69,9 @@ class UserSettingDialog extends Component {
                             <Tabs
                                 value={this.state.currentTab}
                                 fullWidth
-                                onChange={this.handleChange}
-                            >
+                                onChange={(e, v) => this.setState({ currentTab: v })}>
                                 <Tab label="Password" />
+                                <Tab label="Languages"/>
                             </Tabs>
                         </AppBar>
                         {this.state.currentTab === 0 && (
@@ -81,6 +90,12 @@ class UserSettingDialog extends Component {
                                     Change your password
                                 </Button>
                             </div>
+                        )}
+                        {this.state.currentTab === 1 && (
+                            <LocaleChange
+                                languages={supportedLanguages}
+                                choice={this.state.language}
+                                onChange={(event, arg) => this.setState({ language: arg })}/>
                         )}
                     </DialogContent>
                     <DialogActions>
