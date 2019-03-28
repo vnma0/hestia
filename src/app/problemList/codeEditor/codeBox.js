@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Grid, CircularProgress } from '@material-ui/core'
+import { AppBar, Grid } from '@material-ui/core'
 
 import CodeEditor from './codeEditor.js'
 import SubmitButton from './submitButton.js'
