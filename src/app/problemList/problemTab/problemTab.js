@@ -29,7 +29,6 @@ class ProblemTab extends React.PureComponent {
             <div>
                 <AppBar position="static" color="default">
                     <Tabs
-                        centered
                         value={this.props.value}
                         onChange={this.handleChange}
                         indicatorColor="primary"
