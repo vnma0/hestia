@@ -17,6 +17,7 @@ class ScoreboardWrapper extends React.Component {
     }
 
     componentDidMount() {
+        this.componentDidUpdate()
         publicParse().then((data) => {
             this.setState({
                 problems: data.problems,
@@ -24,6 +25,12 @@ class ScoreboardWrapper extends React.Component {
         })
         this.update()
         setInterval(this.update, 30000)
+    }
+
+    componentDidUpdate() {
+        if (this.props.title) {
+            document.title = String(this.props.title);
+        }
     }
 
     update() {

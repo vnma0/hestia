@@ -30,6 +30,7 @@ export default async function submissionParse(count, page, size) {
                     contestant: sub['username'],
                     verdict: (sub['status'] === null) ? "Pending" : sub['status'],
                     timestamp: new Date(sub['date']).toLocaleString(),
+                    language: sub['ext'],
                     id: sub['_id'],
                     problem: sub['prob_id'],
                     score: sub['score'],

@@ -10,6 +10,8 @@ import { Typography } from '@material-ui/core'
  * @author minhducsun2002
  */
 
+import friendlyLang from '../../../strings/lang.json';
+
 class LanguageSignature extends Component {
     render() {
         return (
@@ -22,7 +24,7 @@ class LanguageSignature extends Component {
             >
                 {this.props.children
                     ? this.props.children
-                    : this.props.languageName}
+                    : friendlyLang[String(this.props.languageName).replace('.','').toLowerCase()]}
             </Typography>
         )
     }

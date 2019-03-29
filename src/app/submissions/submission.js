@@ -9,7 +9,7 @@ import ExecTimeSignature from "./signature/execTimeSignature.js";
 // import TimestampSignature from './signature/timestampSignature.js'
 import MemorySignature from "./signature/memorySignature.js";
 
-// import SubmissionDownloadButton from './submission/downloadCell.js'
+import './submission.css'
 
 /**
  * @name Submission
@@ -31,7 +31,7 @@ class Submission extends React.PureComponent {
     render() {
         return (
             <>
-                <TableRow {...this.props}>
+                <TableRow {...this.props} className={`submission_${this.props.verdict}`}>
                     <TableCell>
                         <ContestantSignature
                             contestantName={this.props.contestant || "N/A"}

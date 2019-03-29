@@ -84,7 +84,7 @@ class Hestia extends React.Component {
                     menuOpen={toggleSidenav}
                 />
                 <Router>
-                    <div>
+                    <div style={{ height: '75%' }}>
                         <Sidenav
                             pages={[
                                 {
@@ -105,10 +105,14 @@ class Hestia extends React.Component {
                                 }
                             ]}
                         />
-                        <Route path="/submissions" component={Submission} />
-                        <Route path="/problems" component={ProblemWrapper} />
-                        <Route path="/scoreboard" component={ScoreboardWrapper} />
-                        <Route path="/" component={Homepage} />
+                        <Route path="/submissions" render={() =>
+                            <Submission title={this.state.contestName + ' - Submissions'} />} />
+                        <Route path="/problems" render={() =>
+                            <ProblemWrapper title={this.state.contestName + ' - Problems'} />}/>
+                        <Route path="/scoreboard" render={() =>
+                            <ScoreboardWrapper title={this.state.contestName + ' - Scoreboard'} />} />
+                        <Route path="/" render={() =>
+                            <Homepage title={this.state.contestName} />} />
                     </div>
                 </Router>
             </>
