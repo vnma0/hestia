@@ -68,7 +68,7 @@ class CodeBox extends React.PureComponent {
                                         String(this.props.displayLang[this.state.langId])
                                             .replace('.', '')
                                             .toLowerCase()
-                                    ]}
+                                    ] || String(this.props.displayLang[this.state.langId])}
                                 </LangSelection>
                             </Grid>
                             <Grid item>
