@@ -37,7 +37,8 @@ class LangSelection extends React.Component {
         this.setState({
             anchorEl: undefined
         });
-        this.props.handleChange(newLang);
+        if (typeof this.props.handleChange === 'function')
+            this.props.handleChange(newLang);
     }
 
     render() {
@@ -73,8 +74,7 @@ class LangSelection extends React.Component {
 }
 
 LangSelection.propTypes = {
-    handleChange: PropTypes.func,
-    displayLang: PropTypes.arrayOf(PropTypes.string).isRequired
+    handleChange: PropTypes.func
 };
 
 export default LangSelection;
