@@ -43,7 +43,6 @@ class ProblemTabEditor extends React.Component {
                 <CodeBox
                     submitFileName={this.props.problems[this.state.currentTab] || ''}
                     ext={this.props.ext}
-                    displayLang={this.props.ext}
                 />
             </div>
         )

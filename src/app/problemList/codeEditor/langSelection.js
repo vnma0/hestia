@@ -8,6 +8,13 @@ import PropTypes from "prop-types";
 import friendlyLang from '../../../strings/lang.json';
 
 /**
+ * @param str {String}: Text file extension
+ */
+function getFriendlyExtension(str) {
+    return friendlyLang[String(str).replace('.', '').toLowerCase()] || str;
+}
+
+/**
  * @name LangSelection
  * @description Language chooser
  * @property {Function} `handleChange` - function to execute when a language has been chosen.
@@ -23,13 +30,6 @@ class LangSelection extends React.Component {
             anchorEl: undefined
         };
         this.handleChoice = this.handleChoice.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(event) {
-        this.setState({
-            anchorEl: event.currentTarget
-        });
     }
 
     handleChoice(newLang) {
@@ -39,7 +39,19 @@ class LangSelection extends React.Component {
         this.props.handleChange(newLang);
     }
 
+    handleClick = event => this.setState({
+        anchorEl: event.currentTarget
+    })
+
     render() {
+        let { ext, choice } = this.props;
+        let displayed = getFriendlyExtension(ext[choice]);
+        let langList = ext.map((x, i) => (
+            <MenuItem onClick={() => this.handleChoice(i)} key={`lang-${i}`}>
+                {getFriendlyExtension(String(x))}
+            </MenuItem>
+        ))
+        
         return (
             <>
                 <Tooltip title="Change language" placement="bottom">
@@ -48,18 +60,14 @@ class LangSelection extends React.Component {
                         aria-owns={this.state.anchorEl ? "menu" : undefined}
                         aria-haspopup={true}
                         onClick={this.handleClick}>
-                        {this.props.children || "Not chosen"}
+                        {displayed}
                     </Button>
                 </Tooltip>
                 <Menu
                     anchorEl={this.state.anchorEl}
                     open={this.state.anchorEl !== undefined}
                     onClose={() => this.setState({ anchorEl: undefined })}>
-                    {this.props.displayLang.map((x, i) => (
-                        <MenuItem onClick={() => this.handleChoice(i)} key={i}>
-                            {x}
-                        </MenuItem>
-                    ))}
+                    {langList}
                 </Menu>
             </>
         );
