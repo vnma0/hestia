@@ -48,6 +48,18 @@
                 "time-left" : "Time left",
                 "ended" : "Ended"
             }
+        },
+        "homepage" : {
+            "launcher" : "Homepage"
+        },
+        "scoreboard" : {
+            "launcher" : "Scoreboard"
+        },
+        "problems" : {
+            "launcher" : "Problems"
+        },
+        "submissions" : {
+            "launcher" : "Submissions"
         }
     }
 }

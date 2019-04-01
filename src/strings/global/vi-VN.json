@@ -48,6 +48,18 @@
                 "time-left" : "Thời gian còn lại",
                 "ended" : "Kỳ thi đã kết thúc"
             }
+        },
+        "homepage" : {
+            "launcher" : "Trang chủ"
+        },
+        "scoreboard" : {
+            "launcher" : "Bảng điểm"
+        },
+        "problems" : {
+            "launcher" : "Đề bài"
+        },
+        "submissions" : {
+            "launcher" : "Các bài nộp"
         }
     }
 }
