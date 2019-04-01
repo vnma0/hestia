@@ -98,7 +98,8 @@ class CodeBox extends React.PureComponent {
                         />
                 </div>
                 <input type="file" onChange={(event) => this.processFile(event.target.files[0])}
-                    ref={this.catcherRef} style={{ display: 'none' }}/>
+                    ref={this.catcherRef} style={{ display: 'none' }}
+                    onClick={(event) => event.target.value = null} />
             </>
         )
     }
