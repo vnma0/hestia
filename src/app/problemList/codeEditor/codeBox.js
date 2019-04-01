@@ -38,7 +38,7 @@ class CodeBox extends React.PureComponent {
                 fileLoading: false
             })
         };
-        reader.onloadstart = () => this.setState({ fileLoading: true });
+        this.setState({ fileLoading: true });
         reader.readAsText(file);
     }
 
