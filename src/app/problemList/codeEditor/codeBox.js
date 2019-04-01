@@ -6,6 +6,8 @@ import SubmitButton from './submitButton.js'
 import LangSelection from './langSelection.js'
 import UploadButton from './uploadButton.js';
 
+import { pushNotification } from '../../notifier/notify.js'
+
 var reader = new FileReader();
 
 class CodeBox extends React.PureComponent {
@@ -32,6 +34,9 @@ class CodeBox extends React.PureComponent {
         if (!(file instanceof Blob) && !(file instanceof File))
             // non-File input, hmm..
             return;
+        if (file.size >= 15 * 1024)
+            // 15 KiB limit
+            return pushNotification('You tried to upload something too large!')
         reader.onload = () => {
             this.setState({
                 code : reader.result,
