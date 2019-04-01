@@ -31,7 +31,7 @@ class CodeBox extends React.PureComponent {
     }
 
     processFile(file) {
-        if (!file instanceof Blob && !file instanceof File)
+        if (!(file instanceof Blob) && !(file instanceof File))
             // non-File input, hmm...
             if (typeof pushNotification === 'function')
                 return pushNotification('Invalid file supplied');
