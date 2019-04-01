@@ -8,8 +8,6 @@ import UploadButton from './uploadButton.js';
 
 import { pushNotification } from '../../notifier/notify.js';
 
-import friendlyLang from '../../../strings/lang.json';
-
 var reader = new FileReader();
 
 class CodeBox extends React.PureComponent {
