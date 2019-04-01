@@ -12,6 +12,10 @@ import friendlyLang from '../../../strings/lang.json';
 
 var reader = new FileReader();
 
+function extensify (x) {
+    return String(x).replace('.', '').toLowerCase();
+}
+
 class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props)
@@ -63,13 +67,11 @@ class CodeBox extends React.PureComponent {
                             <Grid item style={{ flexGrow: 1 }} >
                                 <LangSelection
                                     displayLang={this.props.displayLang.map(x => (
-                                        friendlyLang[
-                                            String(x).replace('.', '').toLowerCase()
-                                            ] || String(x)
+                                        friendlyLang[extensify(x)] || String(x)
                                     )) || []}
                                     handleChange={(id) => this.setState({ langId: id })}>
                                     {friendlyLang[
-                                        String(this.props.displayLang[this.state.langId]).replace('.', '').toLowerCase()
+                                        extensify(this.props.displayLang[this.state.langId])
                                         ] || String(this.props.displayLang[this.state.langId])}
                                 </LangSelection>
                             </Grid>
