@@ -27,6 +27,7 @@ class LangSelection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            // anchor element to pin the list
             anchorEl: undefined
         };
         this.handleChoice = this.handleChoice.bind(this);
@@ -38,10 +39,6 @@ class LangSelection extends React.Component {
         });
         this.props.handleChange(newLang);
     }
-
-    handleClick = event => this.setState({
-        anchorEl: event.currentTarget
-    })
 
     render() {
         let { ext, choice } = this.props;
@@ -59,7 +56,8 @@ class LangSelection extends React.Component {
                         variant="contained"
                         aria-owns={this.state.anchorEl ? "menu" : undefined}
                         aria-haspopup={true}
-                        onClick={this.handleClick}>
+                        onClick={event => this.setState({ anchorEl: event.currentTarget })}>
+                        {/* setting anchor to trigger opening of menu */}
                         {displayed}
                     </Button>
                 </Tooltip>
