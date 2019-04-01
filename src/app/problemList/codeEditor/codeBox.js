@@ -6,8 +6,6 @@ import SubmitButton from './submitButton.js'
 import LangSelection from './langSelection.js'
 import UploadButton from './uploadButton.js';
 
-import { pushNotification } from '../../notifier/notify.js';
-
 var reader = new FileReader();
 
 class CodeBox extends React.PureComponent {
@@ -31,10 +29,9 @@ class CodeBox extends React.PureComponent {
     }
 
     processFile(file) {
-        if (!file instanceof Blob && !file instanceof File)
-            // non-File input, hmm...
-            if (typeof pushNotification === 'function')
-                return pushNotification('Invalid file supplied');
+        if (!(file instanceof Blob) && !(file instanceof File))
+            // non-File input, hmm..
+            return;
         reader.onload = () => {
             this.setState({
                 code : reader.result,
