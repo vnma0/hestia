@@ -57,8 +57,7 @@ class LangSelection extends React.Component {
                     onClose={() => this.setState({ anchorEl: undefined })}>
                     {this.props.displayLang.map((x, i) => (
                         <MenuItem onClick={() => this.handleChoice(i)} key={i}>
-                            {friendlyLang[String(x).replace('.', '').toLowerCase()]
-                                || String(x)}
+                            {friendlyLang[x]}
                         </MenuItem>
                     ))}
                 </Menu>

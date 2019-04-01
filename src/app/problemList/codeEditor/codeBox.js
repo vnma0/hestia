@@ -62,13 +62,15 @@ class CodeBox extends React.PureComponent {
                             </Grid>
                             <Grid item style={{ flexGrow: 1 }} >
                                 <LangSelection
-                                    displayLang={this.props.displayLang || []}
+                                    displayLang={this.props.displayLang.map(x => (
+                                        friendlyLang[
+                                            String(x).replace('.', '').toLowerCase()
+                                            ] || String(x)
+                                    )) || []}
                                     handleChange={(id) => this.setState({ langId: id })}>
                                     {friendlyLang[
-                                        String(this.props.displayLang[this.state.langId])
-                                            .replace('.', '')
-                                            .toLowerCase()
-                                    ] || String(this.props.displayLang[this.state.langId])}
+                                        String(this.props.displayLang[this.state.langId]).replace('.', '').toLowerCase()
+                                        ] || String(this.props.displayLang[this.state.langId])}
                                 </LangSelection>
                             </Grid>
                             <Grid item>
