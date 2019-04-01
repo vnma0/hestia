@@ -7,6 +7,8 @@ import AccessTime from '@material-ui/icons/AccessTime'
 import timeAgo from '../../../external/timeAgo.js';
 import './clock.css'
 
+import LocalizedMessage from 'react-l10n';
+
 /**
  * @name CountdownClock
  * @description A simple clock that shows time left and the duration of the contest
@@ -57,9 +59,16 @@ class CountdownClock extends Component {
                     <Button disabled id="clock" className={this.state.clockStyleClass}>
                         <AccessTime style={{ marginRight: '10px' }} />
                         {this.state.ended
-                            ? 'ENDED' : (this.state.started 
-                                ? `TIME LEFT : ${this.state.current} / ${this.state.duration}`
-                                : `${timeAgo(new Date(), this.props.time.start)} BEFORE START`)}
+                            ? <LocalizedMessage id="globalStatusBar.clock.ended"/>
+                            : (this.state.started 
+                                ? <>
+                                <LocalizedMessage id="globalStatusBar.clock.time-left"/>
+                                {` : ${this.state.current} / ${this.state.duration}`}
+                                </>
+                                : <>
+                                {`${timeAgo(new Date(), this.props.time.start)} `}
+                                <LocalizedMessage id="globalStatusBar.clock.before-start"/>
+                                </>)}
                     </Button>
                 </span>
             </Tooltip>

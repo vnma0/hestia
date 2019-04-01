@@ -42,7 +42,11 @@
                         "save" : "Lưu các thay đổi"
                     }
                 }
-                
+            },
+            "clock" : {
+                "before-start": "trước khi bắt đầu kỳ thi",
+                "time-left" : "Thời gian còn lại",
+                "ended" : "Kỳ thi đã kết thúc"
             }
         }
     }

@@ -42,6 +42,11 @@
                         "save" : "Save"
                     }
                 }
+            },
+            "clock" : {
+                "before-start": "before start",
+                "time-left" : "Time left",
+                "ended" : "Ended"
             }
         }
     }
