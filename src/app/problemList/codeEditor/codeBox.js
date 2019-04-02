@@ -9,7 +9,6 @@ import UploadButton from "./uploadButton.js";
 import { pushNotification } from "../../notifier/notify.js";
 
 var reader = new FileReader();
-
 class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -20,7 +19,6 @@ class CodeBox extends React.PureComponent {
             fileLoading: false,
             editorHeight: window.innerHeight - 180
         };
-        this.tabRef= React.createRef();
         this.catcherRef = React.createRef();
         this.updateEditorHeight = this.updateEditorHeight.bind(this);
         this.processFile = this.processFile.bind(this);
@@ -33,7 +31,11 @@ class CodeBox extends React.PureComponent {
     }
     //update editor height when resize window
     updateEditorHeight() {
-        this.setState({ editorHeight: window.innerHeight - 180 });
+        console.log(this.refs.appBar);
+        this.setState({
+            editorHeight:
+                window.innerHeight - this.refs.optionTab.clientHeight - 134
+        });
     }
 
     inputEventFire() {
@@ -59,10 +61,14 @@ class CodeBox extends React.PureComponent {
         return (
             <>
                 <Divider light variant="inset" />
-                <AppBar ref={this.tabRef} position="static" color="default" elevation={0} maxHeight="10%">
+                <AppBar
+                    ref="appBar"
+                    position="static"
+                    color="default"
+                >
                     <div
-                        id="optionTab"
-                        style={{ margin: "10px 10px", maxHeight: "10%" }}
+                        ref="optionTab"
+                        style={{ margin: "10px 10px", maxHeight: "100%" }}
                     >
                         <Grid container spacing={8} alignItems="center">
                             <Grid item>
