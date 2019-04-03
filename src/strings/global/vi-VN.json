@@ -68,6 +68,15 @@
                 },
                 "rows-per-page-change" : "Số hàng hiển thị : ",
                 "index-of-total" : "Bài nộp thứ {from} đến {to} trong tổng số {count}"
+            },
+            "table" : {
+                "contestant" : "Nộp bởi",
+                "problem" : "Bài",
+                "language" : "Ngôn ngữ lập trình",
+                "verdict" : "Kết quả",
+                "executionTime" : "Thời gian thực thi",
+                "memory" : "Bộ nhớ chiếm dụng",
+                "timestamp" : "Thời gian nộp"
             }
         }
     }

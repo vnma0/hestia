@@ -68,6 +68,15 @@
                 },
                 "rows-per-page-change" : "Rows per page : ",
                 "index-of-total" : "{from}-{to} of {count}"
+            },
+            "table" : {
+                "contestant" : "Submitted by",
+                "problem" : "Problem",
+                "language" : "Programming language",
+                "verdict" : "Verdict",
+                "executionTime" : "Execution duration",
+                "memory" : "Memory consumed",
+                "timestamp" : "Timestamp"
             }
         }
     }
