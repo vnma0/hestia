@@ -76,7 +76,30 @@
                 "verdict" : "Kết quả",
                 "executionTime" : "Thời gian thực thi",
                 "memory" : "Bộ nhớ chiếm dụng",
-                "timestamp" : "Thời gian nộp"
+                "timestamp" : "Thời gian nộp",
+                "points" : "Số điểm nhận được"
+            },
+            "details" : {
+                "control" : {
+                    "show-source" : "Xem mã nguồn",
+                    "close": "Đóng"
+                },
+                "table" : {
+                    "no-detail" : [
+                        "Không có thông tin chi tiết cho từng test.",
+                        "Đây có phải một kỳ thi ACM?"
+                    ]
+                },
+                "code" : {
+                    "panel" : {
+                        "loading" : "Đang tải mã nguồn...",
+                        "no-code" : [
+                            "Không có mã nguồn.",
+                            "Có gì đó sai sai thì phải."
+                        ]
+                    },
+                    "dialog.controls.close" : "Đóng"
+                }
             },
             "verdict" : {
                 "AC" : "Được chấp nhận",

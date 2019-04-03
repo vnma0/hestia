@@ -76,7 +76,30 @@
                 "verdict" : "Verdict",
                 "executionTime" : "Execution duration",
                 "memory" : "Memory consumed",
-                "timestamp" : "Timestamp"
+                "timestamp" : "Timestamp",
+                "points" : "Points awarded"
+            },
+            "details" : {
+                "control" : {
+                    "show-source" : "View source code",
+                    "close": "Close"
+                },
+                "table" : {
+                    "no-detail" : [
+                        "No test-based judgement details available.",
+                        "I guess this is an ACM problem?"
+                    ]
+                },
+                "code" : {
+                    "panel" : {
+                        "loading" : "Loading source code...",
+                        "no-code" : [
+                            "No code is available.",
+                            "What are you expecting?"
+                        ]
+                    },
+                    "dialog.controls.close" : "Close"
+                }
             },
             "verdict" : {
                 "AC" : "Accepted",

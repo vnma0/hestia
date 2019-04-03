@@ -1,13 +1,8 @@
 import React from "react";
-import {
-    Table,
-    TableHead,
-    TableCell,
-    TableRow,
-    TableBody,
-    Typography,
-    CardContent
-} from "@material-ui/core";
+import { Table, TableHead, TableCell, TableRow, TableBody, Typography, CardContent } from "@material-ui/core";
+
+import LocalizedMessage from 'react-l10n'
+
 import MemorySignature from "../signature/memorySignature";
 import ExecTimeSignature from "../signature/execTimeSignature";
 import VerdictSignature from "../signature/verdictSignature";
@@ -66,10 +61,18 @@ class ResultTable extends React.Component {
                             style={{
                                 minHeight: 24
                             }}>
-                            <TableCell>Verdict</TableCell>
-                            <TableCell>Execution duration</TableCell>
-                            <TableCell>Memory consumed</TableCell>
-                            <TableCell>Points awarded</TableCell>
+                            <TableCell>
+                                <LocalizedMessage id="submissions.table.verdict"/>
+                            </TableCell>
+                            <TableCell>
+                                <LocalizedMessage id="submissions.table.executionTime"/>
+                            </TableCell>
+                            <TableCell>
+                                <LocalizedMessage id="submissions.table.memory"/>
+                            </TableCell>
+                            <TableCell>
+                                <LocalizedMessage id="submissions.table.points"/>
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -88,10 +91,10 @@ class ResultTable extends React.Component {
         return (
             <CardContent>
                 <Typography variant="h6">
-                    No test-based judgement details available.
+                    <LocalizedMessage id="submissions.details.table.no-detail[0]"/>
                 </Typography>
                 <Typography component="p">
-                    I guess this is an ACM problem?
+                    <LocalizedMessage id="submissions.details.table.no-detail[1]"/>
                 </Typography>
             </CardContent>
         );
