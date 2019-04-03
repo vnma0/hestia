@@ -56,7 +56,24 @@
             "launcher" : "Scoreboard"
         },
         "problems" : {
-            "launcher" : "Problems"
+            "launcher" : "Problems",
+            "code-editor" : {
+                "control" : {
+                    "lang-selector" : {
+                        "tooltip" : "Choose language",
+                        "null-choice" : "Choose language"
+                    },
+                    "upload-button-tooltip" : "Load a file into the editor. Overwrite existing content.",
+                    "submit-button" : "Submit"
+                }
+            },
+            "notify" : {
+                "success" : "Successfully submitted solution",
+                "error" : {
+                    "fail-stat" : "Failure during submission : {error}",
+                    "fail-trans" : "Failed to submit. It seems like a transmission error..."
+                }
+            }
         },
         "submissions" : {
             "launcher" : "Submissions",

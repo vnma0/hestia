@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppBar, Grid, Divider } from '@material-ui/core'
+import LocalizedMessage from 'react-l10n';
 
 import CodeEditor from './codeEditor.js'
 import SubmitButton from './submitButton.js'
@@ -89,7 +90,7 @@ class CodeBox extends React.PureComponent {
                                         submitting: false
                                     })}
                                 >
-                                    Submit
+                                    <LocalizedMessage id="problems.code-editor.control.submit-button"/>
                                 </SubmitButton>
                             </Grid>
                         </Grid>

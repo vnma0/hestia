@@ -56,7 +56,24 @@
             "launcher" : "Bảng điểm"
         },
         "problems" : {
-            "launcher" : "Đề bài"
+            "launcher" : "Đề bài",
+            "code-editor" : {
+                "control" : {
+                    "lang-selector" : {
+                        "tooltip" : "Chọn ngôn ngữ lập trình",
+                        "null-choice" : "Chọn ngôn ngữ lập trình"
+                    },
+                    "upload-button-tooltip" : "Tải một tập tin vào trình soạn thảo. Ghi đè mọi dữ liệu hiện có",
+                    "submit-button" : "Nộp bài"
+                }
+            },
+            "notify" : {
+                "success" : "Mã nguồn của bạn đã được nộp thành công!",
+                "error" : {
+                    "fail-stat" : "Lỗi trong quá trình nộp bài : {error}",
+                    "fail-trans" : "Lỗi trong quá trình nộp bài : kết nối tới máy chủ thất bại"
+                }
+            }
         },
         "submissions" : {
             "launcher" : "Các bài nộp",

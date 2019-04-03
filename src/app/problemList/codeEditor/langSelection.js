@@ -4,6 +4,7 @@ import Menu from "@material-ui/core/Menu";
 import { MenuItem, Tooltip } from "@material-ui/core";
 
 import PropTypes from "prop-types";
+import LocalizedMessage from 'react-l10n';
 
 import friendlyLang from '../../../strings/lang.json';
 
@@ -42,13 +43,17 @@ class LangSelection extends React.Component {
     render() {
         return (
             <>
-                <Tooltip title="Change language" placement="bottom">
+                <Tooltip 
+                    title={<LocalizedMessage id="problems.code-editor.control.lang-selector.tooltip"/>}
+                    placement="bottom">
                     <Button
                         variant="contained"
                         aria-owns={this.state.anchorEl ? "menu" : undefined}
                         aria-haspopup={true}
                         onClick={this.handleClick}>
-                        {this.props.children || "Not chosen"}
+                        {this.props.children
+                            || <LocalizedMessage id="problems.code-editor.control.lang-selector.null-choice"/>}
+                            {/* fallback text if nothing chosen */}
                     </Button>
                 </Tooltip>
                 <Menu
