@@ -34,7 +34,12 @@ import LocalizedMessage from 'react-l10n';
 
 class UserSettingDialog extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+
+        // default to en_US
+        if (!Cookies.get('language'))
+            Cookies.set('language', 'en_US')
+
         this.state = {
             currentTab: 0,
             pwdChangeDialogOpen: false,
