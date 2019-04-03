@@ -77,6 +77,19 @@
                 "executionTime" : "Thời gian thực thi",
                 "memory" : "Bộ nhớ chiếm dụng",
                 "timestamp" : "Thời gian nộp"
+            },
+            "verdict" : {
+                "AC" : "Được chấp nhận",
+                "WA" : "Sai dữ liệu đầu ra",
+                "TLE" : "Chạy quá thời gian",
+                "MLE" : "Sử dụng quá giới hạn bộ nhớ",
+                "RTE" : "Thực thi gặp lỗi",
+                "CE" : "Biên dịch gặp lỗi",
+                "Pending" : "Đang chấm"
+            },
+            "error" : {
+                "submissions" : "Cập nhật thông tin các bài nộp thất bại.",
+                "source" : "Có lỗi xảy ra trong khi tải mã nguồn cho bài nộp."
             }
         }
     }

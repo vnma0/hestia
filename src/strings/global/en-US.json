@@ -77,6 +77,19 @@
                 "executionTime" : "Execution duration",
                 "memory" : "Memory consumed",
                 "timestamp" : "Timestamp"
+            },
+            "verdict" : {
+                "AC" : "Accepted",
+                "WA" : "Wrong output",
+                "TLE" : "Execution timed out",
+                "MLE" : "Memory limit exceeded",
+                "RTE" : "Runtime error",
+                "CE" : "Compilation error",
+                "Pending" : "Pending"
+            },
+            "error" : {
+                "submissions" : "Failed to load submissions' info.",
+                "source" : "Error occurred while loading source code."
             }
         }
     }
