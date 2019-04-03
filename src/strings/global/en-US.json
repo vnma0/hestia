@@ -59,7 +59,16 @@
             "launcher" : "Problems"
         },
         "submissions" : {
-            "launcher" : "Submissions"
+            "launcher" : "Submissions",
+            "control" : {
+                "reload-button" : {
+                    "reload" : "Reload",
+                    "reloading" : "Updating...",
+                    "tooltip" : "Update the data & change back to first page"
+                },
+                "rows-per-page-change" : "Rows per page : ",
+                "index-of-total" : "{from}-{to} of {count}"
+            }
         }
     }
 }

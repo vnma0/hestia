@@ -1,5 +1,7 @@
 import React from 'react'
 import { Table, TableHead, TableRow, TablePagination, Button, TableCell, LinearProgress, Tooltip } from '@material-ui/core'
+import LocalizedMessage from 'react-l10n';
+
 import SubmissionTable from './submissionTable.js'
 
 import submissionParse from './stub/submission.js'
@@ -71,8 +73,7 @@ class Submissions extends React.Component {
                         <TableRow>
                             <TableCell>
                                 <Tooltip
-                                    title={(!this.staleUpdate || this.updateInProgress)
-                                            ? '' : 'Update the data & change back to first page'}>
+                                    title={<LocalizedMessage id="submissions.control.reload-button.tooltip"/>}>
                                     <Button
                                         disabled={!this.staleUpdate || this.updateInProgress}
                                         onClick={() => {
@@ -85,7 +86,9 @@ class Submissions extends React.Component {
                                             this.updateInProgress = false;
                                             this.triggerUpdate();
                                         }}>
-                                        {this.updateInProgress ? 'Updating...' : 'Reload'}
+                                        {this.updateInProgress
+                                            ? <LocalizedMessage id="submissions.control.reload-button.reloading"/>
+                                            : <LocalizedMessage id="submissions.control.reload-button.reload"/>}
                                     </Button>
                                 </Tooltip>
                             </TableCell>
@@ -114,6 +117,14 @@ class Submissions extends React.Component {
                                         event.target.value
                                     )
                                 }}
+                                labelRowsPerPage={
+                                    <LocalizedMessage
+                                        id="submissions.control.rows-per-page-change"/>
+                                }
+                                labelDisplayedRows={(args) =>
+                                    <LocalizedMessage
+                                        id="submissions.control.index-of-total" {...args}/>
+                                }
                             />
                         </TableRow>
                     </TableHead>

@@ -59,7 +59,16 @@
             "launcher" : "Đề bài"
         },
         "submissions" : {
-            "launcher" : "Các bài nộp"
+            "launcher" : "Các bài nộp",
+            "control" : {
+                "reload-button" : {
+                    "reload" : "Cập nhật",
+                    "reloading" : "Đang cập nhật...",
+                    "tooltip" : "Cập nhật dữ liệu và chuyển về trang đầu"
+                },
+                "rows-per-page-change" : "Số hàng hiển thị : ",
+                "index-of-total" : "Bài nộp thứ {from} đến {to} trong tổng số {count}"
+            }
         }
     }
 }
