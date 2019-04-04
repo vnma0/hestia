@@ -53,7 +53,14 @@
             "launcher" : "Trang chủ"
         },
         "scoreboard" : {
-            "launcher" : "Bảng điểm"
+            "launcher" : "Bảng điểm",
+            "table" : {
+                "head" : {
+                    "name" : "Tên",
+                    "score" : "Điểm",
+                    "accepted-count" : "AC"
+                }
+            }
         },
         "problems" : {
             "launcher" : "Đề bài",

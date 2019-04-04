@@ -53,7 +53,14 @@
             "launcher" : "Homepage"
         },
         "scoreboard" : {
-            "launcher" : "Scoreboard"
+            "launcher" : "Scoreboard",
+            "table" : {
+                "head" : {
+                    "name" : "Name",
+                    "score" : "Score",
+                    "accepted-count" : "AC"
+                }
+            }
         },
         "problems" : {
             "launcher" : "Problems",

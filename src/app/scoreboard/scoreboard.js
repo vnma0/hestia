@@ -7,6 +7,8 @@ import {
     TableHead,
 } from '@material-ui/core'
 
+import LocalizedMessage from 'react-l10n';
+
 /**
  * @name Scoreboard
  */
@@ -17,7 +19,12 @@ class Scoreboard extends React.PureComponent {
             <Table>
                 <TableHead>
                     <TableRow>
-                        {['Name', 'Score', 'AC'].concat(this.props.problems)
+                        {[
+                            <LocalizedMessage id="scoreboard.table.head.name" />,
+                            <LocalizedMessage id="scoreboard.table.head.score" />,
+                            <LocalizedMessage id="scoreboard.table.head.accepted-count" />
+                        ]
+                            .concat(this.props.problems)
                             .map((entries, index) => <TableCell key={`head_${index}`}>{entries}</TableCell>)}
                     </TableRow>
                 </TableHead>
