@@ -34,7 +34,8 @@
                             "invokingButton" : "Thay đổi mật khẩu"
                         },
                         "language" : {
-                            "title": "Ngôn ngữ"
+                            "title": "Ngôn ngữ",
+                            "notice" : "Thay đổi ngôn ngữ sẽ tải lại toàn bộ trang."
                         }
                     },
                     "options" : {

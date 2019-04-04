@@ -47,12 +47,19 @@ class UserSettingDialog extends Component {
             language: Cookies.get('language')
         }
 
+        this.requireReload = false;
+        // some settings require reloading
+
         this.submitOptions = this.submitOptions.bind(this);
     }
 
     submitOptions() {
         Cookies.set('language', this.state.language);
-        this.props.onClose()
+
+        if (this.requireReload)
+            window.location.reload();
+        else
+            this.props.onClose()
     }
 
 
@@ -107,10 +114,19 @@ class UserSettingDialog extends Component {
                             </div>
                         )}
                         {this.state.currentTab === 1 && (
-                            <LocaleChange
-                                languages={supportedLanguages}
-                                choice={this.state.language}
-                                onChange={(event, arg) => this.setState({ language: arg })}/>
+                            <>
+                                <LocaleChange
+                                    languages={supportedLanguages}
+                                    choice={this.state.language}
+                                    onChange={(event, arg) => {
+                                        this.requireReload = arg !== Cookies.get('language');
+                                        this.setState({ language: arg })
+                                    }}/>
+                                {this.requireReload
+                                && <div style={{ color: 'red', marginTop: 10 }} >
+                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.language.notice" />
+                                </div>}
+                            </>
                         )}
                     </DialogContent>
                     <DialogActions>
@@ -118,7 +134,7 @@ class UserSettingDialog extends Component {
                             <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.cancel"/>
                         </Button>
                         <Button onClick={this.submitOptions}>
-                        <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.save"/>
+                            <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.save"/>
                         </Button>
                     </DialogActions>
                 </Dialog>

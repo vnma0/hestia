@@ -34,7 +34,8 @@
                             "invokingButton" : "Change your password"
                         },
                         "language" : {
-                            "title": "Language"
+                            "title": "Language",
+                            "notice" : "Changing language preference will reload the whole page."
                         }
                     },
                     "options" : {
