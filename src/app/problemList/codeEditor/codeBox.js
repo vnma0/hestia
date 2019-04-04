@@ -6,7 +6,12 @@ import SubmitButton from "./submitButton.js";
 import LangSelection from "./langSelection.js";
 import UploadButton from "./uploadButton.js";
 
+import { pushNotification } from '../../notifier/notify.js'
+
 var reader = new FileReader();
+
+const byte_limit = 15 * 1024;
+
 class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -43,13 +48,16 @@ class CodeBox extends React.PureComponent {
         if (!(file instanceof Blob) && !(file instanceof File))
             // non-File input, hmm..
             return;
+        if (file.size >= byte_limit)
+            // 15 KiB limit
+            return pushNotification('You tried to upload something too large!')
         reader.onload = () => {
             this.setState({
                 code: reader.result,
                 fileLoading: false
             });
         };
-        reader.onloadstart = () => this.setState({ fileLoading: true });
+        this.setState({ fileLoading: true });
         reader.readAsText(file);
     }
 
@@ -112,16 +120,20 @@ class CodeBox extends React.PureComponent {
                         </Grid>
                     </div>
                 </AppBar>
-                <div>
-                    <CodeEditor
-                        readOnly={
-                            this.state.submitting || this.state.fileLoading
-                        }
-                        ext={this.props.ext[this.state.langId]}
-                        update={code => this.setState({ code: code })}
-                        code={this.state.code}
-                        editorHeight={this.state.editorHeight}
-                    />
+                <div style={(
+                    (this.state.submitting || this.state.fileLoading) ? 
+                    { opacity: 0.4, pointerEvents: 'none' } : {}
+                )}>
+                        <CodeEditor
+                            readOnly={this.state.submitting || this.state.fileLoading}
+                            ext={this.props.ext[this.state.langId]}
+                            update={(code) => {
+                                if (code.length <= byte_limit)
+                                    this.setState({ code: code })
+                                // enforce source limit even for editor
+                            }}
+                            code={this.state.code}
+                        />
                 </div>
                 <input type="file" onChange={(event) => this.processFile(event.target.files[0])}
                     ref={this.catcherRef} style={{ display: 'none' }}
