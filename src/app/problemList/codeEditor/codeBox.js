@@ -31,10 +31,10 @@ class CodeBox extends React.PureComponent {
     }
     //update editor height when resize window
     updateEditorHeight() {
-        console.log(this.refs.appBar);
+        console.log();
         this.setState({
             editorHeight:
-                window.innerHeight - this.refs.optionTab.clientHeight - 134
+                window.innerHeight - this.refs.optionTab.clientHeight - document.getElementById("appBar").offsetHeight - 77.5
         });
     }
 
@@ -62,7 +62,7 @@ class CodeBox extends React.PureComponent {
             <>
                 <Divider light variant="inset" />
                 <AppBar
-                    ref="appBar"
+                    id="appBar"
                     position="static"
                     color="default"
                 >
