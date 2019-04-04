@@ -10,6 +10,8 @@ import { pushNotification } from '../../notifier/notify.js'
 
 var reader = new FileReader();
 
+const byte_limit = 15 * 1024;
+
 class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props)
@@ -34,7 +36,7 @@ class CodeBox extends React.PureComponent {
         if (!(file instanceof Blob) && !(file instanceof File))
             // non-File input, hmm..
             return;
-        if (file.size >= 15 * 1024)
+        if (file.size >= byte_limit)
             // 15 KiB limit
             return pushNotification('You tried to upload something too large!')
         reader.onload = () => {
@@ -98,7 +100,11 @@ class CodeBox extends React.PureComponent {
                         <CodeEditor
                             readOnly={this.state.submitting || this.state.fileLoading}
                             ext={this.props.ext[this.state.langId]}
-                            update={(code) => this.setState({ code: code })}
+                            update={(code) => {
+                                if (code.length <= byte_limit)
+                                    this.setState({ code: code })
+                                // enforce source limit even for editor
+                            }}
                             code={this.state.code}
                         />
                 </div>
