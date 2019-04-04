@@ -31,7 +31,6 @@ class CodeBox extends React.PureComponent {
     }
     //update editor height when resize window
     updateEditorHeight() {
-        console.log();
         this.setState({
             editorHeight:
                 window.innerHeight - this.refs.optionTab.clientHeight - document.getElementById("appBar").offsetHeight - 77.5
