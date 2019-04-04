@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import './index.css';
+import './external/roboto/roboto.css'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { LocalizationProvider } from 'react-l10n';
