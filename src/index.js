@@ -115,6 +115,10 @@ class Hestia extends React.Component {
                                 }
                             ]}
                         />
+                        <Route path="/" render={() => {
+                            document.title = this.state.contestName;
+                            return <Homepage title={this.state.contestName} />
+                        }} />
                         <Route path="/submissions" render={() =>
                             <Submission
                                 title={`${this.state.contestName} - ${this.strings.resources.submissions.launcher}`} />} />
@@ -124,8 +128,6 @@ class Hestia extends React.Component {
                         <Route path="/scoreboard" render={() =>
                             <ScoreboardWrapper
                                 title={`${this.state.contestName} - ${this.strings.resources.scoreboard.launcher}`} />} />
-                        <Route path="/" render={() =>
-                            <Homepage title={this.state.contestName} />} />
                     </div>
                 </Router>
             </LocalizationProvider>
