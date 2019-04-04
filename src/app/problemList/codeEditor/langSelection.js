@@ -9,6 +9,13 @@ import LocalizedMessage from 'react-l10n';
 import friendlyLang from '../../../strings/lang.json';
 
 /**
+ * @param str {String}: Text file extension
+ */
+function getFriendlyExtension(str) {
+    return friendlyLang[String(str).replace('.', '').toLowerCase()] || str;
+}
+
+/**
  * @name LangSelection
  * @description Language chooser
  * @property {Function} `handleChange` - function to execute when a language has been chosen.
@@ -21,26 +28,29 @@ class LangSelection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            // anchor element to pin the list
             anchorEl: undefined
         };
         this.handleChoice = this.handleChoice.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(event) {
-        this.setState({
-            anchorEl: event.currentTarget
-        });
     }
 
     handleChoice(newLang) {
         this.setState({
             anchorEl: undefined
         });
-        this.props.handleChange(newLang);
+        if (typeof this.props.handleChange === 'function')
+            this.props.handleChange(newLang);
     }
 
     render() {
+        let { ext, choice } = this.props;
+        let displayed = getFriendlyExtension(ext[choice]);
+        let langList = ext.map((x, i) => (
+            <MenuItem onClick={() => this.handleChoice(i)} key={`lang-${i}`}>
+                {getFriendlyExtension(String(x))}
+            </MenuItem>
+        ))
+        
         return (
             <>
                 <Tooltip 
@@ -50,21 +60,16 @@ class LangSelection extends React.Component {
                         variant="contained"
                         aria-owns={this.state.anchorEl ? "menu" : undefined}
                         aria-haspopup={true}
-                        onClick={this.handleClick}>
-                        {this.props.children
-                            || <LocalizedMessage id="problems.code-editor.control.lang-selector.null-choice"/>}
-                            {/* fallback text if nothing chosen */}
+                        onClick={event => this.setState({ anchorEl: event.currentTarget })}>
+                        {/* setting anchor to trigger opening of menu */}
+                        {displayed || <LocalizedMessage id="problems.code-editor.control.lang-selector.null-choice"/>}
                     </Button>
                 </Tooltip>
                 <Menu
                     anchorEl={this.state.anchorEl}
                     open={this.state.anchorEl !== undefined}
                     onClose={() => this.setState({ anchorEl: undefined })}>
-                    {this.props.displayLang.map((x, i) => (
-                        <MenuItem onClick={() => this.handleChoice(i)} key={i}>
-                            {friendlyLang[String(x).replace('.', '').toLowerCase()]}
-                        </MenuItem>
-                    ))}
+                    {langList}
                 </Menu>
             </>
         );
@@ -72,8 +77,7 @@ class LangSelection extends React.Component {
 }
 
 LangSelection.propTypes = {
-    handleChange: PropTypes.func,
-    displayLang: PropTypes.arrayOf(PropTypes.string).isRequired
+    handleChange: PropTypes.func
 };
 
 export default LangSelection;
