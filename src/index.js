@@ -4,7 +4,7 @@ import './index.css'
 import 'typeface-roboto'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { LocalizationProvider } from 'react-l10n'
+import { LocalizationProvider } from 'react-l10n';
 import * as Cookies from 'js-cookie'
 
 import { translations } from './l10n-loader.js'
@@ -44,7 +44,11 @@ class Hestia extends React.Component {
                 end: new Date()
             }
         }
-        this.language = Cookies.get('language');
+        // preparing languages
+        this.language = Cookies.get('language') || 'en_US';
+        this.strings = this.language && translations[this.language]
+            ? {resources : translations[this.language].resources}
+            : {resources : translations['en_US'].resources}
     }
 
     componentWillMount() {
@@ -68,9 +72,7 @@ class Hestia extends React.Component {
     render() {
         return (
             <LocalizationProvider
-                {...(this.language && translations[this.language]
-                    ? {resources : translations[this.language].resources}
-                    : {resources : translations['en_US'].resources})}>
+                {...this.strings}>
                 <Notify
                     autoHideDuration={1000}
                     TransitionComponent={props => slideIn(props, 'left')}
@@ -114,11 +116,14 @@ class Hestia extends React.Component {
                             ]}
                         />
                         <Route path="/submissions" render={() =>
-                            <Submission title={this.state.contestName + ' - Submissions'} />} />
+                            <Submission
+                                title={`${this.state.contestName} - ${this.strings.resources.submissions.launcher}`} />} />
                         <Route path="/problems" render={() =>
-                            <ProblemWrapper title={this.state.contestName + ' - Problems'} />}/>
+                            <ProblemWrapper
+                                title={`${this.state.contestName} - ${this.strings.resources.problems.launcher}`} />}/>
                         <Route path="/scoreboard" render={() =>
-                            <ScoreboardWrapper title={this.state.contestName + ' - Scoreboard'} />} />
+                            <ScoreboardWrapper
+                                title={`${this.state.contestName} - ${this.strings.resources.scoreboard.launcher}`} />} />
                         <Route path="/" render={() =>
                             <Homepage title={this.state.contestName} />} />
                     </div>
