@@ -32,6 +32,11 @@ class CodeBox extends React.PureComponent {
         this.updateEditorHeight();
         window.addEventListener("resize", this.updateEditorHeight);
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateEditorHeight);
+    }
+
     //update editor height when resize window
     updateEditorHeight() {
         this.setState({
