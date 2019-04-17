@@ -28,7 +28,7 @@ class UserSettingMenu extends Component {
                     {this.props.user}
                 </MenuItem>
                 <MenuItem onClick={this.props.showProfileAction}>
-                    <LocalizedMessage id="globalStatusBar.userSetting.menu.change-user-settings"/>
+                    <LocalizedMessage id="globalStatusBar.userSetting.menu.changeUserSettings"/>
                 </MenuItem>
                 <MenuItem onClick={this.props.logoutAction}>
                     <LocalizedMessage id="globalStatusBar.userSetting.menu.logout"/>

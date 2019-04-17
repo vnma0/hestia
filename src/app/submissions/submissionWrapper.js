@@ -73,7 +73,7 @@ class Submissions extends React.Component {
                         <TableRow>
                             <TableCell>
                                 <Tooltip
-                                    title={<LocalizedMessage id="submissions.control.reload-button.tooltip"/>}>
+                                    title={<LocalizedMessage id="submissions.control.reloadButton.tooltip"/>}>
                                     <Button
                                         disabled={!this.staleUpdate || this.updateInProgress}
                                         onClick={() => {
@@ -87,8 +87,8 @@ class Submissions extends React.Component {
                                             this.triggerUpdate();
                                         }}>
                                         {this.updateInProgress
-                                            ? <LocalizedMessage id="submissions.control.reload-button.reloading"/>
-                                            : <LocalizedMessage id="submissions.control.reload-button.reload"/>}
+                                            ? <LocalizedMessage id="submissions.control.reloadButton.reloading"/>
+                                            : <LocalizedMessage id="submissions.control.reloadButton.reload"/>}
                                     </Button>
                                 </Tooltip>
                             </TableCell>
@@ -119,11 +119,11 @@ class Submissions extends React.Component {
                                 }}
                                 labelRowsPerPage={
                                     <LocalizedMessage
-                                        id="submissions.control.rows-per-page-change"/>
+                                        id="submissions.control.rowsPerPageChange"/>
                                 }
                                 labelDisplayedRows={(args) =>
                                     <LocalizedMessage
-                                        id="submissions.control.index-of-total" {...args}/>
+                                        id="submissions.control.indexOfTotal" {...args}/>
                                 }
                             />
                         </TableRow>

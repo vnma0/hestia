@@ -48,14 +48,14 @@ async function submit(code, filename, ext) {
                 pushNotification(
                     (res.ok ? 
                         <LocalizedMessage id="problems.notify.success"/> :
-                        <LocalizedMessage id="problems.notify.error.fail-stat" error={res.statusText} />)
+                        <LocalizedMessage id="problems.notify.error.failStat" error={res.statusText} />)
                 )
             return res.ok
         })
         .catch(() => {
             if (typeof pushNotification === 'function')
                 pushNotification(
-                    <LocalizedMessage id="problems.notify.error.fail-trans" />
+                    <LocalizedMessage id="problems.notify.error.failTrans" />
                 )
         })
 }

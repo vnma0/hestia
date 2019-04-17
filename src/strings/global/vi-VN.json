@@ -8,25 +8,25 @@
                 "dialog" : {
                     "title" : "Đăng nhập",
                     "greeting" : "Đăng nhập để xem đề và nộp các bài giải.",
-                    "username-hint": "Tên đăng nhập",
-                    "passkey-hint": "Mật khẩu",
+                    "usernameHint": "Tên đăng nhập",
+                    "passkeyHint": "Mật khẩu",
                     "options" : {
                         "cancel" : "Hủy",
                         "login" : "Đăng nhập"
                     },
-                    "error-text": "Đăng nhập thất bại."
+                    "errorText": "Đăng nhập thất bại."
                 }
             },
             "userSetting" : {
                 "menu" : {
                     "greeting" : "Chào mừng trở lại, ",
-                    "change-user-settings" : "Thay đổi thiết lập người dùng",
+                    "changeUserSettings" : "Thay đổi thiết lập người dùng",
                     "logout" : "Đăng xuất"
                 },
                 "dialog" : {
                     "title" : {
-                        "user-present" : "Thiết lập người dùng của ",
-                        "user-absent" : "Thiết lập người dùng"
+                        "userPresent" : "Thiết lập người dùng của ",
+                        "userAbsent" : "Thiết lập người dùng"
                     },
                     "entry" : {
                         "password" : {
@@ -45,8 +45,8 @@
                 }
             },
             "clock" : {
-                "before-start": "trước khi bắt đầu kỳ thi",
-                "time-left" : "Thời gian còn lại",
+                "beforeStart": "trước khi bắt đầu kỳ thi",
+                "timeLeft" : "Thời gian còn lại",
                 "ended" : "Kỳ thi đã kết thúc"
             }
         },
@@ -59,40 +59,40 @@
                 "head" : {
                     "name" : "Tên",
                     "score" : "Điểm",
-                    "accepted-count" : "AC"
+                    "acceptedCount" : "AC"
                 }
             }
         },
         "problems" : {
             "launcher" : "Đề bài",
-            "code-editor" : {
+            "codeEditor" : {
                 "control" : {
-                    "lang-selector" : {
+                    "langSelector" : {
                         "tooltip" : "Chọn ngôn ngữ lập trình",
-                        "null-choice" : "Chọn ngôn ngữ lập trình"
+                        "nullChoice" : "Chọn ngôn ngữ lập trình"
                     },
-                    "upload-button-tooltip" : "Tải một tập tin vào trình soạn thảo. Ghi đè mọi dữ liệu hiện có",
-                    "submit-button" : "Nộp bài"
+                    "uploadButtonTooltip" : "Tải một tập tin vào trình soạn thảo. Ghi đè mọi dữ liệu hiện có",
+                    "submitButton" : "Nộp bài"
                 }
             },
             "notify" : {
                 "success" : "Mã nguồn của bạn đã được nộp thành công!",
                 "error" : {
-                    "fail-stat" : "Lỗi trong quá trình nộp bài : {error}",
-                    "fail-trans" : "Lỗi trong quá trình nộp bài : kết nối tới máy chủ thất bại"
+                    "failStat" : "Lỗi trong quá trình nộp bài : {error}",
+                    "failTrans" : "Lỗi trong quá trình nộp bài : kết nối tới máy chủ thất bại"
                 }
             }
         },
         "submissions" : {
             "launcher" : "Các bài nộp",
             "control" : {
-                "reload-button" : {
+                "reloadButton" : {
                     "reload" : "Cập nhật",
                     "reloading" : "Đang cập nhật...",
                     "tooltip" : "Cập nhật dữ liệu và chuyển về trang đầu"
                 },
-                "rows-per-page-change" : "Số hàng hiển thị : ",
-                "index-of-total" : "Bài nộp thứ {from} đến {to} trong tổng số {count}"
+                "rowsPerPageChange" : "Số hàng hiển thị : ",
+                "indexOfTotal" : "Bài nộp thứ {from} đến {to} trong tổng số {count}"
             },
             "table" : {
                 "contestant" : "Nộp bởi",
@@ -106,11 +106,11 @@
             },
             "details" : {
                 "control" : {
-                    "show-source" : "Xem mã nguồn",
+                    "showSource" : "Xem mã nguồn",
                     "close": "Đóng"
                 },
                 "table" : {
-                    "no-detail" : [
+                    "noDetail" : [
                         "Không có thông tin chi tiết cho từng test.",
                         "Đây có phải một kỳ thi ACM?"
                     ]
@@ -118,7 +118,7 @@
                 "code" : {
                     "panel" : {
                         "loading" : "Đang tải mã nguồn...",
-                        "no-code" : [
+                        "noCode" : [
                             "Không có mã nguồn.",
                             "Có gì đó sai sai thì phải."
                         ]

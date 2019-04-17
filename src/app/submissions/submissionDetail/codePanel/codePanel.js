@@ -57,10 +57,10 @@ export default class CodePanel extends React.PureComponent {
                             <CircularProgress size={30} />
                         </div> : <CardContent>
                             <Typography variant="h6">
-                                <LocalizedMessage id="submissions.details.code.panel.no-code[0]" />
+                                <LocalizedMessage id="submissions.details.code.panel.noCode[0]" />
                             </Typography>
                             <Typography component="p">
-                                <LocalizedMessage id="submissions.details.code.panel.no-code[1]" />
+                                <LocalizedMessage id="submissions.details.code.panel.noCode[1]" />
                             </Typography>
                         </CardContent>
                 )}

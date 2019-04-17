@@ -91,10 +91,10 @@ class ResultTable extends React.Component {
         return (
             <CardContent>
                 <Typography variant="h6">
-                    <LocalizedMessage id="submissions.details.table.no-detail[0]"/>
+                    <LocalizedMessage id="submissions.details.table.noDetail[0]"/>
                 </Typography>
                 <Typography component="p">
-                    <LocalizedMessage id="submissions.details.table.no-detail[1]"/>
+                    <LocalizedMessage id="submissions.details.table.noDetail[1]"/>
                 </Typography>
             </CardContent>
         );

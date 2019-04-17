@@ -51,7 +51,7 @@ export default class SubmissionDetails extends React.PureComponent {
                     <ResultTable tests={this.state.details.tests} />
                     <DialogActions>
                         <Button onClick={toggleCodeDialog}>
-                            <LocalizedMessage id="submissions.details.control.show-source" />
+                            <LocalizedMessage id="submissions.details.control.showSource" />
                         </Button>
                         <Button onClick={this.toggle}>
                             <LocalizedMessage id="submissions.details.control.close" />

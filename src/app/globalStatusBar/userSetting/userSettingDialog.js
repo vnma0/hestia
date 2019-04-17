@@ -78,12 +78,12 @@ class UserSettingDialog extends Component {
                         {this.props.user
                             ? (
                                 <>
-                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.user-present"/>
+                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.userPresent"/>
                                     {this.props.user}
                                 </>
                             )
                             : (
-                                <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.user-absent"/>
+                                <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.userAbsent"/>
                             )}
                     </DialogTitle>
                     <DialogContent>

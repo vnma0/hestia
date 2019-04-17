@@ -116,7 +116,7 @@ class CodeBox extends React.PureComponent {
                                         })
                                     }
                                 >
-                                    <LocalizedMessage id="problems.code-editor.control.submit-button"/>
+                                    <LocalizedMessage id="problems.codeEditor.control.submitButton"/>
                                 </SubmitButton>
                             </Grid>
                         </Grid>

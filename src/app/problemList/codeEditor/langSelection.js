@@ -54,7 +54,7 @@ class LangSelection extends React.Component {
         return (
             <>
                 <Tooltip 
-                    title={<LocalizedMessage id="problems.code-editor.control.lang-selector.tooltip"/>}
+                    title={<LocalizedMessage id="problems.codeEditor.control.langSelector.tooltip"/>}
                     placement="bottom">
                     <Button
                         variant="contained"
@@ -62,7 +62,7 @@ class LangSelection extends React.Component {
                         aria-haspopup={true}
                         onClick={event => this.setState({ anchorEl: event.currentTarget })}>
                         {/* setting anchor to trigger opening of menu */}
-                        {displayed || <LocalizedMessage id="problems.code-editor.control.lang-selector.null-choice"/>}
+                        {displayed || <LocalizedMessage id="problems.codeEditor.control.langSelector.nullChoice"/>}
                     </Button>
                 </Tooltip>
                 <Menu

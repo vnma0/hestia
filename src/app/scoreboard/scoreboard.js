@@ -22,7 +22,7 @@ class Scoreboard extends React.PureComponent {
                         {[
                             <LocalizedMessage id="scoreboard.table.head.name" />,
                             <LocalizedMessage id="scoreboard.table.head.score" />,
-                            <LocalizedMessage id="scoreboard.table.head.accepted-count" />
+                            <LocalizedMessage id="scoreboard.table.head.acceptedCount" />
                         ]
                             .concat(this.props.problems)
                             .map((entries, index) => <TableCell key={`head_${index}`}>{entries}</TableCell>)}

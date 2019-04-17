@@ -111,7 +111,7 @@ class LoginDialog extends Component {
                         <Grid item>
                             <TextField
                                 autoFocus={true}
-                                label={<LocalizedMessage id="globalStatusBar.login.dialog.username-hint" />}
+                                label={<LocalizedMessage id="globalStatusBar.login.dialog.usernameHint" />}
                                 value={this.state.id}
                                 onChange={this.handleUserIDChange}
                                 fullWidth={true}
@@ -132,7 +132,7 @@ class LoginDialog extends Component {
                         </Grid>
                         <Grid item>
                             <TextField
-                                label={<LocalizedMessage id="globalStatusBar.login.dialog.passkey-hint" />}
+                                label={<LocalizedMessage id="globalStatusBar.login.dialog.passkeyHint" />}
                                 ref={this.state.passkeyRef}
                                 type="password"
                                 onChange={this.handleKeyChange}
@@ -163,7 +163,7 @@ class LoginDialog extends Component {
                                         else 
                                     if (typeof pushNotification === 'function')
                                         pushNotification(
-                                            <LocalizedMessage id="globalStatusBar.login.dialog.error-text" />
+                                            <LocalizedMessage id="globalStatusBar.login.dialog.errorText" />
                                         )
                                 })
                             // if login finished, hide the loading circle

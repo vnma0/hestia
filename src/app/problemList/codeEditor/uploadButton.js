@@ -7,7 +7,7 @@ import LocalizedMessage from 'react-l10n'
 export default class UploadButton extends React.PureComponent {
     render() {
         return (
-            <Tooltip title={<LocalizedMessage id="problems.code-editor.control.upload-button-tooltip"/>}>
+            <Tooltip title={<LocalizedMessage id="problems.codeEditor.control.uploadButtonTooltip"/>}>
                 <Button {...this.props}>
                     {this.props.disabled
                         ? <CircularProgress size={20} />

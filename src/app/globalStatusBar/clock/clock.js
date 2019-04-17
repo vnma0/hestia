@@ -62,12 +62,12 @@ class CountdownClock extends Component {
                             ? <LocalizedMessage id="globalStatusBar.clock.ended"/>
                             : (this.state.started 
                                 ? <>
-                                <LocalizedMessage id="globalStatusBar.clock.time-left"/>
+                                <LocalizedMessage id="globalStatusBar.clock.timeLeft"/>
                                 {` : ${this.state.current} / ${this.state.duration}`}
                                 </>
                                 : <>
                                 {`${timeAgo(new Date(), this.props.time.start)} `}
-                                <LocalizedMessage id="globalStatusBar.clock.before-start"/>
+                                <LocalizedMessage id="globalStatusBar.clock.beforeStart"/>
                                 </>)}
                     </Button>
                 </span>
