@@ -15,15 +15,16 @@ import LocalizedMessage from 'react-l10n';
 
 class Scoreboard extends React.PureComponent {
     render() {
+        let initialStrings = [
+            <LocalizedMessage id="scoreboard.table.head.name" />,
+            <LocalizedMessage id="scoreboard.table.head.score" />,
+            <LocalizedMessage id="scoreboard.table.head.acceptedCount" />
+        ];
         return (
             <Table>
                 <TableHead>
                     <TableRow>
-                        {[
-                            <LocalizedMessage id="scoreboard.table.head.name" />,
-                            <LocalizedMessage id="scoreboard.table.head.score" />,
-                            <LocalizedMessage id="scoreboard.table.head.acceptedCount" />
-                        ]
+                        {initialStrings
                             .concat(this.props.problems)
                             .map((entries, index) => <TableCell key={`head_${index}`}>{entries}</TableCell>)}
                     </TableRow>
@@ -31,15 +32,18 @@ class Scoreboard extends React.PureComponent {
                 <TableBody>
                     {
                         this.props.results.map((record, index) => {
+                            let records = this.props.problems
+                                .map(entries => (
+                                    <TableCell key={`row_${index}_${entries}`}>
+                                        {record.result[entries].pri === null ? '∅' : parseFloat(Number(record.result[entries].pri)).toFixed(2)}
+                                    </TableCell>
+                                ))
                             return (
                                 <TableRow key={`row_${index}`}>
                                     <TableCell>{record.name}</TableCell>
                                     <TableCell>{parseFloat(Number(record.score)).toFixed(2)}</TableCell>
                                     <TableCell>{record.aced}</TableCell>
-                                    {this.props.problems.map(entries => (<TableCell key={`row_${index}_${entries}`}>
-                                                {record.result[entries].pri === null ? '∅' : parseFloat(Number(record.result[entries].pri)).toFixed(2)}
-                                            </TableCell>)
-                                    )}
+                                    {records}
                                 </TableRow>
                             )
                         })
