@@ -92,6 +92,7 @@ class UserSettingDialog extends Component {
                                 value={this.state.currentTab}
                                 fullWidth
                                 onChange={(e, v) => this.setState({ currentTab: v })}>
+                                {/* we only care about the target value, ignore the event passed */}
                                 <Tab label={<LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.password.title"/>} />
                                 <Tab label={<LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.language.title"/>} />
                             </Tabs>
