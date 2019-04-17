@@ -2,6 +2,7 @@ import React from "react";
 import downloadSubmission from "../../stub/download.js";
 import { CardContent, Typography, CircularProgress } from "@material-ui/core";
 import AceEditor from "react-ace";
+import LocalizedMessage from 'react-l10n';
 
 /**
  * @name CodePanel
@@ -29,10 +30,6 @@ export default class CodePanel extends React.PureComponent {
         }
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return (this.state.code !== nextState.code || this.s)
-    // }
-
     componentDidUpdate() {
         this.componentDidMount();
     }
@@ -54,16 +51,16 @@ export default class CodePanel extends React.PureComponent {
                         ? <div align="center">
                             <CardContent>
                                 <Typography variant="h6">
-                                    Loading...
+                                    <LocalizedMessage id="submissions.details.code.panel.loading" />
                                 </Typography>
                             </CardContent>
                             <CircularProgress size={30} />
                         </div> : <CardContent>
                             <Typography variant="h6">
-                                No code is available.
+                                <LocalizedMessage id="submissions.details.code.panel.noCode[0]" />
                             </Typography>
                             <Typography component="p">
-                                What are you expecting?
+                                <LocalizedMessage id="submissions.details.code.panel.noCode[1]" />
                             </Typography>
                         </CardContent>
                 )}

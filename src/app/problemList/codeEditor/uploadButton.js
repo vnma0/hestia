@@ -2,10 +2,12 @@ import React from 'react';
 import { Button, Tooltip, CircularProgress } from '@material-ui/core';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 
+import LocalizedMessage from 'react-l10n'
+
 export default class UploadButton extends React.PureComponent {
     render() {
         return (
-            <Tooltip title="Load a file into the editor. Overwrite existing content.">
+            <Tooltip title={<LocalizedMessage id="problems.codeEditor.control.uploadButtonTooltip"/>}>
                 <Button {...this.props}>
                     {this.props.disabled
                         ? <CircularProgress size={20} />

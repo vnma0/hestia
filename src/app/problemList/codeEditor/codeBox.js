@@ -1,5 +1,6 @@
-import React from "react";
-import { AppBar, Grid, Divider } from "@material-ui/core";
+import React from 'react'
+import { AppBar, Grid, Divider } from '@material-ui/core'
+import LocalizedMessage from 'react-l10n';
 
 import CodeEditor from "./codeEditor.js";
 import SubmitButton from "./submitButton.js";
@@ -22,6 +23,7 @@ class CodeBox extends React.PureComponent {
             fileLoading: false,
             editorHeight: window.innerHeight - 180
         };
+
         this.catcherRef = React.createRef();
         this.updateEditorHeight = this.updateEditorHeight.bind(this);
         this.processFile = this.processFile.bind(this);
@@ -119,7 +121,7 @@ class CodeBox extends React.PureComponent {
                                         })
                                     }
                                 >
-                                    Submit
+                                    <LocalizedMessage id="problems.codeEditor.control.submitButton"/>
                                 </SubmitButton>
                             </Grid>
                         </Grid>
@@ -138,6 +140,7 @@ class CodeBox extends React.PureComponent {
                                 // enforce source limit even for editor
                             }}
                             code={this.state.code}
+                            editorHeight={this.state.editorHeight}
                         />
                 </div>
                 <input type="file" onChange={(event) => this.processFile(event.target.files[0])}

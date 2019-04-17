@@ -10,8 +10,16 @@ import {
     Tab,
 } from '@material-ui/core'
 import { Button } from '@material-ui/core'
+
+import * as Cookies from 'js-cookie';
+
 import PasswordChangeDialog from './passwordChange/passwordChangeDialog.js'
+import LocaleChange from './localeChange/localeChange.js';
 import { fade } from '../lib/libTransition.js'
+
+import { supportedLanguages } from '../../../l10n-loader.js';
+
+import LocalizedMessage from 'react-l10n';
 
 /**
  * @name UserSettingDialog
@@ -26,19 +34,34 @@ import { fade } from '../lib/libTransition.js'
 
 class UserSettingDialog extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+
+        // default to en_US
+        if (!Cookies.get('language'))
+            Cookies.set('language', 'en_US')
+
         this.state = {
             currentTab: 0,
             pwdChangeDialogOpen: false,
+
+            language: Cookies.get('language')
         }
-        this.handleChange = this.handleChange.bind(this)
+
+        this.requireReload = false;
+        // some settings require reloading
+
+        this.submitOptions = this.submitOptions.bind(this);
     }
 
-    handleChange(event, value) {
-        this.setState({
-            currentTab: value,
-        })
+    submitOptions() {
+        Cookies.set('language', this.state.language);
+
+        if (this.requireReload)
+            window.location.reload();
+        else
+            this.props.onClose()
     }
+
 
     render() {
         return (
@@ -52,17 +75,26 @@ class UserSettingDialog extends Component {
                     }
                 >
                     <DialogTitle>
-                        User settings{' '}
-                        {this.props.user ? `for ${this.props.user}` : ''}
+                        {this.props.user
+                            ? (
+                                <>
+                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.userPresent"/>
+                                    {this.props.user}
+                                </>
+                            )
+                            : (
+                                <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.userAbsent"/>
+                            )}
                     </DialogTitle>
                     <DialogContent>
                         <AppBar position="static">
                             <Tabs
                                 value={this.state.currentTab}
                                 fullWidth
-                                onChange={this.handleChange}
-                            >
-                                <Tab label="Password" />
+                                onChange={(e, v) => this.setState({ currentTab: v })}>
+                                {/* we only care about the target value, ignore the event passed */}
+                                <Tab label={<LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.password.title"/>} />
+                                <Tab label={<LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.language.title"/>} />
                             </Tabs>
                         </AppBar>
                         {this.state.currentTab === 0 && (
@@ -78,14 +110,33 @@ class UserSettingDialog extends Component {
                                         })
                                     }
                                 >
-                                    Change your password
+                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.password.invokingButton"/>
                                 </Button>
                             </div>
                         )}
+                        {this.state.currentTab === 1 && (
+                            <>
+                                <LocaleChange
+                                    languages={supportedLanguages}
+                                    choice={this.state.language}
+                                    onChange={(event, arg) => {
+                                        this.requireReload = arg !== Cookies.get('language');
+                                        this.setState({ language: arg })
+                                    }}/>
+                                {this.requireReload
+                                && <div style={{ color: 'red', marginTop: 10 }} >
+                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.language.notice" />
+                                </div>}
+                            </>
+                        )}
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.props.onClose}>Cancel</Button>
-                        <Button onClick={this.submitOptions}>Save</Button>
+                        <Button onClick={this.props.onClose}>
+                            <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.cancel"/>
+                        </Button>
+                        <Button onClick={this.submitOptions}>
+                            <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.save"/>
+                        </Button>
                     </DialogActions>
                 </Dialog>
                 <PasswordChangeDialog

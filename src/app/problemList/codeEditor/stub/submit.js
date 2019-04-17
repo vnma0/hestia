@@ -1,3 +1,6 @@
+import React from 'react';
+import LocalizedMessage from 'react-l10n';
+
 import { pushNotification } from '../../../notifier/notify.js'
 
 /**
@@ -44,15 +47,15 @@ async function submit(code, filename, ext) {
             if (typeof pushNotification === "function")
                 pushNotification(
                     (res.ok ? 
-                        `Successfully submitted solution` :
-                        `Failure during submission : ${res.statusText}`)
+                        <LocalizedMessage id="problems.notify.success"/> :
+                        <LocalizedMessage id="problems.notify.error.failStat" error={res.statusText} />)
                 )
             return res.ok
         })
         .catch(() => {
             if (typeof pushNotification === 'function')
                 pushNotification(
-                    'Failed to submit. It seems like a transmission error...'
+                    <LocalizedMessage id="problems.notify.error.failTrans" />
                 )
         })
 }

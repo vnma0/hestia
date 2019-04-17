@@ -1,5 +1,6 @@
 import React from "react";
 import { Dialog, DialogActions, Button } from "@material-ui/core";
+import LocalizedMessage from 'react-l10n';
 
 import ResultTable from "./testBasedVerdictTable.js";
 import CodeDialog from "./codePanel/codeDialog.js";
@@ -50,9 +51,11 @@ export default class SubmissionDetails extends React.PureComponent {
                     <ResultTable tests={this.state.details.tests} />
                     <DialogActions>
                         <Button onClick={toggleCodeDialog}>
-                            Show source code
+                            <LocalizedMessage id="submissions.details.control.showSource" />
                         </Button>
-                        <Button onClick={this.toggle}>Close</Button>
+                        <Button onClick={this.toggle}>
+                            <LocalizedMessage id="submissions.details.control.close" />
+                        </Button>
                     </DialogActions>
                 </Dialog>
                 <CodeDialog id={this.state.details.id} />

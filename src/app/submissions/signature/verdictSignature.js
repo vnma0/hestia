@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Typography, Grid } from '@material-ui/core'
 
+import LocalizedMessage from 'react-l10n';
+
 import AcceptedVerdictIcon from './verdictIcons/acceptedVerdictSignature.js'
 import WrongVerdictIcon from './verdictIcons/wrongVerdictSignature.js'
 import TimeoutVerdictIcon from './verdictIcons/timeoutVerdictSignature.js'
@@ -13,7 +15,8 @@ import CompilationErrorVerdictSignature from './verdictIcons/compilationErrorVer
 /**
  * @name VerdictSignature : Submission's judged verdict. FlexGrow.
  *                          All props are passed down to <Typography>.
- * @param {String} `verdict` - Judged verdict.
+ * @param {String} `verdict` - Judged verdict, must be in list of 
+ *                              `['AC', 'WA', 'CE', 'TLE', 'MLE', 'Pending']`
  * @param {Boolean} `iconOnly` - Whether to return icon only or with the verdict text.
  * @param {Boolean} `reversed` - Whether the verdict text should appear before or after the icon.
  * @return {React.Component} - A <Typography> that shows the verdict.
@@ -23,22 +26,14 @@ import CompilationErrorVerdictSignature from './verdictIcons/compilationErrorVer
 
 const verdictIcon = {
     AC: <AcceptedVerdictIcon />,
-    Accepted: <AcceptedVerdictIcon />,
 
     WA: <WrongVerdictIcon />,
-    'Wrong answer': <WrongVerdictIcon />,
-    'Wrong output': <WrongVerdictIcon />,
 
     TLE: <TimeoutVerdictIcon />,
-    'Time limit violated': <TimeoutVerdictIcon />,
-    'Time limit exceeded': <TimeoutVerdictIcon />,
 
     MLE: <MemExhaustedVerdictSignature />,
-    'Memory limit exceeded': <MemExhaustedVerdictSignature />,
 
-    RE: <ExitErrorVerdictSignature />,
     RTE: <ExitErrorVerdictSignature />,
-    'Runtime error': <ExitErrorVerdictSignature />,
 
     CE: <CompilationErrorVerdictSignature />,
 
@@ -51,23 +46,18 @@ const verdictIcon = {
 // CSS colour of verdicts
 const color = {
     AC: 'green',
-    Accepted: 'green',
 
     WA: 'red',
-    'Wrong answer': 'red',
-    'Wrong output': 'red',
 
     TLE: '#ff3d00',
-    'Time limit violated': '#ff3d00',
 
     MLE: '',
 
-    RE: '#d500f9',
     RTE: '#d500f9',
 
     Pending: 'blue',
 
-    CE: '#632920',
+    CE: '#632920'
 }
 
 class VerdictSignature extends Component {
@@ -92,9 +82,11 @@ class VerdictSignature extends Component {
                             fontWeight: this.props.success ? 'bold' : '',
                         }}
                     >
-                        {this.props.children
-                            ? this.props.children
+                        {verdictIcon[this.props.verdict]
+                            ? <LocalizedMessage id={`submissions.verdict.${this.props.verdict}`} />
                             : this.props.verdict}
+                            {/* if known verdict, display the respective icon, else 
+                                render the verdict directly */}
                     </Typography>
                 </Grid>
             ),

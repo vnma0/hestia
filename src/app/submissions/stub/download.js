@@ -3,8 +3,10 @@
  * @param {String} `id` - ID of the submission to be downloaded
  * @returns {Promise<Response>}
  */
+import React from 'react';
 
 import { pushNotification } from "../../notifier/notify.js";
+import LocalizedMessage from 'react-l10n';
 
 export default async function downloadSubmission(id) {
     return fetch(`/api/subs/${String(id)}/source`)
@@ -19,7 +21,7 @@ export default async function downloadSubmission(id) {
             if (process.env.NODE_ENV === "development") {
                 console.log(err);
                 if (typeof pushNotification === "function") {
-                    pushNotification("Failed retrieving submissions.");
+                    pushNotification(<LocalizedMessage id="submissions.error.source"/>)
                 }
             }
             return undefined;

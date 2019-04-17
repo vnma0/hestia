@@ -1,4 +1,6 @@
+import React from 'react';
 import { isNumber } from 'util'
+import LocalizedMessage from 'react-l10n';
 import { pushNotification } from '../../notifier/notify.js'
 
 function constructURL(count, page, size) {
@@ -53,9 +55,7 @@ export default async function submissionParse(count, page, size) {
         })
         .catch(() => {
             if (typeof pushNotification === 'function')
-                pushNotification(
-                    'Failed to fetch submission board'
-                )
+                pushNotification(<LocalizedMessage id="submissions.error.submissions"/>)
             return {
                 submissions: [],
                 meta: {

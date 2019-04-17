@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Toolbar, AppBar, IconButton } from '@material-ui/core'
 
 import Menu from '@material-ui/icons/Menu'
+import LocalizedMessage from 'react-l10n';
+
 import ContestSignature from './contestSignature/contestSignature.js'
 import CountdownClock from './clock/clock.js'
 import LoginButton from './login/loginButton.js'
@@ -135,7 +137,7 @@ class GlobalStatusBar extends Component {
                                     })
                                 }
                             >
-                                {'Log in here'}
+                                <LocalizedMessage id="globalStatusBar.login.invokingButton"/>
                             </LoginButton>
                         ) : (
                             <UserSettingButton

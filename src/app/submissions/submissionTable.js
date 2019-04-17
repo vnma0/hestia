@@ -1,12 +1,7 @@
 import React from "react";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    Paper,
-    TableRow
-} from "@material-ui/core";
+import { Table, TableBody, TableCell, TableHead, Paper, TableRow } from "@material-ui/core";
+
+import LocalizedMessage from 'react-l10n';
 
 import Submission from "./submission.js";
 import SubmissionDetail from "./submissionDetail/submissionDetail.js";
@@ -43,13 +38,34 @@ class SubmissionTable extends React.PureComponent {
                     <Table style={{ tableLayout: "fixed" }}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Submitted by</TableCell>
-                                <TableCell>Problem</TableCell>
-                                <TableCell>Programming language</TableCell>
-                                <TableCell>Verdict</TableCell>
-                                <TableCell>Execution duration</TableCell>
-                                <TableCell>Memory consumed</TableCell>
-                                <TableCell>Timestamp</TableCell>
+                                <TableCell>
+                                    <LocalizedMessage
+                                        id="submissions.table.contestant"/>
+                                </TableCell>
+                                <TableCell>
+                                    <LocalizedMessage
+                                        id="submissions.table.problem"/>
+                                </TableCell>
+                                <TableCell>
+                                    <LocalizedMessage
+                                        id="submissions.table.language"/>
+                                </TableCell>
+                                <TableCell>
+                                    <LocalizedMessage
+                                        id="submissions.table.verdict"/>
+                                </TableCell>
+                                <TableCell>
+                                    <LocalizedMessage
+                                        id="submissions.table.executionTime"/>
+                                </TableCell>
+                                <TableCell>
+                                    <LocalizedMessage
+                                        id="submissions.table.memory"/>
+                                </TableCell>
+                                <TableCell>
+                                    <LocalizedMessage
+                                        id="submissions.table.timestamp"/>
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>{mapping}</TableBody>

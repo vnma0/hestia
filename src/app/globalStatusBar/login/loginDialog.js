@@ -19,6 +19,8 @@ import { fade } from '../lib/libTransition.js'
 import login from './stub/login.js'
 import { pushNotification } from '../../notifier/notify.js'
 
+import LocalizedMessage from 'react-l10n';
+
 /**
  * @name LoginDialog
  * @description The login dialog.
@@ -92,11 +94,13 @@ class LoginDialog extends Component {
                         : fade
                 }
             >
-                <DialogTitle>Log in</DialogTitle>
+                <DialogTitle>
+                <LocalizedMessage id="globalStatusBar.login.dialog.title"/>
+                </DialogTitle>
 
                 <DialogContent>
                     <DialogContentText>
-                        Log in to submit solutions and view problems.
+                        <LocalizedMessage id="globalStatusBar.login.dialog.greeting"/>
                         {/* TODO : configurable language */}
                     </DialogContentText>
 
@@ -107,7 +111,7 @@ class LoginDialog extends Component {
                         <Grid item>
                             <TextField
                                 autoFocus={true}
-                                label="ID"
+                                label={<LocalizedMessage id="globalStatusBar.login.dialog.usernameHint" />}
                                 value={this.state.id}
                                 onChange={this.handleUserIDChange}
                                 fullWidth={true}
@@ -128,7 +132,7 @@ class LoginDialog extends Component {
                         </Grid>
                         <Grid item>
                             <TextField
-                                label="Authentication key"
+                                label={<LocalizedMessage id="globalStatusBar.login.dialog.passkeyHint" />}
                                 ref={this.state.passkeyRef}
                                 type="password"
                                 onChange={this.handleKeyChange}
@@ -144,9 +148,8 @@ class LoginDialog extends Component {
                 <DialogActions>
                     <Button
                         disabled={this.state.loginInProgress}
-                        onClick={this.props.onClose}
-                    >
-                        Cancel
+                        onClick={this.props.onClose}>
+                        <LocalizedMessage id="globalStatusBar.login.dialog.options.cancel" />
                     </Button>
                     <Button
                         disabled={this.state.loginInProgress}
@@ -159,7 +162,9 @@ class LoginDialog extends Component {
                                     if (success) window.location.reload();
                                         else 
                                     if (typeof pushNotification === 'function')
-                                        pushNotification('Failed to log in.')
+                                        pushNotification(
+                                            <LocalizedMessage id="globalStatusBar.login.dialog.errorText" />
+                                        )
                                 })
                             // if login finished, hide the loading circle
                             this.setState({
@@ -171,7 +176,7 @@ class LoginDialog extends Component {
                         {this.state.loginInProgress ? (
                             <CircularProgress size={20} />
                         ) : (
-                            'Log in'
+                            <LocalizedMessage id="globalStatusBar.login.dialog.options.login" />
                         )}
                     </Button>
                 </DialogActions>
