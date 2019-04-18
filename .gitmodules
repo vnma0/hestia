@@ -1,0 +1,3 @@
+[submodule "src/strings/hestia-l10n"]
+	path = src/strings/hestia-l10n
+	url = https://github.com/vnma0/hestia-l10n

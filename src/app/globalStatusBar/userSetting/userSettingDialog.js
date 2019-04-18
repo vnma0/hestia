@@ -9,7 +9,7 @@ import PasswordChangeDialog from './passwordChange/passwordChangeDialog.js';
 import LocaleChange from './localeChange/localeChange.js';
 import { fade } from '../lib/libTransition.js';
 
-import { supportedLanguages } from '../../../l10n-loader.js';
+import { supportedLanguages } from '../../../strings/hestia-l10n/l10n-loader.js';
 
 import LocalizedMessage from 'react-l10n';
 

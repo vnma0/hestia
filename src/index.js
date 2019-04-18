@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { LocalizationProvider } from 'react-l10n';
 import * as Cookies from 'js-cookie';
 
-import { translations } from './l10n-loader.js';
+import { translations } from './strings/hestia-l10n/l10n-loader.js';
 
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js';
 import Sidenav from './app/sidenav/sidenav.js';
