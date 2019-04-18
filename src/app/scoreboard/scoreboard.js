@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, TableBody, TableCell, TableRow, TableHead } from '@material-ui/core';
 
 import LocalizedMessage from 'react-l10n';
+import './scoreboard.css';
 
 /**
  * @name Scoreboard
@@ -25,13 +26,19 @@ class Scoreboard extends React.PureComponent {
                 </TableHead>
                 <TableBody>
                     {this.props.results.map((record, index) => {
-                        let records = this.props.problems.map(entries => (
-                            <TableCell key={`row_${index}_${entries}`}>
-                                {record.result[entries].pri === null
-                                    ? '∅'
-                                    : parseFloat(Number(record.result[entries].pri)).toFixed(2)}
-                            </TableCell>
-                        ));
+                        let records = this.props.problems.map(entries => {
+                            let oi_verdict = Number(record.result[entries].sec) !== record.result[entries].sec;
+                            // check if it is OI or ACM
+                            return (
+                                <TableCell
+                                    key={`row_${index}_${entries}`}
+                                    {...(oi_verdict ? { className: `score_${record.result[entries].sec}` } : {})}>
+                                    {record.result[entries].pri === null
+                                        ? '∅'
+                                        : parseFloat(Number(record.result[entries].pri)).toFixed(2)}
+                                </TableCell>
+                            );
+                        });
                         return (
                             <TableRow key={`row_${index}`}>
                                 <TableCell>{record.name}</TableCell>
