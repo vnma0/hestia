@@ -9,14 +9,14 @@ import * as Cookies from 'js-cookie';
 
 import { translations } from './strings/hestia-l10n/l10n-loader.js';
 
-import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js';
-import Sidenav from './app/sidenav/sidenav.js';
-import Homepage from './app/home/homepage.js';
-import Submission from './app/submissions/submissionWrapper.js';
-import ProblemWrapper from './app/problemList/problemWrapper.js';
-import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper';
-import Notify from './app/notifier/notify.js';
-import { slideIn } from './app/globalStatusBar/lib/libTransition.js';
+import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
+import Sidenav from './app/sidenav/sidenav.js'
+import Homepage from './app/home/homepage.js'
+import Submission from './app/submissions/submissionLazyWrapper.js'
+import ProblemWrapper from './app/problemList/problemWrapper.js'
+import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
+import Notify from './app/notifier/notify.js'
+import { slideIn } from './app/globalStatusBar/lib/libTransition.js'
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 import ProblemLauncher from './app/problemList/problemLauncher.js';
