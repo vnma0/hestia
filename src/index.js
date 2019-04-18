@@ -14,7 +14,7 @@ import Sidenav from './app/sidenav/sidenav.js'
 import Homepage from './app/home/homepage.js'
 import Submission from './app/submissions/submissionLazyWrapper.js'
 import ProblemWrapper from './app/problemList/problemWrapper.js'
-import ScoreboardWrapper from './app/scoreboard/scoreboardWrapper'
+import ScoreboardWrapper from './app/scoreboard/scoreboardLazyWrapper'
 import Notify from './app/notifier/notify.js'
 import { slideIn } from './app/globalStatusBar/lib/libTransition.js'
 
