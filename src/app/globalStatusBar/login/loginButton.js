@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Button } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Button } from '@material-ui/core';
 
 /**
  * @name LoginButton
@@ -11,11 +11,11 @@ import { Button } from '@material-ui/core'
 class LoginButton extends Component {
     render() {
         return (
-            <Button color="inherit" {...this.props}>
+            <Button color='inherit' {...this.props}>
                 {this.props.children}
             </Button>
-        )
+        );
     }
 }
 
-export default LoginButton
+export default LoginButton;

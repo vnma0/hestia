@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Typography, Grid } from '@material-ui/core'
-import CalendarToday from '@material-ui/icons/CalendarToday'
+import React, { Component } from 'react';
+import { Typography, Grid } from '@material-ui/core';
+import CalendarToday from '@material-ui/icons/CalendarToday';
 
 /**
  * @name TimestampSignature : Submission's timestamp. FlexGrow.
@@ -18,30 +18,25 @@ class TimestampSignature extends Component {
          * @desc Here I just, er, well, use <Grid> to align things properly.
          */
         return (
-            <Grid container spacing={8} alignItems="flex-start">
+            <Grid container spacing={8} alignItems='flex-start'>
                 <Grid item>
-                    <CalendarToday
-                        style={{ marginRight: '10px', marginTop: '2.5px' }}
-                    />
+                    <CalendarToday style={{ marginRight: '10px', marginTop: '2.5px' }} />
                 </Grid>
                 <Grid item>
                     <Typography
-                        variant="overline"
-                        color="inherit"
+                        variant='overline'
+                        color='inherit'
                         style={{
                             flexGrow: 1,
-                            display: 'inline-block',
+                            display: 'inline-block'
                         }}
-                        {...this.props}
-                    >
-                        {this.props.children
-                            ? this.props.children
-                            : this.props.time}
+                        {...this.props}>
+                        {this.props.children ? this.props.children : this.props.time}
                     </Typography>
                 </Grid>
             </Grid>
-        )
+        );
     }
 }
 
-export default TimestampSignature
+export default TimestampSignature;

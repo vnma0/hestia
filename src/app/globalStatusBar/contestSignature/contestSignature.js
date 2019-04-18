@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import ContestNameText from './contestName.js'
+import React, { Component } from 'react';
+import ContestNameText from './contestName.js';
 
 /**
  * @name ContestSignature
@@ -16,8 +16,8 @@ class ContestSignature extends Component {
                 <ContestNameText contestName={this.props.contestName} />
                 {/* <ContestIcon /> */}
             </>
-        )
+        );
     }
 }
 
-export default ContestSignature
+export default ContestSignature;

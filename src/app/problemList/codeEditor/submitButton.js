@@ -1,7 +1,7 @@
-import React from 'react'
-import { Button, CircularProgress } from '@material-ui/core'
+import React from 'react';
+import { Button, CircularProgress } from '@material-ui/core';
 
-import submit from './stub/submit.js'
+import submit from './stub/submit.js';
 
 /**
  * @name SubmitButton
@@ -18,37 +18,31 @@ import submit from './stub/submit.js'
 
 class SubmitButton extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            submitting: false,
-        }
+            submitting: false
+        };
     }
     render() {
         return (
             <Button
                 disabled={this.props.disabled || this.state.submitting}
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 onClick={() => {
-                    this.setState({ submitting: true })
+                    this.setState({ submitting: true });
                     this.props.onSubmit();
-                    submit(this.props.code, this.props.fileName, this.props.ext)
-                    .then(() => {
+                    submit(this.props.code, this.props.fileName, this.props.ext).then(() => {
                         this.props.onSubmitDone();
                         this.setState({
-                            submitting: false,
-                        })
-                    })
-                }}
-            >
-                {this.state.submitting ? (
-                    <CircularProgress size={20} />
-                ) : (
-                    this.props.children
-                )}
+                            submitting: false
+                        });
+                    });
+                }}>
+                {this.state.submitting ? <CircularProgress size={20} /> : this.props.children}
             </Button>
-        )
+        );
     }
 }
 
-export default SubmitButton
+export default SubmitButton;

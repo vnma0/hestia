@@ -6,28 +6,26 @@
  */
 
 async function verifyLogin() {
-    return fetch(
-        `/api/users`
-    )
+    return fetch(`/api/users`)
         .then(res => {
-            if (!res.ok) 
-                throw new Error('Attempt to automatically log in failed')
-            return res.text()
+            if (!res.ok) throw new Error('Attempt to automatically log in failed');
+            return res.text();
         })
         .then(response => ({
             ok: true,
-            username : JSON.parse(response)['username'],
-            id : JSON.parse(response)['_id']
+            username: JSON.parse(response)['username'],
+            id: JSON.parse(response)['_id']
         }))
         .catch(err => {
             if (process.env.NODE_ENV === 'development')
                 // hide all errors on production builds
-                    console.log(err)
+                console.log(err);
             return {
                 ok: false,
-                username: 'null', id: 'null'
-            }
-        })
+                username: 'null',
+                id: 'null'
+            };
+        });
 }
 
-export default verifyLogin
+export default verifyLogin;

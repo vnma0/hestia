@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Typography } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Typography } from '@material-ui/core';
 
 /**
  * @name LanguageSignature : Language's ID / name / whatever. FlexGrow.
@@ -16,18 +16,21 @@ class LanguageSignature extends Component {
     render() {
         return (
             <Typography
-                variant="subtitle2"
-                color="inherit"
+                variant='subtitle2'
+                color='inherit'
                 style={{
-                    flexGrow: 1,
-                }}
-            >
+                    flexGrow: 1
+                }}>
                 {this.props.children
                     ? this.props.children
-                    : friendlyLang[String(this.props.languageName).replace('.','').toLowerCase()]}
+                    : friendlyLang[
+                          String(this.props.languageName)
+                              .replace('.', '')
+                              .toLowerCase()
+                      ]}
             </Typography>
-        )
+        );
     }
 }
 
-export default LanguageSignature
+export default LanguageSignature;

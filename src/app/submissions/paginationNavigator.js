@@ -9,7 +9,7 @@ import { TablePagination } from '@material-ui/core';
 
 class Paginator extends React.Component {
     render() {
-        return <TablePagination {...this.props}/>
+        return <TablePagination {...this.props} />;
     }
 }
 

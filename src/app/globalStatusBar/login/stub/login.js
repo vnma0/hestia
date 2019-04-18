@@ -7,10 +7,10 @@
  */
 
 function constructRequestBody(username, password) {
-    let out = new URLSearchParams()
-    out.append('username', username)
-    out.append('password', password)
-    return out
+    let out = new URLSearchParams();
+    out.append('username', username);
+    out.append('password', password);
+    return out;
 }
 
 /**
@@ -24,25 +24,19 @@ function constructRequestBody(username, password) {
  */
 
 async function login(username, password) {
-    return (
-        fetch(
-            `/api/login`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: constructRequestBody(username, password),
-                mode: 'cors',
-            }
-        )
-            .then(res => res.ok)
-            .catch(err => {
-                if (process.env.NODE_ENV === 'development')
-                    console.log(err);
-                return false;
-            })
-    )
+    return fetch(`/api/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: constructRequestBody(username, password),
+        mode: 'cors'
+    })
+        .then(res => res.ok)
+        .catch(err => {
+            if (process.env.NODE_ENV === 'development') console.log(err);
+            return false;
+        });
 }
 
-export default login
+export default login;

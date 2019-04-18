@@ -1,7 +1,7 @@
 import React from 'react';
 import LocalizedMessage from 'react-l10n';
 
-import { pushNotification } from '../../../notifier/notify.js'
+import { pushNotification } from '../../../notifier/notify.js';
 
 /**
  * @name constructData
@@ -17,13 +17,9 @@ function constructData(code, filename, ext) {
     // force inject .c -> .cpp here
     // gotta fix later I guess
 
-    let out = new FormData()
-    out.append(
-        'code',
-        new File([code], `${filename}${ext}`),
-        `${filename}${ext}`
-    )
-    return out
+    let out = new FormData();
+    out.append('code', new File([code], `${filename}${ext}`), `${filename}${ext}`);
+    return out;
 }
 
 /**
@@ -36,28 +32,25 @@ function constructData(code, filename, ext) {
  */
 
 async function submit(code, filename, ext) {
-    return fetch(
-        `/api/subs`,
-        {
-            method: 'POST',
-            body: constructData(code, filename, ext),
-        }
-    )
+    return fetch(`/api/subs`, {
+        method: 'POST',
+        body: constructData(code, filename, ext)
+    })
         .then(res => {
-            if (typeof pushNotification === "function")
+            if (typeof pushNotification === 'function')
                 pushNotification(
-                    (res.ok ? 
-                        <LocalizedMessage id="problems.notify.success"/> :
-                        <LocalizedMessage id="problems.notify.error.failStat" error={res.statusText} />)
-                )
-            return res.ok
+                    res.ok ? (
+                        <LocalizedMessage id='problems.notify.success' />
+                    ) : (
+                        <LocalizedMessage id='problems.notify.error.failStat' error={res.statusText} />
+                    )
+                );
+            return res.ok;
         })
         .catch(() => {
             if (typeof pushNotification === 'function')
-                pushNotification(
-                    <LocalizedMessage id="problems.notify.error.failTrans" />
-                )
-        })
+                pushNotification(<LocalizedMessage id='problems.notify.error.failTrans' />);
+        });
 }
 
-export default submit
+export default submit;

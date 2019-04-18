@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Typography } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Typography } from '@material-ui/core';
 
 /**
  * @name ContestNameText : Contest name
@@ -13,19 +13,16 @@ class ContestNameText extends Component {
     render() {
         return (
             <Typography
-                onClick={() => window.location = '/'}
-                variant="h5"
-                color="inherit"
+                onClick={() => (window.location = '/')}
+                variant='h5'
+                color='inherit'
                 style={{
-                    flexGrow: 1,
-                }}
-            >
-                {this.props.children
-                    ? this.props.children
-                    : this.props.contestName}
+                    flexGrow: 1
+                }}>
+                {this.props.children ? this.props.children : this.props.contestName}
             </Typography>
-        )
+        );
     }
 }
 
-export default ContestNameText
+export default ContestNameText;

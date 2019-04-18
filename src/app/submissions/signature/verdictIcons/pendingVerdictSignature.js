@@ -1,5 +1,5 @@
-import React from 'react'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 /**
  * @name PendingVerdictSignature
@@ -9,13 +9,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 class PendingVerdictSignature extends React.Component {
     render() {
-        return (
-            <CircularProgress
-                size={20}
-                style={{ marginRight: 10, marginTop: -2.5, color: 'blue' }}
-            />
-        )
+        return <CircularProgress size={20} style={{ marginRight: 10, marginTop: -2.5, color: 'blue' }} />;
     }
 }
 
-export default PendingVerdictSignature
+export default PendingVerdictSignature;

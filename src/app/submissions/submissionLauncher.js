@@ -1,6 +1,6 @@
-import React from 'react'
-import { ListItemIcon, ListItemText } from '@material-ui/core'
-import DoneAll from '@material-ui/icons/CheckCircleOutline'
+import React from 'react';
+import { ListItemIcon, ListItemText } from '@material-ui/core';
+import DoneAll from '@material-ui/icons/CheckCircleOutline';
 
 import LocalizedMessage from 'react-l10n';
 
@@ -17,11 +17,11 @@ class SubmissionLauncher extends React.Component {
                     <DoneAll />
                 </ListItemIcon>
                 <ListItemText>
-                    <LocalizedMessage id="submissions.launcher"/>
+                    <LocalizedMessage id='submissions.launcher' />
                 </ListItemText>
             </>
-        )
+        );
     }
 }
 
-export default SubmissionLauncher
+export default SubmissionLauncher;

@@ -2,12 +2,8 @@ import React from 'react';
 
 class Info extends React.Component {
     render() {
-        return (
-            <>
-                
-            </>
-        )
+        return <></>;
     }
 }
 
-export default Info
+export default Info;

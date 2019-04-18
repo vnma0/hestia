@@ -1,8 +1,8 @@
-import React from "react";
-import { Dialog, Button, DialogActions } from "@material-ui/core";
+import React from 'react';
+import { Dialog, Button, DialogActions } from '@material-ui/core';
 import LocalizedMessage from 'react-l10n';
 
-import CodePanel from "./codePanel.js";
+import CodePanel from './codePanel.js';
 
 export let toggleCodeDialog;
 
@@ -24,11 +24,11 @@ export default class CodeDialog extends React.PureComponent {
 
     render() {
         return (
-            <Dialog open={this.state.open} onClose={this.toggle} scroll="body">
+            <Dialog open={this.state.open} onClose={this.toggle} scroll='body'>
                 <CodePanel id={this.props.id} />
                 <DialogActions>
                     <Button onClick={this.toggle}>
-                        <LocalizedMessage id="submissions.details.code.dialog.controls.close" />
+                        <LocalizedMessage id='submissions.details.code.dialog.controls.close' />
                     </Button>
                 </DialogActions>
             </Dialog>

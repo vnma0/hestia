@@ -1,6 +1,6 @@
-import React from 'react'
-import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Send from '@material-ui/icons/Send'
+import React from 'react';
+import { ListItemIcon, ListItemText } from '@material-ui/core';
+import Send from '@material-ui/icons/Send';
 
 /**
  * @name AboutLauncher
@@ -16,8 +16,8 @@ class AboutLauncher extends React.Component {
                 </ListItemIcon>
                 <ListItemText>About</ListItemText>
             </>
-        )
+        );
     }
 }
 
-export default AboutLauncher
+export default AboutLauncher;

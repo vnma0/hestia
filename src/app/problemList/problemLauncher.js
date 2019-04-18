@@ -1,6 +1,6 @@
-import React from 'react'
-import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Description from '@material-ui/icons/Assignment'
+import React from 'react';
+import { ListItemIcon, ListItemText } from '@material-ui/core';
+import Description from '@material-ui/icons/Assignment';
 
 import LocalizedMessage from 'react-l10n';
 
@@ -17,11 +17,11 @@ class ProblemLauncher extends React.Component {
                     <Description />
                 </ListItemIcon>
                 <ListItemText>
-                    <LocalizedMessage id="problems.launcher"/>
+                    <LocalizedMessage id='problems.launcher' />
                 </ListItemText>
             </>
-        )
+        );
     }
 }
 
-export default ProblemLauncher
+export default ProblemLauncher;

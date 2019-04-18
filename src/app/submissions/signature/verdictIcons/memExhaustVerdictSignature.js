@@ -1,5 +1,5 @@
-import React from 'react'
-import Memory from '@material-ui/icons/Memory'
+import React from 'react';
+import Memory from '@material-ui/icons/Memory';
 
 /**
  * @name MemExhaustedVerdictSignature
@@ -9,12 +9,8 @@ import Memory from '@material-ui/icons/Memory'
 
 class MemExhaustedVerdictSignature extends React.Component {
     render() {
-        return (
-            <Memory
-                style={{ marginRight: 10, marginTop: -2.5, color: 'blue' }}
-            />
-        )
+        return <Memory style={{ marginRight: 10, marginTop: -2.5, color: 'blue' }} />;
     }
 }
 
-export default MemExhaustedVerdictSignature
+export default MemExhaustedVerdictSignature;

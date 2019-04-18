@@ -3,10 +3,7 @@
     font-style: normal;
     font-display: swap;
     font-weight: 400;
-    src:
-        local('Roboto Regular '),
-        local('Roboto-Regular'),
-        url('./Roboto-Regular.ttf') format('truetype')
+    src: local('Roboto Regular '), local('Roboto-Regular'), url('./Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -14,10 +11,7 @@
     font-style: normal;
     font-display: swap;
     font-weight: 500;
-    src:
-        local('Roboto Medium '),
-        local('Roboto-Medium'),
-        url('./Roboto-Medium.ttf') format('truetype')
+    src: local('Roboto Medium '), local('Roboto-Medium'), url('./Roboto-Medium.ttf') format('truetype');
 }
 
 @font-face {
@@ -25,8 +19,5 @@
     font-style: bold;
     font-display: swap;
     font-weight: 700;
-    src:
-        local('Roboto Bold '),
-        local('Roboto-Bold'),
-        url('./Roboto-Bold.ttf') format('truetype')
+    src: local('Roboto Bold '), local('Roboto-Bold'), url('./Roboto-Bold.ttf') format('truetype');
 }

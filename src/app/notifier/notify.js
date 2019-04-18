@@ -1,5 +1,5 @@
-import React from 'react'
-import { Snackbar } from '@material-ui/core'
+import React from 'react';
+import { Snackbar } from '@material-ui/core';
 
 /**
  * @name Notify
@@ -13,22 +13,22 @@ class Notify extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            message : undefined,
-            open : false
-        }
-        pushNotification = this.notify = this.notify.bind(this)
+            message: undefined,
+            open: false
+        };
+        pushNotification = this.notify = this.notify.bind(this);
     }
 
     notify(message) {
         this.setState({
-            message: message, 
+            message: message,
             open: true
-        })
+        });
     }
 
     render() {
-        return <Snackbar {...this.props} message={this.state.message} open={this.state.open}/>
+        return <Snackbar {...this.props} message={this.state.message} open={this.state.open} />;
     }
 }
 
-export default Notify
+export default Notify;

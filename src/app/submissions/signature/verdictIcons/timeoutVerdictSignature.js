@@ -1,5 +1,5 @@
-import React from 'react'
-import AccessTime from '@material-ui/icons/AccessTime'
+import React from 'react';
+import AccessTime from '@material-ui/icons/AccessTime';
 
 /**
  * @name TimeoutVerdictIcon
@@ -9,12 +9,8 @@ import AccessTime from '@material-ui/icons/AccessTime'
 
 class TimeoutVerdictIcon extends React.Component {
     render() {
-        return (
-            <AccessTime
-                style={{ marginRight: 10, marginTop: -2.5, color: '#ff3d00' }}
-            />
-        )
+        return <AccessTime style={{ marginRight: 10, marginTop: -2.5, color: '#ff3d00' }} />;
     }
 }
 
-export default TimeoutVerdictIcon
+export default TimeoutVerdictIcon;

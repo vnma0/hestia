@@ -1,4 +1,4 @@
-import { pushNotification } from '../../../notifier/notify.js'
+import { pushNotification } from '../../../notifier/notify.js';
 
 /**
  * @name constructRequestBody
@@ -26,29 +26,27 @@ function constructRequestBody(password, newPassword) {
  * @returns {Promise<Response>}
  */
 
-export default async function passwordChange (userId, 
-                                                password, newPassword, func) {
+export default async function passwordChange(userId, password, newPassword, func) {
     return fetch(`/api/users/${userId}/password`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
         mode: 'cors',
         body: constructRequestBody(password, newPassword)
-    }).then(res => {
-        // console.log(res.text())
-        if (res.ok)
-        // password successfully changed
-            window.location.reload()
-            // reload, because the server will sign out automatically
-        else throw new Error('Request to change password failed')
-    }).then((okay) => {
-        if (typeof func === 'function')
-            func(okay);
-    }).catch(err => {
-        if (typeof pushNotification === 'function')
-            pushNotification(
-                'Failed to change your password'
-            )
     })
+        .then(res => {
+            // console.log(res.text())
+            if (res.ok)
+                // password successfully changed
+                window.location.reload();
+            // reload, because the server will sign out automatically
+            else throw new Error('Request to change password failed');
+        })
+        .then(okay => {
+            if (typeof func === 'function') func(okay);
+        })
+        .catch(err => {
+            if (typeof pushNotification === 'function') pushNotification('Failed to change your password');
+        });
 }

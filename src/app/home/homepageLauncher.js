@@ -1,6 +1,6 @@
-import React from 'react'
-import { ListItemIcon, ListItemText } from '@material-ui/core'
-import Home from '@material-ui/icons/Home'
+import React from 'react';
+import { ListItemIcon, ListItemText } from '@material-ui/core';
+import Home from '@material-ui/icons/Home';
 
 import LocalizedMessage from 'react-l10n';
 
@@ -17,11 +17,11 @@ class HomepageLauncher extends React.Component {
                     <Home />
                 </ListItemIcon>
                 <ListItemText>
-                    <LocalizedMessage id="homepage.launcher"/>
+                    <LocalizedMessage id='homepage.launcher' />
                 </ListItemText>
             </>
-        )
+        );
     }
 }
 
-export default HomepageLauncher
+export default HomepageLauncher;

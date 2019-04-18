@@ -5,13 +5,13 @@
 
 .clock-inprogress {
     color: black !important;
-    background-color: yellow !important
+    background-color: yellow !important;
 }
 
 .clock-ended {
-    background-color: unset !important
+    background-color: unset !important;
 }
 
 .clock-notstarted {
-    background-color: lightseagreen !important
+    background-color: lightseagreen !important;
 }

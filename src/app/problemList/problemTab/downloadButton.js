@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button } from '@material-ui/core'
+import React from 'react';
+import { Button } from '@material-ui/core';
 
 /**
  * @name DownloadButton
@@ -9,8 +9,8 @@ import { Button } from '@material-ui/core'
 
 class DownloadButton extends React.Component {
     constructor(props) {
-        super(props)
-        this.handleClick = this.handleClick.bind(this)
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
     }
     //handeClick
     handleClick() {}
@@ -19,17 +19,16 @@ class DownloadButton extends React.Component {
         return (
             <Button
                 {...this.props}
-                size="large"
-                variant="contained"
+                size='large'
+                variant='contained'
                 fullWidth={true}
                 href={this.props.link}
-                target="_blank"
-                onClick={this.handleClick}
-            >
+                target='_blank'
+                onClick={this.handleClick}>
                 {this.props.children}
             </Button>
-        )
+        );
     }
 }
 
-export default DownloadButton
+export default DownloadButton;

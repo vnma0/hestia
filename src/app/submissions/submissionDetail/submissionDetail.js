@@ -1,11 +1,11 @@
-import React from "react";
-import { Dialog, DialogActions, Button } from "@material-ui/core";
+import React from 'react';
+import { Dialog, DialogActions, Button } from '@material-ui/core';
 import LocalizedMessage from 'react-l10n';
 
-import ResultTable from "./testBasedVerdictTable.js";
-import CodeDialog from "./codePanel/codeDialog.js";
+import ResultTable from './testBasedVerdictTable.js';
+import CodeDialog from './codePanel/codeDialog.js';
 
-import { toggleCodeDialog } from "./codePanel/codeDialog.js";
+import { toggleCodeDialog } from './codePanel/codeDialog.js';
 
 export let toggleDetails;
 export let addDetails;
@@ -42,19 +42,14 @@ export default class SubmissionDetails extends React.PureComponent {
     render() {
         return (
             <>
-                <Dialog
-                    open={this.state.open}
-                    onClose={this.toggle}
-                    maxWidth="md"
-                    fullWidth
-                    scroll="body">
+                <Dialog open={this.state.open} onClose={this.toggle} maxWidth='md' fullWidth scroll='body'>
                     <ResultTable tests={this.state.details.tests} />
                     <DialogActions>
                         <Button onClick={toggleCodeDialog}>
-                            <LocalizedMessage id="submissions.details.control.showSource" />
+                            <LocalizedMessage id='submissions.details.control.showSource' />
                         </Button>
                         <Button onClick={this.toggle}>
-                            <LocalizedMessage id="submissions.details.control.close" />
+                            <LocalizedMessage id='submissions.details.control.close' />
                         </Button>
                     </DialogActions>
                 </Dialog>

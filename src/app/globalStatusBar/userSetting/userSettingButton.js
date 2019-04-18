@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Button } from '@material-ui/core'
-import AccountCircle from '@material-ui/icons/AccountCircle'
+import React, { Component } from 'react';
+import { Button } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 /**
  * @name UserSettingButton
@@ -16,16 +16,15 @@ class UserSettingButton extends Component {
                 <Button
                     style={{
                         backgroundColor: '#33eb91',
-                        marginLeft: 10,
+                        marginLeft: 10
                     }}
-                    {...this.props}
-                >
+                    {...this.props}>
                     {this.props.user}
                     <AccountCircle style={{ marginLeft: 5 }} />
                 </Button>
             </>
-        )
+        );
     }
 }
 
-export default UserSettingButton
+export default UserSettingButton;

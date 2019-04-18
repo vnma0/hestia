@@ -1,28 +1,25 @@
-import React from 'react'
-import { Document, Page } from 'react-Pdf'
+import React from 'react';
+import { Document, Page } from 'react-Pdf';
 
 /**
  * WIP (Work in progress)
  */
 class Pdf extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             currentPage: 1,
-            totalPage: null,
-        }
+            totalPage: null
+        };
     }
     onSuccessfulLoad = ({ totalPage }) => {
-        this.setState({ totalPage })
-    }
+        this.setState({ totalPage });
+    };
     render() {
-        const { currentPage, totalPage } = this.state
+        const { currentPage, totalPage } = this.state;
         return (
             <>
-                <Document
-                    file={this.props.path}
-                    onLoadSuccess={this.onDocumentLoadSuccess}
-                >
+                <Document file={this.props.path} onLoadSuccess={this.onDocumentLoadSuccess}>
                     <Page pageNumber={currentPage} />
                 </Document>
                 <h2>
@@ -30,10 +27,10 @@ class Pdf extends React.Component {
                     {totalPage > 1 ? 's' : ''}
                 </h2>
             </>
-        )
+        );
     }
 }
 //sample path
-Pdf.defaultProps = { path: './Sample Document/sample.Pdf' }
+Pdf.defaultProps = { path: './Sample Document/sample.Pdf' };
 
-export default Pdf
+export default Pdf;

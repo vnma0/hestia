@@ -1,5 +1,5 @@
-import React from 'react'
-import Error from '@material-ui/icons/Error'
+import React from 'react';
+import Error from '@material-ui/icons/Error';
 
 /**
  * @name ExitErrorVerdictSignature
@@ -9,12 +9,8 @@ import Error from '@material-ui/icons/Error'
 
 class ExitErrorVerdictSignature extends React.Component {
     render() {
-        return (
-            <Error
-                style={{ marginRight: 10, marginTop: -2.5, color: '#d500f9' }}
-            />
-        )
+        return <Error style={{ marginRight: 10, marginTop: -2.5, color: '#d500f9' }} />;
     }
 }
 
-export default ExitErrorVerdictSignature
+export default ExitErrorVerdictSignature;

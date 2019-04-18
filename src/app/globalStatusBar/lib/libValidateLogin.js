@@ -8,7 +8,7 @@
  */
 
 function validateID(text) {
-    return !/\s/.test(text) && text.length !== 0
+    return !/\s/.test(text) && text.length !== 0;
     // who uses an ID with whitespace and who uses an empty ID?
 }
 
@@ -21,8 +21,8 @@ function validateID(text) {
  */
 
 function validateKey(key) {
-    return true
+    return true;
     // verify if key is valid
 }
 
-export { validateID, validateKey }
+export { validateID, validateKey };

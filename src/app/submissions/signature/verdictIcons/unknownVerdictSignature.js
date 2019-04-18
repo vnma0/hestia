@@ -1,5 +1,5 @@
-import React from 'react'
-import HelpOutline from '@material-ui/icons/HelpOutline'
+import React from 'react';
+import HelpOutline from '@material-ui/icons/HelpOutline';
 
 /**
  * @name UnknownVerdictSignature
@@ -9,12 +9,8 @@ import HelpOutline from '@material-ui/icons/HelpOutline'
 
 class UnknownVerdictSignature extends React.Component {
     render() {
-        return (
-            <HelpOutline
-                style={{ marginRight: 10, marginTop: -2.5, color: 'black' }}
-            />
-        )
+        return <HelpOutline style={{ marginRight: 10, marginTop: -2.5, color: 'black' }} />;
     }
 }
 
-export default UnknownVerdictSignature
+export default UnknownVerdictSignature;

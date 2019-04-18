@@ -1,9 +1,9 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import { MenuItem, Tooltip } from "@material-ui/core";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import { MenuItem, Tooltip } from '@material-ui/core';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import LocalizedMessage from 'react-l10n';
 
 import friendlyLang from '../../../strings/lang.json';
@@ -12,7 +12,13 @@ import friendlyLang from '../../../strings/lang.json';
  * @param str {String}: Text file extension
  */
 function getFriendlyExtension(str) {
-    return friendlyLang[String(str).replace('.', '').toLowerCase()] || str;
+    return (
+        friendlyLang[
+            String(str)
+                .replace('.', '')
+                .toLowerCase()
+        ] || str
+    );
 }
 
 /**
@@ -38,8 +44,7 @@ class LangSelection extends React.Component {
         this.setState({
             anchorEl: undefined
         });
-        if (typeof this.props.handleChange === 'function')
-            this.props.handleChange(newLang);
+        if (typeof this.props.handleChange === 'function') this.props.handleChange(newLang);
     }
 
     render() {
@@ -49,20 +54,20 @@ class LangSelection extends React.Component {
             <MenuItem onClick={() => this.handleChoice(i)} key={`lang-${i}`}>
                 {getFriendlyExtension(String(x))}
             </MenuItem>
-        ))
-        
+        ));
+
         return (
             <>
-                <Tooltip 
-                    title={<LocalizedMessage id="problems.codeEditor.control.langSelector.tooltip"/>}
-                    placement="bottom">
+                <Tooltip
+                    title={<LocalizedMessage id='problems.codeEditor.control.langSelector.tooltip' />}
+                    placement='bottom'>
                     <Button
-                        variant="contained"
-                        aria-owns={this.state.anchorEl ? "menu" : undefined}
+                        variant='contained'
+                        aria-owns={this.state.anchorEl ? 'menu' : undefined}
                         aria-haspopup={true}
                         onClick={event => this.setState({ anchorEl: event.currentTarget })}>
                         {/* setting anchor to trigger opening of menu */}
-                        {displayed || <LocalizedMessage id="problems.codeEditor.control.langSelector.nullChoice"/>}
+                        {displayed || <LocalizedMessage id='problems.codeEditor.control.langSelector.nullChoice' />}
                     </Button>
                 </Tooltip>
                 <Menu

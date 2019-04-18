@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { Drawer, ListItem, List } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Drawer, ListItem, List } from '@material-ui/core';
 
 /**
  * @name Sidenav
@@ -14,39 +14,40 @@ class Sidenav extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open : false
-        }
+            open: false
+        };
 
-        toggleSidenav = this.toggle = this.toggle.bind(this)
+        toggleSidenav = this.toggle = this.toggle.bind(this);
     }
 
     toggle() {
         this.setState({
             open: !this.state.open
-        })
+        });
     }
 
     renderItems() {
         return this.props.pages.map((entry, index) => {
             // mirroring onClick function
             return (
-                <ListItem component={Link} to={entry.link}
+                <ListItem
+                    component={Link}
+                    to={entry.link}
                     onClick={entry.page.props.onClick}
                     button={entry.page.props.button}
                     key={`navigator_${index}`}>
                     {entry.page}
                 </ListItem>
-            )
-        })
+            );
+        });
     }
     render() {
         return (
-            <Drawer anchor="left" {...this.props} open={this.state.open}
-                onClose={this.toggle}>
+            <Drawer anchor='left' {...this.props} open={this.state.open} onClose={this.toggle}>
                 <List>{this.renderItems()}</List>
             </Drawer>
-        )
+        );
     }
 }
 
-export default Sidenav
+export default Sidenav;

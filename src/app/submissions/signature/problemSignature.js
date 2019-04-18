@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Typography } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Typography } from '@material-ui/core';
 
 /**
  * @name ProblemSignature : Problem's ID / name / whatever. FlexGrow.
@@ -14,18 +14,15 @@ class ProblemSignature extends Component {
     render() {
         return (
             <Typography
-                variant="body1"
-                color="inherit"
+                variant='body1'
+                color='inherit'
                 style={{
-                    flexGrow: 1,
-                }}
-            >
-                {this.props.children
-                    ? this.props.children
-                    : this.props.problemName}
+                    flexGrow: 1
+                }}>
+                {this.props.children ? this.props.children : this.props.problemName}
             </Typography>
-        )
+        );
     }
 }
 
-export default ProblemSignature
+export default ProblemSignature;

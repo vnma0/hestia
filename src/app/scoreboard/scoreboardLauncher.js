@@ -1,6 +1,6 @@
-import React from 'react'
-import { ListItemIcon, ListItemText } from '@material-ui/core'
-import BarChart from '@material-ui/icons/BarChart'
+import React from 'react';
+import { ListItemIcon, ListItemText } from '@material-ui/core';
+import BarChart from '@material-ui/icons/BarChart';
 
 import LocalizedMessage from 'react-l10n';
 
@@ -17,11 +17,11 @@ class ScoreboardLauncher extends React.Component {
                     <BarChart />
                 </ListItemIcon>
                 <ListItemText>
-                    <LocalizedMessage id="scoreboard.launcher"/>
+                    <LocalizedMessage id='scoreboard.launcher' />
                 </ListItemText>
             </>
-        )
+        );
     }
 }
 
-export default ScoreboardLauncher
+export default ScoreboardLauncher;

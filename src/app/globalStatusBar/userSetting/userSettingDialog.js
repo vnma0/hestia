@@ -1,21 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import {
-    DialogTitle,
-    DialogContent,
-    Dialog,
-    DialogActions,
-    AppBar,
-    Tabs,
-    Tab,
-} from '@material-ui/core'
-import { Button } from '@material-ui/core'
+import { DialogTitle, DialogContent, Dialog, DialogActions, AppBar, Tabs, Tab } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import * as Cookies from 'js-cookie';
 
-import PasswordChangeDialog from './passwordChange/passwordChangeDialog.js'
+import PasswordChangeDialog from './passwordChange/passwordChangeDialog.js';
 import LocaleChange from './localeChange/localeChange.js';
-import { fade } from '../lib/libTransition.js'
+import { fade } from '../lib/libTransition.js';
 
 import { supportedLanguages } from '../../../l10n-loader.js';
 
@@ -37,15 +29,14 @@ class UserSettingDialog extends Component {
         super(props);
 
         // default to en_US
-        if (!Cookies.get('language'))
-            Cookies.set('language', 'en_US')
+        if (!Cookies.get('language')) Cookies.set('language', 'en_US');
 
         this.state = {
             currentTab: 0,
             pwdChangeDialogOpen: false,
 
             language: Cookies.get('language')
-        }
+        };
 
         this.requireReload = false;
         // some settings require reloading
@@ -56,61 +47,58 @@ class UserSettingDialog extends Component {
     submitOptions() {
         Cookies.set('language', this.state.language);
 
-        if (this.requireReload)
-            window.location.reload();
-        else
-            this.props.onClose()
+        if (this.requireReload) window.location.reload();
+        else this.props.onClose();
     }
-
 
     render() {
         return (
             <>
                 <Dialog
                     {...this.props}
-                    TransitionComponent={
-                        this.props.TransitionComponent
-                            ? this.props.TransitionComponent
-                            : fade
-                    }
-                >
+                    TransitionComponent={this.props.TransitionComponent ? this.props.TransitionComponent : fade}>
                     <DialogTitle>
-                        {this.props.user
-                            ? (
-                                <>
-                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.userPresent"/>
-                                    {this.props.user}
-                                </>
-                            )
-                            : (
-                                <LocalizedMessage id="globalStatusBar.userSetting.dialog.title.userAbsent"/>
-                            )}
+                        {this.props.user ? (
+                            <>
+                                <LocalizedMessage id='globalStatusBar.userSetting.dialog.title.userPresent' />
+                                {this.props.user}
+                            </>
+                        ) : (
+                            <LocalizedMessage id='globalStatusBar.userSetting.dialog.title.userAbsent' />
+                        )}
                     </DialogTitle>
                     <DialogContent>
-                        <AppBar position="static">
+                        <AppBar position='static'>
                             <Tabs
                                 value={this.state.currentTab}
                                 fullWidth
                                 onChange={(e, v) => this.setState({ currentTab: v })}>
                                 {/* we only care about the target value, ignore the event passed */}
-                                <Tab label={<LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.password.title"/>} />
-                                <Tab label={<LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.language.title"/>} />
+                                <Tab
+                                    label={
+                                        <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.password.title' />
+                                    }
+                                />
+                                <Tab
+                                    label={
+                                        <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.language.title' />
+                                    }
+                                />
                             </Tabs>
                         </AppBar>
                         {this.state.currentTab === 0 && (
-                            <div align="center" style={{ marginTop: 10 }}>
+                            <div align='center' style={{ marginTop: 10 }}>
                                 <Button
                                     style={{
                                         backgroundColor: 'red',
-                                        color: 'white',
+                                        color: 'white'
                                     }}
                                     onClick={() =>
                                         this.setState({
-                                            pwdChangeDialogOpen: true,
+                                            pwdChangeDialogOpen: true
                                         })
-                                    }
-                                >
-                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.password.invokingButton"/>
+                                    }>
+                                    <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.password.invokingButton' />
                                 </Button>
                             </div>
                         )}
@@ -121,37 +109,39 @@ class UserSettingDialog extends Component {
                                     choice={this.state.language}
                                     onChange={(event, arg) => {
                                         this.requireReload = arg !== Cookies.get('language');
-                                        this.setState({ language: arg })
-                                    }}/>
-                                {this.requireReload
-                                && <div style={{ color: 'red', marginTop: 10 }} >
-                                    <LocalizedMessage id="globalStatusBar.userSetting.dialog.entry.language.notice" />
-                                </div>}
+                                        this.setState({ language: arg });
+                                    }}
+                                />
+                                {this.requireReload && (
+                                    <div style={{ color: 'red', marginTop: 10 }}>
+                                        <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.language.notice' />
+                                    </div>
+                                )}
                             </>
                         )}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.props.onClose}>
-                            <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.cancel"/>
+                            <LocalizedMessage id='globalStatusBar.userSetting.dialog.options.cancel' />
                         </Button>
                         <Button onClick={this.submitOptions}>
-                            <LocalizedMessage id="globalStatusBar.userSetting.dialog.options.save"/>
+                            <LocalizedMessage id='globalStatusBar.userSetting.dialog.options.save' />
                         </Button>
                     </DialogActions>
                 </Dialog>
                 <PasswordChangeDialog
                     open={this.state.pwdChangeDialogOpen}
-                    slideDirection="left"
+                    slideDirection='left'
                     userId={this.props.userId}
                     onClose={() =>
                         this.setState({
-                            pwdChangeDialogOpen: false,
+                            pwdChangeDialogOpen: false
                         })
                     }
                 />
             </>
-        )
+        );
     }
 }
 
-export default UserSettingDialog
+export default UserSettingDialog;

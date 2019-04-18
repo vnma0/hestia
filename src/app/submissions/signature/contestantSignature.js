@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Typography } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Typography } from '@material-ui/core';
 
 /**
  * @name ContestantSignature : Contestant's ID / name / whatever. FlexGrow.
@@ -14,18 +14,15 @@ class ContestantSignature extends Component {
     render() {
         return (
             <Typography
-                variant="body2"
-                color="inherit"
+                variant='body2'
+                color='inherit'
                 style={{
-                    flexGrow: 1,
-                }}
-            >
-                {this.props.children
-                    ? this.props.children
-                    : this.props.contestantName}
+                    flexGrow: 1
+                }}>
+                {this.props.children ? this.props.children : this.props.contestantName}
             </Typography>
-        )
+        );
     }
 }
 
-export default ContestantSignature
+export default ContestantSignature;

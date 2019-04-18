@@ -1,15 +1,15 @@
 .submission_AC {
-	background-color: #00d40b4b;
+    background-color: #00d40b4b;
 }
 
 .submission_WA {
-	background-color: #ff835d4f;
+    background-color: #ff835d4f;
 }
 
 .submission_TLE {
-	background-color: #e1ff3662;
+    background-color: #e1ff3662;
 }
 
 .submission_RTE {
-	background-color: #f032e04f;
+    background-color: #f032e04f;
 }

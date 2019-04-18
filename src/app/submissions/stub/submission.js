@@ -1,14 +1,14 @@
 import React from 'react';
-import { isNumber } from 'util'
+import { isNumber } from 'util';
 import LocalizedMessage from 'react-l10n';
-import { pushNotification } from '../../notifier/notify.js'
+import { pushNotification } from '../../notifier/notify.js';
 
 function constructURL(count, page, size) {
-    let out = new URLSearchParams()
-    if (isNumber(count)) out.append(`count`, count)
-    if (isNumber(page)) out.append(`page`, page)
-    if (isNumber(size)) out.append(`size`, size)
-    return out.toString() === '' ? '' : `?${out.toString()}`
+    let out = new URLSearchParams();
+    if (isNumber(count)) out.append(`count`, count);
+    if (isNumber(page)) out.append(`page`, page);
+    if (isNumber(size)) out.append(`size`, size);
+    return out.toString() === '' ? '' : `?${out.toString()}`;
 }
 
 /**
@@ -25,12 +25,12 @@ export default async function submissionParse(count, page, size) {
     return fetch(`/api/subs${constructURL(count, page, size)}`)
         .then(res => res.json())
         .then(subsTable => {
-            let submissions = []
+            let submissions = [];
 
             for (let sub of subsTable.data) {
                 submissions.push({
                     contestant: sub['username'],
-                    verdict: (sub['status'] === null) ? "Pending" : sub['status'],
+                    verdict: sub['status'] === null ? 'Pending' : sub['status'],
                     timestamp: new Date(sub['date']).toLocaleString(),
                     language: sub['ext'],
                     id: sub['_id'],
@@ -39,9 +39,9 @@ export default async function submissionParse(count, page, size) {
                     tests: (sub['tests'] ? sub['tests'] : []).map(test => ({
                         executionTime: String(test.time),
                         verdict: test.verdict,
-                        mark: test.score,
-                    })),
-                })
+                        mark: test.score
+                    }))
+                });
             }
 
             return {
@@ -49,20 +49,20 @@ export default async function submissionParse(count, page, size) {
                 meta: {
                     submissionsListSize: subsTable.count,
                     currentPageId: subsTable.page,
-                    pageSize: subsTable.size,
-                },
-            }
+                    pageSize: subsTable.size
+                }
+            };
         })
         .catch(() => {
             if (typeof pushNotification === 'function')
-                pushNotification(<LocalizedMessage id="submissions.error.submissions"/>)
+                pushNotification(<LocalizedMessage id='submissions.error.submissions' />);
             return {
                 submissions: [],
                 meta: {
                     submissionsListSize: 0,
                     currentPageId: 0,
-                    pageSize: 10,
-                },
-            }
-        })
+                    pageSize: 10
+                }
+            };
+        });
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import Check from '@material-ui/icons/Check'
+import React from 'react';
+import Check from '@material-ui/icons/Check';
 
 /**
  * @name AcceptedVerdictIcon
@@ -9,12 +9,8 @@ import Check from '@material-ui/icons/Check'
 
 class AcceptedVerdictIcon extends React.Component {
     render() {
-        return (
-            <Check
-                style={{ marginRight: 10, marginTop: -2.5, color: 'green' }}
-            />
-        )
+        return <Check style={{ marginRight: 10, marginTop: -2.5, color: 'green' }} />;
     }
 }
 
-export default AcceptedVerdictIcon
+export default AcceptedVerdictIcon;

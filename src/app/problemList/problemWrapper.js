@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ProblemTabEditor from './problemTabEditor.js'
+import ProblemTabEditor from './problemTabEditor.js';
 import publicParse from '../globalStatusBar/staticStub/public.js';
 
 class ProblemWrapper extends React.Component {
@@ -9,18 +9,18 @@ class ProblemWrapper extends React.Component {
         this.state = {
             problems: [''],
             ext: ['']
-        }
+        };
     }
 
     componentDidMount() {
-        this.componentDidUpdate()
-        publicParse().then((data) => {
+        this.componentDidUpdate();
+        publicParse().then(data => {
             this.setState({
                 problems: data.problems,
                 ext: data.ext
-            })
-            this.forceUpdate()
-        })
+            });
+            this.forceUpdate();
+        });
     }
 
     componentDidUpdate() {
@@ -30,9 +30,7 @@ class ProblemWrapper extends React.Component {
     }
 
     render() {
-        return (
-            <ProblemTabEditor ext={this.state.ext} problems={this.state.problems}/>
-        )
+        return <ProblemTabEditor ext={this.state.ext} problems={this.state.problems} />;
     }
 }
 

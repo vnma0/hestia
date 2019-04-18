@@ -1,143 +1,137 @@
 {
     "language": "en_US",
-    "display" : "English (United States)",
-    "resources" : {
-        "globalStatusBar" : {
-            "login" : {
-                "invokingButton" : "Log in",
-                "dialog" : {
-                    "title" : "Log in",
-                    "greeting" : "Log in to submit solutions and view problems.",
+    "display": "English (United States)",
+    "resources": {
+        "globalStatusBar": {
+            "login": {
+                "invokingButton": "Log in",
+                "dialog": {
+                    "title": "Log in",
+                    "greeting": "Log in to submit solutions and view problems.",
                     "usernameHint": "ID",
                     "passkeyHint": "Authentication key",
-                    "options" : {
-                        "cancel" : "Cancel",
-                        "login" : "Log in"
+                    "options": {
+                        "cancel": "Cancel",
+                        "login": "Log in"
                     },
-                    "errorText": "Failed to log in." 
+                    "errorText": "Failed to log in."
                 }
             },
-            "userSetting" : {
-                "menu" : {
-                    "greeting" : "Welcome back, ",
-                    "changeUserSettings" : "Change user settings",
-                    "logout" : "Log out"
+            "userSetting": {
+                "menu": {
+                    "greeting": "Welcome back, ",
+                    "changeUserSettings": "Change user settings",
+                    "logout": "Log out"
                 },
-                "dialog" : {
-                    "title" : {
-                        "userPresent" : "User settings for ",
-                        "userAbsent" : "User settings"
+                "dialog": {
+                    "title": {
+                        "userPresent": "User settings for ",
+                        "userAbsent": "User settings"
                     },
-                    "entry" : {
-                        "password" : {
+                    "entry": {
+                        "password": {
                             "title": "Password",
-                            "invokingButton" : "Change your password"
+                            "invokingButton": "Change your password"
                         },
-                        "language" : {
+                        "language": {
                             "title": "Language",
-                            "notice" : "Changing language preference will reload the whole page."
+                            "notice": "Changing language preference will reload the whole page."
                         }
                     },
-                    "options" : {
-                        "cancel" : "Cancel",
-                        "save" : "Save"
+                    "options": {
+                        "cancel": "Cancel",
+                        "save": "Save"
                     }
                 }
             },
-            "clock" : {
+            "clock": {
                 "beforeStart": "before start",
-                "timeLeft" : "Time left",
-                "ended" : "Ended"
+                "timeLeft": "Time left",
+                "ended": "Ended"
             }
         },
-        "homepage" : {
-            "launcher" : "Homepage"
+        "homepage": {
+            "launcher": "Homepage"
         },
-        "scoreboard" : {
-            "launcher" : "Scoreboard",
-            "table" : {
-                "head" : {
-                    "name" : "Name",
-                    "score" : "Score",
-                    "acceptedCount" : "AC"
+        "scoreboard": {
+            "launcher": "Scoreboard",
+            "table": {
+                "head": {
+                    "name": "Name",
+                    "score": "Score",
+                    "acceptedCount": "AC"
                 }
             }
         },
-        "problems" : {
-            "launcher" : "Problems",
-            "codeEditor" : {
-                "control" : {
-                    "langSelector" : {
-                        "tooltip" : "Choose language",
-                        "nullChoice" : "Choose language"
+        "problems": {
+            "launcher": "Problems",
+            "codeEditor": {
+                "control": {
+                    "langSelector": {
+                        "tooltip": "Choose language",
+                        "nullChoice": "Choose language"
                     },
-                    "uploadButtonTooltip" : "Load a file into the editor. Overwrite existing content.",
-                    "submitButton" : "Submit"
+                    "uploadButtonTooltip": "Load a file into the editor. Overwrite existing content.",
+                    "submitButton": "Submit"
                 }
             },
-            "notify" : {
-                "success" : "Successfully submitted solution",
-                "error" : {
-                    "failStat" : "Failure during submission : {error}",
-                    "failTrans" : "Failed to submit. It seems like a transmission error..."
+            "notify": {
+                "success": "Successfully submitted solution",
+                "error": {
+                    "failStat": "Failure during submission : {error}",
+                    "failTrans": "Failed to submit. It seems like a transmission error..."
                 }
             }
         },
-        "submissions" : {
-            "launcher" : "Submissions",
-            "control" : {
-                "reloadButton" : {
-                    "reload" : "Reload",
-                    "reloading" : "Updating...",
-                    "tooltip" : "Update the data & change back to first page"
+        "submissions": {
+            "launcher": "Submissions",
+            "control": {
+                "reloadButton": {
+                    "reload": "Reload",
+                    "reloading": "Updating...",
+                    "tooltip": "Update the data & change back to first page"
                 },
-                "rowsPerPageChange" : "Rows per page : ",
-                "indexOfTotal" : "{from}-{to} of {count}"
+                "rowsPerPageChange": "Rows per page : ",
+                "indexOfTotal": "{from}-{to} of {count}"
             },
-            "table" : {
-                "contestant" : "Submitted by",
-                "problem" : "Problem",
-                "language" : "Programming language",
-                "verdict" : "Verdict",
-                "executionTime" : "Execution duration",
-                "memory" : "Memory consumed",
-                "timestamp" : "Timestamp",
-                "points" : "Points awarded"
+            "table": {
+                "contestant": "Submitted by",
+                "problem": "Problem",
+                "language": "Programming language",
+                "verdict": "Verdict",
+                "executionTime": "Execution duration",
+                "memory": "Memory consumed",
+                "timestamp": "Timestamp",
+                "points": "Points awarded"
             },
-            "details" : {
-                "control" : {
-                    "showSource" : "View source code",
+            "details": {
+                "control": {
+                    "showSource": "View source code",
                     "close": "Close"
                 },
-                "table" : {
-                    "noDetail" : [
-                        "No test-based judgement details available.",
-                        "I guess this is an ACM problem?"
-                    ]
+                "table": {
+                    "noDetail": ["No test-based judgement details available.", "I guess this is an ACM problem?"]
                 },
-                "code" : {
-                    "panel" : {
-                        "loading" : "Loading source code...",
-                        "noCode" : [
-                            "No code is available.",
-                            "What are you expecting?"
-                        ]
+                "code": {
+                    "panel": {
+                        "loading": "Loading source code...",
+                        "noCode": ["No code is available.", "What are you expecting?"]
                     },
-                    "dialog.controls.close" : "Close"
+                    "dialog.controls.close": "Close"
                 }
             },
-            "verdict" : {
-                "AC" : "Accepted",
-                "WA" : "Wrong output",
-                "TLE" : "Execution timed out",
-                "MLE" : "Memory limit exceeded",
-                "RTE" : "Runtime error",
-                "CE" : "Compilation error",
-                "Pending" : "Pending"
+            "verdict": {
+                "AC": "Accepted",
+                "WA": "Wrong output",
+                "TLE": "Execution timed out",
+                "MLE": "Memory limit exceeded",
+                "RTE": "Runtime error",
+                "CE": "Compilation error",
+                "Pending": "Pending"
             },
-            "error" : {
-                "submissions" : "Failed to load submissions' info.",
-                "source" : "Error occurred while loading source code."
+            "error": {
+                "submissions": "Failed to load submissions' info.",
+                "source": "Error occurred while loading source code."
             }
         }
     }

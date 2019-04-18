@@ -1,21 +1,21 @@
-import React, { Component } from 'react'
-import { Typography, Grid } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Typography, Grid } from '@material-ui/core';
 
 import LocalizedMessage from 'react-l10n';
 
-import AcceptedVerdictIcon from './verdictIcons/acceptedVerdictSignature.js'
-import WrongVerdictIcon from './verdictIcons/wrongVerdictSignature.js'
-import TimeoutVerdictIcon from './verdictIcons/timeoutVerdictSignature.js'
-import MemExhaustedVerdictSignature from './verdictIcons/memExhaustVerdictSignature.js'
-import ExitErrorVerdictSignature from './verdictIcons/exitErrorVerdictSignature.js'
-import UnknownVerdictSignature from './verdictIcons/unknownVerdictSignature'
-import PendingVerdictSignature from './verdictIcons/pendingVerdictSignature'
-import CompilationErrorVerdictSignature from './verdictIcons/compilationErrorVerdictSignature.js'
+import AcceptedVerdictIcon from './verdictIcons/acceptedVerdictSignature.js';
+import WrongVerdictIcon from './verdictIcons/wrongVerdictSignature.js';
+import TimeoutVerdictIcon from './verdictIcons/timeoutVerdictSignature.js';
+import MemExhaustedVerdictSignature from './verdictIcons/memExhaustVerdictSignature.js';
+import ExitErrorVerdictSignature from './verdictIcons/exitErrorVerdictSignature.js';
+import UnknownVerdictSignature from './verdictIcons/unknownVerdictSignature';
+import PendingVerdictSignature from './verdictIcons/pendingVerdictSignature';
+import CompilationErrorVerdictSignature from './verdictIcons/compilationErrorVerdictSignature.js';
 
 /**
  * @name VerdictSignature : Submission's judged verdict. FlexGrow.
  *                          All props are passed down to <Typography>.
- * @param {String} `verdict` - Judged verdict, must be in list of 
+ * @param {String} `verdict` - Judged verdict, must be in list of
  *                              `['AC', 'WA', 'CE', 'TLE', 'MLE', 'Pending']`
  * @param {Boolean} `iconOnly` - Whether to return icon only or with the verdict text.
  * @param {Boolean} `reversed` - Whether the verdict text should appear before or after the icon.
@@ -38,10 +38,10 @@ const verdictIcon = {
     CE: <CompilationErrorVerdictSignature />,
 
     Pending: <PendingVerdictSignature />,
-    null : <PendingVerdictSignature />,
+    null: <PendingVerdictSignature />,
 
-    Unknown: <UnknownVerdictSignature />,
-}
+    Unknown: <UnknownVerdictSignature />
+};
 
 // CSS colour of verdicts
 const color = {
@@ -58,45 +58,44 @@ const color = {
     Pending: 'blue',
 
     CE: '#632920'
-}
+};
 
 class VerdictSignature extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         // in order to allow reversion, we render HERE.
         this.state = {
             icon: (
                 <Grid item>
-                    {verdictIcon[this.props.verdict]
-                        ? verdictIcon[this.props.verdict]
-                        : verdictIcon['Unknown']}
+                    {verdictIcon[this.props.verdict] ? verdictIcon[this.props.verdict] : verdictIcon['Unknown']}
                 </Grid>
             ),
             verdictText: (
                 <Grid item>
                     <Typography
-                        variant="body1"
+                        variant='body1'
                         style={{
                             flexGrow: 1,
                             color: color[this.props.verdict],
-                            fontWeight: this.props.success ? 'bold' : '',
-                        }}
-                    >
-                        {verdictIcon[this.props.verdict]
-                            ? <LocalizedMessage id={`submissions.verdict.${this.props.verdict}`} />
-                            : this.props.verdict}
-                            {/* if known verdict, display the respective icon, else 
+                            fontWeight: this.props.success ? 'bold' : ''
+                        }}>
+                        {verdictIcon[this.props.verdict] ? (
+                            <LocalizedMessage id={`submissions.verdict.${this.props.verdict}`} />
+                        ) : (
+                            this.props.verdict
+                        )}
+                        {/* if known verdict, display the respective icon, else 
                                 render the verdict directly */}
                     </Typography>
                 </Grid>
-            ),
-        }
+            )
+        };
     }
     render() {
-        if (this.props.iconOnly) return this.state.icon
+        if (this.props.iconOnly) return this.state.icon;
         else
             return (
-                <Grid container spacing={0} alignItems="flex-start">
+                <Grid container spacing={0} alignItems='flex-start'>
                     {this.props.reversed ? (
                         <>
                             {this.state.verdictText}
@@ -109,8 +108,8 @@ class VerdictSignature extends Component {
                         </>
                     )}
                 </Grid>
-            )
+            );
     }
 }
 
-export default VerdictSignature
+export default VerdictSignature;

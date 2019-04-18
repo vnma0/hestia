@@ -1,4 +1,4 @@
-import { pushNotification } from '../../notifier/notify.js'
+import { pushNotification } from '../../notifier/notify.js';
 
 /**
  * @name publicParse
@@ -7,24 +7,21 @@ import { pushNotification } from '../../notifier/notify.js'
  */
 
 async function publicParse() {
-    return fetch(
-        `/api/info`
-    )
+    return fetch(`/api/info`)
         .then(res => res.json())
         .then(responseBody => ({
             name: String(responseBody['name']),
             time: {
                 start: new Date(responseBody['startTime']),
-                end: new Date(responseBody['endTime']),
+                end: new Date(responseBody['endTime'])
             },
             problems: responseBody['probList'],
             ext: responseBody['allowedCodeExt'] || ['.cpp', '.py', '.java'],
             mode: String(responseBody['mode'])
         }))
         .catch(() => {
-            if (typeof pushNotification === 'function')
-                pushNotification('Failed to fetch data')
-            return ({
+            if (typeof pushNotification === 'function') pushNotification('Failed to fetch data');
+            return {
                 name: '',
                 time: {
                     start: new Date(),
@@ -33,8 +30,8 @@ async function publicParse() {
                 problems: [],
                 ext: ['null'],
                 mode: 'OI'
-            })
-        })
+            };
+        });
 }
 
-export default publicParse
+export default publicParse;

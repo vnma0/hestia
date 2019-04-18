@@ -1,6 +1,6 @@
-import React from 'react'
-import ProblemTab from './problemTab/problemTab'
-import CodeBox from './codeEditor/codeBox'
+import React from 'react';
+import ProblemTab from './problemTab/problemTab';
+import CodeBox from './codeEditor/codeBox';
 
 /**
  * @author Dat Ngo
@@ -12,18 +12,18 @@ import CodeBox from './codeEditor/codeBox'
 
 class ProblemTabEditor extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             currentTab: 0,
             displayLang: []
-        }
-        this.handleTabChange = this.handleTabChange.bind(this)
+        };
+        this.handleTabChange = this.handleTabChange.bind(this);
     }
 
     handleTabChange(value) {
         this.setState({
-            currentTab: value,
-        })
+            currentTab: value
+        });
     }
     render() {
         return (
@@ -31,14 +31,12 @@ class ProblemTabEditor extends React.Component {
                 <ProblemTab
                     problems={this.props.problems}
                     handleTabChange={this.handleTabChange}
-                    value={this.state.currentTab} />
-                <CodeBox
-                    submitFileName={this.props.problems[this.state.currentTab] || ''}
-                    ext={this.props.ext}
+                    value={this.state.currentTab}
                 />
+                <CodeBox submitFileName={this.props.problems[this.state.currentTab] || ''} ext={this.props.ext} />
             </div>
-        )
+        );
     }
 }
 
-export default ProblemTabEditor
+export default ProblemTabEditor;

@@ -1,4 +1,4 @@
-import { pushNotification } from '../../notifier/notify.js'
+import { pushNotification } from '../../notifier/notify.js';
 
 /**
  * @name parseScore
@@ -7,25 +7,21 @@ import { pushNotification } from '../../notifier/notify.js'
  */
 
 async function parseScore() {
-    return fetch(
-        `/api/score`
-    )
+    return fetch(`/api/score`)
         .then(res => res.json())
         .then(responseBody => {
             return responseBody.map(record => ({
                 name: record.name,
                 result: record.result,
                 aced: record.aced,
-                score: record.score,
-            }))
+                score: record.score
+            }));
         })
-        .catch((err) => {
-            if (typeof pushNotification === 'function')
-                pushNotification('Failed to load scoreboard')
-            if (process.env.NODE_ENV === 'development')
-                console.log(err)
-            return []
-        })
+        .catch(err => {
+            if (typeof pushNotification === 'function') pushNotification('Failed to load scoreboard');
+            if (process.env.NODE_ENV === 'development') console.log(err);
+            return [];
+        });
 }
 
-export default parseScore
+export default parseScore;

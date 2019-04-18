@@ -1,5 +1,5 @@
-import React from 'react'
-import Clear from '@material-ui/icons/Clear'
+import React from 'react';
+import Clear from '@material-ui/icons/Clear';
 
 /**
  * @name WrongVerdictIcon
@@ -9,10 +9,8 @@ import Clear from '@material-ui/icons/Clear'
 
 class WrongVerdictIcon extends React.Component {
     render() {
-        return (
-            <Clear style={{ marginRight: 10, marginTop: -2.5, color: 'red' }} />
-        )
+        return <Clear style={{ marginRight: 10, marginTop: -2.5, color: 'red' }} />;
     }
 }
 
-export default WrongVerdictIcon
+export default WrongVerdictIcon;

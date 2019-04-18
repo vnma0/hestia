@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Menu, MenuItem } from '@material-ui/core'
+import React, { Component } from 'react';
+import { Menu, MenuItem } from '@material-ui/core';
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import LocalizedMessage from 'react-l10n';
 
@@ -21,29 +21,28 @@ import LocalizedMessage from 'react-l10n';
 class UserSettingMenu extends Component {
     render() {
         return (
-            <Menu open={this.props.open} anchorEl={this.props.anchorEl}
-                onClose={this.props.onClose}>
+            <Menu open={this.props.open} anchorEl={this.props.anchorEl} onClose={this.props.onClose}>
                 <MenuItem disabled>
-                    <LocalizedMessage id="globalStatusBar.userSetting.menu.greeting"/>
+                    <LocalizedMessage id='globalStatusBar.userSetting.menu.greeting' />
                     {this.props.user}
                 </MenuItem>
                 <MenuItem onClick={this.props.showProfileAction}>
-                    <LocalizedMessage id="globalStatusBar.userSetting.menu.changeUserSettings"/>
+                    <LocalizedMessage id='globalStatusBar.userSetting.menu.changeUserSettings' />
                 </MenuItem>
                 <MenuItem onClick={this.props.logoutAction}>
-                    <LocalizedMessage id="globalStatusBar.userSetting.menu.logout"/>
+                    <LocalizedMessage id='globalStatusBar.userSetting.menu.logout' />
                 </MenuItem>
             </Menu>
-        )
+        );
     }
 }
 
 UserSettingMenu.propTypes = {
-    showProfileAction : PropTypes.func,
+    showProfileAction: PropTypes.func,
     logoutAction: PropTypes.func,
     user: PropTypes.string,
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired
-}
+};
 
-export default UserSettingMenu
+export default UserSettingMenu;

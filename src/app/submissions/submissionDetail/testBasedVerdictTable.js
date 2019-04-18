@@ -1,11 +1,11 @@
-import React from "react";
-import { Table, TableHead, TableCell, TableRow, TableBody, Typography, CardContent } from "@material-ui/core";
+import React from 'react';
+import { Table, TableHead, TableCell, TableRow, TableBody, Typography, CardContent } from '@material-ui/core';
 
-import LocalizedMessage from 'react-l10n'
+import LocalizedMessage from 'react-l10n';
 
-import MemorySignature from "../signature/memorySignature";
-import ExecTimeSignature from "../signature/execTimeSignature";
-import VerdictSignature from "../signature/verdictSignature";
+import MemorySignature from '../signature/memorySignature';
+import ExecTimeSignature from '../signature/execTimeSignature';
+import VerdictSignature from '../signature/verdictSignature';
 
 /**
  * @name AttestationSampleResult
@@ -22,17 +22,15 @@ class AttestationSampleResult extends React.Component {
         return (
             <TableRow>
                 <TableCell>
-                    <VerdictSignature verdict={this.props.verdict || "N/A"} />
+                    <VerdictSignature verdict={this.props.verdict || 'N/A'} />
                 </TableCell>
-                <TableCell align="justify">
-                    <ExecTimeSignature
-                        time={this.props.executionTime || "N/A"}
-                    />
+                <TableCell align='justify'>
+                    <ExecTimeSignature time={this.props.executionTime || 'N/A'} />
                 </TableCell>
-                <TableCell align="right">
-                    <MemorySignature memory={this.props.memory || "N/A"} />
+                <TableCell align='right'>
+                    <MemorySignature memory={this.props.memory || 'N/A'} />
                 </TableCell>
-                <TableCell align="right">{this.props.mark}</TableCell>
+                <TableCell align='right'>{this.props.mark}</TableCell>
             </TableRow>
         );
     }
@@ -62,27 +60,22 @@ class ResultTable extends React.Component {
                                 minHeight: 24
                             }}>
                             <TableCell>
-                                <LocalizedMessage id="submissions.table.verdict"/>
+                                <LocalizedMessage id='submissions.table.verdict' />
                             </TableCell>
                             <TableCell>
-                                <LocalizedMessage id="submissions.table.executionTime"/>
+                                <LocalizedMessage id='submissions.table.executionTime' />
                             </TableCell>
                             <TableCell>
-                                <LocalizedMessage id="submissions.table.memory"/>
+                                <LocalizedMessage id='submissions.table.memory' />
                             </TableCell>
                             <TableCell>
-                                <LocalizedMessage id="submissions.table.points"/>
+                                <LocalizedMessage id='submissions.table.points' />
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.props.tests.map((test, idx) => {
-                            return (
-                                <AttestationSampleResult
-                                    key={`test-${idx}`}
-                                    {...test}
-                                />
-                            );
+                            return <AttestationSampleResult key={`test-${idx}`} {...test} />;
                         })}
                     </TableBody>
                 </Table>
@@ -90,11 +83,11 @@ class ResultTable extends React.Component {
         // else if an empty array or invalid variable type was supplied, assume ACM problem
         return (
             <CardContent>
-                <Typography variant="h6">
-                    <LocalizedMessage id="submissions.details.table.noDetail[0]"/>
+                <Typography variant='h6'>
+                    <LocalizedMessage id='submissions.details.table.noDetail[0]' />
                 </Typography>
-                <Typography component="p">
-                    <LocalizedMessage id="submissions.details.table.noDetail[1]"/>
+                <Typography component='p'>
+                    <LocalizedMessage id='submissions.details.table.noDetail[1]' />
                 </Typography>
             </CardContent>
         );
