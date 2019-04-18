@@ -38,7 +38,9 @@ class ScoreboardError extends React.PureComponent {
                     <LocalizedMessage id="scoreboard.lazyAssistant.failedLoadInfo.text[1]"/>
                 </Typography>
                 <div style={{ marginTop: 20 }}>
-                    <Button onClick={() => window.location.reload(true)}>
+                    <Button
+                        onClick={() => window.location.reload(true)}
+                        color="primary">
                         <LocalizedMessage id="scoreboard.lazyAssistant.failedLoadInfo.control.reload"/>
                     </Button>
                 </div>
