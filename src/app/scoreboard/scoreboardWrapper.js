@@ -20,7 +20,8 @@ class ScoreboardWrapper extends React.Component {
         this.componentDidUpdate();
         publicParse().then(data => {
             this.setState({
-                problems: data.problems
+                problems: data.problems,
+                mode: data.mode
             });
         });
         this.update();
@@ -47,7 +48,7 @@ class ScoreboardWrapper extends React.Component {
                 style={{
                     overflowX: 'auto'
                 }}>
-                <Scoreboard problems={this.state.problems} results={this.state.result} />
+                <Scoreboard problems={this.state.problems} results={this.state.result} mode={this.state.mode} />
             </div>
         );
     }
