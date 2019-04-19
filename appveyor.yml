@@ -20,6 +20,8 @@ matrix:
 
 # Install scripts. (runs after repo cloning)
 install:
+  # Load all submodules
+  - git submodule update --init --recursive
   # install modules
   - npm install
 
