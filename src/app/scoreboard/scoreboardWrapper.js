@@ -14,6 +14,14 @@ class ScoreboardWrapper extends React.Component {
             interval: undefined
         };
         this.update = this.update.bind(this);
+
+        publicParse().then(data => {
+            this.setState({
+                problems: data.problems,
+                mode: data.mode
+            });
+        });
+        this.update();
     }
 
     componentDidMount() {
@@ -25,7 +33,11 @@ class ScoreboardWrapper extends React.Component {
             });
         });
         this.update();
-        setInterval(this.update, 30000);
+        this.interval = setInterval(this.update, 30000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     componentDidUpdate() {

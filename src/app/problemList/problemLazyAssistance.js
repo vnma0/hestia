@@ -2,18 +2,18 @@ import React from 'react';
 import { CircularProgress, Typography, Button } from '@material-ui/core';
 import LocalizedMessage from 'react-l10n';
 
-function LoadingIndicator () {
+function LoadingIndicator() {
     return (
-        <div align="center" style={{ marginTop: '10%' }}>
+        <div align='center' style={{ marginTop: '10%' }}>
             <CircularProgress />
         </div>
-    )
+    );
 }
 
 class ProblemError extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = { error: false }
+        this.state = { error: false };
     }
 
     // error boundary for ProblemWrapper
@@ -26,25 +26,21 @@ class ProblemError extends React.PureComponent {
             // if no error, render normally
             return this.props.children;
         else
-        return (
-            <div
-                align="center"
-                style={{ margin: '10%' }}>
-                <Typography variant="h6">
-                    <LocalizedMessage id="problems.lazyAssistant.failedLoadInfo.text[0]"/>
-                </Typography>
-                <Typography variant="p">
-                    <LocalizedMessage id="problems.lazyAssistant.failedLoadInfo.text[1]"/>
-                </Typography>
-                <div style={{ marginTop: 20 }}>
-                    <Button
-                        onClick={() => window.location.reload(true)}
-                        color="primary">
-                        <LocalizedMessage id="problems.lazyAssistant.failedLoadInfo.control.reload"/>
-                    </Button>
+            return (
+                <div align='center' style={{ margin: '10%' }}>
+                    <Typography variant='h6'>
+                        <LocalizedMessage id='problems.lazyAssistant.failedLoadInfo.text[0]' />
+                    </Typography>
+                    <Typography variant='p'>
+                        <LocalizedMessage id='problems.lazyAssistant.failedLoadInfo.text[1]' />
+                    </Typography>
+                    <div style={{ marginTop: 20 }}>
+                        <Button onClick={() => window.location.reload(true)} color='primary'>
+                            <LocalizedMessage id='problems.lazyAssistant.failedLoadInfo.control.reload' />
+                        </Button>
+                    </div>
                 </div>
-            </div>
-        )
+            );
     }
 }
 

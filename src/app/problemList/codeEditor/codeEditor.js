@@ -57,7 +57,6 @@ class CodeEditor extends React.PureComponent {
     render() {
         return (
             <AceEditor
-                defaultValue='Your code here'
                 mode={parseExt(this.props.ext.replace('.', '').toLowerCase())}
                 value={this.props.code}
                 onChange={this.props.update}
