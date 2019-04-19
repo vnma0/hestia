@@ -1,0 +1,15 @@
+.score_AC {
+    background-color: #00d40b4b;
+}
+
+.score_WA {
+    background-color: #ff835d4f;
+}
+
+.score_TLE {
+    background-color: #e1ff3662;
+}
+
+.score_RTE {
+    background-color: #f032e04f;
+}
