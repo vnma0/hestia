@@ -3,10 +3,10 @@ import { LoadingIndicator, SubmissionError } from './submissionLazyAssistance.js
 
 const Submissions = React.lazy(() => import('./submissionWrapper.js'));
 
-export default (props) => (
+export default props => (
     <SubmissionError>
         <Suspense fallback={<LoadingIndicator />}>
-            <Submissions />
+            <Submissions {...props} />
         </Suspense>
     </SubmissionError>
-)
+);

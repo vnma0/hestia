@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import publicParse from '../globalStatusBar/staticStub/public.js';
-import { LoadingIndicator, ProblemError } from './problemLazyAssistance.js'
+import { LoadingIndicator, ProblemError } from './problemLazyAssistance.js';
 
 const ProblemTabEditor = React.lazy(() => import('./problemTabEditor.js'));
 
@@ -33,14 +33,14 @@ class ProblemWrapper extends React.Component {
     render() {
         return (
             <Suspense fallback={<LoadingIndicator />}>
-                <ProblemTabEditor ext={this.state.ext} problems={this.state.problems}/>
+                <ProblemTabEditor ext={this.state.ext} problems={this.state.problems} />
             </Suspense>
-        )
+        );
     }
 }
 
-export default (props) => (
+export default props => (
     <ProblemError>
-        <ProblemWrapper />
+        <ProblemWrapper {...props} />
     </ProblemError>
 );
