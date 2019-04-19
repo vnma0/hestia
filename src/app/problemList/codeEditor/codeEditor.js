@@ -42,6 +42,18 @@ import 'brace/mode/scala';
 import 'brace/mode/swift';
 import 'brace/mode/typescript';
 
+import 'brace/theme/ambiance';
+import 'brace/theme/cobalt';
+import 'brace/theme/eclipse';
+import 'brace/theme/monokai';
+import 'brace/theme/solarized_dark';
+import 'brace/theme/solarized_light';
+import 'brace/theme/tomorrow';
+import 'brace/theme/tomorrow_night';
+import 'brace/theme/tomorrow_night_blue';
+import 'brace/theme/tomorrow_night_bright';
+import 'brace/theme/xcode';
+
 /**
  * @name CodeEditor
  * @param {String} ext: current language's source file extension
@@ -57,6 +69,7 @@ class CodeEditor extends React.PureComponent {
     render() {
         return (
             <AceEditor
+                theme={this.props.theme}
                 mode={parseExt(this.props.ext.replace('.', '').toLowerCase())}
                 value={this.props.code}
                 onChange={this.props.update}

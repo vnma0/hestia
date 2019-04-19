@@ -4,6 +4,7 @@ import LocalizedMessage from 'react-l10n';
 
 import SubmitButton from './submitButton.js';
 import LangSelection from './langSelection.js';
+import ThemeSelector from './themeSelector.js';
 import UploadButton from './uploadButton.js';
 
 import { pushNotification } from '../../notifier/notify.js';
@@ -23,7 +24,11 @@ class CodeBox extends React.PureComponent {
             langId: 0,
             submitting: false,
             fileLoading: false,
-            editorHeight: window.innerHeight - 180
+            editorHeight: window.innerHeight - 180,
+
+            themeId: 3,
+            theme: undefined
+            // Monokai, as declared from './themeSelector.js'
         };
 
         this.catcherRef = React.createRef();
@@ -87,6 +92,12 @@ class CodeBox extends React.PureComponent {
                                     variant='contained'
                                 />
                             </Grid>
+                            <Grid item>
+                                <ThemeSelector
+                                    choice={this.state.themeId}
+                                    onChange={(id, theme) => this.setState({ themeId: id, theme: theme })}
+                                />
+                            </Grid>
                             <Grid item style={{ flexGrow: 1 }}>
                                 <LangSelection
                                     ext={this.props.ext}
@@ -129,6 +140,7 @@ class CodeBox extends React.PureComponent {
                     <Suspense fallback={<LoadingIndicator />}>
                         {/* no need to catch, we already have an error boundary above */}
                         <CodeEditor
+                            theme={this.state.theme}
                             readOnly={this.state.submitting || this.state.fileLoading}
                             ext={this.props.ext[this.state.langId]}
                             update={code => {
