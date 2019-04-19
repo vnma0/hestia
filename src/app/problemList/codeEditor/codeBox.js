@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { AppBar, Grid, Divider } from '@material-ui/core';
 import LocalizedMessage from 'react-l10n';
 
-import CodeEditor from './codeEditor.js';
 import SubmitButton from './submitButton.js';
 import LangSelection from './langSelection.js';
 import UploadButton from './uploadButton.js';
 
 import { pushNotification } from '../../notifier/notify.js';
+import { LoadingIndicator } from '../problemLazyAssistance.js';
+
+const CodeEditor = React.lazy(() => import('./codeEditor.js'));
 
 var reader = new FileReader();
 
@@ -122,16 +124,19 @@ class CodeBox extends React.PureComponent {
                     style={
                         this.state.submitting || this.state.fileLoading ? { opacity: 0.4, pointerEvents: 'none' } : {}
                     }>
-                    <CodeEditor
-                        readOnly={this.state.submitting || this.state.fileLoading}
-                        ext={this.props.ext[this.state.langId]}
-                        update={code => {
-                            if (code.length <= byte_limit) this.setState({ code: code });
-                            // enforce source limit even for editor
-                        }}
-                        code={this.state.code}
-                        editorHeight={this.state.editorHeight}
-                    />
+                    <Suspense fallback={<LoadingIndicator />}>
+                        {/* no need to catch, we already have an error boundary above */}
+                        <CodeEditor
+                            readOnly={this.state.submitting || this.state.fileLoading}
+                            ext={this.props.ext[this.state.langId]}
+                            update={code => {
+                                if (code.length <= byte_limit) this.setState({ code: code });
+                                // enforce source limit even for editor
+                            }}
+                            code={this.state.code}
+                            editorHeight={this.state.editorHeight}
+                        />
+                    </Suspense>
                 </div>
                 <input
                     type='file'
