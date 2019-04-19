@@ -11,7 +11,7 @@ platform:
 # Supported OSes
 image:
   - Visual Studio 2015
-  - Ubuntu
+  - Ubuntu1804
 
 # A failure in any job fails all.
 matrix:
@@ -21,6 +21,8 @@ matrix:
 # Install scripts. (runs after repo cloning)
 install:
   # Load all submodules
+  - ps: Install-Product node $env:nodejs_version
+  - sh: sudo apt-get install node -y
   - git submodule update --init --recursive
   # install modules
   - npm install
