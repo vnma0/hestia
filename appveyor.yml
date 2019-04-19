@@ -2,6 +2,8 @@
 environment:
   nodejs_version: "11"
   APPVEYOR_YML_DISABLE_PS_LINUX: true
+  NPM_CONFIG_LOGLEVEL: "error"
+  NODE_VERBOSE: "false"
 
 # Test on all arch
 platform:
@@ -23,7 +25,7 @@ matrix:
 install:
   # Load all submodules
   - ps: Install-Product node $env:nodejs_version
-  - sh: sudo apt-get install node -y
+  - sh: curl -sL https://deb.nodesource.com/setup_10.x | sudo bash - && sudo apt-get install nodejs -y
   - git submodule update --init --recursive
   # install modules
   - npm install
