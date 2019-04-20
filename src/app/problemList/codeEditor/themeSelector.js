@@ -5,9 +5,10 @@ import { MenuItem, Tooltip } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
 import LocalizedMessage from 'react-l10n';
+import * as Cookies from 'js-cookie';
 
 import friendlyTheme from './themeParser.js';
-const themes = [
+const theme = [
     'ambiance',
     'cobalt',
     'eclipse',
@@ -36,20 +37,20 @@ class themeSelector extends React.Component {
             // anchor element to pin the list
             anchorEl: undefined
         };
-        this.handleChoice = this.handleChoice.bind(this);
     }
 
-    handleChoice(themeId) {
+    handleChoice = themeId => {
         this.setState({
             anchorEl: undefined
         });
-        if (typeof this.props.onChange === 'function') this.props.onChange(themeId, themes[themeId]);
-    }
+        Cookies.set('ace_lang', theme[themeId]);
+        if (typeof this.props.onChange === 'function') this.props.onChange(themeId, theme[themeId]);
+    };
 
     render() {
         let { choice } = this.props;
-        let displayed = friendlyTheme[themes[choice]];
-        let themeList = themes.map((x, i) => (
+        let displayed = friendlyTheme[theme[choice]];
+        let themeList = theme.map((x, i) => (
             <MenuItem onClick={() => this.handleChoice(i)} key={`theme_ace_${i}`}>
                 {friendlyTheme[x]}
             </MenuItem>

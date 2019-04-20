@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { AppBar, Grid, Divider } from '@material-ui/core';
 import LocalizedMessage from 'react-l10n';
+import * as Cookies from 'js-cookie';
 
 import SubmitButton from './submitButton.js';
 import LangSelection from './langSelection.js';
@@ -27,7 +28,7 @@ class CodeBox extends React.PureComponent {
             editorHeight: window.innerHeight - 180,
 
             themeId: 3,
-            theme: 'monokai'
+            theme: Cookies.get('ace_lang') || 'monokai'
             // Monokai, as declared from './themeSelector.js'
         };
 
