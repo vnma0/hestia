@@ -5,6 +5,9 @@ environment:
   NPM_CONFIG_LOGLEVEL: "error"
   NODE_VERBOSE: "false"
 
+# Don't duplicate things
+skip_branch_with_pr: true
+
 # Test on all arch
 platform:
   - x86
@@ -38,5 +41,12 @@ test_script:
   - npm run prettilint
   
 build_script:
+  - sh: set HESTIA_VERSION=$(node -e "console.log(require('./package.json').version);")
+  - cmd: >-
+        node -e "console.log(require('./package.json').version);" > HESTIA_VERSION.txt
+        set /p HESTIA_VERSION=<HESTIA_VERSION.txt
   - npm run build
   
+artifacts:
+  - path: build
+    name: Hestia (Testing build) - $(HESTIA_VERSION).{branch}
