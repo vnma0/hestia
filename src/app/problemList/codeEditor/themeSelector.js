@@ -37,6 +37,9 @@ class themeSelector extends React.Component {
             // anchor element to pin the list
             anchorEl: undefined
         };
+
+        if (this.props.theme) this.props.onChange(theme.indexOf(this.props.theme), this.props.theme);
+        // if passed initially, we'll set it
     }
 
     handleChoice = themeId => {
@@ -44,7 +47,7 @@ class themeSelector extends React.Component {
             anchorEl: undefined
         });
         Cookies.set('ace_lang', theme[themeId]);
-        if (typeof this.props.onChange === 'function') this.props.onChange(themeId, theme[themeId]);
+        this.props.onChange(themeId, theme[themeId]);
     };
 
     render() {
