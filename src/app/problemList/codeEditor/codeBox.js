@@ -27,7 +27,7 @@ class CodeBox extends React.PureComponent {
             editorHeight: window.innerHeight - 180,
 
             themeId: 3,
-            theme: undefined
+            theme: 'monokai'
             // Monokai, as declared from './themeSelector.js'
         };
 
