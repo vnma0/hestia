@@ -6,17 +6,18 @@ import './external/roboto/roboto.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { LocalizationProvider } from 'react-l10n';
 import * as Cookies from 'js-cookie';
+import { Provider, withGlobalState } from 'react-globally';
 
 import { translations } from './strings/hestia-l10n/l10n-loader.js';
 
-import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js'
-import Sidenav from './app/sidenav/sidenav.js'
-import Homepage from './app/home/homepage.js'
-import Submission from './app/submissions/submissionLazyWrapper.js'
-import ProblemWrapper from './app/problemList/problemWrapper.js'
-import ScoreboardWrapper from './app/scoreboard/scoreboardLazyWrapper'
-import Notify from './app/notifier/notify.js'
-import { slideIn } from './app/globalStatusBar/lib/libTransition.js'
+import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js';
+import Sidenav from './app/sidenav/sidenav.js';
+import Homepage from './app/home/homepage.js';
+import Submission from './app/submissions/submissionLazyWrapper.js';
+import ProblemWrapper from './app/problemList/problemWrapper.js';
+import ScoreboardWrapper from './app/scoreboard/scoreboardLazyWrapper';
+import Notify from './app/notifier/notify.js';
+import { slideIn } from './app/globalStatusBar/lib/libTransition.js';
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 import ProblemLauncher from './app/problemList/problemLauncher.js';
@@ -26,6 +27,10 @@ import HomepageLauncher from './app/home/homepageLauncher.js';
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
 import publicParse from './app/globalStatusBar/staticStub/public.js';
 import { toggleSidenav } from './app/sidenav/sidenav.js';
+
+const globalState = {
+    language: Cookies.get('language') || 'en_US'
+};
 
 class Hestia extends React.Component {
     constructor(props) {
@@ -44,12 +49,6 @@ class Hestia extends React.Component {
                 end: new Date()
             }
         };
-        // preparing languages
-        this.language = Cookies.get('language') || 'en_US';
-        this.strings =
-            this.language && translations[this.language]
-                ? { resources: translations[this.language].resources }
-                : { resources: translations['en_US'].resources };
     }
 
     componentWillMount() {
@@ -71,8 +70,13 @@ class Hestia extends React.Component {
     }
 
     render() {
+        let language = this.props.globalState.language;
+        let strings =
+            language && translations[language]
+                ? { resources: translations[language].resources }
+                : { resources: translations['en_US'].resources };
         return (
-            <LocalizationProvider {...this.strings}>
+            <LocalizationProvider {...strings}>
                 <Notify
                     autoHideDuration={1000}
                     TransitionComponent={props => slideIn(props, 'left')}
@@ -126,7 +130,7 @@ class Hestia extends React.Component {
                             path='/submissions'
                             render={() => (
                                 <Submission
-                                    title={`${this.state.contestName} - ${this.strings.resources.submissions.launcher}`}
+                                    title={`${this.state.contestName} - ${strings.resources.submissions.launcher}`}
                                 />
                             )}
                         />
@@ -134,7 +138,7 @@ class Hestia extends React.Component {
                             path='/problems'
                             render={() => (
                                 <ProblemWrapper
-                                    title={`${this.state.contestName} - ${this.strings.resources.problems.launcher}`}
+                                    title={`${this.state.contestName} - ${strings.resources.problems.launcher}`}
                                 />
                             )}
                         />
@@ -142,7 +146,7 @@ class Hestia extends React.Component {
                             path='/scoreboard'
                             render={() => (
                                 <ScoreboardWrapper
-                                    title={`${this.state.contestName} - ${this.strings.resources.scoreboard.launcher}`}
+                                    title={`${this.state.contestName} - ${strings.resources.scoreboard.launcher}`}
                                 />
                             )}
                         />
@@ -153,4 +157,11 @@ class Hestia extends React.Component {
     }
 }
 
-ReactDOM.render(<Hestia />, document.querySelector('#root'));
+var HestiaGlobal = withGlobalState(Hestia);
+
+ReactDOM.render(
+    <Provider globalState={globalState}>
+        <HestiaGlobal />
+    </Provider>,
+    document.querySelector('#root')
+);

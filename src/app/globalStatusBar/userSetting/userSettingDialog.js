@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import { DialogTitle, DialogContent, Dialog, DialogActions, AppBar, Tabs, Tab } from '@material-ui/core';
 import { Button } from '@material-ui/core';
-
 import * as Cookies from 'js-cookie';
+
+import { withGlobalState } from 'react-globally';
 
 import PasswordChangeDialog from './passwordChange/passwordChangeDialog.js';
 import LocaleChange from './localeChange/localeChange.js';
@@ -27,28 +28,20 @@ import LocalizedMessage from 'react-l10n';
 class UserSettingDialog extends Component {
     constructor(props) {
         super(props);
-
-        // default to en_US
-        if (!Cookies.get('language')) Cookies.set('language', 'en_US');
-
         this.state = {
             currentTab: 0,
-            pwdChangeDialogOpen: false,
-
-            language: Cookies.get('language')
+            pwdChangeDialogOpen: false
         };
-
-        this.requireReload = false;
-        // some settings require reloading
 
         this.submitOptions = this.submitOptions.bind(this);
     }
 
     submitOptions() {
-        Cookies.set('language', this.state.language);
+        Cookies.set('language', this.props.globalState.language);
 
-        if (this.requireReload) window.location.reload();
-        else this.props.onClose();
+        // if (this.requireReload) window.location.reload();
+        // else this.props.onClose();
+        this.props.onClose();
     }
 
     render() {
@@ -106,17 +99,17 @@ class UserSettingDialog extends Component {
                             <>
                                 <LocaleChange
                                     languages={supportedLanguages}
-                                    choice={this.state.language}
+                                    choice={this.props.globalState.language}
                                     onChange={(event, arg) => {
-                                        this.requireReload = arg !== Cookies.get('language');
-                                        this.setState({ language: arg });
+                                        // this.requireReload = arg !== Cookies.get('language');
+                                        this.props.setGlobalState({ language: arg });
                                     }}
                                 />
-                                {this.requireReload && (
+                                {/* {this.requireReload && (
                                     <div style={{ color: 'red', marginTop: 10 }}>
                                         <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.language.notice' />
                                     </div>
-                                )}
+                                )} */}
                             </>
                         )}
                     </DialogContent>
@@ -144,4 +137,4 @@ class UserSettingDialog extends Component {
     }
 }
 
-export default UserSettingDialog;
+export default withGlobalState(UserSettingDialog);
