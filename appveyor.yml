@@ -9,7 +9,6 @@ environment:
 platform:
   - x86
   - x64
-  - Any CPU
 
 # Supported OSes
 image:
