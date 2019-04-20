@@ -38,9 +38,6 @@ class UserSettingDialog extends Component {
 
     submitOptions() {
         Cookies.set('language', this.props.globalState.language);
-
-        // if (this.requireReload) window.location.reload();
-        // else this.props.onClose();
         this.props.onClose();
     }
 
@@ -101,15 +98,9 @@ class UserSettingDialog extends Component {
                                     languages={supportedLanguages}
                                     choice={this.props.globalState.language}
                                     onChange={(event, arg) => {
-                                        // this.requireReload = arg !== Cookies.get('language');
                                         this.props.setGlobalState({ language: arg });
                                     }}
                                 />
-                                {/* {this.requireReload && (
-                                    <div style={{ color: 'red', marginTop: 10 }}>
-                                        <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.language.notice' />
-                                    </div>
-                                )} */}
                             </>
                         )}
                     </DialogContent>
