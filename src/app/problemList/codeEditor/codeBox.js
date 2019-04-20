@@ -97,6 +97,8 @@ class CodeBox extends React.PureComponent {
                             <Grid item>
                                 <SubmitButton
                                     disabled={
+                                        this.state.submitting ||
+                                        this.state.fileLoading ||
                                         this.state.code === '' ||
                                         this.state.langId === null ||
                                         this.props.ext.size === 0
