@@ -114,6 +114,8 @@ class Submissions extends React.Component {
                                 labelDisplayedRows={args => (
                                     <LocalizedMessage id='submissions.control.indexOfTotal' {...args} />
                                 )}
+                                backIconButtonProps={{ disabled: this.updateInProgress }}
+                                nextIconButtonProps={{ disabled: this.updateInProgress }}
                             />
                         </TableRow>
                     </TableHead>
