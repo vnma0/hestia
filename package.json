@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && node scripts/gzip-all.js",
     "test": "react-scripts test",
     "format": "prettier --write \"src/app/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "prettilint": "prettier --check \"src/app/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
@@ -46,7 +46,8 @@
   ],
   "proxy": "http://localhost:3001",
   "devDependencies": {
-    "prettier": "1.16.4"
+    "prettier": "1.16.4",
+    "gzip-all": "^1.0.0"
   },
   "husky": {
     "hooks": {
