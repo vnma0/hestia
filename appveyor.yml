@@ -6,7 +6,7 @@ environment:
   NODE_VERBOSE: "false"
 
 cache: 
-  - node_modules
+  - node_modules -> package.json
 
 # Don't duplicate things
 skip_branch_with_pr: true
@@ -35,7 +35,7 @@ install:
   # Don't show progress on CI
   - npm set progress=false
   # install modules
-  - npm install
+  - npm rebuild
 
 # Post-install test scripts.
 test_script:
