@@ -13,3 +13,9 @@
 .score_RTE {
     background-color: #f032e04f;
 }
+
+.code-text {
+    font-family: 'Roboto Mono', monospace;
+    color: #e60d0d;
+    background-color: #ffcdcd;
+}
