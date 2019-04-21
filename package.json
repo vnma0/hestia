@@ -1,6 +1,6 @@
 {
   "name": "hestia",
-  "version": "1.4.0",
+  "version": "1.5.2",
   "description": "An UI for MIRAI - the Multijudge Independently Rebuilt, Asynchoronus Interface",
   "main": "index.js",
   "private": true,
