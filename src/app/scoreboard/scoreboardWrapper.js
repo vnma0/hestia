@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, LinearProgress, Toolbar, Typography } from '@material-ui/core';
+import { Button, LinearProgress, Toolbar, Typography, Paper } from '@material-ui/core';
 
 import LocalizedMessage from 'react-l10n';
 
@@ -70,27 +70,29 @@ class ScoreboardWrapper extends React.Component {
     render() {
         return (
             <>
-                <Toolbar variant='dense'>
-                    <Typography style={{ flexGrow: 1 }}>
-                        <LocalizedMessage id='scoreboard.reload.lastUpdateTimestamp' /> :&nbsp;
-                        <span className='code-text'>{this.state.lastUpdate.toString()}</span>
-                    </Typography>
-                    <Button
-                        variant='contained'
-                        color='secondary'
-                        disabled={this.state.updating}
-                        onClick={() => {
-                            this.setState({ updating: true });
-                            this.update();
-                            this.resetUpdateInterval();
-                        }}>
-                        {this.state.updating ? (
-                            <LocalizedMessage id='scoreboard.reload.updating' />
-                        ) : (
-                            <LocalizedMessage id='scoreboard.reload.updateAction' />
-                        )}
-                    </Button>
-                </Toolbar>
+                <Paper square>
+                    <Toolbar variant='dense'>
+                        <Typography style={{ flexGrow: 1 }}>
+                            <LocalizedMessage id='scoreboard.reload.lastUpdateTimestamp' /> :&nbsp;
+                            <span className='code-text'>{this.state.lastUpdate.toString()}</span>
+                        </Typography>
+                        <Button
+                            variant='contained'
+                            color='secondary'
+                            disabled={this.state.updating}
+                            onClick={() => {
+                                this.setState({ updating: true });
+                                this.update();
+                                this.resetUpdateInterval();
+                            }}>
+                            {this.state.updating ? (
+                                <LocalizedMessage id='scoreboard.reload.updating' />
+                            ) : (
+                                <LocalizedMessage id='scoreboard.reload.updateAction' />
+                            )}
+                        </Button>
+                    </Toolbar>
+                </Paper>
                 {this.state.updating && <LinearProgress />}
                 <div
                     style={{
