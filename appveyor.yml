@@ -35,7 +35,7 @@ install:
   # Don't show progress on CI
   - npm set progress=false
   # install modules
-  - npm rebuild
+  - npm install --prefer-offline
 
 # Post-install test scripts.
 test_script:
