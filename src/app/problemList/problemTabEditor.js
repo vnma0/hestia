@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ProblemTab from './problemTab/problemTab';
-import CodeBox from './codeEditor/codeBox';
+import { LoadingIndicator } from './problemLazyAssistance.js';
+
+const CodeBox = React.lazy(() => import('./codeEditor/codeBox.js'));
 
 /**
  * @author Dat Ngo
@@ -17,23 +19,18 @@ class ProblemTabEditor extends React.Component {
             currentTab: 0,
             displayLang: []
         };
-        this.handleTabChange = this.handleTabChange.bind(this);
-    }
-
-    handleTabChange(value) {
-        this.setState({
-            currentTab: value
-        });
     }
     render() {
         return (
             <div>
                 <ProblemTab
                     problems={this.props.problems}
-                    handleTabChange={this.handleTabChange}
+                    handleTabChange={value => this.setState({ currentTab: value })}
                     value={this.state.currentTab}
                 />
-                <CodeBox submitFileName={this.props.problems[this.state.currentTab] || ''} ext={this.props.ext} />
+                <Suspense fallback={<LoadingIndicator />}>
+                    <CodeBox submitFileName={this.props.problems[this.state.currentTab] || ''} ext={this.props.ext} />
+                </Suspense>
             </div>
         );
     }

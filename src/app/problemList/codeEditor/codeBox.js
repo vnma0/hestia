@@ -64,16 +64,20 @@ class CodeBox extends React.PureComponent {
     }
 
     inputEventFire() {
+        this.setState({ fileLoading: true });
         this.catcherRef.current.click();
     }
 
     processFile(file) {
+        let enable = () => this.setState({ fileLoading: false });
         if (!(file instanceof Blob) && !(file instanceof File))
             // non-File input, hmm..
-            return;
-        if (file.size >= byte_limit)
+            return enable();
+        if (file.size >= byte_limit) {
             // 15 KiB limit
+            enable();
             return pushNotification('You tried to upload something too large!');
+        }
         reader.onload = () => {
             this.setState({
                 code: reader.result,
