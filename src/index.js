@@ -5,7 +5,6 @@ import './external/roboto/roboto.css';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { LocalizationProvider } from 'react-l10n';
-import * as Cookies from 'js-cookie';
 import { Provider, withGlobalState } from 'react-globally';
 
 import { translations } from './strings/hestia-l10n/l10n-loader.js';
@@ -29,7 +28,7 @@ import publicParse from './app/globalStatusBar/staticStub/public.js';
 import { toggleSidenav } from './app/sidenav/sidenav.js';
 
 const globalState = {
-    language: Cookies.get('language') || 'en_US'
+    language: localStorage.getItem('language') || 'en_US'
 };
 
 class Hestia extends React.Component {

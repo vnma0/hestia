@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { DialogTitle, DialogContent, Dialog, DialogActions, AppBar, Tabs, Tab } from '@material-ui/core';
 import { Button } from '@material-ui/core';
-import * as Cookies from 'js-cookie';
 
 import { withGlobalState } from 'react-globally';
 
@@ -37,7 +36,7 @@ class UserSettingDialog extends Component {
     }
 
     submitOptions() {
-        Cookies.set('language', this.props.globalState.language);
+        localStorage.setItem('language', this.props.globalState.language);
         this.props.onClose();
     }
 
