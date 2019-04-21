@@ -5,6 +5,9 @@ environment:
   NPM_CONFIG_LOGLEVEL: "error"
   NODE_VERBOSE: "false"
 
+cache: 
+  - node_modules
+
 # Don't duplicate things
 skip_branch_with_pr: true
 
