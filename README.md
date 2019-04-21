@@ -5,6 +5,15 @@ Read in : [Vietnamese (tiếng Việt)](doc/README.vi-VN.md)
 # Hestia
 ###### the front-end part of MIRAI
 
+### Features 
+###### `*` means back-end support must be present
+- Account-based submitting & judging (requires created account beforehand) *
+  - Test-by-test details available if allowed by server
+- Account modification (authentication key changeable) *
+- Localization support (currently `en_US` and `vi_VN` is supported)
+- Scoreboard (OI and ACM mode supported with auto-updating present) *
+- Code editor in-browser backed by Ace with multi-language highlighting & theme support
+
 ### Installation
 - Hestia is distributed as part of [Wafter](https://github.com/vnma0/wafter), thus you will need to grab a release [there](https://github.com/vnma0/wafter/releases).
 
