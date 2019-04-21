@@ -5,7 +5,6 @@ import { MenuItem, Tooltip } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
 import LocalizedMessage from 'react-l10n';
-import * as Cookies from 'js-cookie';
 
 import friendlyTheme from './themeParser.js';
 const theme = [
@@ -46,7 +45,7 @@ class themeSelector extends React.Component {
         this.setState({
             anchorEl: undefined
         });
-        Cookies.set('ace_lang', theme[themeId]);
+        localStorage.setItem('ace_lang', theme[themeId]);
         this.props.onChange(themeId, theme[themeId]);
     };
 
