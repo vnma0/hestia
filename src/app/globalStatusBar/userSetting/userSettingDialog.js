@@ -31,14 +31,17 @@ class UserSettingDialog extends Component {
             currentTab: 0,
             pwdChangeDialogOpen: false
         };
-
-        this.submitOptions = this.submitOptions.bind(this);
     }
 
-    submitOptions() {
+    submitOptions = () => {
         localStorage.setItem('language', this.props.globalState.language);
         this.props.onClose();
-    }
+    };
+
+    onClose = () => {
+        this.props.setGlobalState({ language: localStorage.getItem('language') });
+        this.props.onClose();
+    };
 
     render() {
         return (
@@ -104,7 +107,7 @@ class UserSettingDialog extends Component {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.props.onClose}>
+                        <Button onClick={this.onClose}>
                             <LocalizedMessage id='globalStatusBar.userSetting.dialog.options.cancel' />
                         </Button>
                         <Button onClick={this.submitOptions}>
