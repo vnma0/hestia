@@ -4,6 +4,7 @@ import LocalizedMessage from 'react-l10n';
 
 import SubmitButton from './submitButton.js';
 import LangSelection from './langSelection.js';
+import ThemeSelector from './themeSelector.js';
 import UploadButton from './uploadButton.js';
 
 import { pushNotification } from '../../notifier/notify.js';
@@ -15,15 +16,25 @@ var reader = new FileReader();
 
 const byte_limit = 15 * 1024;
 
+/**
+ * Note that localStorage support will be postponed because of security risks.
+ */
+
 class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            // code: localStorage.getItem('code') || '',
+            // reload code from localStorage
             code: '',
             langId: 0,
             submitting: false,
             fileLoading: false,
-            editorHeight: window.innerHeight - 180
+            editorHeight: window.innerHeight - 180,
+
+            themeId: 3,
+            theme: localStorage.getItem('ace_lang') || 'monokai'
+            // Monokai, as declared from './themeSelector.js'
         };
 
         this.catcherRef = React.createRef();
@@ -53,16 +64,20 @@ class CodeBox extends React.PureComponent {
     }
 
     inputEventFire() {
+        this.setState({ fileLoading: true });
         this.catcherRef.current.click();
     }
 
     processFile(file) {
+        let enable = () => this.setState({ fileLoading: false });
         if (!(file instanceof Blob) && !(file instanceof File))
             // non-File input, hmm..
-            return;
-        if (file.size >= byte_limit)
+            return enable();
+        if (file.size >= byte_limit) {
             // 15 KiB limit
+            enable();
             return pushNotification('You tried to upload something too large!');
+        }
         reader.onload = () => {
             this.setState({
                 code: reader.result,
@@ -85,6 +100,13 @@ class CodeBox extends React.PureComponent {
                                     onClick={this.inputEventFire}
                                     disabled={this.state.fileLoading}
                                     variant='contained'
+                                />
+                            </Grid>
+                            <Grid item>
+                                <ThemeSelector
+                                    theme={this.state.theme}
+                                    choice={this.state.themeId}
+                                    onChange={(id, theme) => this.setState({ themeId: id, theme: theme })}
                                 />
                             </Grid>
                             <Grid item style={{ flexGrow: 1 }}>
@@ -129,11 +151,18 @@ class CodeBox extends React.PureComponent {
                     <Suspense fallback={<LoadingIndicator />}>
                         {/* no need to catch, we already have an error boundary above */}
                         <CodeEditor
+                            theme={this.state.theme}
                             readOnly={this.state.submitting || this.state.fileLoading}
                             ext={this.props.ext[this.state.langId]}
                             update={code => {
-                                if (code.length <= byte_limit) this.setState({ code: code });
-                                // enforce source limit even for editor
+                                if (code.length <= byte_limit) {
+                                    this.setState({ code: code });
+                                    // enforce source limit even for editor
+
+                                    // localStorage.setItem('code', code);
+                                    // save code in localStorage in
+                                    // case of any failure
+                                }
                             }}
                             code={this.state.code}
                             editorHeight={this.state.editorHeight}
