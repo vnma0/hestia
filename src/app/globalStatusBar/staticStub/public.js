@@ -1,3 +1,6 @@
+import React from 'react';
+import LocalizedMessage from 'react-l10n';
+
 import { pushNotification } from '../../notifier/notify.js';
 
 /**
@@ -20,7 +23,8 @@ async function publicParse() {
             mode: String(responseBody['mode'])
         }))
         .catch(() => {
-            if (typeof pushNotification === 'function') pushNotification('Failed to fetch data');
+            if (typeof pushNotification === 'function')
+                pushNotification(<LocalizedMessage id='globalStatusBar.staticLoader.failed' />);
             return {
                 name: '',
                 time: {
