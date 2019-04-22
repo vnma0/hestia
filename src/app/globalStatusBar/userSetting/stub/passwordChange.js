@@ -1,5 +1,3 @@
-import { pushNotification } from '../../../notifier/notify.js';
-
 /**
  * @name constructRequestBody
  * @description Create an `URLSearchParams` object suitable for sending as credential changing request
@@ -45,8 +43,5 @@ export default async function passwordChange(userId, password, newPassword, func
         })
         .then(okay => {
             if (typeof func === 'function') func(okay);
-        })
-        .catch(err => {
-            if (typeof pushNotification === 'function') pushNotification('Failed to change your password');
         });
 }

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Button, LinearProgress, Toolbar, Typography, Paper } from '@material-ui/core';
-
 import LocalizedMessage from 'react-l10n';
+import { withGlobalState } from 'react-globally';
+import { translations } from '../../strings/hestia-l10n/l10n-loader.js';
 
 import Scoreboard from './scoreboard.js';
 import './scoreboard.css';
 
 import score from './stub/score.js';
 import publicParse from '../globalStatusBar/staticStub/public.js';
+import { withSnackbar } from 'notistack';
 
 class ScoreboardWrapper extends React.Component {
     constructor(props) {
@@ -58,13 +60,19 @@ class ScoreboardWrapper extends React.Component {
     }
 
     update() {
-        score().then(data => {
-            this.setState({
-                result: data,
-                updating: false,
-                lastUpdate: new Date()
+        score()
+            .then(data => {
+                this.setState({
+                    result: data,
+                    updating: false,
+                    lastUpdate: new Date()
+                });
+            })
+            .catch(() => {
+                const string = translations[this.props.globalState.language].resources.scoreboard.error.failTrans;
+                this.props.enqueueSnackbar(string, { variant: 'error' });
+                this.setState({ updating: false });
             });
-        });
     }
 
     render() {
@@ -105,4 +113,4 @@ class ScoreboardWrapper extends React.Component {
     }
 }
 
-export default ScoreboardWrapper;
+export default withGlobalState(withSnackbar(ScoreboardWrapper));

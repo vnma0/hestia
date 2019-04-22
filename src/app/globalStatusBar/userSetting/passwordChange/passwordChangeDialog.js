@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 
 import { DialogTitle, DialogContent, Dialog, DialogActions, DialogContentText } from '@material-ui/core';
 import { Button, TextField } from '@material-ui/core';
+import { withGlobalState } from 'react-globally';
 import { fade } from '../../lib/libTransition.js';
 
 import passwordChange from '../stub/passwordChange.js';
+import { withSnackbar } from 'notistack';
+
+import { translations } from '../../../../strings/hestia-l10n/l10n-loader.js';
 
 /**
  * @name PasswordChangeForm
@@ -25,13 +29,6 @@ class PasswordChangeDialog extends Component {
             verifyKey: '',
             pwdChangeInvokerRef: React.createRef()
         };
-        this.changePassword = this.changePassword.bind(this);
-
-        this.handleChangeKeyVerifier = this.handleChangeKeyVerifier.bind(this);
-        this.handleChangeOldKey = this.handleChangeOldKey.bind(this);
-        this.handleChangeNewKey = this.handleChangeNewKey.bind(this);
-
-        this.resolveEnterKey = this.resolveEnterKey.bind(this);
     }
 
     resolveEnterKey = event => {
@@ -45,27 +42,33 @@ class PasswordChangeDialog extends Component {
          */
     };
 
-    handleChangeOldKey(event) {
+    handleChangeOldKey = event => {
         this.setState({
             oldKey: event.target.value
         });
-    }
+    };
 
-    handleChangeNewKey(event) {
+    handleChangeNewKey = event => {
         this.setState({
             newKey: event.target.value
         });
-    }
+    };
 
-    handleChangeKeyVerifier(event) {
+    handleChangeKeyVerifier = event => {
         this.setState({
             verifyKey: event.target.value
         });
-    }
+    };
 
-    changePassword() {
-        passwordChange(this.props.userId, this.state.oldKey, this.state.newKey);
-    }
+    changePassword = () => {
+        passwordChange(this.props.userId, this.state.oldKey, this.state.newKey).catch(() => {
+            this.props.enqueueSnackbar(
+                translations[this.props.globalState.language].resources.globalStatusBar.userSetting.dialog.entry
+                    .password.error,
+                { variant: 'error' }
+            );
+        });
+    };
 
     render() {
         return (
@@ -117,4 +120,4 @@ class PasswordChangeDialog extends Component {
     }
 }
 
-export default PasswordChangeDialog;
+export default withGlobalState(withSnackbar(PasswordChangeDialog));

@@ -2,14 +2,17 @@ import React from 'react';
 import downloadSubmission from '../../stub/download.js';
 import { CardContent, Typography, CircularProgress } from '@material-ui/core';
 import AceEditor from 'react-ace';
+import { withGlobalState } from 'react-globally';
+import { translations } from '../../../../strings/hestia-l10n/l10n-loader.js';
 import LocalizedMessage from 'react-l10n';
+import { withSnackbar } from 'notistack';
 
 /**
  * @name CodePanel
  * @param {String} id : Submission ID to get
  */
 
-export default class CodePanel extends React.PureComponent {
+class CodePanel extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,12 +24,18 @@ export default class CodePanel extends React.PureComponent {
 
     componentDidMount() {
         if (this.props.id && this.props.id.constructor === String) {
-            downloadSubmission(this.props.id).then(code => {
-                this.setState({
-                    code: code,
-                    loading: false
+            downloadSubmission(this.props.id)
+                .then(code => {
+                    this.setState({
+                        code: code,
+                        loading: false
+                    });
+                })
+                .catch(() => {
+                    const string = translations[this.props.globalState.language].resources.submissions.error.source;
+                    this.props.enqueueSnackbar(string);
+                    this.setState({ loading: false });
                 });
-            });
         }
     }
 
@@ -64,3 +73,5 @@ export default class CodePanel extends React.PureComponent {
         );
     }
 }
+
+export default withGlobalState(withSnackbar(CodePanel));

@@ -1,8 +1,3 @@
-import React from 'react';
-import LocalizedMessage from 'react-l10n';
-
-import { pushNotification } from '../../notifier/notify.js';
-
 /**
  * @name publicParse
  * @desc Parse contest public information
@@ -21,21 +16,7 @@ async function publicParse() {
             problems: responseBody['probList'],
             ext: responseBody['allowedCodeExt'] || ['.cpp', '.py', '.java'],
             mode: String(responseBody['mode'])
-        }))
-        .catch(() => {
-            if (typeof pushNotification === 'function')
-                pushNotification(<LocalizedMessage id='globalStatusBar.staticLoader.failed' />);
-            return {
-                name: '',
-                time: {
-                    start: new Date(),
-                    end: new Date()
-                },
-                problems: [],
-                ext: ['null'],
-                mode: 'OI'
-            };
-        });
+        }));
 }
 
 export default publicParse;

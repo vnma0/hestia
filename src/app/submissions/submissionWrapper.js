@@ -10,9 +10,11 @@ import {
     Tooltip
 } from '@material-ui/core';
 import LocalizedMessage from 'react-l10n';
+import { withSnackbar } from 'notistack';
+import { withGlobalState } from 'react-globally';
 
 import SubmissionTable from './submissionTable.js';
-
+import { translations } from '../../strings/hestia-l10n/l10n-loader.js';
 import submissionParse from './stub/submission.js';
 
 class Submissions extends React.Component {
@@ -40,14 +42,19 @@ class Submissions extends React.Component {
     }
 
     update = (listSize, page, rowsPerPage) => {
-        submissionParse(listSize, page, rowsPerPage).then(data =>
-            this.setState({
-                submissions: data.submissions,
-                rowsPerPage: data.meta.pageSize,
-                listSize: data.meta.submissionsListSize,
-                page: data.meta.currentPageId
-            })
-        );
+        submissionParse(listSize, page, rowsPerPage)
+            .then(data =>
+                this.setState({
+                    submissions: data.submissions,
+                    rowsPerPage: data.meta.pageSize,
+                    listSize: data.meta.submissionsListSize,
+                    page: data.meta.currentPageId
+                })
+            )
+            .catch(() => {
+                const string = translations[this.props.globalState.language].resources.submissions.error.submissions;
+                this.props.enqueueSnackbar(string);
+            });
     };
 
     triggerUpdate() {
@@ -134,4 +141,4 @@ class Submissions extends React.Component {
     }
 }
 
-export default Submissions;
+export default withGlobalState(withSnackbar(Submissions));
