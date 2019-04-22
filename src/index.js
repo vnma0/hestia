@@ -77,10 +77,10 @@ class Hestia extends React.Component {
         return (
             <LocalizationProvider {...strings}>
                 <Notify
-                    autoHideDuration={1000}
+                    autoHideDuration={3000}
                     TransitionComponent={props => slideIn(props, 'left')}
                     transitionDuration={{
-                        enter: 10,
+                        enter: 100,
                         exit: 100
                     }}
                     anchorOrigin={{

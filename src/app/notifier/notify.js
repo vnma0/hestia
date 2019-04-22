@@ -27,7 +27,14 @@ class Notify extends React.Component {
     }
 
     render() {
-        return <Snackbar {...this.props} message={this.state.message} open={this.state.open} />;
+        return (
+            <Snackbar
+                {...this.props}
+                message={this.state.message}
+                open={this.state.open}
+                onClose={() => this.setState({ open: false })}
+            />
+        );
     }
 }
 
