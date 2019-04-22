@@ -70,14 +70,15 @@ class CodeBox extends React.PureComponent {
         this.catcherRef.current.click();
     }
 
+    enable = () => this.setState({ fileLoading: false });
+
     processFile(file) {
-        let enable = () => this.setState({ fileLoading: false });
         if (!(file instanceof Blob) && !(file instanceof File))
             // non-File input, hmm..
-            return enable();
+            return this.enable();
         if (file.size >= byte_limit) {
             // 15 KiB limit
-            enable();
+            this.enable();
             return this.props.enqueueSnackbar(
                 translations[this.props.globalState.language].resources.problems.codeEditor.error.tooLarge,
                 { variant: 'error' }
@@ -179,7 +180,10 @@ class CodeBox extends React.PureComponent {
                     onChange={event => this.processFile(event.target.files[0])}
                     ref={this.catcherRef}
                     style={{ display: 'none' }}
-                    onClick={event => (event.target.value = null)}
+                    onClick={event => {
+                        event.target.value = null;
+                        if (event.target.files.length < 1) this.enable();
+                    }}
                 />
             </>
         );
