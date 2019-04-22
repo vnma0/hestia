@@ -90,64 +90,6 @@ class Hestia extends React.Component {
             language && translations[language]
                 ? { resources: translations[language].resources }
                 : { resources: translations['en_US'].resources };
-
-        let content = (
-            <Router>
-                <div>
-                    <Sidenav
-                        pages={[
-                            {
-                                page: <HomepageLauncher button onClick={toggleSidenav} />,
-                                link: '/'
-                            },
-                            {
-                                page: <SubmissionLauncher button onClick={toggleSidenav} />,
-                                link: '/submissions'
-                            },
-                            {
-                                page: <ProblemLauncher button onClick={toggleSidenav} />,
-                                link: '/problems'
-                            },
-                            {
-                                page: <ScoreboardLauncher button onClick={toggleSidenav} />,
-                                link: '/scoreboard'
-                            }
-                        ]}
-                    />
-                    <Route
-                        path='/'
-                        render={() => {
-                            document.title = this.state.contestName;
-                            return <Homepage title={this.state.contestName} />;
-                        }}
-                    />
-                    <Route
-                        path='/submissions'
-                        render={() => (
-                            <Submission
-                                title={`${this.state.contestName} - ${strings.resources.submissions.launcher}`}
-                            />
-                        )}
-                    />
-                    <Route
-                        path='/problems'
-                        render={() => (
-                            <ProblemWrapper
-                                title={`${this.state.contestName} - ${strings.resources.problems.launcher}`}
-                            />
-                        )}
-                    />
-                    <Route
-                        path='/scoreboard'
-                        render={() => (
-                            <ScoreboardWrapper
-                                title={`${this.state.contestName} - ${strings.resources.scoreboard.launcher}`}
-                            />
-                        )}
-                    />
-                </div>
-            </Router>
-        );
         return (
             <LocalizationProvider {...strings}>
                 <GlobalStatusBar
@@ -158,7 +100,66 @@ class Hestia extends React.Component {
                     contestTime={this.state.contestTime}
                     menuOpen={toggleSidenav}
                 />
-                {this.state.user.loggedIn ? content : <LoggedOut />}
+                <div style={{ display: this.state.user.loggedIn ? 'block' : 'none' }}>
+                    <Router>
+                        <div>
+                            <Sidenav
+                                pages={[
+                                    {
+                                        page: <HomepageLauncher button onClick={toggleSidenav} />,
+                                        link: '/'
+                                    },
+                                    {
+                                        page: <SubmissionLauncher button onClick={toggleSidenav} />,
+                                        link: '/submissions'
+                                    },
+                                    {
+                                        page: <ProblemLauncher button onClick={toggleSidenav} />,
+                                        link: '/problems'
+                                    },
+                                    {
+                                        page: <ScoreboardLauncher button onClick={toggleSidenav} />,
+                                        link: '/scoreboard'
+                                    }
+                                ]}
+                            />
+                            <Route
+                                path='/'
+                                render={() => {
+                                    document.title = this.state.contestName;
+                                    return <Homepage title={this.state.contestName} />;
+                                }}
+                            />
+                            <Route
+                                path='/submissions'
+                                render={() => (
+                                    <Submission
+                                        title={`${this.state.contestName} - ${strings.resources.submissions.launcher}`}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path='/problems'
+                                render={() => (
+                                    <ProblemWrapper
+                                        title={`${this.state.contestName} - ${strings.resources.problems.launcher}`}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path='/scoreboard'
+                                render={() => (
+                                    <ScoreboardWrapper
+                                        title={`${this.state.contestName} - ${strings.resources.scoreboard.launcher}`}
+                                    />
+                                )}
+                            />
+                        </div>
+                    </Router>
+                </div>
+                <div style={{ display: this.state.user.loggedIn ? 'none' : 'block' }}>
+                    {!this.state.user.loggedIn && <LoggedOut />}
+                </div>
             </LocalizationProvider>
         );
     }
