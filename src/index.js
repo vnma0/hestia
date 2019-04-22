@@ -9,6 +9,7 @@ import { Provider, withGlobalState } from 'react-globally';
 
 import { translations } from './strings/hestia-l10n/l10n-loader.js';
 
+import LoggedOut from './app/loggedOut.js';
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js';
 import Sidenav from './app/sidenav/sidenav.js';
 import Homepage from './app/home/homepage.js';
@@ -74,6 +75,64 @@ class Hestia extends React.Component {
             language && translations[language]
                 ? { resources: translations[language].resources }
                 : { resources: translations['en_US'].resources };
+
+        let content = (
+            <Router>
+                <div>
+                    <Sidenav
+                        pages={[
+                            {
+                                page: <HomepageLauncher button onClick={toggleSidenav} />,
+                                link: '/'
+                            },
+                            {
+                                page: <SubmissionLauncher button onClick={toggleSidenav} />,
+                                link: '/submissions'
+                            },
+                            {
+                                page: <ProblemLauncher button onClick={toggleSidenav} />,
+                                link: '/problems'
+                            },
+                            {
+                                page: <ScoreboardLauncher button onClick={toggleSidenav} />,
+                                link: '/scoreboard'
+                            }
+                        ]}
+                    />
+                    <Route
+                        path='/'
+                        render={() => {
+                            document.title = this.state.contestName;
+                            return <Homepage title={this.state.contestName} />;
+                        }}
+                    />
+                    <Route
+                        path='/submissions'
+                        render={() => (
+                            <Submission
+                                title={`${this.state.contestName} - ${strings.resources.submissions.launcher}`}
+                            />
+                        )}
+                    />
+                    <Route
+                        path='/problems'
+                        render={() => (
+                            <ProblemWrapper
+                                title={`${this.state.contestName} - ${strings.resources.problems.launcher}`}
+                            />
+                        )}
+                    />
+                    <Route
+                        path='/scoreboard'
+                        render={() => (
+                            <ScoreboardWrapper
+                                title={`${this.state.contestName} - ${strings.resources.scoreboard.launcher}`}
+                            />
+                        )}
+                    />
+                </div>
+            </Router>
+        );
         return (
             <LocalizationProvider {...strings}>
                 <Notify
@@ -96,61 +155,7 @@ class Hestia extends React.Component {
                     contestTime={this.state.contestTime}
                     menuOpen={toggleSidenav}
                 />
-                <Router>
-                    <div>
-                        <Sidenav
-                            pages={[
-                                {
-                                    page: <HomepageLauncher button onClick={toggleSidenav} />,
-                                    link: '/'
-                                },
-                                {
-                                    page: <SubmissionLauncher button onClick={toggleSidenav} />,
-                                    link: '/submissions'
-                                },
-                                {
-                                    page: <ProblemLauncher button onClick={toggleSidenav} />,
-                                    link: '/problems'
-                                },
-                                {
-                                    page: <ScoreboardLauncher button onClick={toggleSidenav} />,
-                                    link: '/scoreboard'
-                                }
-                            ]}
-                        />
-                        <Route
-                            path='/'
-                            render={() => {
-                                document.title = this.state.contestName;
-                                return <Homepage title={this.state.contestName} />;
-                            }}
-                        />
-                        <Route
-                            path='/submissions'
-                            render={() => (
-                                <Submission
-                                    title={`${this.state.contestName} - ${strings.resources.submissions.launcher}`}
-                                />
-                            )}
-                        />
-                        <Route
-                            path='/problems'
-                            render={() => (
-                                <ProblemWrapper
-                                    title={`${this.state.contestName} - ${strings.resources.problems.launcher}`}
-                                />
-                            )}
-                        />
-                        <Route
-                            path='/scoreboard'
-                            render={() => (
-                                <ScoreboardWrapper
-                                    title={`${this.state.contestName} - ${strings.resources.scoreboard.launcher}`}
-                                />
-                            )}
-                        />
-                    </div>
-                </Router>
+                {this.state.user.loggedIn ? content : <LoggedOut />}
             </LocalizationProvider>
         );
     }
