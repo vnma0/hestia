@@ -5,6 +5,10 @@ environment:
   NPM_CONFIG_LOGLEVEL: "error"
   NODE_VERBOSE: "false"
 
+branches:
+  only:
+  - master
+
 cache: 
   - node_modules -> package.json
 
