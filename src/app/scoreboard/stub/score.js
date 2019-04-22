@@ -1,5 +1,3 @@
-import { pushNotification } from '../../notifier/notify.js';
-
 /**
  * @name parseScore
  * @desc `fetch()` scoreboard
@@ -16,11 +14,6 @@ async function parseScore() {
                 aced: record.aced,
                 score: record.score
             }));
-        })
-        .catch(err => {
-            if (typeof pushNotification === 'function') pushNotification('Failed to load scoreboard');
-            if (process.env.NODE_ENV === 'development') console.log(err);
-            return [];
         });
 }
 

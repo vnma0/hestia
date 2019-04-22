@@ -1,7 +1,4 @@
-import React from 'react';
 import { isNumber } from 'util';
-import LocalizedMessage from 'react-l10n';
-import { pushNotification } from '../../notifier/notify.js';
 
 function constructURL(count, page, size) {
     let out = new URLSearchParams();
@@ -50,18 +47,6 @@ export default async function submissionParse(count, page, size) {
                     submissionsListSize: subsTable.count,
                     currentPageId: subsTable.page,
                     pageSize: subsTable.size
-                }
-            };
-        })
-        .catch(() => {
-            if (typeof pushNotification === 'function')
-                pushNotification(<LocalizedMessage id='submissions.error.submissions' />);
-            return {
-                submissions: [],
-                meta: {
-                    submissionsListSize: 0,
-                    currentPageId: 0,
-                    pageSize: 10
                 }
             };
         });

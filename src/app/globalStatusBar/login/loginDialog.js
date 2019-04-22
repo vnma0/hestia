@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { DialogTitle, DialogContent, DialogContentText, Dialog, DialogActions, Grid } from '@material-ui/core';
 import { TextField, Button } from '@material-ui/core';
+import { withSnackbar } from 'notistack';
+import { withGlobalState } from 'react-globally';
 
 import { validateID, validateKey } from '../lib/libValidateLogin.js';
 
@@ -10,7 +12,7 @@ import Lock from '@material-ui/icons/Lock';
 import { fade } from '../lib/libTransition.js';
 
 import login from './stub/login.js';
-import { pushNotification } from '../../notifier/notify.js';
+import { translations } from '../../../strings/hestia-l10n/l10n-loader.js';
 
 import LocalizedMessage from 'react-l10n';
 
@@ -143,8 +145,12 @@ class LoginDialog extends Component {
                                     loginInProgress: false
                                 });
                                 if (success) window.location.reload();
-                                else if (typeof pushNotification === 'function')
-                                    pushNotification(<LocalizedMessage id='globalStatusBar.login.dialog.errorText' />);
+                                else
+                                    this.props.enqueueSnackbar(
+                                        translations[this.props.globalState.language].resources.globalStatusBar.login
+                                            .dialog.errorText,
+                                        { variant: 'error' }
+                                    );
                             });
                             // if login finished, hide the loading circle
                             this.setState({
@@ -164,4 +170,4 @@ class LoginDialog extends Component {
     }
 }
 
-export default LoginDialog;
+export default withGlobalState(withSnackbar(LoginDialog));

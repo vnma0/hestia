@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
 
+import { withGlobalState } from 'react-globally';
+import { translations } from '../../../strings/hestia-l10n/l10n-loader.js';
+
 import submit from './stub/submit.js';
+import { withSnackbar } from 'notistack';
 
 /**
  * @name SubmitButton
@@ -32,12 +36,28 @@ class SubmitButton extends React.Component {
                 onClick={() => {
                     this.setState({ submitting: true });
                     this.props.onSubmit();
-                    submit(this.props.code, this.props.fileName, this.props.ext).then(() => {
-                        this.props.onSubmitDone();
-                        this.setState({
-                            submitting: false
-                        });
-                    });
+                    submit(this.props.code, this.props.fileName, this.props.ext)
+                        .then(res => {
+                            let curr = translations[this.props.globalState.language].resources;
+                            // eslint-disable-next-line
+                            let error = res.statusText;
+                            let string = res.ok
+                                ? curr.problems.notify.success
+                                : // eslint-disable-next-line
+                                  eval(`String(\`${curr.problems.notify.error.failStat}\`)`);
+                            this.props.enqueueSnackbar(string, { variant: res.ok ? 'success' : 'error' });
+                        })
+                        .catch(() => {
+                            this.props.enqueueSnackbar(
+                                translations[this.props.globalState.language].resources.problems.notify.error.failTrans,
+                                { variant: 'error' }
+                            );
+                        })
+                        .finally(() =>
+                            this.setState({
+                                submitting: this.props.onSubmitDone() && false
+                            })
+                        );
                 }}>
                 {this.state.submitting ? <CircularProgress size={20} /> : this.props.children}
             </Button>
@@ -45,4 +65,4 @@ class SubmitButton extends React.Component {
     }
 }
 
-export default SubmitButton;
+export default withGlobalState(withSnackbar(SubmitButton));

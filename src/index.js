@@ -6,6 +6,7 @@ import './external/roboto/roboto.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { LocalizationProvider } from 'react-l10n';
 import { Provider, withGlobalState } from 'react-globally';
+import { SnackbarProvider, withSnackbar } from 'notistack';
 
 import { translations } from './strings/hestia-l10n/l10n-loader.js';
 
@@ -16,8 +17,6 @@ import Homepage from './app/home/homepage.js';
 import Submission from './app/submissions/submissionLazyWrapper.js';
 import ProblemWrapper from './app/problemList/problemWrapper.js';
 import ScoreboardWrapper from './app/scoreboard/scoreboardLazyWrapper';
-import Notify from './app/notifier/notify.js';
-import { slideIn } from './app/globalStatusBar/lib/libTransition.js';
 
 import SubmissionLauncher from './app/submissions/submissionLauncher.js';
 import ProblemLauncher from './app/problemList/problemLauncher.js';
@@ -52,12 +51,28 @@ class Hestia extends React.Component {
     }
 
     componentWillMount() {
-        publicParse().then(data => {
-            this.setState({
-                contestName: data.name,
-                contestTime: data.time
+        publicParse()
+            .catch(() => {
+                this.props.enqueueSnackbar(
+                    translations[this.props.globalState.language].resources.globalStatusBar.staticLoader.failed
+                );
+                return {
+                    name: '',
+                    time: {
+                        start: new Date(),
+                        end: new Date()
+                    },
+                    problems: [],
+                    ext: ['null'],
+                    mode: 'OI'
+                };
+            })
+            .then(data => {
+                this.setState({
+                    contestName: data.name,
+                    contestTime: data.time
+                });
             });
-        });
         verifyLogin().then(data => {
             this.setState({
                 user: {
@@ -135,18 +150,6 @@ class Hestia extends React.Component {
         );
         return (
             <LocalizationProvider {...strings}>
-                <Notify
-                    autoHideDuration={1000}
-                    TransitionComponent={props => slideIn(props, 'left')}
-                    transitionDuration={{
-                        enter: 10,
-                        exit: 100
-                    }}
-                    anchorOrigin={{
-                        horizontal: 'left',
-                        vertical: 'bottom'
-                    }}
-                />
                 <GlobalStatusBar
                     currentUser={this.state.user.username}
                     currentUserId={this.state.user.id}
@@ -161,11 +164,13 @@ class Hestia extends React.Component {
     }
 }
 
-var HestiaGlobal = withGlobalState(Hestia);
+var HestiaGlobal = withSnackbar(withGlobalState(Hestia));
 
 ReactDOM.render(
-    <Provider globalState={globalState}>
-        <HestiaGlobal />
-    </Provider>,
+    <SnackbarProvider maxSnack={4}>
+        <Provider globalState={globalState}>
+            <HestiaGlobal />
+        </Provider>
+    </SnackbarProvider>,
     document.querySelector('#root')
 );

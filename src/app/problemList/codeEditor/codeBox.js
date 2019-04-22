@@ -1,14 +1,16 @@
 import React, { Suspense } from 'react';
 import { AppBar, Grid, Divider } from '@material-ui/core';
 import LocalizedMessage from 'react-l10n';
+import { withSnackbar } from 'notistack';
+import { withGlobalState } from 'react-globally';
 
 import SubmitButton from './submitButton.js';
 import LangSelection from './langSelection.js';
 import ThemeSelector from './themeSelector.js';
 import UploadButton from './uploadButton.js';
 
-import { pushNotification } from '../../notifier/notify.js';
 import { LoadingIndicator } from '../problemLazyAssistance.js';
+import { translations } from '../../../strings/hestia-l10n/l10n-loader.js';
 
 const CodeEditor = React.lazy(() => import('./codeEditor.js'));
 
@@ -76,7 +78,10 @@ class CodeBox extends React.PureComponent {
         if (file.size >= byte_limit) {
             // 15 KiB limit
             enable();
-            return pushNotification('You tried to upload something too large!');
+            return this.props.enqueueSnackbar(
+                translations[this.props.globalState.language].resources.problems.codeEditor.error.tooLarge,
+                { variant: 'error' }
+            );
         }
         reader.onload = () => {
             this.setState({
@@ -181,4 +186,4 @@ class CodeBox extends React.PureComponent {
     }
 }
 
-export default CodeBox;
+export default withGlobalState(withSnackbar(CodeBox));
