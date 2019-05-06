@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, LinearProgress, Toolbar, Typography, Paper } from '@material-ui/core';
-import LocalizedMessage from 'react-l10n';
 import { withGlobalState } from 'react-globally';
-import { translations } from '../../strings/hestia-l10n/l10n-loader.js';
 
 import Scoreboard from './scoreboard.js';
 import './scoreboard.css';
@@ -10,6 +8,7 @@ import './scoreboard.css';
 import score from './stub/score.js';
 import publicParse from '../globalStatusBar/staticStub/public.js';
 import { withSnackbar } from 'notistack';
+import { withNamespaces } from 'react-i18next';
 
 class ScoreboardWrapper extends React.Component {
     constructor(props) {
@@ -69,19 +68,20 @@ class ScoreboardWrapper extends React.Component {
                 });
             })
             .catch(() => {
-                const string = translations[this.props.globalState.language].resources.scoreboard.error.failTrans;
+                const string = this.props.t('scoreboard.error.failTrans');
                 this.props.enqueueSnackbar(string, { variant: 'error' });
                 this.setState({ updating: false });
             });
     }
 
     render() {
+        const { t } = this.props;
         return (
             <>
                 <Paper square>
                     <Toolbar variant='dense'>
                         <Typography style={{ flexGrow: 1 }}>
-                            <LocalizedMessage id='scoreboard.reload.lastUpdateTimestamp' /> :&nbsp;
+                            {`${t('scoreboard.reload.lastUpdateTimestamp')} : `}
                             <span className='code-text'>{this.state.lastUpdate.toString()}</span>
                         </Typography>
                         <Button
@@ -93,11 +93,9 @@ class ScoreboardWrapper extends React.Component {
                                 this.update();
                                 this.resetUpdateInterval();
                             }}>
-                            {this.state.updating ? (
-                                <LocalizedMessage id='scoreboard.reload.updating' />
-                            ) : (
-                                <LocalizedMessage id='scoreboard.reload.updateAction' />
-                            )}
+                            {this.state.updating
+                                ? t('scoreboard.reload.updating')
+                                : t('scoreboard.reload.updateAction')}
                         </Button>
                     </Toolbar>
                 </Paper>
@@ -113,4 +111,4 @@ class ScoreboardWrapper extends React.Component {
     }
 }
 
-export default withGlobalState(withSnackbar(ScoreboardWrapper));
+export default withNamespaces()(withGlobalState(withSnackbar(ScoreboardWrapper)));

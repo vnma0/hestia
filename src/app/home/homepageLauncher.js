@@ -1,8 +1,7 @@
 import React from 'react';
 import { ListItemIcon, ListItemText } from '@material-ui/core';
 import Home from '@material-ui/icons/Home';
-
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name HomepageLauncher
@@ -16,12 +15,10 @@ class HomepageLauncher extends React.Component {
                 <ListItemIcon>
                     <Home />
                 </ListItemIcon>
-                <ListItemText>
-                    <LocalizedMessage id='homepage.launcher' />
-                </ListItemText>
+                <ListItemText>{this.props.t('homepage.launcher')}</ListItemText>
             </>
         );
     }
 }
 
-export default HomepageLauncher;
+export default withNamespaces()(HomepageLauncher);

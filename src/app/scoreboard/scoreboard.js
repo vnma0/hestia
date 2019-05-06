@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableRow, TableHead } from '@material-ui/core';
 
-import LocalizedMessage from 'react-l10n';
 import './scoreboard.css';
+import { withNamespaces } from 'react-i18next';
 
 function toHrs(minute) {
     let hr = Math.floor(Number(minute) / 60);
@@ -16,13 +16,14 @@ function toHrs(minute) {
 
 class Scoreboard extends React.PureComponent {
     render() {
+        const { t } = this.props;
         // testing if it is ACM
         let mode = this.props.mode === 'ACM' ? '.acm' : '.oi';
 
         let initialStrings = [
-            <LocalizedMessage id='scoreboard.table.head.name' />,
-            <LocalizedMessage id={`scoreboard.table.head.score${mode}`} />,
-            <LocalizedMessage id={`scoreboard.table.head.acceptedCount${mode}`} />
+            t('scoreboard.table.head.name'),
+            t(`scoreboard.table.head.score${mode}`),
+            t(`scoreboard.table.head.acceptedCount${mode}`)
         ];
         return (
             <Table>
@@ -70,7 +71,6 @@ class Scoreboard extends React.PureComponent {
                                         )}
                                     </TableCell>
                                 );
-                            // `${record.result[entries].sec}\n\n+${toHrs(record.result[entries].pri)}`
                         });
                         return (
                             <TableRow key={`row_${index}`}>
@@ -91,4 +91,4 @@ class Scoreboard extends React.PureComponent {
     }
 }
 
-export default Scoreboard;
+export default withNamespaces()(Scoreboard);

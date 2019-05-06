@@ -4,7 +4,6 @@ import './index.css';
 import './external/roboto/roboto.css';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { LocalizationProvider } from 'react-l10n';
 import { Provider, withGlobalState } from 'react-globally';
 import { SnackbarProvider, withSnackbar } from 'notistack';
 
@@ -27,6 +26,9 @@ import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
 import publicParse from './app/globalStatusBar/staticStub/public.js';
 import { toggleSidenav } from './app/sidenav/sidenav.js';
 
+import i18n from './i18n.js';
+import { withNamespaces } from 'react-i18next';
+
 const globalState = {
     language: localStorage.getItem('language') || 'en_US'
 };
@@ -48,13 +50,14 @@ class Hestia extends React.Component {
                 end: new Date()
             }
         };
+        i18n.changeLanguage(this.props.globalState.language);
     }
 
     componentWillMount() {
         publicParse()
             .catch(() => {
                 this.props.enqueueSnackbar(
-                    translations[this.props.globalState.language].resources.globalStatusBar.staticLoader.failed
+                    translations[this.props.globalState.language].translation.globalStatusBar.staticLoader.failed
                 );
                 return {
                     name: '',
@@ -85,13 +88,9 @@ class Hestia extends React.Component {
     }
 
     render() {
-        let language = this.props.globalState.language;
-        let strings =
-            language && translations[language]
-                ? { resources: translations[language].resources }
-                : { resources: translations['en_US'].resources };
+        const { t } = this.props;
         return (
-            <LocalizationProvider {...strings}>
+            <>
                 <GlobalStatusBar
                     currentUser={this.state.user.username}
                     currentUserId={this.state.user.id}
@@ -133,24 +132,20 @@ class Hestia extends React.Component {
                             <Route
                                 path='/submissions'
                                 render={() => (
-                                    <Submission
-                                        title={`${this.state.contestName} - ${strings.resources.submissions.launcher}`}
-                                    />
+                                    <Submission title={`${this.state.contestName} - ${t('submissions.launcher')}`} />
                                 )}
                             />
                             <Route
                                 path='/problems'
                                 render={() => (
-                                    <ProblemWrapper
-                                        title={`${this.state.contestName} - ${strings.resources.problems.launcher}`}
-                                    />
+                                    <ProblemWrapper title={`${this.state.contestName} - ${t('problems.launcher')}`} />
                                 )}
                             />
                             <Route
                                 path='/scoreboard'
                                 render={() => (
                                     <ScoreboardWrapper
-                                        title={`${this.state.contestName} - ${strings.resources.scoreboard.launcher}`}
+                                        title={`${this.state.contestName} - ${t('scoreboard.launcher')}`}
                                     />
                                 )}
                             />
@@ -160,12 +155,12 @@ class Hestia extends React.Component {
                 <div style={{ display: this.state.user.loggedIn ? 'none' : 'block' }}>
                     {!this.state.user.loggedIn && <LoggedOut />}
                 </div>
-            </LocalizationProvider>
+            </>
         );
     }
 }
 
-var HestiaGlobal = withSnackbar(withGlobalState(Hestia));
+var HestiaGlobal = withNamespaces()(withSnackbar(withGlobalState(Hestia)));
 
 ReactDOM.render(
     <SnackbarProvider maxSnack={4}>

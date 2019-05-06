@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, Tooltip, CircularProgress } from '@material-ui/core';
 import CloudUpload from '@material-ui/icons/CloudUpload';
+import { withNamespaces } from 'react-i18next';
 
-import LocalizedMessage from 'react-l10n';
-
-export default class UploadButton extends React.PureComponent {
+class UploadButton extends React.PureComponent {
     render() {
+        const { t } = this.props;
         return (
-            <Tooltip title={<LocalizedMessage id='problems.codeEditor.control.uploadButtonTooltip' />}>
+            <Tooltip title={t('problems.codeEditor.control.uploadButtonTooltip')}>
                 <Button {...this.props}>
                     {this.props.disabled ? (
                         <CircularProgress size={20} />
@@ -20,3 +20,5 @@ export default class UploadButton extends React.PureComponent {
         );
     }
 }
+
+export default withNamespaces()(UploadButton);

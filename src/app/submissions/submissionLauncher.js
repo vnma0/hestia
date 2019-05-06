@@ -1,8 +1,7 @@
 import React from 'react';
 import { ListItemIcon, ListItemText } from '@material-ui/core';
 import DoneAll from '@material-ui/icons/CheckCircleOutline';
-
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name SubmissionLauncher
@@ -11,17 +10,16 @@ import LocalizedMessage from 'react-l10n';
 
 class SubmissionLauncher extends React.Component {
     render() {
+        const { t } = this.props;
         return (
             <>
                 <ListItemIcon>
                     <DoneAll />
                 </ListItemIcon>
-                <ListItemText>
-                    <LocalizedMessage id='submissions.launcher' />
-                </ListItemText>
+                <ListItemText>{t('submissions.launcher')}</ListItemText>
             </>
         );
     }
 }
 
-export default SubmissionLauncher;
+export default withNamespaces()(SubmissionLauncher);

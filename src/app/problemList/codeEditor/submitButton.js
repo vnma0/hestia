@@ -2,10 +2,10 @@ import React from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
 
 import { withGlobalState } from 'react-globally';
-import { translations } from '../../../strings/hestia-l10n/l10n-loader.js';
 
 import submit from './stub/submit.js';
 import { withSnackbar } from 'notistack';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name SubmitButton
@@ -28,6 +28,7 @@ class SubmitButton extends React.Component {
         };
     }
     render() {
+        const { t } = this.props;
         return (
             <Button
                 disabled={this.props.disabled || this.state.submitting}
@@ -38,20 +39,13 @@ class SubmitButton extends React.Component {
                     this.props.onSubmit();
                     submit(this.props.code, this.props.fileName, this.props.ext)
                         .then(res => {
-                            let curr = translations[this.props.globalState.language].resources;
-                            // eslint-disable-next-line
-                            let error = res.statusText;
                             let string = res.ok
-                                ? curr.problems.notify.success
-                                : // eslint-disable-next-line
-                                  eval(`String(\`${curr.problems.notify.error.failStat}\`)`);
+                                ? t('problems.notify.success')
+                                : `${t('problems.notify.error.failStat')} : ${res.statusText}`;
                             this.props.enqueueSnackbar(string, { variant: res.ok ? 'success' : 'error' });
                         })
                         .catch(() => {
-                            this.props.enqueueSnackbar(
-                                translations[this.props.globalState.language].resources.problems.notify.error.failTrans,
-                                { variant: 'error' }
-                            );
+                            this.props.enqueueSnackbar(t('problems.notify.error.failTrans'), { variant: 'error' });
                         })
                         .finally(() =>
                             this.setState({
@@ -65,4 +59,4 @@ class SubmitButton extends React.Component {
     }
 }
 
-export default withGlobalState(withSnackbar(SubmitButton));
+export default withNamespaces()(withGlobalState(withSnackbar(SubmitButton)));

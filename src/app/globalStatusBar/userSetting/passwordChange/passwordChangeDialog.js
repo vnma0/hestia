@@ -7,8 +7,7 @@ import { fade } from '../../lib/libTransition.js';
 
 import passwordChange from '../stub/passwordChange.js';
 import { withSnackbar } from 'notistack';
-
-import { translations } from '../../../../strings/hestia-l10n/l10n-loader.js';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name PasswordChangeForm
@@ -62,28 +61,37 @@ class PasswordChangeDialog extends Component {
 
     changePassword = () => {
         passwordChange(this.props.userId, this.state.oldKey, this.state.newKey).catch(() => {
-            this.props.enqueueSnackbar(
-                translations[this.props.globalState.language].resources.globalStatusBar.userSetting.dialog.entry
-                    .password.error,
-                { variant: 'error' }
-            );
+            this.props.enqueueSnackbar(this.props.t('globalStatusBar.userSetting.dialog.entry.password.error'), {
+                variant: 'error'
+            });
         });
     };
 
     render() {
+        const { t } = this.props;
         return (
             <Dialog
                 {...this.props}
                 TransitionComponent={this.props.TransitionComponent ? this.props.TransitionComponent : fade}>
-                <DialogTitle>Changing password for {this.props.user}</DialogTitle>
+                <DialogTitle>
+                    {t('globalStatusBar.userSetting.dialog.entry.password.dialog.title')} {this.props.user}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Password length must be longer than 6 and smaller than 18.
+                        {
+                            t('globalStatusBar.userSetting.dialog.entry.password.dialog.notice', {
+                                returnObjects: 1
+                            })[0]
+                        }
                         <br />
-                        Upon successful operation you will be logged out - be careful.
+                        {
+                            t('globalStatusBar.userSetting.dialog.entry.password.dialog.notice', {
+                                returnObjects: 1
+                            })[1]
+                        }
                     </DialogContentText>
                     <TextField
-                        label='Old password'
+                        label={t('globalStatusBar.userSetting.dialog.entry.password.dialog.labels.old')}
                         type='password'
                         fullWidth
                         onChange={this.handleChangeOldKey}
@@ -91,7 +99,7 @@ class PasswordChangeDialog extends Component {
                     />
                     <br />
                     <TextField
-                        label='New password'
+                        label={t('globalStatusBar.userSetting.dialog.entry.password.dialog.labels.new')}
                         type='password'
                         fullWidth
                         onChange={this.handleChangeNewKey}
@@ -99,7 +107,7 @@ class PasswordChangeDialog extends Component {
                     />
                     <br />
                     <TextField
-                        label='Verifying password'
+                        label={t('globalStatusBar.userSetting.dialog.entry.password.dialog.labels.verify')}
                         type='password'
                         fullWidth
                         onChange={this.handleChangeKeyVerifier}
@@ -107,12 +115,14 @@ class PasswordChangeDialog extends Component {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.props.onClose}>Cancel</Button>
+                    <Button onClick={this.props.onClose}>
+                        {t('globalStatusBar.userSetting.dialog.entry.password.dialog.controls.cancel')}
+                    </Button>
                     <Button
                         disabled={this.state.newKey !== this.state.verifyKey}
                         onClick={this.changePassword}
                         ref={this.state.pwdChangeInvokerRef}>
-                        Change your password
+                        {t('globalStatusBar.userSetting.dialog.entry.password.dialog.controls.proceed')}
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -120,4 +130,4 @@ class PasswordChangeDialog extends Component {
     }
 }
 
-export default withGlobalState(withSnackbar(PasswordChangeDialog));
+export default withNamespaces()(withGlobalState(withSnackbar(PasswordChangeDialog)));

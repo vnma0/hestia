@@ -1,12 +1,13 @@
 import React from 'react';
 import { Dialog, Button, DialogActions } from '@material-ui/core';
-import LocalizedMessage from 'react-l10n';
+
+import { withNamespaces } from 'react-i18next';
 
 import CodePanel from './codePanel.js';
 
 export let toggleCodeDialog;
 
-export default class CodeDialog extends React.PureComponent {
+class CodeDialog extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,10 +29,12 @@ export default class CodeDialog extends React.PureComponent {
                 <CodePanel id={this.props.id} />
                 <DialogActions>
                     <Button onClick={this.toggle}>
-                        <LocalizedMessage id='submissions.details.code.dialog.controls.close' />
+                        {this.props.t('submissions.details.code.dialog.controls.close')}
                     </Button>
                 </DialogActions>
             </Dialog>
         );
     }
 }
+
+export default withNamespaces()(CodeDialog);

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Menu, MenuItem } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
-
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name UserSettingMenu
@@ -20,18 +19,14 @@ import LocalizedMessage from 'react-l10n';
 
 class UserSettingMenu extends Component {
     render() {
+        const { t } = this.props;
         return (
             <Menu open={this.props.open} anchorEl={this.props.anchorEl} onClose={this.props.onClose}>
-                <MenuItem disabled>
-                    <LocalizedMessage id='globalStatusBar.userSetting.menu.greeting' />
-                    {this.props.user}
-                </MenuItem>
+                <MenuItem disabled>{`${t('globalStatusBar.userSetting.menu.greeting')}${this.props.user}`}</MenuItem>
                 <MenuItem onClick={this.props.showProfileAction}>
-                    <LocalizedMessage id='globalStatusBar.userSetting.menu.changeUserSettings' />
+                    {t('globalStatusBar.userSetting.menu.changeUserSettings')}
                 </MenuItem>
-                <MenuItem onClick={this.props.logoutAction}>
-                    <LocalizedMessage id='globalStatusBar.userSetting.menu.logout' />
-                </MenuItem>
+                <MenuItem onClick={this.props.logoutAction}>{t('globalStatusBar.userSetting.menu.logout')}</MenuItem>
             </Menu>
         );
     }
@@ -45,4 +40,4 @@ UserSettingMenu.propTypes = {
     onClose: PropTypes.func.isRequired
 };
 
-export default UserSettingMenu;
+export default withNamespaces()(UserSettingMenu);

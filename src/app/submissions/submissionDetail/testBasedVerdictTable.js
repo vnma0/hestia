@@ -1,11 +1,10 @@
 import React from 'react';
 import { Table, TableHead, TableCell, TableRow, TableBody, Typography, CardContent } from '@material-ui/core';
 
-import LocalizedMessage from 'react-l10n';
-
 import MemorySignature from '../signature/memorySignature';
 import ExecTimeSignature from '../signature/execTimeSignature';
 import VerdictSignature from '../signature/verdictSignature';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name AttestationSampleResult
@@ -46,6 +45,7 @@ class AttestationSampleResult extends React.Component {
 
 class ResultTable extends React.Component {
     render() {
+        const { t } = this.props;
         if (
             this.props.tests && // check if undefined or null
             this.props.tests.constructor === Array &&
@@ -59,18 +59,10 @@ class ResultTable extends React.Component {
                             style={{
                                 minHeight: 24
                             }}>
-                            <TableCell>
-                                <LocalizedMessage id='submissions.table.verdict' />
-                            </TableCell>
-                            <TableCell>
-                                <LocalizedMessage id='submissions.table.executionTime' />
-                            </TableCell>
-                            <TableCell>
-                                <LocalizedMessage id='submissions.table.memory' />
-                            </TableCell>
-                            <TableCell>
-                                <LocalizedMessage id='submissions.table.points' />
-                            </TableCell>
+                            <TableCell>{t('submissions.table.verdict')}</TableCell>
+                            <TableCell>{t('submissions.table.executionTime')}</TableCell>
+                            <TableCell>{t('submissions.table.memory')}</TableCell>
+                            <TableCell>{t('submissions.table.points')}</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -84,14 +76,22 @@ class ResultTable extends React.Component {
         return (
             <CardContent>
                 <Typography variant='h6'>
-                    <LocalizedMessage id='submissions.details.table.noDetail[0]' />
+                    {
+                        t('submissions.details.table.noDetail', {
+                            returnObjects: true
+                        })[0]
+                    }
                 </Typography>
                 <Typography component='p'>
-                    <LocalizedMessage id='submissions.details.table.noDetail[1]' />
+                    {
+                        t('submissions.details.table.noDetail', {
+                            returnObjects: true
+                        })[1]
+                    }
                 </Typography>
             </CardContent>
         );
     }
 }
 
-export default ResultTable;
+export default withNamespaces()(ResultTable);

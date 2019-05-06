@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Typography, Grid } from '@material-ui/core';
 
-import LocalizedMessage from 'react-l10n';
-
 import AcceptedVerdictIcon from './verdictIcons/acceptedVerdictSignature.js';
 import WrongVerdictIcon from './verdictIcons/wrongVerdictSignature.js';
 import TimeoutVerdictIcon from './verdictIcons/timeoutVerdictSignature.js';
@@ -11,6 +9,7 @@ import ExitErrorVerdictSignature from './verdictIcons/exitErrorVerdictSignature.
 import UnknownVerdictSignature from './verdictIcons/unknownVerdictSignature';
 import PendingVerdictSignature from './verdictIcons/pendingVerdictSignature';
 import CompilationErrorVerdictSignature from './verdictIcons/compilationErrorVerdictSignature.js';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name VerdictSignature : Submission's judged verdict. FlexGrow.
@@ -79,11 +78,9 @@ class VerdictSignature extends Component {
                             color: color[this.props.verdict],
                             fontWeight: this.props.success ? 'bold' : ''
                         }}>
-                        {verdictIcon[this.props.verdict] ? (
-                            <LocalizedMessage id={`submissions.verdict.${this.props.verdict}`} />
-                        ) : (
-                            this.props.verdict
-                        )}
+                        {verdictIcon[this.props.verdict]
+                            ? props.t(`submissions.verdict.${this.props.verdict}`)
+                            : this.props.verdict}
                         {/* if known verdict, display the respective icon, else 
                                 render the verdict directly */}
                     </Typography>
@@ -112,4 +109,4 @@ class VerdictSignature extends Component {
     }
 }
 
-export default VerdictSignature;
+export default withNamespaces()(VerdictSignature);

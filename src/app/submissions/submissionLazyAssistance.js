@@ -1,7 +1,7 @@
 import React from 'react';
 import { CircularProgress, Typography, Button } from '@material-ui/core';
 
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 function LoadingIndicator() {
     return (
@@ -23,6 +23,7 @@ class SubmissionError extends React.PureComponent {
     }
 
     render() {
+        const { t } = this.props;
         if (!this.state.error)
             // if no error, render normally
             return this.props.children;
@@ -30,19 +31,29 @@ class SubmissionError extends React.PureComponent {
             return (
                 <div align='center' style={{ margin: '10%' }}>
                     <Typography variant='h6'>
-                        <LocalizedMessage id='submissions.lazyAssistant.failedLoadInfo.text[0]' />
+                        {
+                            t('submissions.lazyAssistant.failedLoadInfo.text', {
+                                returnObjects: true
+                            })[0]
+                        }
                     </Typography>
                     <Typography variant='p'>
-                        <LocalizedMessage id='submissions.lazyAssistant.failedLoadInfo.text[1]' />
+                        {
+                            t('submissions.lazyAssistant.failedLoadInfo.text', {
+                                returnObjects: true
+                            })[1]
+                        }
                     </Typography>
                     <div style={{ marginTop: 20 }}>
                         <Button onClick={() => window.location.reload(true)} color='primary' variant='raised'>
-                            <LocalizedMessage id='submissions.lazyAssistant.failedLoadInfo.control.reload' />
+                            {t('submissions.lazyAssistant.failedLoadInfo.control.reload')}
                         </Button>
                     </div>
                 </div>
             );
     }
 }
+
+SubmissionError = withNamespaces()(SubmissionError);
 
 export { LoadingIndicator, SubmissionError };

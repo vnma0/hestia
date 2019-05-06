@@ -4,9 +4,9 @@ import Menu from '@material-ui/core/Menu';
 import { MenuItem, Tooltip } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
-import LocalizedMessage from 'react-l10n';
 
 import friendlyLang from '../../../strings/lang.json';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @param str {String}: Text file extension
@@ -37,20 +37,19 @@ class LangSelection extends React.Component {
             // anchor element to pin the list
             anchorEl: undefined
         };
-        this.handleChoice = this.handleChoice.bind(this);
     }
 
-    handleChoice(newLang) {
+    handleChoice = newLang => {
         this.setState({
             anchorEl: undefined
         });
         if (typeof this.props.handleChange === 'function') this.props.handleChange(newLang);
-    }
+    };
 
     render() {
-        let { ext, choice } = this.props;
-        let displayed = getFriendlyExtension(ext[choice]);
-        let langList = ext.map((x, i) => (
+        const { ext, choice, t } = this.props;
+        const displayed = getFriendlyExtension(ext[choice]);
+        const langList = ext.map((x, i) => (
             <MenuItem onClick={() => this.handleChoice(i)} key={`lang-${i}`}>
                 {getFriendlyExtension(String(x))}
             </MenuItem>
@@ -58,16 +57,14 @@ class LangSelection extends React.Component {
 
         return (
             <>
-                <Tooltip
-                    title={<LocalizedMessage id='problems.codeEditor.control.langSelector.tooltip' />}
-                    placement='bottom'>
+                <Tooltip title={t('problems.codeEditor.control.langSelector.tooltip')} placement='bottom'>
                     <Button
                         variant='contained'
                         aria-owns={this.state.anchorEl ? 'menu' : undefined}
                         aria-haspopup={true}
                         onClick={event => this.setState({ anchorEl: event.currentTarget })}>
                         {/* setting anchor to trigger opening of menu */}
-                        {displayed || <LocalizedMessage id='problems.codeEditor.control.langSelector.nullChoice' />}
+                        {displayed || t('problems.codeEditor.control.langSelector.nullChoice')}
                     </Button>
                 </Tooltip>
                 <Menu
@@ -85,4 +82,4 @@ LangSelection.propTypes = {
     handleChange: PropTypes.func
 };
 
-export default LangSelection;
+export default withNamespaces()(LangSelection);

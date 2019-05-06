@@ -12,9 +12,8 @@ import Lock from '@material-ui/icons/Lock';
 import { fade } from '../lib/libTransition.js';
 
 import login from './stub/login.js';
-import { translations } from '../../../strings/hestia-l10n/l10n-loader.js';
 
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name LoginDialog
@@ -46,9 +45,6 @@ class LoginDialog extends Component {
             loginInProgress: false,
             errorLogin: false
         };
-        this.handleUserIDChange = this.handleUserIDChange.bind(this);
-        this.handleKeyChange = this.handleKeyChange.bind(this);
-        this.resolveEnterKey = this.resolveEnterKey.bind(this);
     }
 
     resolveEnterKey = event => {
@@ -77,6 +73,7 @@ class LoginDialog extends Component {
     };
 
     render() {
+        const { t } = this.props;
         return (
             <Dialog
                 {...this.props}
@@ -84,15 +81,10 @@ class LoginDialog extends Component {
                 disableBackdropClick={this.state.loginInProgress}
                 // if logging in, no exiting
                 TransitionComponent={this.props.TransitionComponent ? this.props.TransitionComponent : fade}>
-                <DialogTitle>
-                    <LocalizedMessage id='globalStatusBar.login.dialog.title' />
-                </DialogTitle>
+                <DialogTitle>{t('globalStatusBar.login.dialog.title')}</DialogTitle>
 
                 <DialogContent>
-                    <DialogContentText>
-                        <LocalizedMessage id='globalStatusBar.login.dialog.greeting' />
-                        {/* TODO : configurable language */}
-                    </DialogContentText>
+                    <DialogContentText>{t('globalStatusBar.login.dialog.greeting')}</DialogContentText>
 
                     <Grid container spacing={16} alignItems='flex-end'>
                         <Grid item>
@@ -101,7 +93,7 @@ class LoginDialog extends Component {
                         <Grid item>
                             <TextField
                                 autoFocus={true}
-                                label={<LocalizedMessage id='globalStatusBar.login.dialog.usernameHint' />}
+                                label={t('globalStatusBar.login.dialog.usernameHint')}
                                 value={this.state.id}
                                 onChange={this.handleUserIDChange}
                                 fullWidth={true}
@@ -120,7 +112,7 @@ class LoginDialog extends Component {
                         </Grid>
                         <Grid item>
                             <TextField
-                                label={<LocalizedMessage id='globalStatusBar.login.dialog.passkeyHint' />}
+                                label={t('globalStatusBar.login.dialog.passkeyHint')}
                                 ref={this.state.passkeyRef}
                                 type='password'
                                 onChange={this.handleKeyChange}
@@ -135,7 +127,7 @@ class LoginDialog extends Component {
 
                 <DialogActions>
                     <Button disabled={this.state.loginInProgress} onClick={this.props.onClose}>
-                        <LocalizedMessage id='globalStatusBar.login.dialog.options.cancel' />
+                        {t('globalStatusBar.login.dialog.options.cancel')}
                     </Button>
                     <Button
                         disabled={this.state.loginInProgress}
@@ -146,11 +138,9 @@ class LoginDialog extends Component {
                                 });
                                 if (success) window.location.reload();
                                 else
-                                    this.props.enqueueSnackbar(
-                                        translations[this.props.globalState.language].resources.globalStatusBar.login
-                                            .dialog.errorText,
-                                        { variant: 'error' }
-                                    );
+                                    this.props.enqueueSnackbar(t('globalStatusBar.login.dialog.errorText'), {
+                                        variant: 'error'
+                                    });
                             });
                             // if login finished, hide the loading circle
                             this.setState({
@@ -161,7 +151,7 @@ class LoginDialog extends Component {
                         {this.state.loginInProgress ? (
                             <CircularProgress size={20} />
                         ) : (
-                            <LocalizedMessage id='globalStatusBar.login.dialog.options.login' />
+                            t('globalStatusBar.login.dialog.options.login')
                         )}
                     </Button>
                 </DialogActions>
@@ -170,4 +160,4 @@ class LoginDialog extends Component {
     }
 }
 
-export default withGlobalState(withSnackbar(LoginDialog));
+export default withNamespaces()(withGlobalState(withSnackbar(LoginDialog)));

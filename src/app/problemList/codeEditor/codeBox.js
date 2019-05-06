@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { AppBar, Grid, Divider } from '@material-ui/core';
-import LocalizedMessage from 'react-l10n';
 import { withSnackbar } from 'notistack';
 import { withGlobalState } from 'react-globally';
 
@@ -10,7 +9,7 @@ import ThemeSelector from './themeSelector.js';
 import UploadButton from './uploadButton.js';
 
 import { LoadingIndicator } from '../problemLazyAssistance.js';
-import { translations } from '../../../strings/hestia-l10n/l10n-loader.js';
+import { withNamespaces } from 'react-i18next';
 
 const CodeEditor = React.lazy(() => import('./codeEditor.js'));
 
@@ -73,16 +72,14 @@ class CodeBox extends React.PureComponent {
     enable = () => this.setState({ fileLoading: false });
 
     processFile(file) {
+        const { t } = this.props;
         if (!(file instanceof Blob) && !(file instanceof File))
             // non-File input, hmm..
             return this.enable();
         if (file.size >= byte_limit) {
             // 15 KiB limit
             this.enable();
-            return this.props.enqueueSnackbar(
-                translations[this.props.globalState.language].resources.problems.codeEditor.error.tooLarge,
-                { variant: 'error' }
-            );
+            return this.props.enqueueSnackbar(t('problems.codeEditor.error.tooLarge'), { variant: 'error' });
         }
         reader.onload = () => {
             this.setState({
@@ -95,6 +92,7 @@ class CodeBox extends React.PureComponent {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <>
                 <Divider light variant='inset' />
@@ -144,7 +142,7 @@ class CodeBox extends React.PureComponent {
                                             submitting: false
                                         })
                                     }>
-                                    <LocalizedMessage id='problems.codeEditor.control.submitButton' />
+                                    {t('problems.codeEditor.control.submitButton')}
                                 </SubmitButton>
                             </Grid>
                         </Grid>
@@ -190,4 +188,4 @@ class CodeBox extends React.PureComponent {
     }
 }
 
-export default withGlobalState(withSnackbar(CodeBox));
+export default withNamespaces()(withGlobalState(withSnackbar(CodeBox)));
