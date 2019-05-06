@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircularProgress, Typography, Button } from '@material-ui/core';
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 function LoadingIndicator() {
     return (
@@ -22,6 +22,7 @@ class ProblemError extends React.PureComponent {
     }
 
     render() {
+        const { t } = this.props;
         if (!this.state.error)
             // if no error, render normally
             return this.props.children;
@@ -29,19 +30,29 @@ class ProblemError extends React.PureComponent {
             return (
                 <div align='center' style={{ margin: '10%' }}>
                     <Typography variant='h6'>
-                        <LocalizedMessage id='problems.lazyAssistant.failedLoadInfo.text[0]' />
+                        {
+                            t('problems.lazyAssistant.failedLoadInfo.text', {
+                                returnObjects: true
+                            })[0]
+                        }
                     </Typography>
                     <Typography variant='p'>
-                        <LocalizedMessage id='problems.lazyAssistant.failedLoadInfo.text[1]' />
+                        {
+                            t('problems.lazyAssistant.failedLoadInfo.text', {
+                                returnObjects: true
+                            })[1]
+                        }
                     </Typography>
                     <div style={{ marginTop: 20 }}>
-                        <Button onClick={() => window.location.reload(true)} color='primary'>
-                            <LocalizedMessage id='problems.lazyAssistant.failedLoadInfo.control.reload' />
+                        <Button onClick={() => window.location.reload(true)} color='primary' variant='raised'>
+                            {t('problems.lazyAssistant.failedLoadInfo.control.reload')}
                         </Button>
                     </div>
                 </div>
             );
     }
 }
+
+ProblemError = withNamespaces()(ProblemError);
 
 export { LoadingIndicator, ProblemError };

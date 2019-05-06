@@ -1,8 +1,7 @@
 import React from 'react';
 import { ListItemIcon, ListItemText } from '@material-ui/core';
 import BarChart from '@material-ui/icons/BarChart';
-
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name ScoreboardLauncher
@@ -16,12 +15,10 @@ class ScoreboardLauncher extends React.Component {
                 <ListItemIcon>
                     <BarChart />
                 </ListItemIcon>
-                <ListItemText>
-                    <LocalizedMessage id='scoreboard.launcher' />
-                </ListItemText>
+                <ListItemText>{this.props.t('scoreboard.launcher')}</ListItemText>
             </>
         );
     }
 }
 
-export default ScoreboardLauncher;
+export default withNamespaces()(ScoreboardLauncher);

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Toolbar, AppBar, IconButton } from '@material-ui/core';
 
 import Menu from '@material-ui/icons/Menu';
-import LocalizedMessage from 'react-l10n';
 
 import ContestSignature from './contestSignature/contestSignature.js';
 import CountdownClock from './clock/clock.js';
@@ -13,6 +12,7 @@ import UserSettingMenu from './userSetting/userSettingMenu.js';
 import UserSettingDialog from './userSetting/userSettingDialog.js';
 
 import logout from './userSetting/stub/logout.js';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name GlobalStatusBar
@@ -103,6 +103,7 @@ class GlobalStatusBar extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <>
                 <AppBar position='sticky'>
@@ -128,7 +129,7 @@ class GlobalStatusBar extends Component {
                                         loginDialogOpen: true
                                     })
                                 }>
-                                <LocalizedMessage id='globalStatusBar.login.invokingButton' />
+                                {t('globalStatusBar.login.invokingButton')}
                             </LoginButton>
                         ) : (
                             <UserSettingButton user={this.props.currentUser} onClick={this.openUserMenu} />
@@ -153,4 +154,4 @@ class GlobalStatusBar extends Component {
     }
 }
 
-export default GlobalStatusBar;
+export default withNamespaces()(GlobalStatusBar);

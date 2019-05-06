@@ -1,8 +1,8 @@
 import React from 'react';
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 import Feedback from '@material-ui/icons/FeedbackOutlined';
 
-export default class LoggedOut extends React.Component {
+class LoggedOut extends React.Component {
     render() {
         return (
             <div
@@ -12,8 +12,10 @@ export default class LoggedOut extends React.Component {
                 }}>
                 <Feedback fontSize='large' />
                 <br />
-                <LocalizedMessage id='global.loggedOut' />
+                {this.props.t('global.loggedOut')}
             </div>
         );
     }
 }
+
+export default withNamespaces()(LoggedOut);

@@ -3,9 +3,8 @@ import downloadSubmission from '../../stub/download.js';
 import { CardContent, Typography, CircularProgress } from '@material-ui/core';
 import AceEditor from 'react-ace';
 import { withGlobalState } from 'react-globally';
-import { translations } from '../../../../strings/hestia-l10n/l10n-loader.js';
-import LocalizedMessage from 'react-l10n';
 import { withSnackbar } from 'notistack';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name CodePanel
@@ -23,6 +22,7 @@ class CodePanel extends React.PureComponent {
     }
 
     componentDidMount() {
+        const { t } = this.props;
         if (this.props.id && this.props.id.constructor === String) {
             downloadSubmission(this.props.id)
                 .then(code => {
@@ -32,8 +32,7 @@ class CodePanel extends React.PureComponent {
                     });
                 })
                 .catch(() => {
-                    const string = translations[this.props.globalState.language].resources.submissions.error.source;
-                    this.props.enqueueSnackbar(string);
+                    this.props.enqueueSnackbar(t('submissions.error.source'));
                     this.setState({ loading: false });
                 });
         }
@@ -44,6 +43,7 @@ class CodePanel extends React.PureComponent {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <>
                 {this.state.code !== undefined ? (
@@ -53,19 +53,25 @@ class CodePanel extends React.PureComponent {
                 ) : this.state.loading ? (
                     <div align='center'>
                         <CardContent>
-                            <Typography variant='h6'>
-                                <LocalizedMessage id='submissions.details.code.panel.loading' />
-                            </Typography>
+                            <Typography variant='h6'>{t('submissions.details.code.panel.loading')}</Typography>
                         </CardContent>
                         <CircularProgress size={30} />
                     </div>
                 ) : (
                     <CardContent>
                         <Typography variant='h6'>
-                            <LocalizedMessage id='submissions.details.code.panel.noCode[0]' />
+                            {
+                                t('submissions.details.code.panel.noCode', {
+                                    returnObjects: true
+                                })[0]
+                            }
                         </Typography>
                         <Typography component='p'>
-                            <LocalizedMessage id='submissions.details.code.panel.noCode[1]' />
+                            {
+                                t('submissions.details.code.panel.noCode', {
+                                    returnObjects: true
+                                })[1]
+                            }
                         </Typography>
                     </CardContent>
                 )}
@@ -74,4 +80,4 @@ class CodePanel extends React.PureComponent {
     }
 }
 
-export default withGlobalState(withSnackbar(CodePanel));
+export default withNamespaces()(withGlobalState(withSnackbar(CodePanel)));

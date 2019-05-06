@@ -7,7 +7,7 @@ import AccessTime from '@material-ui/icons/AccessTime';
 import timeAgo from '../../../external/timeAgo.js';
 import './clock.css';
 
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name CountdownClock
@@ -51,26 +51,25 @@ class CountdownClock extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <Tooltip
                 placement='bottom'
                 title={`${this.props.time.start.toLocaleString()} - ${this.props.time.end.toLocaleString()}`}>
                 <span>
-                    <Button disabled id='clock' className={this.state.clockStyleClass}>
+                    <Button
+                        disabled
+                        id='clock'
+                        className={this.state.clockStyleClass}
+                        style={{
+                            textTransform: 'none'
+                        }}>
                         <AccessTime style={{ marginRight: '10px' }} />
-                        {this.state.ended ? (
-                            <LocalizedMessage id='globalStatusBar.clock.ended' />
-                        ) : this.state.started ? (
-                            <>
-                                <LocalizedMessage id='globalStatusBar.clock.timeLeft' />
-                                {` : ${this.state.current} / ${this.state.duration}`}
-                            </>
-                        ) : (
-                            <>
-                                {`${timeAgo(new Date(), this.props.time.start)} `}
-                                <LocalizedMessage id='globalStatusBar.clock.beforeStart' />
-                            </>
-                        )}
+                        {this.state.ended
+                            ? t('globalStatusBar.clock.ended')
+                            : this.state.started
+                            ? `${t('globalStatusBar.clock.timeLeft')} : ${this.state.current} / ${this.state.duration}`
+                            : `${timeAgo(new Date(), this.props.time.start)} ${t('globalStatusBar.clock.beforeStart')}`}
                     </Button>
                 </span>
             </Tooltip>
@@ -78,4 +77,4 @@ class CountdownClock extends Component {
     }
 }
 
-export default CountdownClock;
+export default withNamespaces()(CountdownClock);

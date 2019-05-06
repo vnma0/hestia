@@ -1,8 +1,6 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, Paper, TableRow } from '@material-ui/core';
 
-import LocalizedMessage from 'react-l10n';
-
 import Submission from './submission.js';
 import SubmissionDetail from './submissionDetail/submissionDetail.js';
 /**
@@ -16,15 +14,18 @@ import SubmissionDetail from './submissionDetail/submissionDetail.js';
  */
 
 import { toggleDetails, addDetails } from './submissionDetail/submissionDetail.js';
+import { withNamespaces } from 'react-i18next';
 
 class SubmissionTable extends React.PureComponent {
     render() {
-        let mapping = this.props.submissionList.map(submission => (
+        const { t } = this.props;
+        const mapping = this.props.submissionList.map(submission => (
             <Submission
                 {...submission}
                 key={submission.id}
                 onClick={() => {
-                    addDetails({ tests: submission.tests, id: submission.id });
+                    const { tests, id } = submission;
+                    addDetails({ tests, id });
                     toggleDetails();
                 }}
             />
@@ -35,27 +36,13 @@ class SubmissionTable extends React.PureComponent {
                     <Table style={{ tableLayout: 'fixed' }}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>
-                                    <LocalizedMessage id='submissions.table.contestant' />
-                                </TableCell>
-                                <TableCell>
-                                    <LocalizedMessage id='submissions.table.problem' />
-                                </TableCell>
-                                <TableCell>
-                                    <LocalizedMessage id='submissions.table.language' />
-                                </TableCell>
-                                <TableCell>
-                                    <LocalizedMessage id='submissions.table.verdict' />
-                                </TableCell>
-                                <TableCell>
-                                    <LocalizedMessage id='submissions.table.executionTime' />
-                                </TableCell>
-                                <TableCell>
-                                    <LocalizedMessage id='submissions.table.memory' />
-                                </TableCell>
-                                <TableCell>
-                                    <LocalizedMessage id='submissions.table.timestamp' />
-                                </TableCell>
+                                <TableCell>{t('submissions.table.contestant')}</TableCell>
+                                <TableCell>{t('submissions.table.problem')}</TableCell>
+                                <TableCell>{t('submissions.table.language')}</TableCell>
+                                <TableCell>{t('submissions.table.verdict')}</TableCell>
+                                <TableCell>{t('submissions.table.executionTime')}</TableCell>
+                                <TableCell>{t('submissions.table.memory')}</TableCell>
+                                <TableCell>{t('submissions.table.timestamp')}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>{mapping}</TableBody>
@@ -67,4 +54,4 @@ class SubmissionTable extends React.PureComponent {
     }
 }
 
-export default SubmissionTable;
+export default withNamespaces()(SubmissionTable);

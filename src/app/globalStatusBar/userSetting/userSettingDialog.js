@@ -10,8 +10,7 @@ import LocaleChange from './localeChange/localeChange.js';
 import { fade } from '../lib/libTransition.js';
 
 import { supportedLanguages } from '../../../strings/hestia-l10n/l10n-loader.js';
-
-import LocalizedMessage from 'react-l10n';
+import { withNamespaces } from 'react-i18next';
 
 /**
  * @name UserSettingDialog
@@ -40,24 +39,21 @@ class UserSettingDialog extends Component {
 
     onClose = () => {
         this.props.setGlobalState({ language: localStorage.getItem('language') });
+        this.props.i18n.changeLanguage(localStorage.getItem('language'));
         this.props.onClose();
     };
 
     render() {
+        const { t } = this.props;
         return (
             <>
                 <Dialog
                     {...this.props}
                     TransitionComponent={this.props.TransitionComponent ? this.props.TransitionComponent : fade}>
                     <DialogTitle>
-                        {this.props.user ? (
-                            <>
-                                <LocalizedMessage id='globalStatusBar.userSetting.dialog.title.userPresent' />
-                                {this.props.user}
-                            </>
-                        ) : (
-                            <LocalizedMessage id='globalStatusBar.userSetting.dialog.title.userAbsent' />
-                        )}
+                        {this.props.user
+                            ? `${t('globalStatusBar.userSetting.dialog.title.userPresent')}${this.props.user}`
+                            : t('globalStatusBar.userSetting.dialog.title.userAbsent')}
                     </DialogTitle>
                     <DialogContent>
                         <AppBar position='static'>
@@ -66,16 +62,8 @@ class UserSettingDialog extends Component {
                                 fullWidth
                                 onChange={(e, v) => this.setState({ currentTab: v })}>
                                 {/* we only care about the target value, ignore the event passed */}
-                                <Tab
-                                    label={
-                                        <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.password.title' />
-                                    }
-                                />
-                                <Tab
-                                    label={
-                                        <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.language.title' />
-                                    }
-                                />
+                                <Tab label={t('globalStatusBar.userSetting.dialog.entry.password.title')} />
+                                <Tab label={t('globalStatusBar.userSetting.dialog.entry.language.title')} />
                             </Tabs>
                         </AppBar>
                         {this.state.currentTab === 0 && (
@@ -90,7 +78,7 @@ class UserSettingDialog extends Component {
                                             pwdChangeDialogOpen: true
                                         })
                                     }>
-                                    <LocalizedMessage id='globalStatusBar.userSetting.dialog.entry.password.invokingButton' />
+                                    {t('globalStatusBar.userSetting.dialog.entry.password.invokingButton')}
                                 </Button>
                             </div>
                         )}
@@ -101,17 +89,16 @@ class UserSettingDialog extends Component {
                                     choice={this.props.globalState.language}
                                     onChange={(event, arg) => {
                                         this.props.setGlobalState({ language: arg });
+                                        this.props.i18n.changeLanguage(arg);
                                     }}
                                 />
                             </>
                         )}
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.onClose}>
-                            <LocalizedMessage id='globalStatusBar.userSetting.dialog.options.cancel' />
-                        </Button>
+                        <Button onClick={this.onClose}>{t('globalStatusBar.userSetting.dialog.options.cancel')}</Button>
                         <Button onClick={this.submitOptions}>
-                            <LocalizedMessage id='globalStatusBar.userSetting.dialog.options.save' />
+                            {t('globalStatusBar.userSetting.dialog.options.save')}
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -130,4 +117,4 @@ class UserSettingDialog extends Component {
     }
 }
 
-export default withGlobalState(UserSettingDialog);
+export default withNamespaces()(withGlobalState(UserSettingDialog));

@@ -4,9 +4,10 @@ import Menu from '@material-ui/core/Menu';
 import { MenuItem, Tooltip } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
-import LocalizedMessage from 'react-l10n';
 
 import friendlyTheme from './themeParser.js';
+import { withNamespaces } from 'react-i18next';
+
 const theme = [
     'ambiance',
     'cobalt',
@@ -50,9 +51,9 @@ class themeSelector extends React.Component {
     };
 
     render() {
-        let { choice } = this.props;
-        let displayed = friendlyTheme[theme[choice]];
-        let themeList = theme.map((x, i) => (
+        const { choice, t } = this.props;
+        const displayed = friendlyTheme[theme[choice]];
+        const themeList = theme.map((x, i) => (
             <MenuItem onClick={() => this.handleChoice(i)} key={`theme_ace_${i}`}>
                 {friendlyTheme[x]}
             </MenuItem>
@@ -60,16 +61,14 @@ class themeSelector extends React.Component {
 
         return (
             <>
-                <Tooltip
-                    title={<LocalizedMessage id='problems.codeEditor.control.themeSelector.tooltip' />}
-                    placement='bottom'>
+                <Tooltip title={t('problems.codeEditor.control.themeSelector.tooltip')} placement='bottom'>
                     <Button
                         variant='contained'
                         aria-owns={this.state.anchorEl ? 'menu' : undefined}
                         aria-haspopup={true}
                         onClick={event => this.setState({ anchorEl: event.currentTarget })}>
                         {/* setting anchor to trigger opening of menu */}
-                        {displayed || <LocalizedMessage id='problems.codeEditor.control.themeSelector.nullChoice' />}
+                        {displayed || t('problems.codeEditor.control.themeSelector.nullChoice')}
                     </Button>
                 </Tooltip>
                 <Menu
@@ -87,4 +86,4 @@ themeSelector.propTypes = {
     onChange: PropTypes.func
 };
 
-export default themeSelector;
+export default withNamespaces()(themeSelector);

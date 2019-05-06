@@ -9,13 +9,12 @@ import {
     LinearProgress,
     Tooltip
 } from '@material-ui/core';
-import LocalizedMessage from 'react-l10n';
 import { withSnackbar } from 'notistack';
 import { withGlobalState } from 'react-globally';
 
 import SubmissionTable from './submissionTable.js';
-import { translations } from '../../strings/hestia-l10n/l10n-loader.js';
 import submissionParse from './stub/submission.js';
+import { withNamespaces } from 'react-i18next';
 
 class Submissions extends React.Component {
     constructor(props) {
@@ -31,10 +30,7 @@ class Submissions extends React.Component {
         this.staleUpdate = false;
         this.updateInProgress = false;
 
-        this.update = this.update.bind(this);
         this.update(this.state.listSize, this.state.page, this.state.rowsPerPage);
-
-        this.triggerUpdate = this.triggerUpdate.bind(this);
     }
 
     componentWillUpdate() {
@@ -52,15 +48,14 @@ class Submissions extends React.Component {
                 })
             )
             .catch(() => {
-                const string = translations[this.props.globalState.language].resources.submissions.error.submissions;
-                this.props.enqueueSnackbar(string);
+                this.props.enqueueSnackbar(this.props.t('submissions.error.submissions'));
             });
     };
 
-    triggerUpdate() {
+    triggerUpdate = () => {
         this.staleUpdate = !this.staleUpdate;
         this.forceUpdate();
-    }
+    };
 
     componentDidMount() {
         this.componentWillUpdate();
@@ -76,13 +71,14 @@ class Submissions extends React.Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                <Tooltip title={<LocalizedMessage id='submissions.control.reloadButton.tooltip' />}>
+                                <Tooltip title={t('submissions.control.reloadButton.tooltip')}>
                                     <Button
                                         disabled={!this.staleUpdate || this.updateInProgress}
                                         onClick={() => {
@@ -95,11 +91,9 @@ class Submissions extends React.Component {
                                             this.updateInProgress = false;
                                             this.triggerUpdate();
                                         }}>
-                                        {this.updateInProgress ? (
-                                            <LocalizedMessage id='submissions.control.reloadButton.reloading' />
-                                        ) : (
-                                            <LocalizedMessage id='submissions.control.reloadButton.reload' />
-                                        )}
+                                        {this.updateInProgress
+                                            ? t('submissions.control.reloadButton.reloading')
+                                            : t('submissions.control.reloadButton.reload')}
                                     </Button>
                                 </Tooltip>
                             </TableCell>
@@ -117,10 +111,8 @@ class Submissions extends React.Component {
                                     // event.target.value is the key here
                                     this.update(this.state.listSize, newPage, event.target.value);
                                 }}
-                                labelRowsPerPage={<LocalizedMessage id='submissions.control.rowsPerPageChange' />}
-                                labelDisplayedRows={args => (
-                                    <LocalizedMessage id='submissions.control.indexOfTotal' {...args} />
-                                )}
+                                labelRowsPerPage={t('submissions.control.rowsPerPageChange')}
+                                labelDisplayedRows={args => t('submissions.control.indexOfTotal', args)}
                                 backIconButtonProps={{ disabled: this.updateInProgress }}
                                 nextIconButtonProps={{ disabled: this.updateInProgress }}
                             />
@@ -141,4 +133,4 @@ class Submissions extends React.Component {
     }
 }
 
-export default withGlobalState(withSnackbar(Submissions));
+export default withNamespaces()(withGlobalState(withSnackbar(Submissions)));
