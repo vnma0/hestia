@@ -17,17 +17,24 @@ var reader = new FileReader();
 
 const byte_limit = 15 * 1024;
 
-/**
- * Note that localStorage support will be postponed because of security risks.
- */
-
 class CodeBox extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        let code = '';
+        // check for username
+        if (localStorage.getItem('username') === this.props.globalState.username)
+            // if match, restore
+            code = localStorage.getItem('code');
+        else {
+            // else, clear everything and start as new
+            localStorage.setItem('username', this.props.globalState.username);
+            localStorage.setItem('code', '');
+        }
+
         this.state = {
-            // code: localStorage.getItem('code') || '',
+            code: code,
             // reload code from localStorage
-            code: '',
             langId: 0,
             submitting: false,
             fileLoading: false,
@@ -163,7 +170,7 @@ class CodeBox extends React.PureComponent {
                                     this.setState({ code: code });
                                     // enforce source limit even for editor
 
-                                    // localStorage.setItem('code', code);
+                                    localStorage.setItem('code', code);
                                     // save code in localStorage in
                                     // case of any failure
                                 }
