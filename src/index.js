@@ -30,7 +30,8 @@ import i18n from './i18n.js';
 import { withNamespaces } from 'react-i18next';
 
 const globalState = {
-    language: localStorage.getItem('language') || 'en_US'
+    language: localStorage.getItem('language') || 'en_US',
+    username: null
 };
 
 class Hestia extends React.Component {
@@ -76,13 +77,16 @@ class Hestia extends React.Component {
                     contestTime: data.time
                 });
             });
-        verifyLogin().then(data => {
+        verifyLogin().then(({ ok, username, id }) => {
             this.setState({
                 user: {
-                    loggedIn: data.ok,
-                    username: data.username,
-                    id: data.id
+                    loggedIn: ok,
+                    username: username,
+                    id: id
                 }
+            });
+            this.props.setGlobalState({
+                username: username
             });
         });
     }
