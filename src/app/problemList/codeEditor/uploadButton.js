@@ -5,10 +5,10 @@ import { withNamespaces } from 'react-i18next';
 
 class UploadButton extends React.PureComponent {
     render() {
-        const { t } = this.props;
+        const { t, tReady, i18nOptions, defaultNS, reportNS, ...passed } = this.props;
         return (
             <Tooltip title={t('problems.codeEditor.control.uploadButtonTooltip')}>
-                <Button {...this.props}>
+                <Button {...passed}>
                     {this.props.disabled ? (
                         <CircularProgress size={20} />
                     ) : (

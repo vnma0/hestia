@@ -2,7 +2,12 @@ import React, { Suspense } from 'react';
 import publicParse from '../globalStatusBar/staticStub/public.js';
 import { LoadingIndicator, ProblemError } from './problemLazyAssistance.js';
 
-const ProblemTabEditor = React.lazy(() => import('./problemTabEditor.js'));
+const ProblemTabEditor = React.lazy(() =>
+    import('./problemTabEditor.js').then(component => {
+        console.log('Hestia : %cProblems %capplet has been successfully loaded!', 'color: green', 'color: none');
+        return component;
+    })
+);
 
 class ProblemWrapper extends React.Component {
     constructor(props) {

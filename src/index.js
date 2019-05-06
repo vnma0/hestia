@@ -7,8 +7,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider, withGlobalState } from 'react-globally';
 import { SnackbarProvider, withSnackbar } from 'notistack';
 
-import { translations } from './strings/hestia-l10n/l10n-loader.js';
-
 import LoggedOut from './app/loggedOut.js';
 import GlobalStatusBar from './app/globalStatusBar/globalStatusBar.js';
 import Sidenav from './app/sidenav/sidenav.js';
@@ -28,6 +26,7 @@ import { toggleSidenav } from './app/sidenav/sidenav.js';
 
 import i18n from './i18n.js';
 import { withNamespaces } from 'react-i18next';
+import './version.js';
 
 const globalState = {
     language: localStorage.getItem('language') || 'en_US',
@@ -36,6 +35,7 @@ const globalState = {
 
 class Hestia extends React.Component {
     constructor(props) {
+        console.log('Hestia : Global node has been successfully loaded!');
         super(props);
         this.state = {
             currentPage: 'front',
@@ -57,9 +57,7 @@ class Hestia extends React.Component {
     componentWillMount() {
         publicParse()
             .catch(() => {
-                this.props.enqueueSnackbar(
-                    translations[this.props.globalState.language].translation.globalStatusBar.staticLoader.failed
-                );
+                this.props.enqueueSnackbar(this.props.t('globalStatusBar.staticLoader.failed'));
                 return {
                     name: '',
                     time: {

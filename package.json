@@ -21,8 +21,8 @@
     "react-scripts": "^2.1.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && node scripts/gzip-all.js",
+    "start": "node scripts/version.js && react-scripts start",
+    "build": "node scripts/version.js && react-scripts build && node scripts/gzip-all.js",
     "test": "react-scripts test",
     "format": "prettier --write \"src/app/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "prettilint": "prettier --check \"src/app/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
@@ -48,8 +48,9 @@
   ],
   "proxy": "http://localhost:3001",
   "devDependencies": {
-    "prettier": "1.16.4",
-    "gzip-all": "^1.0.0"
+    "gzip-all": "^1.0.0",
+    "hasbin": "^1.2.3",
+    "prettier": "1.16.4"
   },
   "husky": {
     "hooks": {

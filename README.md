@@ -26,8 +26,12 @@ Read in : [Vietnamese (tiếng Việt)](doc/README.vi-VN.md)
 - ##### Setting things up
   - Just `git clone` this repository, fire up a terminal and `npm install` all required modules. See [here](https://github.com/facebook/create-react-app#creating-an-app) for any other supported commands.
     - **Note** : this repository uses Git submodules (starting with commit [`078fa99fe64bc4b9d784802b81ea6d7a398258bb`](https://github.com/vnma0/hestia/commit/078fa99fe64bc4b9d784802b81ea6d7a398258bb)). Supply `--recurse-submodules` when you `clone` or do a `git submodule update --init --recursive` if you already `clone`d it and find out the submodule is missing.
-  - If you want to have a compiled build, `npm run build` will produce one for you with gzipped version for each compiled file in the output directory.
-    - Invoke `npx react-scripts build` manually will not produce a gzipped version. If you already did so, you can produce one with the script located [here](https://github.com/vnma0/hestia/blob/master/scripts/gzip-all.js).
+  - If you want to have a compiled build, `npm run build` will produce one for you with gzipped version for each compiled file in the output directory. Note that the compiled build will include the following information:
+    - Your current local username
+    - Your machine's hostname and CPU model
+    - The date on which the build was made
+    - The current branch name, commit hash, and the tag associated with it if any.
+    See [this script](scripts/version.js) for details and remove or alter anything you don't want.
 
 ### Contribution
 Please use Prettier before committing - `husky` is listed as a dependency, and it will create a pre-commit hook for you, but software has bugs.

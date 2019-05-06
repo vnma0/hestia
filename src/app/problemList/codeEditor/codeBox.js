@@ -11,7 +11,12 @@ import UploadButton from './uploadButton.js';
 import { LoadingIndicator } from '../problemLazyAssistance.js';
 import { withNamespaces } from 'react-i18next';
 
-const CodeEditor = React.lazy(() => import('./codeEditor.js'));
+const CodeEditor = React.lazy(() =>
+    import('./codeEditor.js').then(component => {
+        console.log('Hestia : %cAce editor %chas been successfully loaded!', 'color: green', 'color: none');
+        return component;
+    })
+);
 
 var reader = new FileReader();
 
