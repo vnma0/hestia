@@ -21,8 +21,9 @@
     "react-scripts": "^2.1.5"
   },
   "scripts": {
-    "start": "node scripts/version.js && react-scripts start",
+    "start": "node scripts/version.js bypass-tag && react-scripts start",
     "build": "node scripts/version.js && react-scripts build && node scripts/gzip-all.js",
+    "build:custom": "node scripts/version.js bypass-tag && react-scripts build && node scripts/gzip-all.js",
     "test": "react-scripts test",
     "format": "prettier --write \"src/app/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "prettilint": "prettier --check \"src/app/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""

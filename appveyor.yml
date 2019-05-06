@@ -54,7 +54,7 @@ build_script:
   - cmd: >-
         node -e "console.log(require('./package.json').version);" > HESTIA_VERSION.txt
         set /p HESTIA_VERSION=<HESTIA_VERSION.txt
-  - npm run build
+  - npm run build:custom
   
 artifacts:
   - path: build

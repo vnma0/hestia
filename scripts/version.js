@@ -12,7 +12,11 @@ if (!hasbin.sync('git'))
 // load up the versioning tag
 const HESTIA_GIT_COMMIT = child_process.execFileSync('git', 'rev-parse HEAD'.split(' '));
 const HESTIA_GIT_BRANCH = child_process.execFileSync('git', 'symbolic-ref --short HEAD'.split(' '));
-const HESTIA_GIT_TAG = child_process.execFileSync('git', 'describe --exact-match --tags'.split(' '));
+var HESTIA_GIT_TAG = '';
+if (!(process.argv[2] === 'bypass-tag'))
+    HESTIA_GIT_TAG = child_process.execFileSync('git', 'describe --exact-match --tags'.split(' '));
+else 
+    HESTIA_GIT_TAG = '<untagged release>'
 
 const BUILD_INFO = `${os.userInfo().username}@${os.hostname()} [${os.cpus()[0].model}]`
 const BUILD_TIME = new Date().toString()
