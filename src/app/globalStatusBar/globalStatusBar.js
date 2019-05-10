@@ -37,19 +37,16 @@ class GlobalStatusBar extends Component {
         };
     }
 
-    renderClock() {
-        if (this.props.loggedIn)
-            // if logged in, show the clock, otherwise hide it
-            return <CountdownClock time={this.props.contestTime} />;
-        else return <></>;
-    }
-
     renderLoginDialog() {
         return (
             <LoginDialog
                 open={this.state.loginDialogOpen && !this.state.loggedIn}
                 // don't open if logged in
-                onClose={this.closeLoginDialog}
+                onClose={() =>
+                    this.setState({
+                        loginDialogOpen: false
+                    })
+                }
             />
         );
     }
@@ -60,28 +57,20 @@ class GlobalStatusBar extends Component {
                 userId={this.props.currentUserId}
                 user={this.props.currentUser}
                 open={this.state.userSettingDialogOpen}
-                onClose={this.closeUserSettingDialog}
+                onClose={() =>
+                    this.setState({
+                        userSettingDialogOpen: false
+                    })
+                }
             />
         );
     }
-
-    closeUserSettingDialog = () => {
-        this.setState({
-            userSettingDialogOpen: false
-        });
-    };
 
     openUserSettingDialog = () => {
         this.setState({
             userSettingDialogOpen: true
         });
         this.closeUserMenu();
-    };
-
-    closeLoginDialog = () => {
-        this.setState({
-            loginDialogOpen: false
-        });
     };
 
     openUserMenu = event => {
@@ -98,7 +87,7 @@ class GlobalStatusBar extends Component {
     };
 
     render() {
-        const { t, isAdmin } = this.props;
+        const { t, isAdmin, loggedIn } = this.props;
         return (
             <>
                 <AppBar position='sticky'>
@@ -115,7 +104,7 @@ class GlobalStatusBar extends Component {
                         {/* this button opens the sidenav or invoke whatever passed as menuOpen */}
 
                         <ContestSignature contestName={this.props.contestName} />
-                        {this.renderClock()}
+                        {loggedIn && <CountdownClock time={this.props.contestTime} />}
 
                         {!this.props.loggedIn ? (
                             <LoginButton

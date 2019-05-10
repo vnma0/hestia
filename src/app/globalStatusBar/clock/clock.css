@@ -1,6 +1,11 @@
+/* the commented parts are currently-experimental design changes being proposed */
+
 #clock {
+    /* pointer-events: auto; */
     font-weight: normal;
     color: white;
+    border-radius: 30px;
+    /* transition-duration: 1s */
 }
 
 .clock-inprogress {
