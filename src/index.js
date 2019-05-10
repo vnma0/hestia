@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './external/roboto/roboto.css';
 
+import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider, withGlobalState } from 'react-globally';
 import { SnackbarProvider, withSnackbar } from 'notistack';
@@ -171,6 +172,7 @@ var HestiaGlobal = withNamespaces()(withSnackbar(withGlobalState(Hestia)));
 ReactDOM.render(
     <SnackbarProvider maxSnack={4}>
         <Provider globalState={globalState}>
+            <CssBaseline />
             <HestiaGlobal />
         </Provider>
     </SnackbarProvider>,
