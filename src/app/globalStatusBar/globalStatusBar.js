@@ -20,8 +20,9 @@ import { withNamespaces } from 'react-i18next';
  * @param {Object <Date, Date>} `contestTime` - Object containing two properties, `start` and `end` representing start & end time
  * @param {String} currentUser currently logged in user
  * @param {String} currentUserId currently logged in user ID
- * @param {boolean} loggedIn true if user has logged in, otherwise false
- * @param {function} menuOpen function to open the menu/sidenav/etc.. (called upon menu button click)
+ * @param {Boolean} loggedIn true if user has logged in, false otherwise
+ * @param {Function} menuOpen function to open the menu/sidenav/etc.. (called upon menu button click)
+ * @param {Boolean} isAdmin true if user has logged in, false otherwise
  * @author minhducsun2002
  */
 
@@ -34,19 +35,6 @@ class GlobalStatusBar extends Component {
             userSettingDialogOpen: false,
             userMenuAnchorElement: undefined
         };
-
-        this.closeLoginDialog = this.closeLoginDialog.bind(this);
-        this.openUserMenu = this.openUserMenu.bind(this);
-        this.closeUserMenu = this.closeUserMenu.bind(this);
-        this.closeUserSettingDialog = this.closeUserSettingDialog.bind(this);
-        this.openUserSettingDialog = this.openUserSettingDialog.bind(this);
-    }
-
-    renderClock() {
-        if (this.props.loggedIn)
-            // if logged in, show the clock, otherwise hide it
-            return <CountdownClock time={this.props.contestTime} />;
-        else return <></>;
     }
 
     renderLoginDialog() {
@@ -54,7 +42,11 @@ class GlobalStatusBar extends Component {
             <LoginDialog
                 open={this.state.loginDialogOpen && !this.state.loggedIn}
                 // don't open if logged in
-                onClose={this.closeLoginDialog}
+                onClose={() =>
+                    this.setState({
+                        loginDialogOpen: false
+                    })
+                }
             />
         );
     }
@@ -65,45 +57,37 @@ class GlobalStatusBar extends Component {
                 userId={this.props.currentUserId}
                 user={this.props.currentUser}
                 open={this.state.userSettingDialogOpen}
-                onClose={this.closeUserSettingDialog}
+                onClose={() =>
+                    this.setState({
+                        userSettingDialogOpen: false
+                    })
+                }
             />
         );
     }
 
-    closeUserSettingDialog() {
-        this.setState({
-            userSettingDialogOpen: false
-        });
-    }
-
-    openUserSettingDialog() {
+    openUserSettingDialog = () => {
         this.setState({
             userSettingDialogOpen: true
         });
         this.closeUserMenu();
-    }
+    };
 
-    closeLoginDialog() {
-        this.setState({
-            loginDialogOpen: false
-        });
-    }
-
-    openUserMenu(event) {
+    openUserMenu = event => {
         this.setState({
             userMenuAnchorElement: event.currentTarget,
             userMenuOpen: true
         });
-    }
+    };
 
-    closeUserMenu() {
+    closeUserMenu = () => {
         this.setState({
             userMenuOpen: false
         });
-    }
+    };
 
     render() {
-        const { t } = this.props;
+        const { t, isAdmin, loggedIn } = this.props;
         return (
             <>
                 <AppBar position='sticky'>
@@ -120,7 +104,7 @@ class GlobalStatusBar extends Component {
                         {/* this button opens the sidenav or invoke whatever passed as menuOpen */}
 
                         <ContestSignature contestName={this.props.contestName} />
-                        {this.renderClock()}
+                        {loggedIn && <CountdownClock time={this.props.contestTime} />}
 
                         {!this.props.loggedIn ? (
                             <LoginButton
@@ -132,7 +116,7 @@ class GlobalStatusBar extends Component {
                                 {t('globalStatusBar.login.invokingButton')}
                             </LoginButton>
                         ) : (
-                            <UserSettingButton user={this.props.currentUser} onClick={this.openUserMenu} />
+                            <UserSettingButton onClick={this.openUserMenu} isAdmin={isAdmin} />
                         )}
                     </Toolbar>
                 </AppBar>

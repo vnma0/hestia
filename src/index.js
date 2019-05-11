@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './external/roboto/roboto.css';
 
+import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider, withGlobalState } from 'react-globally';
 import { SnackbarProvider, withSnackbar } from 'notistack';
@@ -42,7 +43,8 @@ class Hestia extends React.Component {
             user: {
                 loggedIn: false,
                 username: '',
-                id: ''
+                id: '',
+                isAdmin: false
             },
 
             contestName: '',
@@ -75,12 +77,13 @@ class Hestia extends React.Component {
                     contestTime: data.time
                 });
             });
-        verifyLogin().then(({ ok, username, id }) => {
+        verifyLogin().then(({ ok, username, id, isAdmin }) => {
             this.setState({
                 user: {
                     loggedIn: ok,
                     username: username,
-                    id: id
+                    id: id,
+                    isAdmin: isAdmin
                 }
             });
             this.props.setGlobalState({
@@ -91,15 +94,17 @@ class Hestia extends React.Component {
 
     render() {
         const { t } = this.props;
+        const { user, contestName, contestTime } = this.state;
         return (
             <>
                 <GlobalStatusBar
-                    currentUser={this.state.user.username}
-                    currentUserId={this.state.user.id}
-                    loggedIn={this.state.user.loggedIn}
-                    contestName={this.state.contestName}
-                    contestTime={this.state.contestTime}
+                    currentUser={user.username}
+                    currentUserId={user.id}
+                    loggedIn={user.loggedIn}
+                    contestName={contestName}
+                    contestTime={contestTime}
                     menuOpen={toggleSidenav}
+                    isAdmin={user.isAdmin}
                 />
                 <div style={{ display: this.state.user.loggedIn ? 'block' : 'none' }}>
                     <Router>
@@ -167,6 +172,7 @@ var HestiaGlobal = withNamespaces()(withSnackbar(withGlobalState(Hestia)));
 ReactDOM.render(
     <SnackbarProvider maxSnack={4}>
         <Provider globalState={globalState}>
+            <CssBaseline />
             <HestiaGlobal />
         </Provider>
     </SnackbarProvider>,
