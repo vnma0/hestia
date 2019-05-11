@@ -109,8 +109,8 @@ class Hestia extends React.Component {
                     />
                     <div style={{ display: this.state.user.loggedIn ? 'block' : 'none' }}>
                         <div>
-                            <Sidenav
-                                pages={[
+                            <Sidenav>
+                                {[
                                     {
                                         page: <HomepageLauncher button onClick={toggleSidenav} />,
                                         link: '/'
@@ -128,7 +128,7 @@ class Hestia extends React.Component {
                                         link: '/scoreboard'
                                     }
                                 ]}
-                            />
+                            </Sidenav>
                             <Route
                                 path='/'
                                 render={() => {

@@ -17,34 +17,30 @@ class Sidenav extends Component {
             open: false
         };
 
-        toggleSidenav = this.toggle = this.toggle.bind(this);
+        toggleSidenav = this.toggle;
     }
 
-    toggle() {
+    toggle = () => {
         this.setState({
             open: !this.state.open
         });
-    }
+    };
 
-    renderItems() {
-        return this.props.pages.map((entry, index) => {
-            // mirroring onClick function
-            return (
-                <ListItem
-                    component={Link}
-                    to={entry.link}
-                    onClick={entry.page.props.onClick}
-                    button={entry.page.props.button}
-                    key={`navigator_${index}`}>
-                    {entry.page}
-                </ListItem>
-            );
-        });
-    }
     render() {
         return (
             <Drawer anchor='left' {...this.props} open={this.state.open} onClose={this.toggle}>
-                <List>{this.renderItems()}</List>
+                <List>
+                    {this.props.children.map(({ link, page }, index) => (
+                        <ListItem
+                            component={Link}
+                            to={link}
+                            onClick={page.props.onClick}
+                            button={page.props.button}
+                            key={`navigator_${index}`}>
+                            {page}
+                        </ListItem>
+                    ))}
+                </List>
             </Drawer>
         );
     }
