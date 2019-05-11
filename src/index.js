@@ -96,18 +96,18 @@ class Hestia extends React.Component {
         const { t } = this.props;
         const { user, contestName, contestTime } = this.state;
         return (
-            <>
-                <GlobalStatusBar
-                    currentUser={user.username}
-                    currentUserId={user.id}
-                    loggedIn={user.loggedIn}
-                    contestName={contestName}
-                    contestTime={contestTime}
-                    menuOpen={toggleSidenav}
-                    isAdmin={user.isAdmin}
-                />
-                <div style={{ display: this.state.user.loggedIn ? 'block' : 'none' }}>
-                    <Router>
+            <Router>
+                <>
+                    <GlobalStatusBar
+                        currentUser={user.username}
+                        currentUserId={user.id}
+                        loggedIn={user.loggedIn}
+                        contestName={contestName}
+                        contestTime={contestTime}
+                        menuOpen={toggleSidenav}
+                        isAdmin={user.isAdmin}
+                    />
+                    <div style={{ display: this.state.user.loggedIn ? 'block' : 'none' }}>
                         <div>
                             <Sidenav
                                 pages={[
@@ -157,12 +157,12 @@ class Hestia extends React.Component {
                                 )}
                             />
                         </div>
-                    </Router>
-                </div>
-                <div style={{ display: this.state.user.loggedIn ? 'none' : 'block' }}>
-                    {!this.state.user.loggedIn && <LoggedOut />}
-                </div>
-            </>
+                    </div>
+                    <div style={{ display: this.state.user.loggedIn ? 'none' : 'block' }}>
+                        {!this.state.user.loggedIn && <LoggedOut />}
+                    </div>
+                </>
+            </Router>
         );
     }
 }

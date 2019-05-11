@@ -104,6 +104,7 @@ class GlobalStatusBar extends Component {
                         {/* this button opens the sidenav or invoke whatever passed as menuOpen */}
 
                         <ContestSignature contestName={this.props.contestName} />
+                        <span style={{ flexGrow: 1 }} />
                         {loggedIn && <CountdownClock time={this.props.contestTime} />}
 
                         {!this.props.loggedIn ? (
