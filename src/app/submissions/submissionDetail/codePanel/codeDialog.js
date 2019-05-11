@@ -24,13 +24,12 @@ class CodeDialog extends React.PureComponent {
     }
 
     render() {
+        const { id, ext, t } = this.props;
         return (
             <Dialog open={this.state.open} onClose={this.toggle} scroll='body'>
-                <CodePanel id={this.props.id} />
+                <CodePanel id={id} ext={ext} />
                 <DialogActions>
-                    <Button onClick={this.toggle}>
-                        {this.props.t('submissions.details.code.dialog.controls.close')}
-                    </Button>
+                    <Button onClick={this.toggle}>{t('submissions.details.code.dialog.controls.close')}</Button>
                 </DialogActions>
             </Dialog>
         );

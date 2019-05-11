@@ -24,8 +24,8 @@ class SubmissionTable extends React.PureComponent {
                 {...submission}
                 key={submission.id}
                 onClick={() => {
-                    const { tests, id } = submission;
-                    addDetails({ tests, id });
+                    const { tests, id, language } = submission;
+                    addDetails({ tests, id, language });
                     toggleDetails();
                 }}
             />

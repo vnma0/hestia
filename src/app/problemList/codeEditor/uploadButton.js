@@ -8,7 +8,7 @@ class UploadButton extends React.PureComponent {
         const { t, tReady, i18nOptions, defaultNS, reportNS, ...passed } = this.props;
         return (
             <Tooltip title={t('problems.codeEditor.control.uploadButtonTooltip')}>
-                <Button {...passed}>
+                <Button color='secondary' {...passed}>
                     {this.props.disabled ? (
                         <CircularProgress size={20} />
                     ) : (

@@ -41,16 +41,22 @@ class SubmissionDetails extends React.PureComponent {
 
     render() {
         const { t } = this.props;
+        const { details, open } = this.state;
         return (
             <>
-                <Dialog open={this.state.open} onClose={this.toggle} maxWidth='md' fullWidth scroll='body'>
-                    <ResultTable tests={this.state.details.tests} />
+                <Dialog open={open} onClose={this.toggle} maxWidth='md' fullWidth scroll='body'>
+                    <ResultTable tests={details.tests} />
                     <DialogActions>
                         <Button onClick={toggleCodeDialog}>{t('submissions.details.control.showSource')}</Button>
                         <Button onClick={this.toggle}>{t('submissions.details.control.close')}</Button>
                     </DialogActions>
                 </Dialog>
-                <CodeDialog id={this.state.details.id} />
+                <CodeDialog
+                    id={details.id}
+                    ext={String(details.language)
+                        .replace('.', '')
+                        .toLowerCase()}
+                />
             </>
         );
     }

@@ -1,10 +1,11 @@
 import React from 'react';
 import downloadSubmission from '../../stub/download.js';
 import { CardContent, Typography, CircularProgress } from '@material-ui/core';
-import AceEditor from 'react-ace';
 import { withGlobalState } from 'react-globally';
 import { withSnackbar } from 'notistack';
 import { withNamespaces } from 'react-i18next';
+
+import CodeEditor from '../../../problemList/codeEditor/codeEditor.js';
 
 /**
  * @name CodePanel
@@ -16,7 +17,6 @@ class CodePanel extends React.PureComponent {
         super(props);
         this.state = {
             code: undefined,
-            ref: React.createRef(),
             loading: true
         };
     }
@@ -43,12 +43,12 @@ class CodePanel extends React.PureComponent {
     }
 
     render() {
-        const { t } = this.props;
+        const { t, ext } = this.props;
         return (
             <>
                 {this.state.code !== undefined ? (
                     <CardContent>
-                        <AceEditor value={this.state.code} readOnly ref={this.state.ref} width='100%' />
+                        <CodeEditor ext={ext} code={this.state.code} readOnly />
                     </CardContent>
                 ) : this.state.loading ? (
                     <div align='center'>

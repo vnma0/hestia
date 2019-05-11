@@ -67,16 +67,17 @@ import 'brace/theme/xcode';
 
 class CodeEditor extends React.PureComponent {
     render() {
+        const { theme, ext, code, update, readOnly, editorHeight } = this.props;
         return (
             <AceEditor
-                theme={this.props.theme}
-                mode={parseExt(this.props.ext.replace('.', '').toLowerCase())}
-                value={this.props.code}
-                onChange={this.props.update}
+                theme={theme}
+                mode={parseExt(ext.replace('.', '').toLowerCase())}
+                value={code}
+                onChange={update}
                 width='100%'
-                height={`${this.props.editorHeight}px`}
+                height={editorHeight ? `${editorHeight}px` : undefined}
                 // set height to overwhelming large, so no problems even if screens get big
-                readOnly={this.props.readOnly}
+                readOnly={readOnly}
             />
         );
     }
