@@ -45,11 +45,11 @@ class AttestationSampleResult extends React.Component {
 
 class ResultTable extends React.Component {
     render() {
-        const { t } = this.props;
+        const { t, tests, score } = this.props;
         if (
-            this.props.tests && // check if undefined or null
-            this.props.tests.constructor === Array &&
-            this.props.tests.length !== 0
+            tests && // check if undefined or null
+            tests.constructor === Array &&
+            tests.length !== 0
         )
             // if valid, render normally
             return (
@@ -66,9 +66,14 @@ class ResultTable extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.tests.map((test, idx) => {
+                        {tests.map((test, idx) => {
                             return <AttestationSampleResult key={`test-${idx}`} {...test} />;
                         })}
+                        <TableRow>
+                            <TableCell colSpan={2} />
+                            <TableCell align='left'>{t('submissions.table.totalPoints')}</TableCell>
+                            <TableCell align='right'>{score}</TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             );
