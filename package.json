@@ -18,7 +18,9 @@
     "react-globally": "^1.1.0",
     "react-i18next": "^9.0.10",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.5"
+    "react-scripts": "^2.1.5",
+    "gzip-all": "^1.0.0",
+    "hasbin": "^1.2.3"
   },
   "scripts": {
     "start": "node scripts/version.js bypass-tag && react-scripts start",
@@ -49,8 +51,6 @@
   ],
   "proxy": "http://localhost:3001",
   "devDependencies": {
-    "gzip-all": "^1.0.0",
-    "hasbin": "^1.2.3",
     "prettier": "1.16.4"
   },
   "husky": {
