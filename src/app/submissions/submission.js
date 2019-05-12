@@ -56,7 +56,7 @@ class Submission extends React.PureComponent {
                         <VerdictSignature verdict={verdict || 'N/A'} />
                     </TableCell>
                     <TableCell>
-                        <ExecTimeSignature time={executionTime || 'N/A'} />
+                        <ExecTimeSignature time={executionTime ? `${Number(executionTime).toFixed(4)} (s)` : 'N/A'} />
                     </TableCell>
                     {false && (
                         <TableCell>

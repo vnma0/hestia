@@ -19,12 +19,17 @@ import { withNamespaces } from 'react-i18next';
 class SubmissionTable extends React.PureComponent {
     render() {
         const { t, submissionList } = this.props;
-        const mapping = submissionList.map(submission => (
+        const mapping = submissionList.map(({ tests, ...submission }) => (
             <Submission
                 {...submission}
+                executionTime={
+                    tests.constructor === Array && tests.length !== 0
+                        ? tests.reduce((a, { executionTime }) => Math.max(a, executionTime), 0)
+                        : undefined
+                }
                 key={submission.id}
                 onClick={() => {
-                    const { tests, id, language, score } = submission;
+                    const { id, language, score } = submission;
                     addDetails({ tests, id, language, score });
                     toggleDetails();
                 }}

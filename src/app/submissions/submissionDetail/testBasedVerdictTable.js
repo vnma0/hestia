@@ -16,22 +16,23 @@ import { withNamespaces } from 'react-i18next';
  * @return {React.Component} a <TableRow /> representing a test
  */
 
-class AttestationSampleResult extends React.Component {
+class AttestationSampleResult extends React.PureComponent {
     render() {
+        const { verdict, executionTime, memory, mark } = this.props;
         return (
             <TableRow>
                 <TableCell>
-                    <VerdictSignature verdict={this.props.verdict || 'N/A'} />
+                    <VerdictSignature verdict={verdict || 'N/A'} />
                 </TableCell>
                 <TableCell align='justify'>
-                    <ExecTimeSignature time={this.props.executionTime || 'N/A'} />
+                    <ExecTimeSignature time={executionTime ? `${Number(executionTime).toFixed(6)} (s)` : 'N/A'} />
                 </TableCell>
                 {false && (
                     <TableCell align='right'>
-                        <MemorySignature memory={this.props.memory || 'N/A'} />
+                        <MemorySignature memory={memory || 'N/A'} />
                     </TableCell>
                 )}
-                <TableCell align='right'>{this.props.mark}</TableCell>
+                <TableCell align='right'>{mark}</TableCell>
             </TableRow>
         );
     }
