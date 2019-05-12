@@ -26,9 +26,11 @@ class AttestationSampleResult extends React.Component {
                 <TableCell align='justify'>
                     <ExecTimeSignature time={this.props.executionTime || 'N/A'} />
                 </TableCell>
-                <TableCell align='right'>
-                    <MemorySignature memory={this.props.memory || 'N/A'} />
-                </TableCell>
+                {false && (
+                    <TableCell align='right'>
+                        <MemorySignature memory={this.props.memory || 'N/A'} />
+                    </TableCell>
+                )}
                 <TableCell align='right'>{this.props.mark}</TableCell>
             </TableRow>
         );
@@ -61,7 +63,7 @@ class ResultTable extends React.Component {
                             }}>
                             <TableCell>{t('submissions.table.verdict')}</TableCell>
                             <TableCell>{t('submissions.table.executionTime')}</TableCell>
-                            <TableCell>{t('submissions.table.memory')}</TableCell>
+                            {/* <TableCell>{t('submissions.table.memory')}</TableCell> */}
                             <TableCell>{t('submissions.table.points')}</TableCell>
                         </TableRow>
                     </TableHead>
@@ -70,7 +72,7 @@ class ResultTable extends React.Component {
                             return <AttestationSampleResult key={`test-${idx}`} {...test} />;
                         })}
                         <TableRow>
-                            <TableCell colSpan={2} />
+                            <TableCell colSpan={1} />
                             <TableCell align='left'>{t('submissions.table.totalPoints')}</TableCell>
                             <TableCell align='right'>{score}</TableCell>
                         </TableRow>

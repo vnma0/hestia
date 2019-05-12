@@ -41,7 +41,7 @@ class SubmissionTable extends React.PureComponent {
                                 <TableCell>{t('submissions.table.language')}</TableCell>
                                 <TableCell>{t('submissions.table.verdict')}</TableCell>
                                 <TableCell>{t('submissions.table.executionTime')}</TableCell>
-                                <TableCell>{t('submissions.table.memory')}</TableCell>
+                                {/* <TableCell>{t('submissions.table.memory')}</TableCell> */}
                                 <TableCell>{t('submissions.table.totalPoints')}</TableCell>
                                 <TableCell>{t('submissions.table.timestamp')}</TableCell>
                             </TableRow>

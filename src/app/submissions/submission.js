@@ -58,9 +58,11 @@ class Submission extends React.PureComponent {
                     <TableCell>
                         <ExecTimeSignature time={executionTime || 'N/A'} />
                     </TableCell>
-                    <TableCell>
-                        <MemorySignature memory={memory || 'N/A'} />
-                    </TableCell>
+                    {false && (
+                        <TableCell>
+                            <MemorySignature memory={memory || 'N/A'} />
+                        </TableCell>
+                    )}
                     <TableCell>{score || 'N/A'}</TableCell>
                     <TableCell>
                         {/* <TimestampSignature time={timestamp || "N/A"} /> */}
