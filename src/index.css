@@ -2,3 +2,9 @@ html,
 body {
     font-family: 'Roboto', sans-serif !important;
 }
+
+.code-text {
+    font-family: 'Roboto Mono', monospace;
+    color: #e60d0d;
+    background-color: #ffcdcd;
+}

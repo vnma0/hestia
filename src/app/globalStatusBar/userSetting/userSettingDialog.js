@@ -51,9 +51,14 @@ class UserSettingDialog extends Component {
                     {...this.props}
                     TransitionComponent={this.props.TransitionComponent ? this.props.TransitionComponent : fade}>
                     <DialogTitle>
-                        {this.props.user
-                            ? `${t('globalStatusBar.userSetting.dialog.title.userPresent')}${this.props.user}`
-                            : t('globalStatusBar.userSetting.dialog.title.userAbsent')}
+                        {this.props.user ? (
+                            <>
+                                {t('globalStatusBar.userSetting.dialog.title.userPresent')}
+                                <span className='code-text'>{this.props.user}</span>
+                            </>
+                        ) : (
+                            t('globalStatusBar.userSetting.dialog.title.userAbsent')
+                        )}
                     </DialogTitle>
                     <DialogContent>
                         <AppBar position='static'>
