@@ -32,14 +32,12 @@ class CodePanel extends React.PureComponent {
                     });
                 })
                 .catch(() => {
-                    this.props.enqueueSnackbar(t('submissions.error.source'));
+                    this.props.enqueueSnackbar(t('submissions.error.source'), {
+                        variant: 'error'
+                    });
                     this.setState({ loading: false });
                 });
         }
-    }
-
-    componentDidUpdate() {
-        this.componentDidMount();
     }
 
     render() {

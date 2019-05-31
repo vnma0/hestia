@@ -79,22 +79,24 @@ class Submissions extends React.Component {
                         <TableRow>
                             <TableCell>
                                 <Tooltip title={t('submissions.control.reloadButton.tooltip')}>
-                                    <Button
-                                        disabled={!this.staleUpdate || this.updateInProgress}
-                                        onClick={() => {
-                                            this.updateInProgress = true;
-                                            this.forceUpdate();
-                                            // currently updating, disable things
+                                    <span>
+                                        <Button
+                                            disabled={!this.staleUpdate || this.updateInProgress}
+                                            onClick={() => {
+                                                this.updateInProgress = true;
+                                                this.forceUpdate();
+                                                // currently updating, disable things
 
-                                            this.update(0, 0, this.state.rowsPerPage);
-                                            // done, applying changes & enabling things
-                                            this.updateInProgress = false;
-                                            this.triggerUpdate();
-                                        }}>
-                                        {this.updateInProgress
-                                            ? t('submissions.control.reloadButton.reloading')
-                                            : t('submissions.control.reloadButton.reload')}
-                                    </Button>
+                                                this.update(0, 0, this.state.rowsPerPage);
+                                                // done, applying changes & enabling things
+                                                this.updateInProgress = false;
+                                                this.triggerUpdate();
+                                            }}>
+                                            {this.updateInProgress
+                                                ? t('submissions.control.reloadButton.reloading')
+                                                : t('submissions.control.reloadButton.reload')}
+                                        </Button>
+                                    </span>
                                 </Tooltip>
                             </TableCell>
                             <TablePagination

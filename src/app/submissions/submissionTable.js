@@ -18,14 +18,19 @@ import { withNamespaces } from 'react-i18next';
 
 class SubmissionTable extends React.PureComponent {
     render() {
-        const { t } = this.props;
-        const mapping = this.props.submissionList.map(submission => (
+        const { t, submissionList } = this.props;
+        const mapping = submissionList.map(({ tests, ...submission }) => (
             <Submission
                 {...submission}
+                executionTime={
+                    tests.constructor === Array && tests.length !== 0
+                        ? tests.reduce((a, { executionTime }) => Math.max(a, executionTime), 0)
+                        : undefined
+                }
                 key={submission.id}
                 onClick={() => {
-                    const { tests, id, language } = submission;
-                    addDetails({ tests, id, language });
+                    const { id, language, score } = submission;
+                    addDetails({ tests, id, language, score });
                     toggleDetails();
                 }}
             />
@@ -41,7 +46,8 @@ class SubmissionTable extends React.PureComponent {
                                 <TableCell>{t('submissions.table.language')}</TableCell>
                                 <TableCell>{t('submissions.table.verdict')}</TableCell>
                                 <TableCell>{t('submissions.table.executionTime')}</TableCell>
-                                <TableCell>{t('submissions.table.memory')}</TableCell>
+                                {/* <TableCell>{t('submissions.table.memory')}</TableCell> */}
+                                <TableCell>{t('submissions.table.totalPoints')}</TableCell>
                                 <TableCell>{t('submissions.table.timestamp')}</TableCell>
                             </TableRow>
                         </TableHead>

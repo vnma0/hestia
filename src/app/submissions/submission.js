@@ -29,31 +29,45 @@ import './submission.css';
 
 class Submission extends React.PureComponent {
     render() {
+        const {
+            verdict,
+            contestant,
+            problem,
+            language,
+            executionTime,
+            memory,
+            timestamp,
+            score,
+            ...passed
+        } = this.props;
         return (
             <>
-                <TableRow {...this.props} className={`submission_${this.props.verdict}`}>
+                <TableRow {...passed} className={`submission_${verdict}`}>
                     <TableCell>
-                        <ContestantSignature contestantName={this.props.contestant || 'N/A'} />
+                        <ContestantSignature contestantName={contestant || 'N/A'} />
                     </TableCell>
                     <TableCell>
-                        <ProblemSignature problemName={this.props.problem || 'N/A'} />
+                        <ProblemSignature problemName={problem || 'N/A'} />
                     </TableCell>
                     <TableCell>
-                        <LanguageSignature languageName={this.props.language || 'N/A'} />
+                        <LanguageSignature languageName={language || 'N/A'} />
                     </TableCell>
                     <TableCell>
-                        <VerdictSignature verdict={this.props.verdict || 'N/A'} />
+                        <VerdictSignature verdict={verdict || 'N/A'} />
                     </TableCell>
                     <TableCell>
-                        <ExecTimeSignature time={this.props.executionTime || 'N/A'} />
+                        <ExecTimeSignature time={executionTime ? `${Number(executionTime).toFixed(4)} (s)` : 'N/A'} />
                     </TableCell>
+                    {false && (
+                        <TableCell>
+                            <MemorySignature memory={memory || 'N/A'} />
+                        </TableCell>
+                    )}
+                    <TableCell>{score || 'N/A'}</TableCell>
                     <TableCell>
-                        <MemorySignature memory={this.props.memory || 'N/A'} />
-                    </TableCell>
-                    <TableCell>
-                        {/* <TimestampSignature time={this.props.timestamp || "N/A"} /> */}
+                        {/* <TimestampSignature time={timestamp || "N/A"} /> */}
                         {/* table overflow; will fix later, I guess */}
-                        {new Date(this.props.timestamp).toLocaleString() || 'N/A'}
+                        {new Date(timestamp).toLocaleString() || 'N/A'}
                     </TableCell>
                 </TableRow>
             </>
