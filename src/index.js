@@ -24,6 +24,7 @@ import HomepageLauncher from './app/home/homepageLauncher.js';
 import verifyLogin from './app/globalStatusBar/login/stub/credential.js';
 import publicParse from './app/globalStatusBar/staticStub/public.js';
 import { toggleSidenav } from './app/sidenav/sidenav.js';
+import { slideIn } from './app/globalStatusBar/lib/libTransition.js';
 
 import i18n from './i18n.js';
 import { withNamespaces } from 'react-i18next';
@@ -170,7 +171,14 @@ class Hestia extends React.Component {
 var HestiaGlobal = withNamespaces()(withSnackbar(withGlobalState(Hestia)));
 
 ReactDOM.render(
-    <SnackbarProvider maxSnack={4} autoHideDuration={1500}>
+    <SnackbarProvider
+        maxSnack={2}
+        autoHideDuration={1500}
+        TransitionComponent={props => slideIn(props, 'left')}
+        anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+        }}>
         <Provider globalState={globalState}>
             <CssBaseline />
             <HestiaGlobal />
