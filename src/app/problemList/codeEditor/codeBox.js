@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { AppBar, Grid, Divider } from '@material-ui/core';
 import { withSnackbar } from 'notistack';
 import { withGlobalState } from 'react-globally';
+import FileDrop from 'react-file-drop';
 
 import SubmitButton from './submitButton.js';
 import LangSelection from './langSelection.js';
@@ -166,23 +167,25 @@ class CodeBox extends React.PureComponent {
                     }>
                     <Suspense fallback={<LoadingIndicator />}>
                         {/* no need to catch, we already have an error boundary above */}
-                        <CodeEditor
-                            theme={this.state.theme}
-                            readOnly={this.state.submitting || this.state.fileLoading}
-                            ext={this.props.ext[this.state.langId]}
-                            update={code => {
-                                if (code.length <= byte_limit) {
-                                    this.setState({ code: code });
-                                    // enforce source limit even for editor
+                        <FileDrop onDrop={files => this.processFile(files[0])}>
+                            <CodeEditor
+                                theme={this.state.theme}
+                                readOnly={this.state.submitting || this.state.fileLoading}
+                                ext={this.props.ext[this.state.langId]}
+                                update={code => {
+                                    if (code.length <= byte_limit) {
+                                        this.setState({ code: code });
+                                        // enforce source limit even for editor
 
-                                    localStorage.setItem('code', code);
-                                    // save code in localStorage in
-                                    // case of any failure
-                                }
-                            }}
-                            code={this.state.code}
-                            editorHeight={this.state.editorHeight}
-                        />
+                                        localStorage.setItem('code', code);
+                                        // save code in localStorage in
+                                        // case of any failure
+                                    }
+                                }}
+                                code={this.state.code}
+                                editorHeight={this.state.editorHeight}
+                            />
+                        </FileDrop>
                     </Suspense>
                 </div>
                 <input
