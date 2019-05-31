@@ -170,7 +170,7 @@ class Hestia extends React.Component {
 var HestiaGlobal = withNamespaces()(withSnackbar(withGlobalState(Hestia)));
 
 ReactDOM.render(
-    <SnackbarProvider maxSnack={4}>
+    <SnackbarProvider maxSnack={4} autoHideDuration={1500}>
         <Provider globalState={globalState}>
             <CssBaseline />
             <HestiaGlobal />
