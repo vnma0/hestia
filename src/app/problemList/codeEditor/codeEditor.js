@@ -77,8 +77,8 @@ class CodeEditor extends React.PureComponent {
                 width='100%'
                 fontSize={14}
                 height={editorHeight ? `${editorHeight}px` : undefined}
-                // set height to overwhelming large, so no problems even if screens get big
                 readOnly={readOnly}
+                showPrintMargin={false}
             />
         );
     }
