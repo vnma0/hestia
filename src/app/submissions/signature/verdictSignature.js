@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Typography, Grid } from '@material-ui/core';
 
 import AcceptedVerdictIcon from './verdictIcons/acceptedVerdictSignature.js';
@@ -59,49 +59,40 @@ const color = {
     CE: '#632920'
 };
 
-class VerdictSignature extends Component {
-    constructor(props) {
-        super(props);
-        // in order to allow reversion, we render HERE.
-        this.state = {
-            icon: (
-                <Grid item>
-                    {verdictIcon[this.props.verdict] ? verdictIcon[this.props.verdict] : verdictIcon['Unknown']}
-                </Grid>
-            ),
-            verdictText: (
-                <Grid item>
-                    <Typography
-                        variant='body1'
-                        style={{
-                            flexGrow: 1,
-                            color: color[this.props.verdict],
-                            fontWeight: this.props.success ? 'bold' : ''
-                        }}>
-                        {verdictIcon[this.props.verdict]
-                            ? props.t(`submissions.verdict.${this.props.verdict}`)
-                            : this.props.verdict}
-                        {/* if known verdict, display the respective icon, else 
-                                render the verdict directly */}
-                    </Typography>
-                </Grid>
-            )
-        };
-    }
+class VerdictSignature extends React.PureComponent {
     render() {
-        if (this.props.iconOnly) return this.state.icon;
+        const { verdict, reversed, success, t } = this.props;
+        const icon = <Grid item>{verdictIcon[verdict] ? verdictIcon[verdict] : verdictIcon['Unknown']}</Grid>;
+
+        const verdictText = (
+            <Grid item>
+                <Typography
+                    variant='body1'
+                    style={{
+                        flexGrow: 1,
+                        color: color[verdict],
+                        fontWeight: success ? 'bold' : ''
+                    }}>
+                    {verdictIcon[verdict] ? t(`submissions.verdict.${verdict}`) : verdict}
+                    {/* if known verdict, display the respective icon, else 
+                            render the verdict directly */}
+                </Typography>
+            </Grid>
+        );
+
+        if (this.props.iconOnly) return icon;
         else
             return (
                 <Grid container spacing={0} alignItems='flex-start'>
-                    {this.props.reversed ? (
+                    {reversed ? (
                         <>
-                            {this.state.verdictText}
-                            {this.state.icon}
+                            {verdictText}
+                            {icon}
                         </>
                     ) : (
                         <>
-                            {this.state.icon}
-                            {this.state.verdictText}
+                            {icon}
+                            {verdictText}
                         </>
                     )}
                 </Grid>
