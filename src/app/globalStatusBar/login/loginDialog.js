@@ -40,7 +40,6 @@ class LoginDialog extends Component {
             passkey: '',
 
             loginInvokerRef: React.createRef(),
-            testRef: React.createRef(),
 
             loginInProgress: false,
             errorLogin: false
@@ -73,14 +72,15 @@ class LoginDialog extends Component {
     };
 
     render() {
-        const { t } = this.props;
+        const { t, TransitionComponent, onClose, enqueueSnackbar } = this.props;
+        const { loginInProgress, validId, id, passkey, validPasskey } = this.state;
         return (
             <Dialog
                 {...this.props}
-                disableEscapeKeyDown={this.state.loginInProgress}
-                disableBackdropClick={this.state.loginInProgress}
+                disableEscapeKeyDown={loginInProgress}
+                disableBackdropClick={loginInProgress}
                 // if logging in, no exiting
-                TransitionComponent={this.props.TransitionComponent ? this.props.TransitionComponent : fade}>
+                TransitionComponent={TransitionComponent ? TransitionComponent : fade}>
                 <DialogTitle>{t('globalStatusBar.login.dialog.title')}</DialogTitle>
 
                 <DialogContent>
@@ -92,14 +92,14 @@ class LoginDialog extends Component {
                         </Grid>
                         <Grid item>
                             <TextField
+                                disabled={loginInProgress} /* disable if logging in */
                                 autoFocus={true}
                                 label={t('globalStatusBar.login.dialog.usernameHint')}
-                                value={this.state.id}
+                                value={id}
                                 onChange={this.handleUserIDChange}
                                 fullWidth={true}
-                                error={!this.state.validId} /* if invalid ID, must be addressed */
+                                error={!validId} /* if invalid ID, must be addressed */
                                 onKeyDown={this.resolveEnterKey}
-                                ref={this.state.testRef}
                             />
                         </Grid>
                     </Grid>
@@ -112,13 +112,14 @@ class LoginDialog extends Component {
                         </Grid>
                         <Grid item>
                             <TextField
+                                disabled={loginInProgress}
                                 label={t('globalStatusBar.login.dialog.passkeyHint')}
                                 ref={this.state.passkeyRef}
                                 type='password'
                                 onChange={this.handleKeyChange}
-                                value={this.state.passkey}
+                                value={passkey}
                                 fullWidth={true}
-                                error={!this.state.validPasskey}
+                                error={!validPasskey}
                                 onKeyDown={this.resolveEnterKey}
                             />
                         </Grid>
@@ -126,19 +127,23 @@ class LoginDialog extends Component {
                 </DialogContent>
 
                 <DialogActions>
-                    <Button disabled={this.state.loginInProgress} onClick={this.props.onClose}>
+                    <Button disabled={loginInProgress} onClick={onClose}>
                         {t('globalStatusBar.login.dialog.options.cancel')}
                     </Button>
                     <Button
-                        disabled={this.state.loginInProgress}
+                        disabled={loginInProgress}
                         onClick={() => {
-                            login(this.state.id, this.state.passkey).then(success => {
+                            login(id, passkey).then(success => {
                                 this.setState({
                                     loginInProgress: false
                                 });
-                                if (success) window.location.reload();
-                                else
-                                    this.props.enqueueSnackbar(t('globalStatusBar.login.dialog.errorText'), {
+                                if (success) {
+                                    enqueueSnackbar(t('globalStatusBar.login.dialog.successText'), {
+                                        variant: 'success'
+                                    });
+                                    setTimeout(() => window.location.reload(true), 500);
+                                } else
+                                    enqueueSnackbar(t('globalStatusBar.login.dialog.errorText'), {
                                         variant: 'error'
                                     });
                             });
@@ -148,7 +153,7 @@ class LoginDialog extends Component {
                             });
                         }}
                         ref={this.state.loginInvokerRef}>
-                        {this.state.loginInProgress ? (
+                        {loginInProgress ? (
                             <CircularProgress size={20} />
                         ) : (
                             t('globalStatusBar.login.dialog.options.login')
