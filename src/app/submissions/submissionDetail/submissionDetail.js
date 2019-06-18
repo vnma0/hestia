@@ -27,10 +27,12 @@ class SubmissionDetails extends React.PureComponent {
         addDetails = this.addDetails = this.addDetails.bind(this);
     }
 
-    toggle() {
+    toggle(onClose = null) {
         this.setState({
             open: !this.state.open
         });
+        if (onClose && typeof onClose === 'function') this.setState({ onClose });
+        else if (this.state.onClose) this.state.onClose();
     }
 
     addDetails(details) {

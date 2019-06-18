@@ -17,8 +17,15 @@ import { toggleDetails, addDetails } from './submissionDetail/submissionDetail.j
 import { withNamespaces } from 'react-i18next';
 
 class SubmissionTable extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            disabled: false
+        };
+    }
     render() {
         const { t, submissionList } = this.props;
+        const { disabled } = this.state;
         const mapping = submissionList.map(({ tests, ...submission }) => (
             <Submission
                 {...submission}
@@ -29,16 +36,17 @@ class SubmissionTable extends React.PureComponent {
                 }
                 key={submission.id}
                 onClick={() => {
+                    this.setState({ disabled: true });
                     const { id, language, score } = submission;
                     addDetails({ tests, id, language, score });
-                    toggleDetails();
+                    toggleDetails(() => this.setState({ disabled: false }));
                 }}
             />
         ));
         return (
             <>
-                <Paper>
-                    <Table style={{ tableLayout: 'fixed' }}>
+                <Paper style={disabled ? { opacity: 0.4, pointerEvents: 'none' } : {}}>
+                    <Table style={{ tableLayout: 'fixed', ...{} }}>
                         <TableHead>
                             <TableRow>
                                 <TableCell>{t('submissions.table.contestant')}</TableCell>
