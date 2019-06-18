@@ -78,7 +78,7 @@ class ScoreboardWrapper extends React.Component {
         const { t } = this.props;
         return (
             <>
-                <Paper square>
+                <Paper square elevation={2}>
                     <Toolbar variant='dense'>
                         <Typography style={{ flexGrow: 1 }}>
                             {`${t('scoreboard.reload.lastUpdateTimestamp')} : `}

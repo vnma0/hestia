@@ -37,7 +37,7 @@ class ScoreboardError extends React.PureComponent {
                             })[0]
                         }
                     </Typography>
-                    <Typography variant='p'>
+                    <Typography component='p'>
                         {
                             t('scoreboard.lazyAssistant.failedLoadInfo.text', {
                                 returnObjects: true

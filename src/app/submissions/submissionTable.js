@@ -45,7 +45,7 @@ class SubmissionTable extends React.PureComponent {
         ));
         return (
             <>
-                <Paper style={disabled ? { opacity: 0.4, pointerEvents: 'none' } : {}}>
+                <Paper elevation={2} style={disabled ? { opacity: 0.4, pointerEvents: 'none' } : {}}>
                     <Table style={{ tableLayout: 'fixed', ...{} }}>
                         <TableHead>
                             <TableRow>

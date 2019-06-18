@@ -33,7 +33,7 @@ class ProblemTab extends React.PureComponent {
                         onChange={this.handleChange}
                         indicatorColor='primary'
                         textColor='primary'
-                        scrollable
+                        variant='scrollable'
                         scrollButtons='auto'>
                         {this.props.problems.map((x, index) => (
                             <Tab label={x} key={index} />

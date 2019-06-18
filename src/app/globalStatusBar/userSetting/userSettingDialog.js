@@ -64,7 +64,7 @@ class UserSettingDialog extends Component {
                         <AppBar position='static'>
                             <Tabs
                                 value={this.state.currentTab}
-                                fullWidth
+                                variant='scrollable'
                                 onChange={(e, v) => this.setState({ currentTab: v })}>
                                 {/* we only care about the target value, ignore the event passed */}
                                 <Tab label={t('globalStatusBar.userSetting.dialog.entry.password.title')} />

@@ -37,7 +37,7 @@ class SubmissionError extends React.PureComponent {
                             })[0]
                         }
                     </Typography>
-                    <Typography variant='p'>
+                    <Typography component='p'>
                         {
                             t('submissions.lazyAssistant.failedLoadInfo.text', {
                                 returnObjects: true
@@ -45,7 +45,7 @@ class SubmissionError extends React.PureComponent {
                         }
                     </Typography>
                     <div style={{ marginTop: 20 }}>
-                        <Button onClick={() => window.location.reload(true)} color='primary' variant='raised'>
+                        <Button onClick={() => window.location.reload(true)} color='primary' variant='contained'>
                             {t('submissions.lazyAssistant.failedLoadInfo.control.reload')}
                         </Button>
                     </div>

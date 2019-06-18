@@ -36,7 +36,7 @@ class ProblemError extends React.PureComponent {
                             })[0]
                         }
                     </Typography>
-                    <Typography variant='p'>
+                    <Typography component='p'>
                         {
                             t('problems.lazyAssistant.failedLoadInfo.text', {
                                 returnObjects: true
@@ -44,7 +44,7 @@ class ProblemError extends React.PureComponent {
                         }
                     </Typography>
                     <div style={{ marginTop: 20 }}>
-                        <Button onClick={() => window.location.reload(true)} color='primary' variant='raised'>
+                        <Button onClick={() => window.location.reload(true)} color='primary' variant='contained'>
                             {t('problems.lazyAssistant.failedLoadInfo.control.reload')}
                         </Button>
                     </div>
